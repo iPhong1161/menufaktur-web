@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { CalendarDays, Clock, MapPin, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 
 interface CourseCardProps {
   title: string
@@ -35,13 +36,6 @@ function CapacityBadge({ remaining }: { remaining: number }) {
   )
 }
 
-function PhotoPlaceholder() {
-  return (
-    <div className="w-full h-full bg-gradient-to-br from-wine-red/15 to-garnet-red/20 flex items-center justify-center">
-      <span className="text-wine-red/30 text-sm font-condensed">Foto folgt</span>
-    </div>
-  )
-}
 
 export function CourseCard({
   title,
@@ -61,13 +55,9 @@ export function CourseCard({
       <div className="h-56 relative overflow-hidden">
         {photoUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={photoUrl}
-            alt={title}
-            className="w-full h-full object-cover"
-          />
+          <img src={photoUrl} alt={title} className="w-full h-full object-cover" />
         ) : (
-          <PhotoPlaceholder />
+          <ImagePlaceholder label="Course photo — uploaded via admin" className="w-full h-full" />
         )}
         {remainingCapacity !== null && (
           <CapacityBadge remaining={remainingCapacity} />

@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ChefHat, Award, Users, ChevronRight } from "lucide-react"
 import { CourseCard } from "@/components/course/CourseCard"
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 
 const FEATURED_COURSES = [
   {
@@ -114,10 +115,8 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="relative">
-            <div className="aspect-[4/5] rounded-lg overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500 bg-gradient-to-br from-wine-red/10 to-garnet-red/15 flex items-center justify-center">
-              <span className="text-wine-red/30 text-sm font-condensed">
-                Foto folgt
-              </span>
+            <div className="aspect-[4/5] rounded-lg overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+              <ImagePlaceholder label="about/atelier-interior.jpg" className="w-full h-full" />
             </div>
             <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-wine-red rounded-lg -z-10 opacity-5" />
           </div>

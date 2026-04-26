@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { CalendarDays, Clock, MapPin } from "lucide-react"
+import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 
 export interface CatalogCourse {
   id: string
@@ -10,6 +11,7 @@ export interface CatalogCourse {
   location: string
   price: number
   remainingCapacity: number
+  photo_url?: string | null
 }
 
 function CapacityBadge({ remaining }: { remaining: number }) {
@@ -44,6 +46,7 @@ export function CatalogCourseCard({
   location,
   price,
   remainingCapacity,
+  photo_url,
 }: CatalogCourse) {
   const soldOut = remainingCapacity === 0
 
@@ -51,7 +54,16 @@ export function CatalogCourseCard({
     <article className={`group flex flex-col${soldOut ? " opacity-70" : ""}`}>
       {/* Image */}
       <div className="relative overflow-hidden rounded-lg aspect-[4/3] mb-5">
-        <div className="w-full h-full bg-gradient-to-br from-wine-red/10 to-garnet-red/15 transition-transform duration-700 group-hover:scale-105" />
+        {photo_url ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={photo_url}
+            alt={title}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+        ) : (
+          <ImagePlaceholder label="Course photo — uploaded via admin" className="w-full h-full" />
+        )}
         <div className="absolute top-4 left-4">
           <CapacityBadge remaining={remainingCapacity} />
         </div>
