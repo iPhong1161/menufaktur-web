@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&amp;family=Manrope:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#680017",
+                    "on-surface": "#1c1c0c",
+                    "primary-fixed": "#ffdad9",
+                    "on-secondary": "#ffffff",
+                    "surface-container": "#f2efd4",
+                    "inverse-primary": "#ffb3b3",
+                    "error": "#ba1a1a",
+                    "background": "#fdfadf",
+                    "surface-container-highest": "#e6e4c9",
+                    "primary-container": "#7e1423",
+                    "on-secondary-fixed-variant": "#8f0d26",
+                    "surface-container-high": "#ece9cf",
+                    "secondary-fixed-dim": "#ffb3b4",
+                    "tertiary-fixed": "#ffdbd0",
+                    "tertiary-container": "#772100",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#323120",
+                    "inverse-on-surface": "#f5f2d7",
+                    "outline": "#8b7171",
+                    "on-tertiary-fixed": "#390b00",
+                    "surface-dim": "#dedbc1",
+                    "on-primary-fixed": "#40000a",
+                    "secondary-fixed": "#ffdad9",
+                    "on-tertiary-container": "#ff8884",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#511400",
+                    "on-tertiary": "#ffffff",
+                    "secondary-container": "#ff6570",
+                    "on-tertiary-fixed-variant": "#842600",
+                    "surface-tint": "#a8353f",
+                    "surface-container-low": "#f8f5da",
+                    "surface-variant": "#e6e4c9",
+                    "on-primary-container": "#ff888c",
+                    "on-secondary-fixed": "#40000a",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#ffb3b3",
+                    "on-primary-fixed-variant": "#881c29",
+                    "surface": "#fdfadf",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#fdfadf",
+                    "outline-variant": "#debfbf",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#574141",
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "secondary": "#b02a3b",
+                    "primary": "#5b0012",
+                    "on-background": "#1c1c0c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(253, 250, 223, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#5b0012] dark:bg-[#40000a] flex justify-between items-center px-12 py-6 w-full max-w-none">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-[#fdfadf]/10 border border-[#fdfadf]/20 rounded-md flex-shrink-0"></div>
+<div class="text-2xl font-bold text-[#fdfadf] font-headline tracking-tight">menufaktur</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kurse</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Private Events</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Über uns</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kontakt</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight">Anmelden</button>
+<button class="bg-tertiary-container text-on-tertiary px-6 py-2 rounded-xl font-headline font-bold tracking-tight hover:opacity-90 transition-opacity duration-300 scale-95 duration-200">Kurs buchen</button>
+</div>
+</nav>
+<main class="pt-0">
+<!-- Hero Section -->
+<section class="relative h-[716px] w-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close-up of chef hands kneading fresh yellow pasta dough on a flour-dusted wooden table with warm natural window lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDe-U5b3A9bYLiMAXBlYBCnUBQ6B0M-XW5WdfN784sc1A0P20XgrUPPoSWl5MrFVuocPGBpM7XJuWJ-QtN9pLuEgejdXfyY4S9UyXehrHXqNHLsokuQ0GNftAhSO6-nrHvDDpYF_1ieypK4YEq0lOx1g9t6aFcdiSv5IqKdIBQx5v47iy-Vs_i111ilUH5FkXlF_c8u_gU1SGicauASdCvL2_bNQogRHJQj0AA8Z8w51rdTWajXCXLtWoHAhA1qLNhyve4E_LS4c64"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent"></div>
+<div class="absolute bottom-0 left-0 w-full p-12 md:p-24">
+<div class="max-w-screen-2xl mx-auto">
+<span class="inline-block bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full text-sm font-bold tracking-widest mb-6">ITALIENISCHE MEISTERKLASSE</span>
+<h1 class="text-white text-5xl md:text-7xl font-headline font-bold leading-none tracking-tighter max-w-4xl">Handgemachte Pasta &amp; Saucen</h1>
+</div>
+</div>
+</section>
+<!-- Main Content -->
+<section class="max-w-screen-2xl mx-auto px-8 md:px-12 py-24">
+<div class="grid grid-cols-1 lg:grid-cols-10 gap-16">
+<!-- Left Column (60%) -->
+<div class="lg:col-span-6 space-y-12">
+<div class="space-y-6">
+<p class="text-2xl font-headline text-primary italic leading-relaxed">
+                            Entdecken Sie die archaische Freude, Mehl und Eier in goldene Kunstwerke zu verwandeln. 
+                        </p>
+<div class="prose prose-lg text-on-surface/80 leading-relaxed space-y-4">
+<p>In diesem exklusiven Kurs führen wir Sie tief in das Herz der italienischen Pastakultur ein. Es beginnt mit der Berührung: Das richtige Verhältnis der Zutaten und das meditative Kneten, bis der Teig die perfekte Elastizität erreicht.</p>
+<p>Unter professioneller Anleitung formen Sie filigrane Tagliatelle, füllen zarte Ravioli mit saisonalen Kreationen und erlernen die Geheimnisse authentischer Saucen, die nicht überdecken, sondern den Eigengeschmack der Pasta krönen. Wir lassen Saucen langsam simmern, bis sich die Aromen perfekt verbinden – genau so, wie man es in einer traditionellen Trattoria erleben würde.</p>
+</div>
+</div>
+<!-- Inclusion List -->
+<div class="bg-surface-container-low p-10 rounded-xl">
+<h3 class="text-2xl font-headline font-bold text-primary mb-8">Was ist enthalten</h3>
+<ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<li class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">restaurant</span>
+<span class="text-on-surface/90">Alle hochwertigen Zutaten &amp; Utensilien</span>
+</li>
+<li class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">checkroom</span>
+<span class="text-on-surface/90">Leihschürze für den Abend</span>
+</li>
+<li class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">wine_bar</span>
+<span class="text-on-surface/90">Wein, Mineralwasser &amp; Espresso</span>
+</li>
+<li class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary">menu_book</span>
+<span class="text-on-surface/90">Digitales Rezeptbuch zum Nachkochen</span>
+</li>
+</ul>
+</div>
+<!-- Food Preferences -->
+<div class="border-l-4 border-primary-container pl-8 py-2">
+<p class="text-sm italic text-on-surface/70">
+                            Vegetarische Optionen sind bei uns Standard. Auf Wunsch bereiten wir gerne vegane oder glutenfreie Alternativen für Sie vor. Bitte teilen Sie uns dies bei der Buchung mit.
+                        </p>
+</div>
+<!-- Instructor Bio -->
+<div class="flex flex-col md:flex-row items-center gap-8 bg-surface-container-lowest p-8 rounded-xl">
+<img class="w-32 h-32 rounded-full object-cover" data-alt="professional portrait of a smiling middle-aged male chef in a clean white uniform in a modern kitchen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu7ftCvAI6Kl-w6FXxpmdYUxqkJ36OM3tR71OuUJCcSd4YfHrxK5QraQkVK-AsmveyX3srPNEna0_FOMRuhpUBEfedzQ9-e6-IjQ1ER83LGBYoAcJ-mkOHRD3iZ55FwcoG1ZZPAQ5E9MpN0PEpHgkqKM4Kd34TTNMTgNT6Mn3Ly20Pc6Y-I3NYc93x8Qa_pyD1LgF8wfzC1uKAVW0ocDjHM_-1RwXHevDWk-ohY32MVhQ0bKAyZMHM6PlCWKjTGDwmSGqFFdxn2Zj4"/>
+<div>
+<h4 class="text-xl font-headline font-bold text-primary">Ihr Gastgeber: Chef Marco</h4>
+<p class="text-on-surface/80 mt-2">Mit über 15 Jahren Erfahrung in der gehobenen Gastronomie in Rom und Florenz bringt Marco nicht nur Technik, sondern wahre Leidenschaft in die Menufaktur. Sein Fokus liegt auf der Einfachheit und Qualität der Rohstoffe.</p>
+</div>
+</div>
+</div>
+<!-- Right Column (40%) -->
+<div class="lg:col-span-4">
+<div class="sticky top-32 bg-[#FFFCE1] p-10 rounded-xl shadow-sm space-y-8">
+<div class="flex justify-between items-end">
+<span class="text-on-surface/60 font-label uppercase tracking-widest text-xs">Kurspreis</span>
+<span class="text-4xl font-headline font-bold text-primary">109 € <span class="text-lg font-normal text-on-surface/50">/ Pers.</span></span>
+</div>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">calendar_today</span>
+<div>
+<p class="font-bold text-on-surface">Donnerstag, 14. November 2024</p>
+<p class="text-sm text-on-surface/60">18:00 – 22:30 Uhr (ca. 4,5 Std.)</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-primary mt-1">location_on</span>
+<div>
+<p class="font-bold text-on-surface">Atelier Frankfurt-Bornheim</p>
+<p class="text-sm text-on-surface/60">Berger Straße 124, 60385 Frankfurt</p>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-error-container/30 p-3 rounded-lg">
+<span class="material-symbols-outlined text-error">group</span>
+<span class="text-error font-bold text-sm">Nur noch 3 Plätze verfügbar</span>
+</div>
+</div>
+<button class="w-full py-5 bg-tertiary text-on-tertiary rounded-xl font-headline font-bold text-lg hover:bg-tertiary-container transition-all active:scale-95">
+                            Jetzt buchen
+                        </button>
+<p class="text-center text-xs text-on-surface/40 leading-relaxed">
+                            Sie erhalten sofort nach der Buchung eine Bestätigung sowie alle weiteren Details per E-Mail.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Reviews Section -->
+<section class="bg-primary py-24">
+<div class="max-w-screen-2xl mx-auto px-8 md:px-12">
+<h2 class="text-4xl font-headline font-bold text-white mb-16 text-center">Stimmen unserer Gäste</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Review 1 -->
+<div class="bg-primary-container p-8 rounded-xl text-white/90 space-y-4">
+<div class="flex text-on-tertiary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="italic text-lg">"Ein unvergesslicher Abend! Marco hat eine so ruhige und kompetente Art. Man vergisst völlig die Zeit."</p>
+<p class="font-bold text-sm uppercase tracking-widest text-on-primary-container">Saskia K.</p>
+</div>
+<!-- Review 2 -->
+<div class="bg-primary-container p-8 rounded-xl text-white/90 space-y-4">
+<div class="flex text-on-tertiary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="italic text-lg">"Hätte nie gedacht, dass ich selbst Ravioli herstellen kann. Die Qualität der Zutaten war einfach überragend."</p>
+<p class="font-bold text-sm uppercase tracking-widest text-on-primary-container">Thomas M.</p>
+</div>
+<!-- Review 3 -->
+<div class="bg-primary-container p-8 rounded-xl text-white/90 space-y-4">
+<div class="flex text-on-tertiary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="italic text-lg">"Die Atmosphäre in der Menufaktur ist magisch. Es fühlt sich an wie ein Abendessen unter Freunden, bei dem man nebenbei noch Profi-Tipps lernt."</p>
+<p class="font-bold text-sm uppercase tracking-widest text-on-primary-container">Dr. Elena V.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Related Courses -->
+<section class="py-24 bg-surface">
+<div class="max-w-screen-2xl mx-auto px-8 md:px-12">
+<h2 class="text-3xl font-headline font-bold text-primary mb-12">Das könnte Sie auch interessieren</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+<!-- Related Card 1 -->
+<div class="group cursor-pointer">
+<div class="relative h-64 mb-6 overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="vibrant Thai street food scene with colorful ingredients and steaming woks in a clean modern kitchen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBudlakBEXjhhBAD8lviA_f8dpLbCR6dqvwwkGi1Nj-r9OZLRqJZZwgYL1FMR8zR1eKLyycuQLwZB83UC68XJIFGMUYgcDj4T16Vx9TIesXNkgbxpfb6tCjE32N9wyhQ6-NmO_HAN5_Qh4onHMsKLAQycNQHP6kGPWyWbmZxQdYYqe0GtjCMseeG9M-k3h7jMflpXH0v1xjTTXLP1ooho5EbSX6xxhHcm4hg0GcWiDDofH3ltnrHxm5TmJm_qQaq2V07EzWkucfTAL"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded text-xs font-bold text-primary">119 €</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-primary group-hover:underline">Thai-Küche: Balance &amp; Schärfe</h3>
+<p class="text-on-surface/60 mt-2 text-sm">Die Geheimnisse von Zitronengras, Galgant und der perfekten Currypaste.</p>
+</div>
+<!-- Related Card 2 -->
+<div class="group cursor-pointer">
+<div class="relative h-64 mb-6 overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="thick dry-aged beef steak being seared in a cast iron pan with rosemary and garlic butter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_mCHr0buXLkfhyLU2S28ROCWFMYw-jmyNFc5HZHunp30yjyxBTjBNZpp10Oo8XvhNUV8SzfP5TTpwumAflJgsNSu-hqJ_PoWu1nyY_1-2sdLae0OGEdyqgtTTfbVm1nu_t1pGwvTwhDDZwYIv2iZfGZihuLgB4b2q-QUblbNQt2E3bk-sFZFRcXx18zM79-T3NaAjZ9O6UJ9LmhbdpgFwxTnbRhaWdcWP0ImQ-3DGTa0LP-YA4IBDgx9b-Jv7TVyR95ZL8mwSLFxK"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded text-xs font-bold text-primary">149 €</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-primary group-hover:underline">Das perfekte Steak</h3>
+<p class="text-on-surface/60 mt-2 text-sm">Fleischkunde, Reifegrade und die perfekte Maillard-Reaktion in der Pfanne.</p>
+</div>
+<!-- Related Card 3 -->
+<div class="group cursor-pointer">
+<div class="relative h-64 mb-6 overflow-hidden rounded-xl">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="elegant french macarons and tarts displayed on a marble plate with delicate gold leaf details" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqyCCZrKwYsoLaN1y-5Wqsj_FWTE4bbdMbX4nYfm-1A-n9u7mxnu6NR4L9bcf5AZP0X-9DbJp0tNlFvgA9lQYihc5BdFilB6QZyZSGDbhcya7tkpslJZqRv_N6FRxgo0p3w9NVQtqWnoXGHcD8Ay1wKjwI_itu3dA_dKMojV4JGRG8PWh5EePsR4-yOAAMvflTgj3M6f6jSgiqEqvaobStPiMsFMsFrWM7_pErixbpvtR0wEBRMemihtLBW2mxO1quaZdgnDnfqUBS"/>
+<div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded text-xs font-bold text-primary">125 €</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-primary group-hover:underline">Französische Patisserie</h3>
+<p class="text-on-surface/60 mt-2 text-sm">Macarons, Eclairs und die hohe Kunst der zarten Cremes und Teige.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#5b0012] dark:bg-[#40000a] text-[#ffffff] font-body text-sm leading-relaxed tracking-wide">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full max-w-7xl mx-auto">
+<!-- Brand & Contact -->
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 bg-[#fdfadf]/10 border border-[#fdfadf]/20 rounded-sm flex-shrink-0"></div>
+<div class="text-xl font-bold text-[#fdfadf]">menufaktur</div>
+</div>
+<div class="text-[#ffffff]/70 space-y-2">
+<p>Berger Straße 204</p>
+<p>60385 Frankfurt am Main</p>
+<p class="pt-4">Tel: +49 (0)69 1234567</p>
+<p>Email: info@menufaktur.de</p>
+</div>
+</div>
+<!-- Nav -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Menü</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kurse</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Private Events</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Gutscheine</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Über uns</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Rechtliches</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Impressum</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Datenschutz</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">AGB</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kontakt</a></li>
+</ul>
+</div>
+<!-- Socials -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Social Media</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-2.25c0-1.176.21-1.75 1.25-1.75h2.75v-4h-3.75c-3.518 0-5.25 1.838-5.25 4.5v3.5z"></path></svg>
+</a>
+</div>
+<p class="text-[#ffffff]/50 text-xs">Abonnieren Sie unseren Newsletter für aktuelle Termine.</p>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-[#ffffff]/10 text-center text-[#ffffff]/40 text-xs">
+            © 2024 menufaktur. Alle Rechte vorbehalten.
+        </div>
+</footer>
+</body></html>

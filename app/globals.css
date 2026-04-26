@@ -1,0 +1,25 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  /* Brand colors */
+  --color-wine-red: #7E1423;
+  --color-light-beige: #FFFCE1;
+  --color-gold-yellow: #F15A22;
+  --color-garnet-red: #A72335;
+  --color-dark: #2A2A2A;
+
+  /* Fonts — CSS vars injected at runtime by Next.js font loader on <body> */
+  --font-sans: var(--font-roboto), 'Roboto', sans-serif;
+  --font-condensed: var(--font-roboto-condensed), 'Roboto Condensed', sans-serif;
+}
+
+:root {
+  --background: #FFFCE1;
+  --foreground: #2A2A2A;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}

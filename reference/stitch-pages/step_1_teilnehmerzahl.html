@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#323120",
+                    "surface-tint": "#a8353f",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#5b0012",
+                    "primary-fixed-dim": "#ffb3b3",
+                    "tertiary-container": "#772100",
+                    "surface-container": "#f2efd4",
+                    "surface": "#fdfadf",
+                    "tertiary-fixed": "#ffdbd0",
+                    "on-primary-container": "#ff888c",
+                    "secondary-fixed-dim": "#ffb3b4",
+                    "surface-container-high": "#ece9cf",
+                    "on-secondary-container": "#680017",
+                    "on-tertiary-fixed-variant": "#842600",
+                    "primary-container": "#7e1423",
+                    "surface-bright": "#fdfadf",
+                    "outline": "#8b7171",
+                    "secondary-container": "#ff6570",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#1c1c0c",
+                    "on-primary-fixed": "#40000a",
+                    "on-tertiary-container": "#ff8b64",
+                    "error": "#ba1a1a",
+                    "tertiary": "#511400",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "on-background": "#1c1c0c",
+                    "inverse-primary": "#ffb3b3",
+                    "on-secondary-fixed": "#40000a",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f8f5da",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#390b00",
+                    "on-surface-variant": "#574141",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#e6e4c9",
+                    "secondary-fixed": "#ffdad9",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e6e4c9",
+                    "inverse-on-surface": "#f5f2d7",
+                    "surface-dim": "#dedbc1",
+                    "on-secondary-fixed-variant": "#8f0d26",
+                    "outline-variant": "#debfbf",
+                    "background": "#fdfadf",
+                    "primary-fixed": "#ffdad9",
+                    "secondary": "#b02a3b",
+                    "on-primary-fixed-variant": "#881c29"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "2xl": "2rem"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .font-headline { font-family: 'Epilogue', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased overflow-hidden">
+<!-- Blurred Content Background (Simulated Course Detail Page) -->
+<div class="fixed inset-0 z-0 blur-md grayscale-[0.2]">
+<nav class="flex justify-between items-center px-8 py-4 w-full bg-[#fdfadf]/80 backdrop-blur-xl">
+<span class="text-2xl font-bold text-primary tracking-widest font-headline">The Culinary Atelier</span>
+<div class="flex gap-8">
+<span class="text-primary/70 font-medium">Kurse</span>
+<span class="text-primary/70 font-medium">Über uns</span>
+<span class="text-primary/70 font-medium">Atelier</span>
+</div>
+</nav>
+<main class="max-w-6xl mx-auto mt-20 px-8">
+<div class="grid grid-cols-12 gap-12">
+<div class="col-span-7">
+<h1 class="text-6xl font-bold font-headline text-primary mb-8 leading-tight">Handgemachte Pasta &amp; Saucen</h1>
+<p class="text-xl leading-relaxed text-on-surface-variant">Tauchen Sie ein in die Kunst der italienischen Teigwaren...</p>
+</div>
+<div class="col-span-5 aspect-[4/5] rounded-2xl bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up of artisan fresh pasta being dusted with flour on a rustic wooden table with warm natural window lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCq22sq4IKHp2bOoffsHiDDjnv36YVgGffs7FFEsr86u_QZijPkC7h2EWG7ShRczI6yMt8a_DvH9iA0ije3lMaP--YSwUWYKPC4ksw2FZ-5vNyLextiByO8TJp92PbsrIdsMEdSBZnXQb54J12vjMVsSEdGNAFQms3fEIYDxD2DprUC0yq4QplHj4USE-vAAroUm1U0yoKf2OvqujVMC6KnVJxvP5cPDVo80G6ov5G0O2UrIL5E6Gf9Q2_1t9AnWB2D-sUD0rbjPQ9j"/>
+</div>
+</div>
+</main>
+</div>
+<!-- Wine Red Overlay Tint -->
+<div class="fixed inset-0 bg-primary/30 z-10"></div>
+<!-- Modal Container -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+<div class="bg-surface-container-lowest w-full max-w-lg rounded-2xl overflow-hidden shadow-[0_32px_64px_-12px_rgba(91,0,18,0.15)] flex flex-col">
+<!-- Progress Bar & Course Strip -->
+<div class="bg-surface-container-low px-8 pt-8 pb-6">
+<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col">
+<span class="text-[0.65rem] uppercase tracking-[0.2em] font-bold text-primary/60 mb-1">Buchungsschritt 1 von 4</span>
+<div class="flex gap-1 w-48 h-1">
+<div class="flex-1 bg-primary rounded-full"></div>
+<div class="flex-1 bg-outline-variant/30 rounded-full"></div>
+<div class="flex-1 bg-outline-variant/30 rounded-full"></div>
+<div class="flex-1 bg-outline-variant/30 rounded-full"></div>
+</div>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<!-- Compact Course Strip -->
+<div class="flex items-center gap-4 bg-surface-container-lowest p-3 rounded-xl border border-outline-variant/10">
+<div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="Vibrant close-up of fresh herbs and sun-ripened tomatoes in a culinary studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGxpadDPaCl9Ek7VhLR7Hj2cCOiOrg41xA5vQPX9E_pDmhY7QrJH68u6iSOEkXyX6wgTINsorwtt_e4BPPBYK6y14f1Z2UIOhyyHO2RW4SajmY_s9n_I1fvrgEaKo2MfDAJ8bojLVKcRLZOX_LISmcvbCbdL0qI0HF6urm0kuD_nLapriip1fHln_GoVfnk5dC7QZ03pyFK1haTZoRZqcofb_0Hy2TOFAMuioO0NIz2shILFcrjS8LrIzG0r8dCH5B7afIjExZzndt"/>
+</div>
+<div class="flex flex-col">
+<span class="font-headline text-sm font-bold text-primary">Handgemachte Pasta &amp; Saucen</span>
+<div class="flex items-center gap-2 text-on-surface-variant text-xs">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>12. Mai 2026</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Modal Body -->
+<div class="px-8 py-10 flex flex-col items-center text-center">
+<h2 class="text-3xl font-bold font-headline text-primary mb-3">Wie viele Teilnehmer?</h2>
+<p class="text-on-surface-variant max-w-[280px] leading-relaxed mb-10">Wählen Sie die Anzahl der Plätze, die Sie buchen möchten.</p>
+<!-- Number Selector -->
+<div class="flex items-center gap-8 mb-12">
+<button class="w-14 h-14 rounded-full border border-outline-variant/30 flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all active:scale-90">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<span class="text-6xl font-bold font-headline text-primary w-16">2</span>
+<button class="w-14 h-14 rounded-full border border-outline-variant/30 flex items-center justify-center text-primary hover:bg-primary hover:text-on-primary transition-all active:scale-90">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<!-- Price Preview -->
+<div class="bg-surface-container-high/40 px-6 py-3 rounded-full mb-2">
+<p class="text-lg font-medium text-on-surface">Gesamtpreis: <span class="font-bold text-primary">178 €</span></p>
+</div>
+<p class="text-[0.7rem] uppercase tracking-widest text-on-surface-variant/60 font-bold mb-10">Inkl. gesetzlicher MwSt.</p>
+</div>
+<!-- Modal Footer -->
+<div class="px-8 pb-10 flex items-center justify-between">
+<button class="text-on-surface-variant font-bold hover:text-primary transition-colors underline-offset-8 hover:underline">
+                    Abbrechen
+                </button>
+<button class="bg-tertiary-container hover:bg-tertiary text-on-tertiary px-10 py-4 rounded-xl font-bold flex items-center gap-3 transition-all active:scale-95 shadow-lg shadow-tertiary/20">
+<span>Weiter</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

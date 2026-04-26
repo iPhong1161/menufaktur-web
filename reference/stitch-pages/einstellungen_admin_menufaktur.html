@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#842600",
+                    "secondary": "#b02a3b",
+                    "error-container": "#ffdad6",
+                    "primary": "#5b0012",
+                    "on-tertiary-fixed": "#390b00",
+                    "inverse-on-surface": "#f5f2d7",
+                    "tertiary": "#511400",
+                    "outline": "#8b7171",
+                    "on-secondary-fixed": "#40000a",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#fdfadf",
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "primary-fixed": "#ffdad9",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#772100",
+                    "error": "#ba1a1a",
+                    "primary-container": "#7e1423",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#574141",
+                    "tertiary-fixed": "#ffdbd0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#ece9cf",
+                    "on-tertiary-container": "#ff8b64",
+                    "on-secondary-container": "#680017",
+                    "on-primary-fixed-variant": "#881c29",
+                    "surface-container-low": "#f8f5da",
+                    "surface-variant": "#e6e4c9",
+                    "on-surface": "#1c1c0c",
+                    "background": "#fdfadf",
+                    "secondary-container": "#ff6570",
+                    "surface-container-highest": "#e6e4c9",
+                    "outline-variant": "#debfbf",
+                    "on-primary-container": "#ff888c",
+                    "surface-container": "#f2efd4",
+                    "inverse-primary": "#ffb3b3",
+                    "surface": "#fdfadf",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffdad9",
+                    "on-secondary-fixed-variant": "#8f0d26",
+                    "inverse-surface": "#323120",
+                    "surface-dim": "#dedbc1",
+                    "secondary-fixed-dim": "#ffb3b4",
+                    "primary-fixed-dim": "#ffb3b3",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#40000a",
+                    "surface-tint": "#a8353f",
+                    "on-background": "#1c1c0c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #fdfadf;
+        }
+        h1, h2, h3 {
+            font-family: 'Epilogue', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-[#fdfadf] dark:bg-[#1a1614] backdrop-blur-md bg-opacity-90 border-b border-[#5b0012]/10 dark:border-[#ffffff]/10">
+<div class="flex justify-between items-center h-20 px-8 w-full max-w-full">
+<div class="text-2xl font-bold text-[#5b0012] dark:text-[#ffb3b4] font-['Epilogue']"><div class="flex items-center space-x-3"><div class="w-8 h-8 bg-[#7E1423] rounded-sm shrink-0"></div><span class="lowercase tracking-tight">menufaktur</span></div></div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Dashboard</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Kurse</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Buchungen</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Kunden</a>
+<a class="text-[#5b0012] dark:text-[#ffb3b4] font-bold border-b-2 border-[#5b0012] pb-1 font-['Epilogue'] tracking-tight" href="#">Einstellungen</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="p-2 hover:bg-[#7e1423]/5 dark:hover:bg-[#ffffff]/5 rounded-lg transition-all duration-300">
+<span class="material-symbols-outlined text-[#5b0012] dark:text-[#ffb3b4]">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#7e1423]/5 dark:hover:bg-[#ffffff]/5 rounded-lg transition-all duration-300">
+<span class="material-symbols-outlined text-[#5b0012] dark:text-[#ffb3b4]">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow pt-32 pb-20 px-8 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<div class="mb-12">
+<h1 class="text-5xl font-bold text-primary tracking-tight mb-2">Einstellungen</h1>
+<p class="text-on-surface-variant text-xl">Konto und Systemeinstellungen</p>
+</div>
+<div class="flex flex-col lg:flex-row gap-12">
+<!-- Vertical Sidebar Tabs -->
+<aside class="w-full lg:w-64 flex flex-col space-y-2">
+<button class="flex items-center space-x-4 px-6 py-4 bg-primary-container text-on-primary rounded-xl transition-all duration-300 group">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-semibold text-lg">Profil</span>
+</button>
+<button class="flex items-center space-x-4 px-6 py-4 hover:bg-surface-container-high text-on-surface-variant rounded-xl transition-all duration-300 group">
+<span class="material-symbols-outlined">lock</span>
+<span class="font-medium text-lg">Passwort</span>
+</button>
+<button class="flex items-center space-x-4 px-6 py-4 hover:bg-surface-container-high text-on-surface-variant rounded-xl transition-all duration-300 group">
+<span class="material-symbols-outlined">notifications_active</span>
+<span class="font-medium text-lg">Benachrichtigungen</span>
+</button>
+<button class="flex items-center space-x-4 px-6 py-4 hover:bg-surface-container-high text-on-surface-variant rounded-xl transition-all duration-300 group">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span class="font-medium text-lg">System</span>
+</button>
+</aside>
+<!-- Main Content Area: Profil Form -->
+<div class="flex-grow">
+<div class="bg-surface-container-lowest rounded-[2rem] p-8 lg:p-12 shadow-sm">
+<div class="flex flex-col md:flex-row gap-12">
+<!-- Profile Image Upload -->
+<div class="flex flex-col items-center space-y-6 shrink-0">
+<div class="relative group">
+<img alt="Profilbild" class="w-40 h-40 rounded-full object-cover border-4 border-surface-container-high" data-alt="Close-up portrait of a professional chef in white uniform with blurred kitchen background and natural side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSu25cpr9XB-GTTBMBdZOV11ZiF15wSXQZw12_TYJd_xoYKeo7Ktqe6vNlWdPnvObAs4NywKuYuqlfuotJVLmZo50Mse7Qqu1cS1QF1uuob0CeH9wlhrUJxGTwh0kwNFNbXukbO25zAYGRa1avkUhSPETOb_qddv3FsBgZnM1gsmwiOKhWp95AlRiWUpWjo54yWJvS3T25hJ8S847XlnSK4KWERIwzi2AMB4dKdomCON1IHAJi6c1keVV_gWA_sxOIfK6w77ycm0c"/>
+<button class="absolute bottom-0 right-0 bg-primary text-on-primary p-3 rounded-full shadow-lg hover:scale-105 transition-transform duration-300">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</button>
+</div>
+<div class="text-center">
+<h3 class="text-lg font-semibold text-primary">Profilbild</h3>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest mt-1">JPG ODER PNG, MAX. 2MB</p>
+</div>
+</div>
+<!-- Form Fields -->
+<div class="flex-grow space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="flex flex-col space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider ml-1" for="firstName">Vorname</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-colors font-medium" id="firstName" type="text" value="Maximilian"/>
+</div>
+<div class="flex flex-col space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider ml-1" for="lastName">Nachname</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-colors font-medium" id="lastName" type="text" value="von Berching"/>
+</div>
+</div>
+<div class="flex flex-col space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider ml-1" for="email">E-Mail-Adresse</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-colors font-medium" id="email" placeholder="Geben Sie Ihre E-Mail ein" type="email" value="m.berching@culinary-atelier.de"/>
+</div>
+<div class="flex flex-col space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider ml-1" for="phone">Telefonnummer</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-colors font-medium" id="phone" type="tel" value="+49 176 12345678"/>
+</div>
+<div class="flex flex-col space-y-2">
+<label class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider ml-1" for="bio">Kurzbiografie</label>
+<textarea class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary px-4 py-3 rounded-t-lg transition-colors font-medium resize-none" id="bio" rows="4">Küchenmeister und Sommelier mit Leidenschaft für die alpine Sterneküche. Seit 2018 im Culinary Atelier tätig.</textarea>
+</div>
+<div class="pt-6 border-t border-outline-variant/30 flex justify-end">
+<button class="bg-primary text-on-primary px-10 py-4 rounded-xl font-bold text-lg hover:bg-primary-container transition-all duration-300 flex items-center space-x-3">
+<span>Speichern</span>
+<span class="material-symbols-outlined">save</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Section: Advanced Security Note -->
+<div class="mt-8 p-8 bg-surface-container-low rounded-[2rem] flex items-center space-x-6 border border-outline-variant/10">
+<div class="bg-tertiary-container p-4 rounded-2xl">
+<span class="material-symbols-outlined text-on-tertiary-container text-3xl">verified_user</span>
+</div>
+<div>
+<h4 class="text-lg font-bold text-on-surface">Zweistufige Verifizierung</h4>
+<p class="text-on-surface-variant">Schützen Sie Ihr Konto zusätzlich mit einer Bestätigung per Mobiltelefon.</p>
+</div>
+<div class="ml-auto">
+<button class="text-primary font-bold hover:underline underline-offset-4">Aktivieren</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-8 mt-auto bg-[#fdfadf] dark:bg-[#1a1614] border-t border-[#5b0012]/5 dark:border-[#ffffff]/5">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto opacity-80 hover:opacity-100 transition-opacity">
+<p class="text-[#5b0012] dark:text-[#ffb3b4] font-['Manrope'] text-sm tracking-wide">© 2024 The Culinary Atelier. Alle Rechte vorbehalten.</p>
+<div class="flex space-x-8 mt-4 md:mt-0">
+<a class="text-[#5b0012]/50 dark:text-[#ffffff]/50 hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 font-['Manrope'] text-sm tracking-wide" href="#">Dokumentation</a>
+<a class="text-[#5b0012]/50 dark:text-[#ffffff]/50 hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 font-['Manrope'] text-sm tracking-wide" href="#">Support</a>
+<a class="text-[#5b0012]/50 dark:text-[#ffffff]/50 hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 font-['Manrope'] text-sm tracking-wide" href="#">Impressum</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#323120",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-bright": "#fdfadf",
+                      "primary-fixed": "#ffdad9",
+                      "tertiary-fixed": "#ffdbd0",
+                      "primary-fixed-dim": "#ffb3b3",
+                      "on-primary-fixed-variant": "#881c29",
+                      "surface-tint": "#a8353f",
+                      "outline-variant": "#debfbf",
+                      "on-background": "#1c1c0c",
+                      "surface-container": "#f2efd4",
+                      "secondary": "#b02a3b",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "surface-container-low": "#f8f5da",
+                      "tertiary-container": "#772100",
+                      "primary-container": "#7e1423",
+                      "tertiary": "#511400",
+                      "outline": "#8b7171",
+                      "on-error": "#ffffff",
+                      "error": "#ba1a1a",
+                      "on-tertiary-fixed-variant": "#842600",
+                      "error-container": "#ffdad6",
+                      "on-surface-variant": "#574141",
+                      "surface-dim": "#dedbc1",
+                      "surface-container-highest": "#e6e4c9",
+                      "on-secondary-fixed": "#40000a",
+                      "surface-variant": "#e6e4c9",
+                      "secondary-fixed-dim": "#ffb3b4",
+                      "on-primary-fixed": "#40000a",
+                      "on-primary-container": "#ff888c",
+                      "on-surface": "#1c1c0c",
+                      "background": "#fdfadf",
+                      "secondary-container": "#ff6570",
+                      "on-tertiary-container": "#ff8b64",
+                      "on-primary": "#ffffff",
+                      "inverse-on-surface": "#f5f2d7",
+                      "on-secondary-container": "#680017",
+                      "on-error-container": "#93000a",
+                      "surface": "#fdfadf",
+                      "secondary-fixed": "#ffdad9",
+                      "tertiary-fixed-dim": "#ffb59d",
+                      "surface-container-high": "#ece9cf",
+                      "on-tertiary-fixed": "#390b00",
+                      "on-secondary-fixed-variant": "#8f0d26",
+                      "primary": "#5b0012",
+                      "inverse-primary": "#ffb3b3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Epilogue"],
+                      "body": ["Manrope"],
+                      "label": ["Manrope"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(to bottom, rgba(91, 0, 18, 0.4), rgba(91, 0, 18, 0.7));
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#5b0012] dark:bg-[#40000a] flex justify-between items-center px-12 py-6 w-full max-w-none">
+<div class="text-2xl font-bold text-[#fdfadf] font-headline tracking-tight flex items-center"><img alt="Logo" class="h-8 mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpOslqp-RSIfNFDy9NOVL2WPRklxpJ9QzEqMeeIMyGgdCTmE54V9Dq8veU5a7x9cazu4WA4lVRW9Mk506qNtylDPAm34FlnzcIKoXLNRyM2214GRELUcpr7VQxsS4Az0-nGhPHOGuj0d5aU1jOJl0KnTann82grSfAg88cp_64seSDIhNyFBlDAe59f5RoEVdg0XVWDjuAo-UeHdFh9jnImZRX5VOmIfR-3u7k1p2XeCpio3qKRrsmoQtP_T3NteHvGsMWL3GEtF4l"/>menufaktur</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kurse</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Private Events</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Über uns</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kontakt</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight">Anmelden</button>
+<button class="bg-tertiary-container text-on-tertiary px-6 py-2 rounded-xl font-headline font-bold tracking-tight hover:opacity-90 transition-opacity duration-300 scale-95 duration-200">Kurs buchen</button>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" data-alt="Group of diverse people laughing and cooking together in a high-end spacious kitchen with natural afternoon light and professional equipment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhXzK6dw7Wr9b5qEs6vxE4iXvtBzV8afc3IkysH-Cqt7W_8rOhoBcoLlJZ0737S0rLM6siZOQw67iyZ9eMD7TygrNHasxgcb5RvIoV0GmLsJjD0KRMEqauUYGoPoJ3xMXBSSeT8J5lj8flAUKWm14-gNUEsbNcC4eDVWB5Q5RUUc--eJIXSySMoB5uphAY0ksCAiHRpfnuJ5zGyNq02P8WYoD9vja-PREZpVvl8vuzlXCPdUSEoXP6y82tyrVTiDTzaH2RQllX9a5l"/>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 text-center px-4 max-w-5xl">
+<h1 class="text-[#fdfadf] font-headline text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+                Kochen als Handwerk.<br/>Essen als Verbindung.
+            </h1>
+<p class="text-[#fdfadf]/90 text-xl md:text-2xl font-body mb-10 tracking-wide">
+                Seit 2007 in Frankfurt-Bornheim.
+            </p>
+<button class="bg-tertiary-container text-white px-10 py-4 rounded-xl text-lg font-headline font-bold hover:opacity-90 transition-all shadow-xl">
+                Kurse ansehen
+            </button>
+</div>
+</section>
+<!-- Intro Section -->
+<section class="py-32 px-6 md:px-12 bg-surface">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+<div class="space-y-8">
+<h2 class="font-headline text-4xl md:text-5xl font-bold text-primary leading-tight">
+                    Die Kunst der bewussten Zubereitung.
+                </h2>
+<div class="space-y-6 text-lg text-on-surface-variant leading-relaxed">
+<p>
+                        In der menufaktur verstehen wir Kochen nicht als bloße Notwendigkeit, sondern als eine Form des Dialogs – mit den Zutaten, der Tradition und Ihren Gästen. Seit über 15 Jahren begleiten wir Genießer dabei, ihre handwerklichen Fähigkeiten zu verfeinern.
+                    </p>
+<p>
+                        In unseren Kursen im Herzen von Frankfurt-Bornheim legen wir Wert auf Ruhe, Präzision und die Freude am gemeinsamen Entdecken. Wir laden Sie ein, den hektischen Alltag vor der Tür zu lassen und sich ganz dem Moment des Kreierens zu widmen.
+                    </p>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-[4/5] rounded-lg overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+<img class="w-full h-full object-cover" data-alt="Close up of a chef's hands carefully garnishing a gourmet plate in a warm sun-drenched kitchen with shallow depth of field" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALrRIbs1abobZXhBUsBmJ46Kk4VqK9pQzcgNYpRuEmEINnY6fA2-mgN5R5WoebJpR5zUHg8sW3ooeE7IWKHdPlp7vaE8ajzqjnXgZQFXfMKEd4jbbesDTHF6HR2hU3gqidjOQ2PW0vdRMyGCFG42vlm0DP0FqI6WyNjfFybSHL7ss_f6P5T5FS552t2IaCbpKB4Hbep2aHaObY154NSIcp_TDEtgT3FITQE_WvDp07Z2z_xqsp8yQ1XW5Lxd_NJndpZIDsRFj9MPhp"/>
+</div>
+<div class="absolute -bottom-8 -left-8 w-48 h-48 bg-primary-container rounded-lg -z-10 opacity-10"></div>
+</div>
+</div>
+</section>
+<!-- Featured Courses -->
+<section class="py-24 bg-surface-container-low px-6 md:px-12">
+<div class="max-w-7xl mx-auto">
+<div class="flex justify-between items-end mb-16">
+<div>
+<h2 class="font-headline text-4xl font-bold text-primary">Kommende Kurse</h2>
+<p class="text-on-surface-variant mt-2">Finden Sie den passenden Termin für Ihre kulinarische Reise.</p>
+</div>
+<a class="text-primary font-bold border-b-2 border-primary-container pb-1 hover:text-secondary transition-colors" href="#">Alle Kurse entdecken</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Course Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_32px_64px_-12px_rgba(91,0,18,0.06)] hover:translate-y-[-8px] transition-transform duration-300">
+<div class="h-64 relative">
+<img class="w-full h-full object-cover" data-alt="Artisanal pasta making class with flour dusted wooden table and yellow egg pasta strands" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADVw-gJ2MqFvzu9pdFVJVZOrjdlFAaE_Xs-p0feDZUTJoqrVEaKYYzOvE5gUlfdgwnA5Bm74H4r2Smo-p0tnIsFIMUZIt0UHHRjJRrlnB9c7v6JEcp57Me9lsyvZ9bjAuy6Lf5apaLhR40cC3Rp8lsVWM3PfbrEvG3qxf4n6k9_VcZ7ac69HmDQvhJGAaDwpc5P3J3350jvkQ6kMO9ukuJqMnmRaeG_KXLgba43jNbHKYz74NjWFPe7hKkH2EmQjoXFW6J0EHOSuyD"/>
+<span class="absolute top-4 right-4 bg-tertiary-container text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">noch 3 Plätze</span>
+</div>
+<div class="p-8 space-y-4">
+<h3 class="font-headline text-xl font-bold text-primary">Handgemachte Pasta &amp; Saucen</h3>
+<div class="space-y-2 text-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+<span>14. November 2024</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span>18:00 – 22:30 Uhr</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">location_on</span>
+<span>Frankfurt-Bornheim</span>
+</div>
+</div>
+<div class="pt-4 flex justify-between items-center border-t border-outline-variant/20">
+<span class="text-xl font-bold text-primary">129 €</span>
+<a class="text-primary font-bold flex items-center gap-1 group" href="#">Details ansehen <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span></a>
+</div>
+</div>
+</div>
+<!-- Course Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_32px_64px_-12px_rgba(91,0,18,0.06)] hover:translate-y-[-8px] transition-transform duration-300">
+<div class="h-64 relative">
+<img class="w-full h-full object-cover" data-alt="Close up of a premium beef steak being seared in a cast iron pan with herbs and butter" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvpM_MebM7m76NBlvE2CTwNVYqSfPyDqsqSNe_KoMYTn6BdrTC2A8On723uoi0aUpNV7TpdCPJNjXFNkU1cesQ9Md4uWvO4u_11eTWupYKBoE6VCcZuCNvknRDBfU7YHpUkH034Rhoq4wHIUzfR8qeOjci7e_VorZqXWKll_2cIc9huzZ6JdTLi4-p-HJ16C6sak0-M9FoLj5J7HuCXSSu1JUTm-D2m6NjvvddYmfKmXuMMLvDd1m8fAEUVfJM4XNhxDArumPSgAr9"/>
+<span class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">noch 1 Platz</span>
+</div>
+<div class="p-8 space-y-4">
+<h3 class="font-headline text-xl font-bold text-primary">Die Kunst des perfekten Steaks</h3>
+<div class="space-y-2 text-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+<span>20. November 2024</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span>17:30 – 22:00 Uhr</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">location_on</span>
+<span>Frankfurt-Bornheim</span>
+</div>
+</div>
+<div class="pt-4 flex justify-between items-center border-t border-outline-variant/20">
+<span class="text-xl font-bold text-primary">145 €</span>
+<a class="text-primary font-bold flex items-center gap-1 group" href="#">Details ansehen <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span></a>
+</div>
+</div>
+</div>
+<!-- Course Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_32px_64px_-12px_rgba(91,0,18,0.06)] hover:translate-y-[-8px] transition-transform duration-300">
+<div class="h-64 relative">
+<img class="w-full h-full object-cover" data-alt="Vibrant Thai curry with fresh vegetables and coconut milk served in a rustic bowl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8LI1MmHJCVc6WPS3qVdBiX7IW0pHY7j2p22Zpw_-St7XSGhojExAenRDI_Uj8K10BoM8cXiTJzuPap1WsRLclpCEp-Dftzq8rV8z7oMM4ODzE9WOiU8iRIhz8A-yb2RRgMc1sfreLFe9bkN0P7xQ_qaIXQzdCilDE2s7mZEU7VCn7_lHV6eB-i-18zdPMJdMk6bR6GiNgFCO6PzcKogydkyU912pgYVsGMIgAbLTSjVd6ELysvX16VWSnv2-aX_VSQMJIlF_PVF1y"/>
+<span class="absolute top-4 right-4 bg-tertiary-container text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">noch 6 Plätze</span>
+</div>
+<div class="p-8 space-y-4">
+<h3 class="font-headline text-xl font-bold text-primary">Thai-Küche: Aromen Bangkoks</h3>
+<div class="space-y-2 text-sm text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">calendar_today</span>
+<span>25. November 2024</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span>18:30 – 22:30 Uhr</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">location_on</span>
+<span>Frankfurt-Bornheim</span>
+</div>
+</div>
+<div class="pt-4 flex justify-between items-center border-t border-outline-variant/20">
+<span class="text-xl font-bold text-primary">115 €</span>
+<a class="text-primary font-bold flex items-center gap-1 group" href="#">Details ansehen <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">chevron_right</span></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why menufaktur -->
+<section class="py-32 bg-surface px-6 md:px-12">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-16 text-center">
+<div class="flex flex-col items-center space-y-6">
+<div class="w-20 h-20 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary">Vollständige Menüs selbst kochen</h3>
+<p class="text-on-surface-variant leading-relaxed px-4">
+                    Vom Amuse-Bouche bis zum Dessert – Sie erlernen die Koordination ganzer Menüfolgen unter professioneller Anleitung.
+                </p>
+</div>
+<div class="flex flex-col items-center space-y-6">
+<div class="w-20 h-20 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">history_edu</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary">Seit 2007 in Frankfurt</h3>
+<p class="text-on-surface-variant leading-relaxed px-4">
+                    Unsere Wurzeln liegen im Herzen von Bornheim. Über ein Jahrzehnt Erfahrung bürgt für höchste kulinarische Qualität.
+                </p>
+</div>
+<div class="flex flex-col items-center space-y-6">
+<div class="w-20 h-20 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary">Privat &amp; Firmenevents</h3>
+<p class="text-on-surface-variant leading-relaxed px-4">
+                    Ob Teambuilding oder Familienfeier – wir schaffen den perfekten Rahmen für Ihre exklusiven kulinarischen Erlebnisse.
+                </p>
+</div>
+</div>
+</section>
+<!-- Testimonial -->
+<section class="bg-primary py-24 px-6 md:px-12">
+<div class="max-w-4xl mx-auto text-center space-y-10">
+<span class="material-symbols-outlined text-surface text-6xl opacity-30" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+<blockquote class="text-[#fdfadf] font-headline text-3xl md:text-4xl italic leading-relaxed">
+                „Ein Abend in der menufaktur ist wie ein Kurzurlaub für die Sinne. Wir haben nicht nur Techniken gelernt, sondern die echte Leidenschaft für gute Lebensmittel gespürt.“
+            </blockquote>
+<div class="space-y-2">
+<p class="text-[#fdfadf] font-bold text-xl">Dr. Matthias Weber</p>
+<p class="text-[#fdfadf]/70 uppercase tracking-widest text-sm">Privates Dinner Event</p>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-[#5b0012] dark:bg-[#40000a] text-[#ffffff] font-manrope text-sm leading-relaxed tracking-wide">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full max-w-7xl mx-auto">
+<!-- Brand & Contact -->
+<div class="space-y-6">
+<div class="text-xl font-bold text-[#fdfadf] flex items-center"><img alt="Logo" class="h-6 mr-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6fBKoA3VCNZi7mxmoYWNvevZidj12oaZ7hqYJHkrzVyNZLAupcbm3HbEeEdrgCONkAQ3ZA6VzAPaUq6LPEZo3j836DHPEXtjHv7GxzOkrmdaRRNMkDvn_-nQp0Emn3B8cou-zU54Tnmh5kI89I8fi-bCR-N0ZDAiX1Sb5I66pUDFB-795YF3TMGDkaA2-lP3Gm8ubSqW8s8e3XIdAJpvfyG9uv5RvzjBiOihsT1HOEHAzI8Ln8jAlUdGRyXVZFkISzKDSxB1zqEE4"/>menufaktur</div>
+<div class="text-[#ffffff]/70 space-y-2">
+<p>Berger Straße 204</p>
+<p>60385 Frankfurt am Main</p>
+<p class="pt-4">Tel: +49 (0)69 1234567</p>
+<p>Email: info@menufaktur.de</p>
+</div>
+</div>
+<!-- Nav -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Menü</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kurse</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Private Events</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Gutscheine</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Über uns</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Rechtliches</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Impressum</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Datenschutz</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">AGB</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kontakt</a></li>
+</ul>
+</div>
+<!-- Socials -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Social Media</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-2.25c0-1.176.21-1.75 1.25-1.75h2.75v-4h-3.75c-3.518 0-5.25 1.838-5.25 4.5v3.5z"></path></svg>
+</a>
+</div>
+<p class="text-[#ffffff]/50 text-xs">Abonnieren Sie unseren Newsletter für aktuelle Termine.</p>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-[#ffffff]/10 text-center text-[#ffffff]/40 text-xs">
+            © 2024 menufaktur. Alle Rechte vorbehalten.
+        </div>
+</footer>
+</body></html>

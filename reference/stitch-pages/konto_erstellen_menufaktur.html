@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+
+<html lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Konto erstellen | Menufaktur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#ff6570",
+                    "surface-container-highest": "#e6e4c9",
+                    "surface-bright": "#fdfadf",
+                    "surface-container-low": "#f8f5da",
+                    "on-tertiary-fixed-variant": "#842600",
+                    "surface-tint": "#a8353f",
+                    "primary-fixed-dim": "#ffb3b3",
+                    "surface": "#fdfadf",
+                    "secondary-fixed-dim": "#ffb3b4",
+                    "on-secondary-fixed": "#40000a",
+                    "inverse-primary": "#ffb3b3",
+                    "outline": "#8b7171",
+                    "on-secondary-container": "#680017",
+                    "on-primary-container": "#ff888c",
+                    "surface-dim": "#dedbc1",
+                    "primary-container": "#7e1423",
+                    "surface-container": "#f2efd4",
+                    "primary": "#5b0012",
+                    "tertiary-fixed": "#ffdbd0",
+                    "tertiary": "#511400",
+                    "error": "#ba1a1a",
+                    "secondary-fixed": "#ffdad9",
+                    "inverse-on-surface": "#f5f2d7",
+                    "background": "#fdfadf",
+                    "surface-container-lowest": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-tertiary-container": "#ff8b64",
+                    "on-tertiary-fixed": "#390b00",
+                    "on-surface-variant": "#574141",
+                    "secondary": "#b02a3b",
+                    "primary-fixed": "#ffdad9",
+                    "on-secondary-fixed-variant": "#8f0d26",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#1c1c0c",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#881c29",
+                    "on-background": "#1c1c0c",
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "tertiary-container": "#772100",
+                    "surface-container-high": "#ece9cf",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#debfbf",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#e6e4c9",
+                    "on-primary-fixed": "#40000a",
+                    "inverse-surface": "#323120"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; background-color: #fdfadf; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#7e1423] dark:bg-[#40000a] flex justify-between items-center px-12 py-6 w-full max-w-none">
+<div class="text-2xl font-bold text-[#FFFCE1] font-headline tracking-tight"><div class="flex items-center gap-3">
+<img alt="Menufaktur Logo" class="w-8 h-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBqn4JXbXeB-LYZemPIy7ONhVRTvVDG3re-XD6I3QZlSXFzFQ43fD81xF2Aqt2Afc4bUgITI-MEWojrcEM0tip06dfIKh8p-v7zrQ1fEBpHsEfBBN_7hObPoRn438ClRpeN07R036YMh8vS2N76SwJbqiMfXCfrynBCzYx1u-qSU3hN14ecszMgiXQZa2fbfg3cXlpKD0dDvBBvN7CkBItozEMFSTHU7gBk7rxW_RD7hOpPToQh6oQ7tM3yaJXZ4r2vrruNLY5gxE9"/>
+<span>Menufaktur</span>
+</div></div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kurse</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Rezepte</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Über uns</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Atelier</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight">Anmelden</button>
+<button class="bg-tertiary-container text-[#ffffff] px-6 py-2 rounded-xl font-headline font-bold tracking-tight hover:opacity-90 transition-opacity duration-300 scale-95 active:duration-100">Jetzt Buchen</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center py-32 px-4 sm:px-6 lg:px-8">
+<div class="max-w-[560px] w-full space-y-12">
+<!-- Asymmetric Header Layout -->
+<div class="text-center md:text-left space-y-4">
+<h1 class="text-5xl font-bold text-primary tracking-tight font-headline">
+                Konto erstellen
+            </h1>
+<p class="text-lg text-on-surface-variant max-w-md leading-relaxed font-body">
+                Verfolgen Sie Ihre Buchungen, sparen Sie Zeit beim nächsten Buchen.
+            </p>
+</div>
+<!-- Form Card -->
+<div class="bg-surface-container-lowest rounded-xl p-8 md:p-12 shadow-[0_32px_64px_-12px_rgba(91,0,18,0.06)] border border-outline-variant/15">
+<form action="#" class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label" for="vorname">Vorname</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-lg py-3 px-4 transition-all duration-300 font-body placeholder:text-outline-variant" id="vorname" placeholder="Geben Sie Ihren Vornamen ein" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label" for="nachname">Nachname</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-lg py-3 px-4 transition-all duration-300 font-body placeholder:text-outline-variant" id="nachname" placeholder="Geben Sie Ihren Nachnamen ein" type="text"/>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label" for="email">Email</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-lg py-3 px-4 transition-all duration-300 font-body placeholder:text-outline-variant" id="email" placeholder="beispiel@atelier.de" type="email"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label" for="passwort">Passwort</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-lg py-3 px-4 transition-all duration-300 font-body" id="passwort" type="password"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label" for="passwort_confirm">Bestätigen</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-lg py-3 px-4 transition-all duration-300 font-body" id="passwort_confirm" type="password"/>
+</div>
+</div>
+<div class="space-y-6 pt-4">
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label" for="strasse">Straße und Hausnummer</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-lg py-3 px-4 transition-all duration-300 font-body" id="strasse" placeholder="Geben Sie Ihre Adresse ein" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label" for="plz">PLZ</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-lg py-3 px-4 transition-all duration-300 font-body" id="plz" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label" for="stadt">Stadt</label>
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-lg py-3 px-4 transition-all duration-300 font-body" id="stadt" type="text"/>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant font-label" for="land">Land</label>
+<select class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-lg py-3 px-4 transition-all duration-300 font-body appearance-none" id="land">
+<option>Deutschland</option>
+<option>Österreich</option>
+<option>Schweiz</option>
+</select>
+</div>
+</div>
+<div class="space-y-4 pt-4">
+<label class="flex items-start gap-3 cursor-pointer group">
+<div class="relative flex items-center justify-center mt-1">
+<input class="peer appearance-none w-5 h-5 border-2 border-outline-variant rounded-md checked:bg-primary checked:border-primary transition-all duration-200" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-white text-[16px] opacity-0 peer-checked:opacity-100 transition-opacity">check</span>
+</div>
+<span class="text-sm text-on-surface-variant leading-tight font-body">Ich akzeptiere die AGB</span>
+</label>
+<label class="flex items-start gap-3 cursor-pointer group">
+<div class="relative flex items-center justify-center mt-1">
+<input class="peer appearance-none w-5 h-5 border-2 border-outline-variant rounded-md checked:bg-primary checked:border-primary transition-all duration-200" type="checkbox"/>
+<span class="material-symbols-outlined absolute text-white text-[16px] opacity-0 peer-checked:opacity-100 transition-opacity">check</span>
+</div>
+<span class="text-sm text-on-surface-variant leading-tight font-body">Ich habe die Datenschutzerklärung gelesen</span>
+</label>
+</div>
+<div class="pt-6">
+<button class="w-full bg-tertiary-container hover:bg-tertiary text-white font-bold py-4 rounded-xl transition-all duration-300 active:scale-95 font-body shadow-lg shadow-tertiary-container/20" type="submit">
+                        Konto erstellen
+                    </button>
+</div>
+</form>
+<div class="mt-10 flex items-center gap-4">
+<div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+<span class="text-xs font-bold uppercase tracking-tighter text-outline-variant font-label">Oder</span>
+<div class="flex-grow h-[1px] bg-outline-variant/30"></div>
+</div>
+<div class="mt-8 text-center">
+<a class="text-primary font-bold hover:underline transition-all font-body" href="#">
+                    Bereits ein Konto? Anmelden
+                </a>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#5b0012] dark:bg-[#40000a] text-[#ffffff] font-manrope text-sm leading-relaxed tracking-wide">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full max-w-7xl mx-auto">
+<!-- Brand & Contact -->
+<div class="space-y-6">
+<div class="text-xl font-bold text-[#fdfadf]"><div class="flex items-center gap-3">
+<img alt="Menufaktur Logo" class="w-7 h-7 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnaEjH69d0H-uzR6IvTUHdi_2POR36rTW1scBPAsHkXaICgGhsIbzP9zFBywOXPIncA6AiPNWda7YeC1ssS_IGiSLJJMS53uDLo32fdGvbyMneUGRJxGng-MR-CNID-5brUKv83iWGjvuE2qlFeyj3kUhWlTfZ_NXGNm1GazNUrbc2JMncdKstKcCEX6FpTqVx2VvHhMPFCDjla1oOOdZ2SWUjZCfe5QK59DvmMJ_V0-U-JKmq78m10yUrxJDze2SL6DCR4U7oM6zu"/>
+<span>Menufaktur</span>
+</div></div>
+<div class="text-[#ffffff]/70 space-y-2">
+<p>Berger Straße 204</p>
+<p>60385 Frankfurt am Main</p>
+<p class="pt-4">Tel: +49 (0)69 1234567</p>
+<p>Email: info@menufaktur.de</p>
+</div>
+</div>
+<!-- Nav -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Menü</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kurse</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Rezepte</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Gutscheine</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Über uns</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Rechtliches</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Impressum</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Datenschutz</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">AGB</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kontakt</a></li>
+</ul>
+</div>
+<!-- Socials -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Social Media</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all opacity-80 hover:opacity-100" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all opacity-80 hover:opacity-100" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-2.25c0-1.176.21-1.75 1.25-1.75h2.75v-4h-3.75c-3.518 0-5.25 1.838-5.25 4.5v3.5z"></path></svg>
+</a>
+</div>
+<p class="text-[#ffffff]/50 text-xs">Abonnieren Sie unseren Newsletter für aktuelle Termine.</p>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-[#ffffff]/10 text-center text-[#ffffff]/40 text-xs">
+        © 2024 Menufaktur Culinary Atelier. Alle Rechte vorbehalten.
+    </div>
+</footer>
+</body></html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gutscheine | Menufaktur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&amp;family=Manrope:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "tertiary-container": "#772100",
+                    "primary-container": "#7e1423",
+                    "on-surface": "#1c1c0c",
+                    "primary": "#5b0012",
+                    "background": "#fdfadf",
+                    "secondary": "#b02a3b",
+                    "outline-variant": "#debfbf",
+                    "secondary-fixed": "#ffdad9",
+                    "on-tertiary-container": "#ff8b64",
+                    "surface-container-high": "#ece9cf",
+                    "surface-tint": "#a8353f",
+                    "on-surface-variant": "#574141",
+                    "on-secondary-container": "#680017",
+                    "on-primary-fixed-variant": "#881c29",
+                    "secondary-container": "#ff6570",
+                    "on-secondary-fixed-variant": "#8f0d26",
+                    "error-container": "#ffdad6",
+                    "surface-container": "#f2efd4",
+                    "primary-fixed-dim": "#ffb3b3",
+                    "inverse-on-surface": "#f5f2d7",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-low": "#f8f5da",
+                    "surface-variant": "#e6e4c9",
+                    "on-tertiary-fixed-variant": "#842600",
+                    "on-primary-fixed": "#40000a",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "surface": "#fdfadf",
+                    "surface-bright": "#fdfadf",
+                    "outline": "#8b7171",
+                    "primary-fixed": "#ffdad9",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-background": "#1c1c0c",
+                    "surface-dim": "#dedbc1",
+                    "surface-container-highest": "#e6e4c9",
+                    "on-primary-container": "#ff888c",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#511400",
+                    "inverse-primary": "#ffb3b3",
+                    "on-tertiary-fixed": "#390b00",
+                    "tertiary-fixed": "#ffdbd0",
+                    "on-secondary-fixed": "#40000a",
+                    "secondary-fixed-dim": "#ffb3b4",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#323120",
+                    "gold-cta": "#772100"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue", "sans-serif"],
+                    "body": ["Roboto", "sans-serif"],
+                    "label": ["Manrope", "sans-serif"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Roboto', sans-serif; background-color: #fdfadf; }
+        .font-epilogue { font-family: 'Epilogue', sans-serif; }
+        
+        /* Modal toggle helper */
+        #voucher-modal:target {
+            display: flex;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#5b0012] dark:bg-[#40000a] flex justify-between items-center px-12 py-6">
+<div class="text-2xl font-bold text-[#fdfadf] font-headline tracking-tight flex items-center">
+<img alt="Logo" class="h-8 mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpOslqp-RSIfNFDy9NOVL2WPRklxpJ9QzEqMeeIMyGgdCTmE54V9Dq8veU5a7x9cazu4WA4lVRW9Mk506qNtylDPAm34FlnzcIKoXLNRyM2214GRELUcpr7VQxsS4Az0-nGhPHOGuj0d5aU1jOJl0KnTann82grSfAg88cp_64seSDIhNyFBlDAe59f5RoEVdg0XVWDjuAo-UeHdFh9jnImZRX5VOmIfR-3u7k1p2XeCpio3qKRrsmoQtP_T3NteHvGsMWL3GEtF4l"/>
+        menufaktur
+    </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kurse</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Private Events</a>
+<a class="text-[#ffffff] border-b-2 border-white/30 pb-1 transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Gutscheine</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kontakt</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight">Anmelden</button>
+<button class="bg-tertiary-container text-on-tertiary px-6 py-2 rounded-xl font-headline font-bold tracking-tight hover:opacity-90 transition-opacity duration-300 scale-95">Kurs buchen</button>
+</div>
+</nav>
+<main class="min-h-screen">
+<!-- Hero Section -->
+<section class="relative h-[614px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Elegante Küchendetails" class="w-full h-full object-cover brightness-50" data-alt="Close-up of elegant culinary tools and fresh herbs on a rustic wooden table with warm atmospheric lighting and soft shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJLGt0SuqRSqxpSJRazABzJi9D-NgOrjaNDkg-N0Z97SVDMPo56vs3qW9u0IvjZkdMJ5zDkVq_rCHSl9RSwVdqE6aj9WWMHDrms96pPwSeJic6aFGTk7FCvrOb5ujB_wt9GHimvqDX0QTq_PFGAHkYZQx7htP863L-pPUHG5wIDGgmpqWbfYI1E9fp38r1d7KZGB7MNQ7XP4Sl4NCB8lvmGhxTdTpX5BA-2olWEQa0A2xYhD97JECsFGopzNXdvcSjv8xpiS_oR1ML"/>
+</div>
+<div class="container mx-auto px-8 md:px-16 z-10 relative">
+<div class="max-w-3xl">
+<h1 class="text-white font-headline font-bold text-6xl md:text-8xl tracking-tight mb-4 drop-shadow-lg">Gutscheine</h1>
+<div class="w-24 h-1 bg-white/30 rounded-full mb-6"></div>
+<p class="text-white/90 text-xl font-body leading-relaxed max-w-xl">
+                    Verschenken Sie kulinarische Erlebnisse und unvergessliche Momente in der Menufaktur.
+                </p>
+</div>
+</div>
+</section>
+<!-- Main Content Asymmetric Grid -->
+<section class="py-24 px-8 md:px-16 max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+<!-- Left Sidebar: Visual Accent -->
+<div class="lg:col-span-4 space-y-12">
+<div class="aspect-[4/5] rounded-xl overflow-hidden shadow-2xl rotate-1">
+<img alt="Gutschein Design" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" data-alt="Beautifully designed gift voucher on premium paper with gold foil accents resting on a velvet texture in wine red" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_KwvpWV7M28C9oNdrFJwRZBgSvS5yyVM6k1hZV7yoh9KfH9dHngtMnQNphnZ8j67Q2Q9OAltETLi14YquueLQ8w41oSqt3qm9Gq0GSdRWoU7LeeGToagUWG-kgzXhy1N_M550qA85UET_aU3SltWX_hlB6RoTZsvFq3aiuttjf-MZ-Hsp1pQ_UVkpISLwXuLnSZ4AI3SPagJJT4TaHbrc3P3TXLeJw9Z6OQyif_HRVEMn-pAyVgHEpqhG3y-nfwzyXbgIvIMEkiUY"/>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl border-l-4 border-primary">
+<p class="font-body text-primary italic text-lg leading-relaxed">
+                        "Ein Kochkurs ist mehr als nur ein Rezept – es ist die Leidenschaft für das Handwerk, die wir teilen möchten."
+                    </p>
+</div>
+</div>
+<!-- Right Side: Content -->
+<div class="lg:col-span-8 space-y-20">
+<!-- Section 1 -->
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container text-4xl" data-icon="confirmation_number">confirmation_number</span>
+<h2 class="text-primary font-headline font-bold text-3xl md:text-4xl tracking-tight">Sie möchten einen Gutschein einlösen</h2>
+</div>
+<p class="text-on-surface-variant font-body text-lg leading-relaxed max-w-2xl">
+                        Um einen Gutschein einzulösen, melden Sie sich einfach zum gewünschten Kurs an und geben im Laufe der Kursanmeldung Ihre/n Gutscheincode/s in das entsprechende Feld ein.
+                    </p>
+</div>
+<!-- Section 2: Recipe Sheet Component -->
+<div class="bg-surface-container-lowest p-10 md:p-16 rounded-xl shadow-sm border border-outline-variant/15 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-8 opacity-5">
+<span class="material-symbols-outlined text-9xl text-primary" data-icon="card_giftcard">card_giftcard</span>
+</div>
+<div class="relative z-10 space-y-8">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary-container text-4xl" data-icon="shopping_basket">shopping_basket</span>
+<h2 class="text-primary font-headline font-bold text-3xl md:text-4xl tracking-tight">Sie möchten einen Gutschein kaufen</h2>
+</div>
+<div class="space-y-6 max-w-3xl">
+<p class="text-on-surface-variant font-body text-lg leading-relaxed">
+                                Sie können Gutscheine im Wert zwischen <span class="font-bold text-primary">25,- €</span> und <span class="font-bold text-primary">145,- €</span> kaufen. Bei den meisten Kochkursen beträgt die Teilnahmegebühr 109,- € pro Person. Er kann für jeden menufaktur Kochkurs eingelöst werden.
+                            </p>
+<p class="text-on-surface-variant font-body text-lg leading-relaxed">
+                                Bitte lesen Sie vor dem Kauf aufmerksam unsere allgemeinen Geschäftsbedingungen und informieren Sie sich im FAQ zum Thema Gutschein.
+                            </p>
+</div>
+<div class="pt-8 flex flex-col md:flex-row items-center gap-8">
+<a class="bg-tertiary-container hover:bg-tertiary text-white font-headline font-bold px-10 py-5 rounded-xl shadow-lg transition-all transform hover:-translate-y-1 active:scale-95 flex items-center gap-3" href="#voucher-modal">
+<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
+                                Gutschein jetzt kaufen
+                            </a>
+<div class="flex items-center gap-2 text-sm text-on-surface-variant/70">
+<span class="material-symbols-outlined text-xl" data-icon="verified_user">verified_user</span>
+<span>Sichere Bezahlung &amp; Sofortversand</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Newsletter / Contact Teaser -->
+<section class="bg-primary-container py-20 mt-12 overflow-hidden relative">
+<div class="container mx-auto px-8 flex flex-col items-center text-center space-y-6 relative z-10">
+<h3 class="text-white font-headline font-bold text-3xl md:text-5xl">Haben Sie Fragen zu unseren Gutscheinen?</h3>
+<p class="text-white/80 font-body text-lg max-w-xl">Unser Team berät Sie gerne persönlich zu unseren Kursangeboten und Konditionen.</p>
+<a class="text-white font-bold border-b-2 border-white/40 hover:border-white transition-all pb-1 mt-4" href="#">Kontaktieren Sie uns</a>
+</div>
+</section>
+</main>
+<!-- Voucher Modal Overlay -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-[#1c1c0c]/80 backdrop-blur-sm overflow-y-auto" id="voucher-modal">
+<div class="bg-[#fdfadf] w-full max-w-4xl rounded-2xl shadow-2xl relative my-8">
+<div class="p-8 md:p-12">
+<!-- Header -->
+<div class="mb-10 border-b border-primary/10 pb-6">
+<h2 class="text-primary font-body font-bold text-4xl mb-4">Gutschein kaufen</h2>
+<p class="text-on-surface-variant font-body text-sm bg-surface-container-low p-4 rounded-lg inline-block">
+                    Bitte beachten Sie, dass die mit einem <span class="text-error font-bold">*</span> gekennzeichneten Felder Pflichtfelder sind.
+                </p>
+</div>
+<form action="#" class="space-y-12">
+<!-- Section 1: Personal Data -->
+<div class="space-y-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="person">person</span>
+<h3 class="text-primary font-body font-bold text-xl">Daten des Gutscheinkäufers und Rechnungsempfängers</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="block text-sm font-body text-on-surface-variant">Firma</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-body text-on-surface-variant">Abteilung</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="text"/>
+</div>
+<div class="md:col-span-2 space-y-3">
+<label class="block text-sm font-body text-on-surface-variant">Anrede</label>
+<div class="flex gap-8">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="w-4 h-4 text-primary focus:ring-primary border-outline-variant" name="anrede" type="radio"/>
+<span class="font-body text-on-surface group-hover:text-primary transition-colors">Frau</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="w-4 h-4 text-primary focus:ring-primary border-outline-variant" name="anrede" type="radio"/>
+<span class="font-body text-on-surface group-hover:text-primary transition-colors">Herr</span>
+</label>
+</div>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-body text-on-surface-variant">Vorname*</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required="" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-body text-on-surface-variant">Nachname*</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required="" type="text"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="block text-sm font-body text-on-surface-variant">Straße*</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required="" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-body text-on-surface-variant">PLZ*</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required="" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-body text-on-surface-variant">Ort*</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required="" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-body text-on-surface-variant">Telefon (Vorwahl/Rufnummer)*</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required="" type="tel"/>
+</div>
+<div class="space-y-2">
+<label class="block text-sm font-body text-on-surface-variant">Fax</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" type="tel"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="block text-sm font-body text-on-surface-variant">E-Mail*</label>
+<input class="w-full bg-white border border-outline-variant rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" required="" type="email"/>
+</div>
+</div>
+</div>
+<!-- Section 2: Voucher Value -->
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="euro">euro</span>
+<h3 class="text-primary font-body font-bold text-xl">Wert der Gutscheine</h3>
+</div>
+<div class="relative">
+<select class="w-full bg-white border border-outline-variant rounded-lg p-4 font-body text-on-surface focus:ring-2 focus:ring-primary focus:border-primary outline-none appearance-none transition-all">
+<option>25,00 €</option>
+<option>50,00 €</option>
+<option>75,00 €</option>
+<option>95,00 €</option>
+<option>99,00 €</option>
+<option selected="">109,00 €</option>
+<option>115,00 €</option>
+<option>125,00 €</option>
+<option>145,00 €</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-outline">expand_more</span>
+</div>
+</div>
+<!-- Section 3: Quantity -->
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="format_list_numbered">format_list_numbered</span>
+<h3 class="text-primary font-body font-bold text-xl">Anzahl der Gutscheine</h3>
+</div>
+<div class="flex flex-col md:flex-row items-center gap-4 bg-surface-container-low p-6 rounded-xl">
+<span class="font-body text-on-surface">Ich möchte insgesamt</span>
+<div class="relative w-32">
+<select class="w-full bg-white border border-outline-variant rounded-lg p-3 font-body text-center focus:ring-2 focus:ring-primary outline-none appearance-none">
+<option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+<option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-xs text-outline">expand_more</span>
+</div>
+<span class="font-body text-on-surface">Gutschein/e mit dem gewählten Wert kaufen.</span>
+</div>
+</div>
+<!-- Section 4: Legal -->
+<div class="space-y-8 bg-surface-container/50 p-8 rounded-2xl border border-outline-variant/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="gavel">gavel</span>
+<h3 class="text-primary font-body font-bold text-xl">Sonstige Angaben &amp; Rechtliches</h3>
+</div>
+<div class="space-y-6">
+<label class="flex gap-4 cursor-pointer">
+<input class="mt-1 w-5 h-5 text-primary focus:ring-primary border-outline-variant rounded" required="" type="checkbox"/>
+<span class="font-body text-on-surface text-sm leading-relaxed">
+                                Ja, ich habe die <a class="text-primary font-bold underline" href="#">allgemeinen Geschäftsbedingungen</a> gelesen und verstanden. Mit dem Setzen eines Hakens akzeptiere ich die AGB der menufaktur.*
+                            </span>
+</label>
+<div class="p-4 bg-primary/5 rounded-lg flex gap-3 border-l-4 border-primary">
+<span class="material-symbols-outlined text-primary shrink-0" data-icon="info">info</span>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                                Nach dem Kauf habe ich die Möglichkeit meine/n Gutschein/e ausdrucken. Den Link dafür erhalte ich per E-Mail. Dieser Service ist kostenlos.
+                            </p>
+</div>
+<label class="flex gap-4 cursor-pointer">
+<input class="mt-1 w-5 h-5 text-primary focus:ring-primary border-outline-variant rounded" type="checkbox"/>
+<span class="font-body text-on-surface text-sm leading-relaxed">
+                                Ja, ich möchte den/die Gutschein/e per Post geschickt bekommen. Dafür zahle ich eine zusätzliche Versandpauschale in Höhe von <span class="font-bold">2,00 € + 0,20 €</span> je Gutschein.
+                            </span>
+</label>
+<label class="flex gap-4 cursor-pointer">
+<input class="mt-1 w-5 h-5 text-primary focus:ring-primary border-outline-variant rounded" type="checkbox"/>
+<span class="font-body text-on-surface text-sm leading-relaxed">
+                                Ja, ich möchte in Zukunft den menufaktur Newsletter erhalten. Dieser kann jederzeit wieder abbestellt werden.
+                            </span>
+</label>
+</div>
+</div>
+<!-- Footer Buttons -->
+<div class="flex flex-col-reverse md:flex-row justify-end gap-4 pt-6">
+<a class="px-8 py-4 text-on-surface-variant hover:text-primary font-body font-bold transition-colors text-center" href="#">
+                        Abbrechen
+                    </a>
+<button class="bg-gold-cta hover:bg-tertiary-container text-white px-10 py-4 rounded-xl font-body font-bold shadow-lg transition-all transform hover:-translate-y-0.5 active:scale-95" type="submit">
+                        Zahlungspflichtig bestellen
+                    </button>
+</div>
+</form>
+</div>
+<!-- Close Button Top Right (optional but good UX) -->
+<a class="absolute top-6 right-6 text-outline hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-3xl" data-icon="close">close</span>
+</a>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-[#5b0012] dark:bg-[#40000a] text-[#ffffff] font-body text-sm leading-relaxed tracking-wide">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full max-w-7xl mx-auto">
+<!-- Brand & Contact -->
+<div class="space-y-6">
+<div class="text-xl font-bold text-[#fdfadf] flex items-center">
+<img alt="Logo" class="h-6 mr-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6fBKoA3VCNZi7mxmoYWNvevZidj12oaZ7hqYJHkrzVyNZLAupcbm3HbEeEdrgCONkAQ3ZA6VzAPaUq6LPEZo3j836DHPEXtjHv7GxzOkrmdaRRNMkDvn_-nQp0Emn3B8cou-zU54Tnmh5kI89I8fi-bCR-N0ZDAiX1Sb5I66pUDFB-795YF3TMGDkaA2-lP3Gm8ubSqW8s8e3XIdAJpvfyG9uv5RvzjBiOihsT1HOEHAzI8Ln8jAlUdGRyXVZFkISzKDSxB1zqEE4"/>
+                menufaktur
+            </div>
+<div class="text-[#ffffff]/70 space-y-2">
+<p>Berger Straße 204</p>
+<p>60385 Frankfurt am Main</p>
+<p class="pt-4">Tel: +49 (0)69 1234567</p>
+<p>Email: info@menufaktur.de</p>
+</div>
+</div>
+<!-- Nav -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Menü</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kurse</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Private Events</a></li>
+<li><a class="text-[#fdfadf] transition-colors duration-300 font-bold" href="#">Gutscheine</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Über uns</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Rechtliches</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Impressum</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Datenschutz</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">AGB</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kontakt</a></li>
+</ul>
+</div>
+<!-- Socials -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Social Media</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-2.25c0-1.176.21-1.75 1.25-1.75h2.75v-4h-3.75c-3.518 0-5.25 1.838-5.25 4.5v3.5z"></path></svg>
+</a>
+</div>
+<p class="text-[#ffffff]/50 text-xs">Abonnieren Sie unseren Newsletter für aktuelle Termine.</p>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-[#ffffff]/10 text-center text-[#ffffff]/40 text-xs">
+        © 2024 menufaktur. Alle Rechte vorbehalten.
+    </div>
+</footer>
+</body></html>

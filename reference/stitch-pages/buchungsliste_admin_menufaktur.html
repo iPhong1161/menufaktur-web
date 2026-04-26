@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Buchungen | The Culinary Atelier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#842600",
+                        "secondary": "#b02a3b",
+                        "error-container": "#ffdad6",
+                        "primary": "#5b0012",
+                        "on-tertiary-fixed": "#390b00",
+                        "inverse-on-surface": "#f5f2d7",
+                        "tertiary": "#511400",
+                        "outline": "#8b7171",
+                        "on-secondary-fixed": "#40000a",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#fdfadf",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "primary-fixed": "#ffdad9",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#772100",
+                        "error": "#ba1a1a",
+                        "primary-container": "#7e1423",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#574141",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ece9cf",
+                        "on-tertiary-container": "#ff8b64",
+                        "on-secondary-container": "#680017",
+                        "on-primary-fixed-variant": "#881c29",
+                        "surface-container-low": "#f8f5da",
+                        "surface-variant": "#e6e4c9",
+                        "on-surface": "#1c1c0c",
+                        "background": "#fdfadf",
+                        "secondary-container": "#ff6570",
+                        "surface-container-highest": "#e6e4c9",
+                        "outline-variant": "#debfbf",
+                        "on-primary-container": "#ff888c",
+                        "surface-container": "#f2efd4",
+                        "inverse-primary": "#ffb3b3",
+                        "surface": "#fdfadf",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdad9",
+                        "on-secondary-fixed-variant": "#8f0d26",
+                        "inverse-surface": "#323120",
+                        "surface-dim": "#dedbc1",
+                        "secondary-fixed-dim": "#ffb3b4",
+                        "primary-fixed-dim": "#ffb3b3",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#40000a",
+                        "surface-tint": "#a8353f",
+                        "on-background": "#1c1c0c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Epilogue', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#fdfadf] dark:bg-[#1a1614] backdrop-blur-md bg-opacity-90 border-b border-[#5b0012]/10 dark:border-[#ffffff]/10">
+<div class="flex justify-between items-center h-20 px-8 w-full max-w-full">
+<div class="text-2xl font-bold text-[#5b0012] dark:text-[#ffb3b4] uppercase tracking-widest font-['Epilogue']"><div class="flex items-center gap-3"><div class="w-8 h-8 bg-[#7E1423] rounded-sm flex-shrink-0"></div><span class="uppercase tracking-widest font-['Epilogue']">menufaktur</span></div></div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Dashboard</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Kurse</a>
+<a class="text-[#5b0012] dark:text-[#ffb3b4] font-bold border-b-2 border-[#5b0012] pb-1 font-['Epilogue'] tracking-tight" href="#">Buchungen</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Kunden</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Einstellungen</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 hover:bg-[#7e1423]/5 dark:hover:bg-[#ffffff]/5 rounded-lg text-[#5b0012] transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#7e1423]/5 dark:hover:bg-[#ffffff]/5 rounded-lg text-[#5b0012] transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-32 pb-16 px-8 max-w-7xl mx-auto w-full">
+<!-- Header Section -->
+<header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-5xl font-bold text-primary tracking-tight mb-2">Buchungen</h1>
+<p class="text-title-lg text-on-surface-variant font-medium">Alle Buchungen einsehen und verwalten</p>
+</div>
+<button class="inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-4 rounded-xl font-semibold transition-all hover:bg-primary-container focus:ring-4 focus:ring-primary/20">
+<span class="material-symbols-outlined" data-icon="file_download">file_download</span>
+<span>CSV exportieren</span>
+</button>
+</header>
+<!-- Filter Bar -->
+<section class="mb-8 p-6 bg-surface-container-low rounded-xl">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant ml-1">Kurs</label>
+<select class="bg-surface-container-high border-none rounded-lg text-sm focus:ring-2 focus:ring-primary h-12">
+<option>Alle Kurse</option>
+<option>Wein-Degustation</option>
+<option>Französische Patisserie</option>
+<option>Vegane Sterneküche</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant ml-1">Zeitraum</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none rounded-lg text-sm focus:ring-2 focus:ring-primary h-12 pl-10" placeholder="Geben Sie ein Datum ein" type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant" data-icon="calendar_today">calendar_today</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant ml-1">Status</label>
+<select class="bg-surface-container-high border-none rounded-lg text-sm focus:ring-2 focus:ring-primary h-12">
+<option>Alle Stati</option>
+<option>Bezahlt</option>
+<option>Offen</option>
+<option>Storniert</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant ml-1">Zahlungsart</label>
+<select class="bg-surface-container-high border-none rounded-lg text-sm focus:ring-2 focus:ring-primary h-12">
+<option>Alle Methoden</option>
+<option>Kreditkarte</option>
+<option>PayPal</option>
+<option>Rechnung</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-xs font-bold uppercase tracking-widest text-on-surface-variant ml-1">Suche</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none rounded-lg text-sm focus:ring-2 focus:ring-primary h-12 pl-10" placeholder="Name oder Nr. suchen" type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-3 text-on-surface-variant" data-icon="search">search</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bookings Table -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant/15">
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Buchungsnr</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Kurs</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Kunde</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">TN</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Betrag</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Status</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Methode</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Gebucht</th>
+<th class="px-6 py-5 text-xs font-bold uppercase tracking-widest text-on-surface-variant text-right">Aktionen</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1: Bezahlt -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5 font-mono text-sm text-primary">#CA-88901</td>
+<td class="px-6 py-5">
+<span class="font-bold text-on-surface">Französische Patisserie Masterclass</span>
+<span class="block text-xs text-on-surface-variant">14. Nov 2024</span>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">Marc-André Weber</span>
+<span class="block text-xs text-on-surface-variant">weber@example.com</span>
+</td>
+<td class="px-6 py-5 font-medium">2</td>
+<td class="px-6 py-5 font-bold">298,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#dcfce7] text-[#166534]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#166534] mr-2"></span>
+                                    Bezahlt
+                                </span>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Kreditkarte</td>
+<td class="px-6 py-5 text-sm">24.10.2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-primary/10 rounded-lg text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Offen -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5 font-mono text-sm text-primary">#CA-88912</td>
+<td class="px-6 py-5">
+<span class="font-bold text-on-surface">Grundlagen der Sommelier-Kunst</span>
+<span class="block text-xs text-on-surface-variant">18. Nov 2024</span>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">Dr. Elena Schneider</span>
+<span class="block text-xs text-on-surface-variant">elena.s@web.de</span>
+</td>
+<td class="px-6 py-5 font-medium">1</td>
+<td class="px-6 py-5 font-bold">149,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#fef9c3] text-[#854d0e]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#854d0e] mr-2"></span>
+                                    Offen
+                                </span>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Überweisung</td>
+<td class="px-6 py-5 text-sm">25.10.2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-primary/10 rounded-lg text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Storniert -->
+<tr class="hover:bg-surface-container-low transition-colors group opacity-60">
+<td class="px-6 py-5 font-mono text-sm text-primary">#CA-88915</td>
+<td class="px-6 py-5">
+<span class="font-bold text-on-surface line-through">Vegane Sterneküche</span>
+<span class="block text-xs text-on-surface-variant">02. Dez 2024</span>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">Julian Meyer-Larsen</span>
+<span class="block text-xs text-on-surface-variant">j.meyer@larsen.com</span>
+</td>
+<td class="px-6 py-5 font-medium">3</td>
+<td class="px-6 py-5 font-bold">447,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#fee2e2] text-[#991b1b]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#991b1b] mr-2"></span>
+                                    Storniert
+                                </span>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">PayPal</td>
+<td class="px-6 py-5 text-sm">26.10.2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-primary/10 rounded-lg text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Bezahlt -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5 font-mono text-sm text-primary">#CA-88922</td>
+<td class="px-6 py-5">
+<span class="font-bold text-on-surface">Meeresfrüchte &amp; Krustentiere</span>
+<span class="block text-xs text-on-surface-variant">10. Dez 2024</span>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">Sabine Vollmer</span>
+<span class="block text-xs text-on-surface-variant">sabine.v@icloud.com</span>
+</td>
+<td class="px-6 py-5 font-medium">2</td>
+<td class="px-6 py-5 font-bold">338,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#dcfce7] text-[#166534]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#166534] mr-2"></span>
+                                    Bezahlt
+                                </span>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Kreditkarte</td>
+<td class="px-6 py-5 text-sm">27.10.2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-primary/10 rounded-lg text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Offen -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5 font-mono text-sm text-primary">#CA-88931</td>
+<td class="px-6 py-5">
+<span class="font-bold text-on-surface">Sauce-Techniken Kurs</span>
+<span class="block text-xs text-on-surface-variant">15. Dez 2024</span>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">Thomas Bach</span>
+<span class="block text-xs text-on-surface-variant">bach@t-online.de</span>
+</td>
+<td class="px-6 py-5 font-medium">1</td>
+<td class="px-6 py-5 font-bold">129,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#fef9c3] text-[#854d0e]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#854d0e] mr-2"></span>
+                                    Offen
+                                </span>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Überweisung</td>
+<td class="px-6 py-5 text-sm">28.10.2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-primary/10 rounded-lg text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 6: Bezahlt -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5 font-mono text-sm text-primary">#CA-88944</td>
+<td class="px-6 py-5">
+<span class="font-bold text-on-surface">Messerführung &amp; Technik</span>
+<span class="block text-xs text-on-surface-variant">20. Dez 2024</span>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">Lars Kuhlmann</span>
+<span class="block text-xs text-on-surface-variant">l.kuhlmann@gmx.de</span>
+</td>
+<td class="px-6 py-5 font-medium">1</td>
+<td class="px-6 py-5 font-bold">99,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#dcfce7] text-[#166534]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#166534] mr-2"></span>
+                                    Bezahlt
+                                </span>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Apple Pay</td>
+<td class="px-6 py-5 text-sm">29.10.2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-primary/10 rounded-lg text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 7: Bezahlt -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5 font-mono text-sm text-primary">#CA-88950</td>
+<td class="px-6 py-5">
+<span class="font-bold text-on-surface">Gourmet Fleischküche</span>
+<span class="block text-xs text-on-surface-variant">05. Jan 2025</span>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">Maria S. Lopez</span>
+<span class="block text-xs text-on-surface-variant">m.lopez@travel.es</span>
+</td>
+<td class="px-6 py-5 font-medium">2</td>
+<td class="px-6 py-5 font-bold">398,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#dcfce7] text-[#166534]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#166534] mr-2"></span>
+                                    Bezahlt
+                                </span>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Kreditkarte</td>
+<td class="px-6 py-5 text-sm">30.10.2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-primary/10 rounded-lg text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 8: Offen -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5 font-mono text-sm text-primary">#CA-88962</td>
+<td class="px-6 py-5">
+<span class="font-bold text-on-surface">Wild &amp; Wald Spezialitäten</span>
+<span class="block text-xs text-on-surface-variant">12. Jan 2025</span>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">Bernhard Fuchs</span>
+<span class="block text-xs text-on-surface-variant">fuchs@jagdwelt.de</span>
+</td>
+<td class="px-6 py-5 font-medium">1</td>
+<td class="px-6 py-5 font-bold">169,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#fef9c3] text-[#854d0e]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#854d0e] mr-2"></span>
+                                    Offen
+                                </span>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Rechnung</td>
+<td class="px-6 py-5 text-sm">31.10.2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-primary/10 rounded-lg text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 9: Storniert -->
+<tr class="hover:bg-surface-container-low transition-colors group opacity-60">
+<td class="px-6 py-5 font-mono text-sm text-primary">#CA-88965</td>
+<td class="px-6 py-5">
+<span class="font-bold text-on-surface line-through">Italienische Pasta-Kunst</span>
+<span class="block text-xs text-on-surface-variant">15. Jan 2025</span>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">Vittorio Rossi</span>
+<span class="block text-xs text-on-surface-variant">v.rossi@pastai.it</span>
+</td>
+<td class="px-6 py-5 font-medium">4</td>
+<td class="px-6 py-5 font-bold">476,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#fee2e2] text-[#991b1b]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#991b1b] mr-2"></span>
+                                    Storniert
+                                </span>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">PayPal</td>
+<td class="px-6 py-5 text-sm">01.11.2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-primary/10 rounded-lg text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 10: Bezahlt -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-5 font-mono text-sm text-primary">#CA-88970</td>
+<td class="px-6 py-5">
+<span class="font-bold text-on-surface">Trüffel &amp; Champagner</span>
+<span class="block text-xs text-on-surface-variant">25. Jan 2025</span>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">Sandra Bullock</span>
+<span class="block text-xs text-on-surface-variant">sb@hollywood.com</span>
+</td>
+<td class="px-6 py-5 font-medium">2</td>
+<td class="px-6 py-5 font-bold">590,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#dcfce7] text-[#166534]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#166534] mr-2"></span>
+                                    Bezahlt
+                                </span>
+</td>
+<td class="px-6 py-5 text-on-surface-variant">Kreditkarte</td>
+<td class="px-6 py-5 text-sm">02.11.2024</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 hover:bg-primary/10 rounded-lg text-primary transition-all">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination-esque footer -->
+<div class="px-6 py-4 flex items-center justify-between bg-surface-container-low border-t border-outline-variant/10">
+<span class="text-xs font-medium text-on-surface-variant">Zeige 10 von 452 Buchungen</span>
+<div class="flex gap-2">
+<button class="p-1 hover:bg-primary/10 rounded-lg transition-colors"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<button class="px-3 py-1 bg-primary text-on-primary rounded-lg text-xs font-bold">1</button>
+<button class="px-3 py-1 hover:bg-primary/10 rounded-lg text-xs font-medium">2</button>
+<button class="px-3 py-1 hover:bg-primary/10 rounded-lg text-xs font-medium">3</button>
+<button class="p-1 hover:bg-primary/10 rounded-lg transition-colors"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#fdfadf] dark:bg-[#1a1614] w-full py-8 mt-auto border-t border-[#5b0012]/5 dark:border-[#ffffff]/5">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto w-full">
+<div class="text-[#5b0012]/50 dark:text-[#ffffff]/50 font-['Manrope'] text-sm tracking-wide"><div class="flex items-center gap-3 mb-4 md:mb-0"><div class="w-8 h-8 bg-[#7E1423] rounded-sm flex-shrink-0"></div><span class="font-['Manrope'] text-sm tracking-wide">© 2024 menufaktur. Alle Rechte vorbehalten.</span></div></div>
+<div class="flex space-x-8">
+<a class="text-[#5b0012]/50 dark:text-[#ffffff]/50 hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-opacity font-['Manrope'] text-sm tracking-wide" href="#"><div class="flex items-center gap-3 mb-4 md:mb-0"><div class="w-8 h-8 bg-[#7E1423] rounded-sm flex-shrink-0"></div><span class="font-['Manrope'] text-sm tracking-wide">© 2024 menufaktur. Alle Rechte vorbehalten.</span></div></a>
+<a class="text-[#5b0012]/50 dark:text-[#ffffff]/50 hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-opacity font-['Manrope'] text-sm tracking-wide" href="#"><div class="flex items-center gap-3 mb-4 md:mb-0"><div class="w-8 h-8 bg-[#7E1423] rounded-sm flex-shrink-0"></div><span class="font-['Manrope'] text-sm tracking-wide">© 2024 menufaktur. Alle Rechte vorbehalten.</span></div></a>
+<a class="text-[#5b0012]/50 dark:text-[#ffffff]/50 hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-opacity font-['Manrope'] text-sm tracking-wide" href="#"><div class="flex items-center gap-3 mb-4 md:mb-0"><div class="w-8 h-8 bg-[#7E1423] rounded-sm flex-shrink-0"></div><span class="font-['Manrope'] text-sm tracking-wide">© 2024 menufaktur. Alle Rechte vorbehalten.</span></div></a>
+</div>
+</div>
+</footer>
+</body></html>

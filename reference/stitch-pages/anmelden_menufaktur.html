@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Anmelden | Menufaktur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&amp;family=Manrope:wght@300;400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#1c1c0c",
+                        "error-container": "#ffdad6",
+                        "secondary": "#b02a3b",
+                        "surface-container": "#f2efd4",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface": "#fdfadf",
+                        "primary-fixed": "#ffdad9",
+                        "background": "#fdfadf",
+                        "surface-container-low": "#f8f5da",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#511400",
+                        "inverse-surface": "#323120",
+                        "inverse-on-surface": "#f5f2d7",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#e6e4c9",
+                        "surface-bright": "#fdfadf",
+                        "on-surface-variant": "#574141",
+                        "on-primary-fixed-variant": "#881c29",
+                        "secondary-fixed": "#ffdad9",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#40000a",
+                        "inverse-primary": "#ffb3b3",
+                        "outline": "#8b7171",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e6e4c9",
+                        "primary-fixed-dim": "#ffb3b3",
+                        "surface-container-high": "#ece9cf",
+                        "outline-variant": "#debfbf",
+                        "surface-tint": "#a8353f",
+                        "primary": "#5b0012",
+                        "secondary-container": "#ff6570",
+                        "on-tertiary-fixed-variant": "#842600",
+                        "on-primary-fixed": "#40000a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-container": "#7e1423",
+                        "on-tertiary-container": "#ff8b64",
+                        "on-surface": "#1c1c0c",
+                        "surface-dim": "#dedbc1",
+                        "on-secondary-fixed-variant": "#8f0d26",
+                        "secondary-fixed-dim": "#ffb3b4",
+                        "on-tertiary-fixed": "#390b00",
+                        "on-primary-container": "#ff888c",
+                        "tertiary-container": "#772100",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#680017"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .font-epilogue { font-family: 'Epilogue', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component Execution) -->
+<nav class="fixed top-0 w-full z-50 bg-[#7E1423] flex justify-between items-center px-12 py-6 w-full max-w-none">
+<div class="text-2xl font-bold text-[#FFFCE1] font-headline tracking-wider uppercase flex items-center"><div class="w-8 h-8 bg-[#FFFCE1]/20 rounded-md flex-shrink-0 mr-3 inline-flex items-center justify-center border border-[#FFFCE1]/30"><span class="material-symbols-outlined text-[#FFFCE1]" style="font-size: 18px;">restaurant_menu</span></div>Menufaktur</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kurse</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Rezepte</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Über Uns</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Atelier</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight">Anmelden</button>
+<button class="bg-tertiary-container text-on-tertiary px-6 py-2 rounded-xl font-headline font-bold tracking-tight hover:opacity-90 transition-opacity duration-300 scale-95 duration-200">Jetzt Buchen</button>
+</div>
+</nav>
+<!-- Main Content: Login Canvas -->
+<main class="flex-grow flex items-center justify-center px-4 pt-32 pb-20 relative overflow-hidden">
+<!-- Editorial Background Element -->
+<div class="absolute top-0 right-0 w-1/3 h-full opacity-5 pointer-events-none">
+<img alt="" class="w-full h-full object-cover" data-alt="close-up of artisan culinary ingredients with moody lighting and professional kitchen aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC24ZkfIH7dIgO9hw4p0n_EnkW0aZ0Fob9dSlymjGNKqgOl-hCrhi-7sUs_e-dUDziNEudBgvQms8nGr-7ZryXhwzo6cv1g7I6eG7Pj2us8OmqMbnnLu1V8Nqp1ox6PeRPg8Oh1oriMu2ynRcfQQSQkMCRMzBnO2jzJeciq_nlPkCfBoSZE0AZ_W1kq4PXOB-PXhM5jUxLyR-gxZ-2Ok61LN9Og4Y-KDeYj2vvJc7Ow9FIkOxY5vJ8TjiXTS0FTcbmUmulUZVx1_2Br"/>
+</div>
+<div class="w-full max-w-[480px] z-10">
+<!-- Login Card -->
+<div class="bg-surface-container-lowest rounded-xl p-10 shadow-[0_32px_64px_-12px_rgba(91,0,18,0.06)] border border-outline-variant/10">
+<div class="text-center mb-10">
+<h1 class="text-4xl font-bold font-headline text-primary tracking-tight mb-2">Anmelden</h1>
+<p class="text-on-surface-variant font-body">Willkommen zurück in der Menufaktur.</p>
+</div>
+<form class="space-y-6">
+<div class="space-y-1.5">
+<label class="block text-xs font-medium uppercase tracking-widest text-on-surface-variant px-1" for="email">E-Mail Adresse</label>
+<input class="w-full px-4 py-4 rounded-lg bg-surface-container-high border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-colors text-on-surface placeholder:text-on-surface-variant/40" id="email" name="email" placeholder="Geben Sie Ihre E-Mail ein" type="email"/>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between items-center px-1">
+<label class="block text-xs font-medium uppercase tracking-widest text-on-surface-variant" for="password">Passwort</label>
+<a class="text-xs font-semibold text-primary hover:underline underline-offset-4" href="#">Passwort vergessen?</a>
+</div>
+<input class="w-full px-4 py-4 rounded-lg bg-surface-container-high border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-colors text-on-surface placeholder:text-on-surface-variant/40" id="password" name="password" placeholder="Ihr Passwort" type="password"/>
+</div>
+<div class="pt-4">
+<button class="w-full py-4 bg-tertiary-container text-on-tertiary font-bold rounded-xl hover:bg-tertiary transition-all duration-300 scale-100 active:scale-95 shadow-lg shadow-tertiary-container/20" type="submit">
+                            Anmelden
+                        </button>
+</div>
+</form>
+<!-- Divider -->
+<div class="relative my-10">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/30"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-4 bg-surface-container-lowest text-on-surface-variant font-label italic">oder</span>
+</div>
+</div>
+<div class="text-center">
+<p class="text-on-surface-variant font-body">
+                        Noch kein Konto? 
+                        <a class="text-primary font-bold hover:underline underline-offset-4 ml-1 transition-all" href="#">Jetzt registrieren</a>
+</p>
+</div>
+</div>
+<!-- Contextual Social Proof / Editorial Note -->
+<div class="mt-8 text-center px-6">
+<p class="text-xs text-on-surface-variant/60 font-label tracking-widest leading-relaxed">MENUFAKTUR STANDARD<br/>EXKLUSIVE REZEPTE • MASTERCLASSES • COMMUNITY</p>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component Execution) -->
+<footer class="bg-[#5b0012] dark:bg-[#40000a] text-[#fdfadf] font-manrope text-sm leading-relaxed tracking-wide">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full max-w-7xl mx-auto">
+<!-- Brand & Contact -->
+<div class="space-y-6">
+<div class="text-xl font-bold text-[#fdfadf] flex items-center"><div class="w-6 h-6 bg-[#fdfadf]/20 rounded-md flex-shrink-0 mr-2 inline-flex items-center justify-center border border-[#fdfadf]/30"><span class="material-symbols-outlined text-[#fdfadf]" style="font-size: 14px;">restaurant_menu</span></div>Menufaktur</div>
+<div class="text-[#fdfadf]/70 space-y-2">
+<p>Berger Straße 204</p>
+<p>60385 Frankfurt am Main</p>
+<p class="pt-4">Tel: +49 (0)69 1234567</p>
+<p>Email: info@menufaktur.de</p>
+</div>
+</div>
+<!-- Nav -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Menü</h4>
+<ul class="space-y-4">
+<li><a class="text-[#fdfadf]/70 hover:text-white transition-colors duration-300" href="#">Kurse</a></li>
+<li><a class="text-[#fdfadf]/70 hover:text-white transition-colors duration-300" href="#">Rezepte</a></li>
+<li><a class="text-[#fdfadf]/70 hover:text-white transition-colors duration-300" href="#">Über Uns</a></li>
+<li><a class="text-[#fdfadf]/70 hover:text-white transition-colors duration-300" href="#">Atelier</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Rechtliches</h4>
+<ul class="space-y-4">
+<li><a class="text-[#fdfadf]/70 hover:text-white transition-colors duration-300" href="#">Impressum</a></li>
+<li><a class="text-[#fdfadf]/70 hover:text-white transition-colors duration-300" href="#">Datenschutz</a></li>
+<li><a class="text-[#fdfadf]/70 hover:text-white transition-colors duration-300" href="#">AGB</a></li>
+<li><a class="text-[#fdfadf]/70 hover:text-white transition-colors duration-300" href="#">Kontakt</a></li>
+</ul>
+</div>
+<!-- Socials -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Social Media</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-[#5b0012] transition-all" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">public</span>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-[#5b0012] transition-all" href="#">
+<span class="material-symbols-outlined" style="font-size: 20px;">restaurant</span>
+</a>
+</div>
+<p class="text-[#fdfadf]/50 text-xs">Abonnieren Sie unseren Newsletter für aktuelle Termine.</p>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-white/10 text-center text-[#fdfadf]/40 text-xs">
+        © 2024 Menufaktur Culinary Atelier. Alle Rechte vorbehalten.
+    </div>
+</footer>
+</body></html>

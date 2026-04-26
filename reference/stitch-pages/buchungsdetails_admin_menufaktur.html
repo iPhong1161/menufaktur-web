@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;600;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#842600",
+                        "secondary": "#b02a3b",
+                        "error-container": "#ffdad6",
+                        "primary": "#5b0012",
+                        "on-tertiary-fixed": "#390b00",
+                        "inverse-on-surface": "#f5f2d7",
+                        "tertiary": "#511400",
+                        "outline": "#8b7171",
+                        "on-secondary-fixed": "#40000a",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#fdfadf",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "primary-fixed": "#ffdad9",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#772100",
+                        "error": "#ba1a1a",
+                        "primary-container": "#7e1423",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#574141",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ece9cf",
+                        "on-tertiary-container": "#ff8b64",
+                        "on-secondary-container": "#680017",
+                        "on-primary-fixed-variant": "#881c29",
+                        "surface-container-low": "#f8f5da",
+                        "surface-variant": "#e6e4c9",
+                        "on-surface": "#1c1c0c",
+                        "background": "#fdfadf",
+                        "secondary-container": "#ff6570",
+                        "surface-container-highest": "#e6e4c9",
+                        "outline-variant": "#debfbf",
+                        "on-primary-container": "#ff888c",
+                        "surface-container": "#f2efd4",
+                        "inverse-primary": "#ffb3b3",
+                        "surface": "#fdfadf",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdad9",
+                        "on-secondary-fixed-variant": "#8f0d26",
+                        "inverse-surface": "#323120",
+                        "surface-dim": "#dedbc1",
+                        "secondary-fixed-dim": "#ffb3b4",
+                        "primary-fixed-dim": "#ffb3b3",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#40000a",
+                        "surface-tint": "#a8353f",
+                        "on-background": "#1c1c0c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            vertical-align: middle;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Epilogue', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-[#fdfadf] dark:bg-[#1a1614] backdrop-blur-md bg-opacity-90 border-b border-[#5b0012]/10 dark:border-[#ffffff]/10">
+<div class="flex justify-between items-center h-20 px-8 w-full max-w-full">
+<div class="text-2xl font-bold text-[#5b0012] dark:text-[#ffb3b4] tracking-widest font-['Epilogue'] flex"><div class="flex items-center gap-3">
+<div class="w-10 h-10 flex items-center justify-center border-2 border-[#5b0012]/10 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-[#5b0012] text-xl">restaurant_menu</span>
+</div>
+<span class="lowercase">menufaktur</span>
+</div></div>
+<nav class="hidden md:flex items-center space-x-8 font-['Epilogue'] tracking-tight">
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors" href="#">Dashboard</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors" href="#">Kurse</a>
+<a class="text-[#5b0012] dark:text-[#ffb3b4] font-bold border-b-2 border-[#5b0012] pb-1" href="#">Buchungen</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors" href="#">Kunden</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors" href="#">Einstellungen</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="p-2 hover:bg-[#7e1423]/5 dark:hover:bg-[#ffffff]/5 rounded-lg transition-all duration-300">
+<span class="material-symbols-outlined text-[#5b0012] dark:text-[#ffb3b4]">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#7e1423]/5 dark:hover:bg-[#ffffff]/5 rounded-lg transition-all duration-300">
+<span class="material-symbols-outlined text-[#5b0012] dark:text-[#ffb3b4]">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="mt-28 flex-grow px-8 pb-16 max-w-7xl mx-auto w-full">
+<!-- Breadcrumb & Header -->
+<div class="mb-8">
+<nav class="flex items-center text-label-md text-on-surface-variant/60 tracking-wider mb-4">
+<a class="hover:text-primary transition-colors" href="#">Buchungen</a>
+<span class="material-symbols-outlined mx-2 text-xs">chevron_right</span>
+<span class="text-on-surface-variant">MF-2026-00142</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-4xl font-bold text-primary mb-2 tracking-tight">Buchung MF-2026-00142</h1>
+<div class="flex items-center gap-3">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-sm font-semibold border border-secondary/20">Zahlung ausstehend</span>
+<span class="text-on-surface-variant/70 text-sm">Eingegangen am 14. Okt. 2024, 14:32</span>
+</div>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-3 bg-surface-container-highest text-primary font-semibold rounded-xl hover:bg-surface-container-high transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">download</span>
+                        Rechnung herunterladen
+                    </button>
+<button class="px-6 py-3 bg-primary text-on-primary font-semibold rounded-xl hover:opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">payments</span>
+                        Als bezahlt markieren
+                    </button>
+<button class="px-4 py-3 text-secondary font-medium hover:underline decoration-secondary/30 transition-all">
+                        Stornieren
+                    </button>
+</div>
+</div>
+</div>
+<!-- Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column (60%) -->
+<div class="lg:col-span-7 space-y-8">
+<!-- Kurs Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8 transition-all">
+<div class="flex items-start justify-between mb-6">
+<h2 class="text-2xl font-bold text-primary">Kurs</h2>
+<button class="text-primary/60 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">edit</span>
+</button>
+</div>
+<div class="flex flex-col md:flex-row gap-8">
+<div class="w-full md:w-1/3 aspect-[4/3] rounded-lg overflow-hidden bg-surface-container-low">
+<img class="w-full h-full object-cover" data-alt="close-up of professional chef hands plating a gourmet dish in a sunlit modern kitchen with copper pans in background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqPrP9nql7WgzuVdSrnfRHlolcBUGN0IX0RhfKFDs0fszT0y4CIwuWD14kx94iwqpf3XWQtF07HP9Wi9ejdxsCDeOK_pXOAtgZNhnXZ5LLdmP-Y9lC7tkeghxvhaToTyZ9PqjRV4_mygWU0cKyXG6pphdg1PTOJ27_H38ydranpLc6OltozYi3d9LJlb1ztX41uxSdecsU55PsLCNs6DrdJYGPsAzF4AGdr5cuaQ0_2K8j2aWXhHyN1NEzO3qRw-5o8hXAQlrMjjE"/>
+</div>
+<div class="flex-1 space-y-4">
+<div>
+<p class="text-label-md text-on-surface-variant/60 uppercase tracking-widest mb-1">Kursname</p>
+<h3 class="text-xl font-semibold text-primary">Die Kunst der Saucen: Klassik trifft Moderne</h3>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<p class="text-label-md text-on-surface-variant/60 uppercase tracking-widest mb-1">Datum</p>
+<p class="font-medium">Sa, 12. Nov. 2024</p>
+</div>
+<div>
+<p class="text-label-md text-on-surface-variant/60 uppercase tracking-widest mb-1">Uhrzeit</p>
+<p class="font-medium">18:00 – 22:30 Uhr</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Teilnehmer Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8">
+<h2 class="text-2xl font-bold text-primary mb-6">Teilnehmer (2)</h2>
+<div class="space-y-6">
+<!-- Teilnehmer 1 -->
+<div class="flex items-center justify-between pb-6 border-b border-outline-variant/15">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">ML</div>
+<div>
+<p class="font-bold text-lg">Maximilian Lehmann</p>
+<div class="flex gap-2 mt-1">
+<span class="text-xs px-2 py-0.5 bg-tertiary-container/10 text-tertiary rounded font-medium">Vegetarisch</span>
+<span class="text-xs px-2 py-0.5 bg-error-container/20 text-error rounded font-medium">Laktoseintoleranz</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/30">chevron_right</span>
+</div>
+<!-- Teilnehmer 2 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center text-on-secondary-container font-bold">SL</div>
+<div>
+<p class="font-bold text-lg">Sophie Lehmann</p>
+<div class="flex gap-2 mt-1">
+<span class="text-xs px-2 py-0.5 bg-surface-container text-on-surface-variant/60 rounded font-medium">Keine Besonderheiten</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant/30">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Rechnungsempfänger Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8">
+<h2 class="text-2xl font-bold text-primary mb-6">Rechnungsempfänger</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<p class="text-label-md text-on-surface-variant/60 uppercase tracking-widest mb-2">Adresse</p>
+<address class="not-italic text-on-surface font-medium leading-relaxed">
+                                Maximilian Lehmann<br/>
+                                Sophienstraße 42<br/>
+                                80333 München<br/>
+                                Deutschland
+                            </address>
+</div>
+<div>
+<p class="text-label-md text-on-surface-variant/60 uppercase tracking-widest mb-2">Kontakt</p>
+<p class="font-medium">m.lehmann@email.de</p>
+<p class="font-medium">+49 151 12345678</p>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column (40%) -->
+<div class="lg:col-span-5 space-y-8">
+<!-- Zahlung Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8 border-l-4 border-secondary">
+<h2 class="text-xl font-bold text-primary mb-6">Zahlungsübersicht</h2>
+<div class="space-y-4">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>2x Kursticket á 149,00 €</span>
+<span class="font-medium">298,00 €</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Servicepauschale</span>
+<span class="font-medium">5,00 €</span>
+</div>
+<div class="pt-4 border-t border-outline-variant/15 flex justify-between items-center">
+<span class="text-lg font-bold text-primary">Gesamtsumme</span>
+<span class="text-2xl font-bold text-primary">303,00 €</span>
+</div>
+<div class="mt-6 p-4 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">account_balance_wallet</span>
+<span class="text-sm font-medium">Banküberweisung</span>
+</div>
+<span class="text-xs font-bold text-secondary uppercase tracking-tighter bg-secondary/10 px-2 py-1 rounded">Warten auf Geldeingang</span>
+</div>
+</div>
+</section>
+<!-- Rechnung Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8">
+<h2 class="text-xl font-bold text-primary mb-4">Rechnungsdokumente</h2>
+<div class="group cursor-pointer flex items-center justify-between p-4 rounded-lg border border-outline-variant/10 hover:border-primary/20 hover:bg-primary/5 transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-3xl text-primary/40 group-hover:text-primary transition-colors">description</span>
+<div>
+<p class="font-bold">RE-2024-00142.pdf</p>
+<p class="text-xs text-on-surface-variant/60">PDF Dokument • 124 KB</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary/60">download</span>
+</div>
+</section>
+<!-- Aktivität Timeline -->
+<section class="bg-surface-container-lowest rounded-xl p-8">
+<h2 class="text-xl font-bold text-primary mb-6">Aktivität</h2>
+<div class="relative space-y-8 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-px before:bg-outline-variant/30">
+<!-- Event 1 -->
+<div class="relative pl-10">
+<div class="absolute left-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-white text-xs">mail</span>
+</div>
+<p class="text-sm font-bold">Bestätigungs-Email gesendet</p>
+<p class="text-xs text-on-surface-variant/60">14. Okt. 2024, 14:33 Uhr</p>
+</div>
+<!-- Event 2 -->
+<div class="relative pl-10">
+<div class="absolute left-0 w-6 h-6 rounded-full bg-outline-variant flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-white text-xs">shopping_cart</span>
+</div>
+<p class="text-sm font-bold">Buchung erstellt durch Maximilian Lehmann</p>
+<p class="text-xs text-on-surface-variant/60">14. Okt. 2024, 14:32 Uhr</p>
+</div>
+<!-- Event 3 -->
+<div class="relative pl-10 opacity-50">
+<div class="absolute left-0 w-6 h-6 rounded-full bg-outline-variant/30 flex items-center justify-center ring-4 ring-surface-container-lowest">
+<span class="material-symbols-outlined text-white text-xs">check</span>
+</div>
+<p class="text-sm font-medium">Rechnung generiert</p>
+<p class="text-xs">System • 14. Okt. 2024</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#fdfadf] dark:bg-[#1a1614] w-full py-8 mt-auto border-t border-[#5b0012]/5 dark:border-[#ffffff]/5">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto font-['Manrope'] text-sm tracking-wide text-[#5b0012]/50 dark:text-[#ffffff]/50">
+<div class="mb-4 md:mb-0">
+                © 2024 The Culinary Atelier. Alle Rechte vorbehalten.
+            </div>
+<div class="flex space-x-8">
+<a class="hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-all opacity-80 hover:opacity-100" href="#">Dokumentation</a>
+<a class="hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-all opacity-80 hover:opacity-100" href="#">Support</a>
+<a class="hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-all opacity-80 hover:opacity-100" href="#">Impressum</a>
+</div>
+</div>
+</footer>
+</body></html>

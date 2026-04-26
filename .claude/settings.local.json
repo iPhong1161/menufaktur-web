@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@15 *)",
+      "Bash(mkdir -p /tmp/mf-scaffold)",
+      "Read(//tmp/**)",
+      "Bash(npm cache *)",
+      "Bash(pnpm --version)",
+      "Bash(bun --version)",
+      "Bash(yarn --version)",
+      "Bash(rm -rf /tmp/mf-scaffold)",
+      "Bash(mkdir /tmp/mf-scaffold)",
+      "Read(//private/tmp/mf-scaffold/**)",
+      "Bash(bunx create-next-app@15 . --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(rsync *)"
+    ]
+  }
+}

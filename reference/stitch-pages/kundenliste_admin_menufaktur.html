@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#842600",
+                    "secondary": "#b02a3b",
+                    "error-container": "#ffdad6",
+                    "primary": "#5b0012",
+                    "on-tertiary-fixed": "#390b00",
+                    "inverse-on-surface": "#f5f2d7",
+                    "tertiary": "#511400",
+                    "outline": "#8b7171",
+                    "on-secondary-fixed": "#40000a",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#fdfadf",
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "primary-fixed": "#ffdad9",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#772100",
+                    "error": "#ba1a1a",
+                    "primary-container": "#7e1423",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#574141",
+                    "tertiary-fixed": "#ffdbd0",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#ece9cf",
+                    "on-tertiary-container": "#ff8b64",
+                    "on-secondary-container": "#680017",
+                    "on-primary-fixed-variant": "#881c29",
+                    "surface-container-low": "#f8f5da",
+                    "surface-variant": "#e6e4c9",
+                    "on-surface": "#1c1c0c",
+                    "background": "#fdfadf",
+                    "secondary-container": "#ff6570",
+                    "surface-container-highest": "#e6e4c9",
+                    "outline-variant": "#debfbf",
+                    "on-primary-container": "#ff888c",
+                    "surface-container": "#f2efd4",
+                    "inverse-primary": "#ffb3b3",
+                    "surface": "#fdfadf",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed": "#ffdad9",
+                    "on-secondary-fixed-variant": "#8f0d26",
+                    "inverse-surface": "#323120",
+                    "surface-dim": "#dedbc1",
+                    "secondary-fixed-dim": "#ffb3b4",
+                    "primary-fixed-dim": "#ffb3b3",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#40000a",
+                    "surface-tint": "#a8353f",
+                    "on-background": "#1c1c0c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Epilogue', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-[#fdfadf] dark:bg-[#1a1614] backdrop-blur-md bg-opacity-90 border-b border-[#5b0012]/10 font-['Epilogue'] tracking-tight">
+<div class="flex justify-between items-center h-20 px-8 w-full max-w-full">
+<div class="text-2xl font-bold text-[#5b0012] dark:text-[#ffb3b4] uppercase tracking-widest"><div class="flex items-center gap-3"><div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center"><span class="material-symbols-outlined text-primary">restaurant</span></div><span>menufaktur</span></div></div>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-[#5b0012]/60 font-medium hover:text-[#5b0012] transition-colors" href="#">Dashboard</a>
+<a class="text-[#5b0012]/60 font-medium hover:text-[#5b0012] transition-colors" href="#">Kurse</a>
+<a class="text-[#5b0012]/60 font-medium hover:text-[#5b0012] transition-colors" href="#">Buchungen</a>
+<a class="text-[#5b0012] dark:text-[#ffb3b4] font-bold border-b-2 border-[#5b0012] pb-1" href="#">Kunden</a>
+<a class="text-[#5b0012]/60 font-medium hover:text-[#5b0012] transition-colors" href="#">Einstellungen</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button class="p-2 hover:bg-[#7e1423]/5 rounded-lg transition-all text-[#5b0012]">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#7e1423]/5 rounded-lg transition-all text-[#5b0012]">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-32 pb-20 px-8 max-w-[1600px] mx-auto w-full">
+<!-- Header Section -->
+<div class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-5xl font-bold text-primary tracking-tight mb-2">Kunden</h1>
+<p class="text-lg text-on-surface-variant font-medium">Alle registrierten und Gast-Kunden Ihres Ateliers.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-primary text-on-primary px-8 py-3 rounded-xl font-bold flex items-center gap-2 hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined text-sm">person_add</span>
+                    Neuen Kunden anlegen
+                </button>
+</div>
+</div>
+<!-- Filter and Search Bar -->
+<div class="bg-surface-container-low p-6 rounded-xl mb-8 flex flex-wrap items-center gap-6">
+<div class="flex-grow min-w-[300px] relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-high border-none rounded-lg focus:ring-2 focus:ring-primary text-on-surface placeholder-on-surface-variant/60 font-medium" placeholder="Suchen Sie nach Name, Email oder Telefon..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex bg-surface-container-high p-1 rounded-lg">
+<button class="px-6 py-2 rounded-md bg-primary text-on-primary font-bold transition-all">Alle</button>
+<button class="px-6 py-2 rounded-md text-on-surface-variant font-medium hover:text-primary transition-all">Registriert</button>
+<button class="px-6 py-2 rounded-md text-on-surface-variant font-medium hover:text-primary transition-all">Gast</button>
+</div>
+<button class="flex items-center gap-2 px-6 py-3 border border-outline-variant/30 rounded-lg hover:bg-surface-container-high transition-all text-on-surface-variant font-semibold">
+<span class="material-symbols-outlined text-xl">tune</span>
+                    Filter
+                </button>
+</div>
+</div>
+<!-- High-Density Data Table -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant/10">
+<th class="px-6 py-5 text-sm font-bold text-primary uppercase tracking-wider">Name</th>
+<th class="px-6 py-5 text-sm font-bold text-primary uppercase tracking-wider">Kontakt</th>
+<th class="px-6 py-5 text-sm font-bold text-primary uppercase tracking-wider">Typ</th>
+<th class="px-6 py-5 text-sm font-bold text-primary uppercase tracking-wider text-center">Buchungen</th>
+<th class="px-6 py-5 text-sm font-bold text-primary uppercase tracking-wider text-right">Umsatz</th>
+<th class="px-6 py-5 text-sm font-bold text-primary uppercase tracking-wider">Letzte Aktivität</th>
+<th class="px-6 py-5 text-sm font-bold text-primary uppercase tracking-wider text-right">Aktionen</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">AB</div>
+<span class="font-bold text-on-surface">Andreas Buchberger</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium text-on-surface">andreas.b@web.de</div>
+<div class="text-xs text-on-surface-variant">+49 172 8849 221</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-primary/5 text-primary rounded-full text-xs font-bold uppercase tracking-wide">Registriert</span>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-surface">12</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">1.420,00 €</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Gestern, 14:20</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">SM</div>
+<span class="font-bold text-on-surface">Sophie Müller</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium text-on-surface">sophie.m@gmail.com</div>
+<div class="text-xs text-on-surface-variant">+49 151 2231 990</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-on-surface-variant/10 text-on-surface-variant rounded-full text-xs font-bold uppercase tracking-wide">Gast</span>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-surface">1</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">149,00 €</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">12. Okt 2023</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-bold">JK</div>
+<span class="font-bold text-on-surface">Johann Krämer</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium text-on-surface">kraemer.johann@t-online.de</div>
+<div class="text-xs text-on-surface-variant">+49 160 3345 112</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-primary/5 text-primary rounded-full text-xs font-bold uppercase tracking-wide">Registriert</span>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-surface">4</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">590,00 €</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Gerade eben</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold">LW</div>
+<span class="font-bold text-on-surface">Lara Wagner</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium text-on-surface">lara.w@outlook.com</div>
+<div class="text-xs text-on-surface-variant">+49 152 4432 001</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-primary/5 text-primary rounded-full text-xs font-bold uppercase tracking-wide">Registriert</span>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-surface">22</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">3.850,00 €</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">08. Okt 2023</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-outline-variant flex items-center justify-center text-on-surface font-bold">MK</div>
+<span class="font-bold text-on-surface">Maximilian Klein</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium text-on-surface">max.klein@business.de</div>
+<div class="text-xs text-on-surface-variant">+49 176 9901 223</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-on-surface-variant/10 text-on-surface-variant rounded-full text-xs font-bold uppercase tracking-wide">Gast</span>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-surface">0</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">0,00 €</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Nie</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed font-bold">CH</div>
+<span class="font-bold text-on-surface">Claudia Heuser</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium text-on-surface">c.heuser@icloud.com</div>
+<div class="text-xs text-on-surface-variant">+49 155 0098 776</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-primary/5 text-primary rounded-full text-xs font-bold uppercase tracking-wide">Registriert</span>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-surface">5</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">745,00 €</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Vor 3 Stunden</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-bold">PR</div>
+<span class="font-bold text-on-surface">Peter Richter</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium text-on-surface">peter.richter@richter-bau.de</div>
+<div class="text-xs text-on-surface-variant">+49 171 1122 334</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-on-surface-variant/10 text-on-surface-variant rounded-full text-xs font-bold uppercase tracking-wide">Gast</span>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-surface">2</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">298,00 €</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">05. Okt 2023</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 8 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed-dim flex items-center justify-center text-on-primary-fixed font-bold">EK</div>
+<span class="font-bold text-on-surface">Elena Kozlow</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium text-on-surface">e.kozlow@art.info</div>
+<div class="text-xs text-on-surface-variant">+49 157 8876 554</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-primary/5 text-primary rounded-full text-xs font-bold uppercase tracking-wide">Registriert</span>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-surface">8</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">1.192,00 €</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Gestern, 09:15</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 9 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-dim flex items-center justify-center text-on-surface font-bold">TH</div>
+<span class="font-bold text-on-surface">Thomas Hering</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium text-on-surface">th.hering@gmx.net</div>
+<div class="text-xs text-on-surface-variant">+49 162 4455 667</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-on-surface-variant/10 text-on-surface-variant rounded-full text-xs font-bold uppercase tracking-wide">Gast</span>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-surface">1</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">149,00 €</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">30. Sep 2023</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 10 -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed-dim flex items-center justify-center text-on-secondary-fixed font-bold">BN</div>
+<span class="font-bold text-on-surface">Beate Neumann</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium text-on-surface">b.neumann@family.com</div>
+<div class="text-xs text-on-surface-variant">+49 159 2233 445</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-primary/5 text-primary rounded-full text-xs font-bold uppercase tracking-wide">Registriert</span>
+</td>
+<td class="px-6 py-5 text-center font-bold text-on-surface">15</td>
+<td class="px-6 py-5 text-right font-bold text-on-surface">2.235,00 €</td>
+<td class="px-6 py-5 text-sm text-on-surface-variant font-medium">Vor 1 Woche</td>
+<td class="px-6 py-5 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Section -->
+<div class="px-8 py-6 bg-surface-container-low flex justify-between items-center">
+<div class="text-sm font-medium text-on-surface-variant">
+                    Zeige <span class="text-primary font-bold">1-10</span> von <span class="text-primary font-bold">248</span> Kunden
+                </div>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-surface-container-high text-on-surface-variant font-medium transition-all">2</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center hover:bg-surface-container-high text-on-surface-variant font-medium transition-all">3</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#fdfadf] dark:bg-[#1a1614] border-t border-[#5b0012]/5 w-full py-8 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto font-['Manrope'] text-sm tracking-wide text-[#5b0012]/50 dark:text-[#ffffff]/50">
+<div class="mb-4 md:mb-0">
+                © 2024 The Culinary Atelier. Alle Rechte vorbehalten.
+            </div>
+<div class="flex gap-8">
+<a class="hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Dokumentation</a>
+<a class="hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Support</a>
+<a class="hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-opacity opacity-80 hover:opacity-100" href="#">Impressum</a>
+</div>
+</div>
+</footer>
+</body></html>

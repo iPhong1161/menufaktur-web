@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meine Gutscheine | Menufaktur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e6e4c9",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#772100",
+                        "on-tertiary-container": "#ff8b64",
+                        "primary": "#5b0012",
+                        "on-surface-variant": "#574141",
+                        "on-secondary-fixed": "#40000a",
+                        "on-primary-fixed": "#40000a",
+                        "surface": "#fdfadf",
+                        "tertiary": "#511400",
+                        "on-tertiary-fixed-variant": "#842600",
+                        "inverse-on-surface": "#f5f2d7",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "surface-container-high": "#ece9cf",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#a8353f",
+                        "secondary-container": "#ff6570",
+                        "primary-fixed": "#ffdad9",
+                        "on-tertiary-fixed": "#390b00",
+                        "surface-variant": "#e6e4c9",
+                        "outline": "#8b7171",
+                        "surface-dim": "#dedbc1",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#b02a3b",
+                        "on-surface": "#1c1c0c",
+                        "background": "#fdfadf",
+                        "secondary-fixed-dim": "#ffb3b4",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#ff888c",
+                        "surface-bright": "#fdfadf",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#ffb3b3",
+                        "on-secondary-fixed-variant": "#8f0d26",
+                        "on-primary-fixed-variant": "#881c29",
+                        "surface-container": "#f2efd4",
+                        "surface-container-low": "#f8f5da",
+                        "tertiary-fixed": "#ffdbd0",
+                        "secondary-fixed": "#ffdad9",
+                        "inverse-surface": "#323120",
+                        "on-secondary-container": "#680017",
+                        "inverse-primary": "#ffb3b3",
+                        "primary-container": "#7e1423",
+                        "on-background": "#1c1c0c",
+                        "outline-variant": "#debfbf"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Epilogue', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-background min-h-screen">
+<nav class="fixed top-0 w-full z-50 bg-[#7E1423] flex justify-between items-center px-12 py-6 w-full max-w-none">
+<div class="flex items-center">
+<div class="h-8 w-8 bg-[#FFFCE1] rounded-sm mr-3 flex-shrink-0"></div>
+<div class="text-2xl font-bold text-[#FFFCE1] font-headline tracking-tight">Menufaktur</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kurse</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Private Events</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Über uns</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kontakt</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight">Anmelden</button>
+<button class="bg-[#b02a3b] text-white px-6 py-2 rounded-xl font-headline font-bold tracking-tight hover:opacity-90 transition-opacity duration-300 scale-95 duration-200">Kurs buchen</button>
+</div>
+</nav>
+<div class="flex pt-20 min-h-screen">
+<aside class="hidden md:flex flex-col h-screen py-12 px-6 fixed left-0 w-64 bg-[#fdfadf] dark:bg-[#40000a] font-manrope leading-relaxed border-r border-outline-variant/15">
+<div class="mb-10">
+<p class="text-[#5b0012]/60 dark:text-[#ffffff]/60 text-sm tracking-wide uppercase">Guten Tag,</p>
+<h3 class="text-xl font-bold text-[#5b0012] dark:text-[#ffffff]">Willkommen im Atelier</h3>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center py-3 text-[#5b0012]/60 dark:text-[#ffffff]/60 pl-5 hover:bg-[#7e1423]/5 transition-all group" href="#">
+<span class="material-symbols-outlined mr-3 text-lg">calendar_today</span>
+<span>Meine Buchungen</span>
+</a>
+<a class="flex items-center py-3 text-[#5b0012] font-bold border-l-4 border-[#5b0012] pl-4 transition-all group" href="#">
+<span class="material-symbols-outlined mr-3 text-lg" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span>Meine Gutscheine</span>
+</a>
+<a class="flex items-center py-3 text-[#5b0012]/60 dark:text-[#ffffff]/60 pl-5 hover:bg-[#7e1423]/5 transition-all group" href="#">
+<span class="material-symbols-outlined mr-3 text-lg">person</span>
+<span>Profil</span>
+</a>
+<div class="pt-8">
+<a class="flex items-center py-3 text-[#5b0012]/60 dark:text-[#ffffff]/60 pl-5 hover:bg-[#7e1423]/5 transition-all group" href="#">
+<span class="material-symbols-outlined mr-3 text-lg">logout</span>
+<span>Abmelden</span>
+</a>
+</div>
+</nav>
+</aside>
+<main class="flex-1 md:ml-64 p-8 md:p-12 max-w-6xl">
+<header class="mb-12">
+<h1 class="text-5xl font-bold text-primary tracking-tight mb-4">Meine Gutscheine</h1>
+<p class="text-on-surface-variant text-lg max-w-2xl leading-relaxed">Verwalten Sie Ihre erworbenen Atelier-Gutscheine, laden Sie Zertifikate herunter oder verschenken Sie kulinarische Momente.</p>
+</header>
+<section class="mb-16">
+<h2 class="text-2xl font-bold text-primary mb-8 flex items-center">
+                    Aktive Gutscheine
+                    <span class="ml-4 h-px flex-1 bg-outline-variant/30"></span>
+</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col md:flex-row gap-8 relative overflow-hidden group border border-outline-variant/10 shadow-sm transition-all hover:translate-y-[-4px]">
+<div class="flex-shrink-0 w-full md:w-32 h-32 bg-primary-container rounded-lg flex items-center justify-center relative overflow-hidden">
+<span class="material-symbols-outlined text-on-primary text-5xl opacity-40">confirmation_number</span>
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent"></div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Aktiv</span>
+<span class="text-primary font-bold text-2xl">109,00 €</span>
+</div>
+<h3 class="text-lg font-bold text-on-background mb-1">Kulinarischer Abend für Zwei</h3>
+<p class="text-sm text-on-surface-variant font-mono mb-6">Code: MF-XJ-9981-L</p>
+<div class="flex items-center text-sm text-on-surface-variant mb-6">
+<span class="material-symbols-outlined text-base mr-2">event_available</span>
+                                Gültig bis 31.12.2027
+                            </div>
+<div class="flex flex-wrap gap-6 pt-4 border-t border-outline-variant/20">
+<a class="flex items-center text-sm font-bold text-primary hover:text-secondary transition-colors underline decoration-2 underline-offset-4" href="#">
+<span class="material-symbols-outlined text-lg mr-1">download</span>
+                                    PDF herunterladen
+                                </a>
+<a class="flex items-center text-sm font-bold text-primary hover:text-secondary transition-colors underline decoration-2 underline-offset-4" href="#">
+<span class="material-symbols-outlined text-lg mr-1">card_giftcard</span>
+                                    Als Geschenk senden
+                                </a>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-xl flex flex-col md:flex-row gap-8 relative overflow-hidden group border border-outline-variant/10 shadow-sm transition-all hover:translate-y-[-4px]">
+<div class="flex-shrink-0 w-full md:w-32 h-32 bg-secondary-container rounded-lg flex items-center justify-center relative overflow-hidden">
+<span class="material-symbols-outlined text-on-secondary-container text-5xl opacity-40">confirmation_number</span>
+<div class="absolute inset-0 bg-gradient-to-tr from-secondary/20 to-transparent"></div>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-secondary/10 text-secondary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Aktiv</span>
+<span class="text-primary font-bold text-2xl">50,00 €</span>
+</div>
+<h3 class="text-lg font-bold text-on-background mb-1">Wertgutschein Atelier</h3>
+<p class="text-sm text-on-surface-variant font-mono mb-6">Code: MF-RT-4420-B</p>
+<div class="flex items-center text-sm text-on-surface-variant mb-6">
+<span class="material-symbols-outlined text-base mr-2">event_available</span>
+                                Gültig bis 15.06.2026
+                            </div>
+<div class="flex flex-wrap gap-6 pt-4 border-t border-outline-variant/20">
+<a class="flex items-center text-sm font-bold text-primary hover:text-secondary transition-colors underline decoration-2 underline-offset-4" href="#">
+<span class="material-symbols-outlined text-lg mr-1">download</span>
+                                    PDF herunterladen
+                                </a>
+<a class="flex items-center text-sm font-bold text-primary hover:text-secondary transition-colors underline decoration-2 underline-offset-4" href="#">
+<span class="material-symbols-outlined text-lg mr-1">card_giftcard</span>
+                                    Als Geschenk senden
+                                </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-16">
+<h2 class="text-2xl font-bold text-primary/50 mb-8 flex items-center">
+                    Vergangene Gutscheine
+                    <span class="ml-4 h-px flex-1 bg-outline-variant/30"></span>
+</h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-6 bg-surface-container rounded-xl border border-outline-variant/5 opacity-60">
+<div class="flex items-center gap-6">
+<div class="w-12 h-12 bg-outline-variant/20 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">check_circle</span>
+</div>
+<div>
+<h4 class="font-bold text-on-background">Backkurs "Macarons d'Art"</h4>
+<p class="text-sm text-on-surface-variant font-mono">MF-AA-1200-Z</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold text-on-surface-variant">Eingelöst am 12.11.2023</p>
+<p class="text-xs uppercase tracking-widest text-on-surface-variant/70">Wert: 89,00 €</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mt-20 p-12 rounded-3xl bg-surface-container-high relative overflow-hidden">
+<div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="max-w-md text-center md:text-left">
+<h2 class="text-3xl font-bold text-primary mb-4">Noch kein Geschenk?</h2>
+<p class="text-on-surface-variant leading-relaxed">Schenken Sie Freude mit einem individuellen Gutschein für unsere exklusiven Kochkurse oder Tastings.</p>
+</div>
+<button class="bg-primary text-on-primary px-10 py-4 rounded-xl font-bold hover:bg-primary-container transition-all flex items-center group">
+                        Gutschein kaufen
+                        <span class="material-symbols-outlined ml-2 transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+</div>
+<div class="absolute -right-20 -bottom-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+</section>
+</main>
+</div>
+<footer class="bg-[#7E1423] text-white font-manrope text-sm leading-relaxed tracking-wide mt-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full max-w-7xl mx-auto">
+<!-- Brand & Contact -->
+<div class="space-y-6">
+<div class="flex items-center">
+<div class="h-7 w-7 bg-[#FFFCE1] rounded-sm mr-3 flex-shrink-0"></div>
+<div class="text-xl font-bold text-[#FFFCE1]">Menufaktur</div>
+</div>
+<div class="text-white/70 space-y-2">
+<p>Berger Straße 204</p>
+<p>60385 Frankfurt am Main</p>
+<p class="pt-4">Tel: +49 (0)69 1234567</p>
+<p>Email: info@menufaktur.de</p>
+</div>
+</div>
+<!-- Nav -->
+<div class="space-y-6">
+<h4 class="text-[#FFFCE1] font-bold uppercase tracking-widest text-xs">Menü</h4>
+<ul class="space-y-4">
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Kurse</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Private Events</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Gutscheine</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Über uns</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div class="space-y-6">
+<h4 class="text-[#FFFCE1] font-bold uppercase tracking-widest text-xs">Rechtliches</h4>
+<ul class="space-y-4">
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Impressum</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Datenschutz</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">AGB</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Kontakt</a></li>
+</ul>
+</div>
+<!-- Socials -->
+<div class="space-y-6">
+<h4 class="text-[#FFFCE1] font-bold uppercase tracking-widest text-xs">Social Media</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FFFCE1] hover:text-[#7E1423] transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FFFCE1] hover:text-[#7E1423] transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-2.25c0-1.176.21-1.75 1.25-1.75h2.75v-4h-3.75c-3.518 0-5.25 1.838-5.25 4.5v3.5z"></path></svg>
+</a>
+</div>
+<p class="text-white/50 text-xs">Abonnieren Sie unseren Newsletter für aktuelle Termine.</p>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-white/10 text-center text-white/40 text-xs">
+            © 2024 Menufaktur Culinary Atelier. Alle Rechte vorbehalten.
+        </div>
+</footer>
+</body></html>

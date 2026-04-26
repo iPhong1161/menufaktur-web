@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&amp;family=Manrope:wght@400;500;700&amp;family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-fixed-variant": "#881c29",
+                      "on-primary": "#ffffff",
+                      "secondary-container": "#ff6570",
+                      "surface-container-low": "#f8f5da",
+                      "surface-bright": "#fdfadf",
+                      "background": "#fdfadf",
+                      "surface-container-high": "#ece9cf",
+                      "error-container": "#ffdad6",
+                      "on-surface": "#1c1c0c",
+                      "on-secondary": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#40000a",
+                      "tertiary-fixed-dim": "#ffb59d",
+                      "surface-container": "#f2efd4",
+                      "surface": "#fdfadf",
+                      "on-tertiary-fixed": "#390b00",
+                      "surface-tint": "#a8353f",
+                      "outline-variant": "#debfbf",
+                      "on-surface-variant": "#574141",
+                      "outline": "#8b7171",
+                      "on-tertiary-container": "#ff8b64",
+                      "on-tertiary": "#ffffff",
+                      "tertiary-container": "#772100",
+                      "tertiary-fixed": "#ffdbd0",
+                      "on-tertiary-fixed-variant": "#842600",
+                      "on-secondary-container": "#680017",
+                      "on-primary-container": "#ff888c",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#ffb3b3",
+                      "error": "#ba1a1a",
+                      "surface-dim": "#dedbc1",
+                      "inverse-surface": "#323120",
+                      "surface-variant": "#e6e4c9",
+                      "primary": "#5b0012",
+                      "on-error-container": "#93000a",
+                      "primary-container": "#7e1423",
+                      "inverse-primary": "#ffb3b3",
+                      "secondary-fixed-dim": "#ffb3b4",
+                      "primary-fixed": "#ffdad9",
+                      "on-primary-fixed": "#40000a",
+                      "on-secondary-fixed-variant": "#8f0d26",
+                      "surface-container-highest": "#e6e4c9",
+                      "inverse-on-surface": "#f5f2d7",
+                      "secondary": "#b02a3b",
+                      "on-background": "#1c1c0c",
+                      "tertiary": "#511400",
+                      "secondary-fixed": "#ffdad9"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "fontFamily": {
+                      "headline": ["Epilogue"],
+                      "body": ["Roboto", "sans-serif"],
+                      "label": ["Manrope"]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Roboto', sans-serif; }
+        h1, h2, h3 { font-family: 'Epilogue', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#5b0012] dark:bg-[#40000a] flex justify-between items-center px-12 py-6 w-full max-w-none">
+<div class="text-2xl font-bold text-[#fdfadf] font-headline tracking-tight flex items-center">
+<img alt="Logo" class="h-8 mr-3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpOslqp-RSIfNFDy9NOVL2WPRklxpJ9QzEqMeeIMyGgdCTmE54V9Dq8veU5a7x9cazu4WA4lVRW9Mk506qNtylDPAm34FlnzcIKoXLNRyM2214GRELUcpr7VQxsS4Az0-nGhPHOGuj0d5aU1jOJl0KnTann82grSfAg88cp_64seSDIhNyFBlDAe59f5RoEVdg0XVWDjuAo-UeHdFh9jnImZRX5VOmIfR-3u7k1p2XeCpio3qKRrsmoQtP_T3NteHvGsMWL3GEtF4l"/>
+        menufaktur
+    </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kurse</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Private Events</a>
+<a class="text-[#ffffff] border-b-2 border-white/30 pb-1 transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Über uns</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kontakt</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight">Anmelden</button>
+<button class="bg-tertiary-container text-on-tertiary px-6 py-2 rounded-xl font-headline font-bold tracking-tight hover:opacity-90 transition-opacity duration-300 scale-95">Kurs buchen</button>
+</div>
+</nav>
+<main class="pt-0">
+<!-- Hero Section -->
+<section class="relative h-[819px] flex items-end overflow-hidden">
+<div class="absolute inset-0">
+<img class="w-full h-full object-cover" data-alt="Modern high-end culinary atelier with large windows, natural light streaming onto a clean marble workspace with fresh herbs and copper pots" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAF0i2eGs74GUHZxzLafPA82uoFNO-lkTGdpI5mfWOPNIj3Zkl0n_jHAv0qWk6IrakNI2jcibyBuoZ0NfJWpe-s-SFMe4TnXbIssRfBgZwzkXfIzoD-Nap1XtsRGm2ZjUGN2Amu5bx7BnO_yBmMrX4NJtfBCgMdoKtNymgTFakeXTy8-d4u5sg-f4vwbChg6afPXYtO540LNonTGJEQWpHkF3EJaLro1ZavXXaKW1fPYTZJc6bV_OJQ5RLq-WJvhIuyksS6ICGnuERk"/>
+<div class="absolute inset-0 bg-gradient-to-t from-[#5b0012]/40 to-transparent"></div>
+</div>
+<div class="relative w-full max-w-screen-2xl mx-auto px-8 pb-20">
+<h1 class="text-white text-6xl md:text-8xl font-bold tracking-tighter mb-4">Über uns</h1>
+<p class="text-white/90 text-xl md:text-2xl max-w-2xl font-body leading-relaxed">
+                Wo Leidenschaft auf Handwerk trifft. Willkommen in der Menufaktur.
+            </p>
+</div>
+</section>
+<!-- Main Content: Updated Story -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-start">
+<div class="md:col-span-5">
+<h2 class="text-4xl md:text-5xl font-bold text-primary leading-tight mb-8">Wieso eigentlich menufaktur?</h2>
+<div class="aspect-[4/5] rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A group of smiling professional chefs in a modern kitchen preparing high-end plates with focused attention and warm camaraderie" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNEq8Wrhu4qCgbpi0xmPtlEfEu1J7lhmj5W-99G7RWL2RLjdELfuIT2V8EODqu9ocMWZXmvG36Y5vWFyNv211cVwvYf96A0xIuNylAaPZGMTSQmDOcFN_dERJ1j3uAFy9Ta9cfLSWMf-z0aiuMPjRkxs5areUhlV9XX_KGWvHwR_eRbnhu8S48Mgz0phRn0uJGYHM07K1wm63TkXkJh5tq1QGghEjiN_esw73MGYR70RCwZG6ph4lNz5U661UkBr-i-Iic5nXkaWq3"/>
+</div>
+</div>
+<div class="md:col-span-7 pt-12">
+<div class="space-y-8 text-on-surface-variant">
+<p class="text-2xl font-semibold text-primary/90 leading-snug">
+                        Weil Kochen vor allem Handwerk ist. Ein Handwerk, das bei sorgsamer Auswahl der Grundprodukte, dem Wissen um die richtigen Techniken der Zubereitung und der gebotenen Aufmerksamkeit bei der Umsetzung Speisen zum Ergebnis hat, die ein Essen zu Genuss werden lassen.
+                    </p>
+<p class="text-lg leading-relaxed font-body">
+                        Unser Anliegen ist es, mit Ihnen gemeinsam das Kochen wieder in die eigenen Hände zu nehmen, zumindest für einen Abend. Sie werden feststellen, dass es einen großen Unterschied macht, wenn beispielsweise ein vermeintlich profanes Gericht wie Gnocchi mit Tomatensauce frisch auf den Tisch kommt und sich fortan schwer tun, es irgendwo zu bestellen, weil es Ihnen niemand mit derselben Hingabe kochen wird, wie Sie sich selbst.
+                    </p>
+<p class="text-lg leading-relaxed font-body">
+<span class="font-headline font-bold text-primary block mb-2">menufaktur - Konzept</span>
+                        Zudem sind viele Lebensmittel heute aus der Tüte erhältlich, viele Kochtechniken der Generation unserer Großmütter haben den Sprung in die nächste Generation nicht geschafft, ein Lebensmittelskandal jagt den anderen. Wir möchten Ihnen zeigen, dass es oftmals nicht aufwändig ist, Lebensmittel frisch zuzubereiten anstatt die Tüte aufzureißen und anzurühren.
+                    </p>
+<p class="text-lg leading-relaxed font-body">
+                        Wer ist noch in der Lage, Omas Sonntagsbraten mit Serviettenknödeln zu kochen? Wie erkenne und schmecke ich, ob ein Stück Fleisch oder Fisch guter Qualität entspringt? Wir helfen Ihnen, diese Fragen zu beantworten und Ihnen einen Leitfaden mitzugeben. Kehren Sie zum einen wieder auf die alten und bewährten Wege der Kochkunst zurück und lassen Sie sich zum anderen dabei auch von neuen Ideen inspirieren. Wir freuen uns darauf, mit Ihnen zu kochen.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Asymmetric Gallery Module -->
+<section class="bg-surface-container-low py-24">
+<div class="max-w-screen-2xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<div class="space-y-12">
+<div class="bg-surface-container-lowest p-12 rounded-xl shadow-sm">
+<h3 class="text-3xl font-bold text-primary mb-6">Unsere Philosophie</h3>
+<div class="space-y-6 text-on-surface-variant font-body">
+<p>Wir glauben an die Entschleunigung. In einer hektischen Welt bietet das gemeinsam Kochen einen Ankerpunkt. Es geht darum, sich Zeit zu nehmen – für die Auswahl der Produkte, die Präzision des Schnitts und das gemeinsame Genießen am gedeckten Tisch.</p>
+<p>Ob Anfänger oder ambitionierter Hobbykoch: Wir begleiten Sie auf Ihrem individuellen Weg zu neuen kulinarischen Horizonten. In entspannter Atmosphäre lernen Sie, wie man Aromen balanciert und Texturen perfektioniert.</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+<span class="font-headline font-bold text-primary text-xl">Kulinarik erleben</span>
+<div class="h-px flex-1 bg-outline-variant/30"></div>
+</div>
+</div>
+<div class="relative">
+<div class="rounded-xl overflow-hidden aspect-square scale-95 hover:scale-100 transition-transform duration-700">
+<img class="w-full h-full object-cover" data-alt="Detail shot of hands kneading artisanal dough on a flour-dusted wooden surface in warm afternoon sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4CfeqSLOVO7_Els-dzZXSWitJsMfK7uqvCXof1W1nPZ4fRgetlu3ZLrwFzBTPRCTtMtTf3PtTmXdXCmHcVOgYth21dYKSzk-kjPXgzbwMxv5zBgxLU7mIfSz6325ZF6gpBJn-aNvUoxnkBjOp8Dej8Ha2o1v9BIyiaEvckrc63kOhoJojahqQn68T6JfPskc8r3gJwsLmZ7MKWZscYO5IlNzn9PONrrauLvLk1pZPzmBR9W7ZzldgcsVnbkQ1xM_XF4aAqdkrh_bt"/>
+</div>
+<div class="absolute -bottom-8 -left-8 bg-primary-container p-8 rounded-xl text-white hidden md:block max-w-xs">
+<p class="font-headline font-bold text-lg mb-2">"Kochen ist die einzige Kunst, bei der man alle Sinne gleichzeitig einsetzt."</p>
+<p class="text-sm opacity-80">— Unser Credo</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Call to Action -->
+<section class="py-32 px-8 text-center max-w-4xl mx-auto">
+<span class="text-secondary font-bold tracking-[0.2em] uppercase text-sm block mb-6">Willkommen am Tisch</span>
+<h2 class="text-4xl md:text-6xl font-bold text-primary mb-10 leading-tight">Wir freuen uns darauf, mit Ihnen zu kochen.</h2>
+<div class="flex flex-col md:flex-row gap-6 justify-center">
+<button class="bg-primary text-on-primary px-10 py-5 rounded-xl font-bold text-lg hover:opacity-90 transition-all">
+                Kursangebot entdecken
+            </button>
+<button class="bg-surface-container-highest text-primary px-10 py-5 rounded-xl font-bold text-lg hover:bg-surface-container-high transition-all">
+                Kontaktieren Sie uns
+            </button>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#5b0012] dark:bg-[#40000a] text-[#ffffff] font-body text-sm leading-relaxed tracking-wide">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full max-w-7xl mx-auto">
+<!-- Brand & Contact -->
+<div class="space-y-6">
+<div class="text-xl font-bold text-[#fdfadf] flex items-center">
+<img alt="Logo" class="h-6 mr-2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6fBKoA3VCNZi7mxmoYWNvevZidj12oaZ7hqYJHkrzVyNZLAupcbm3HbEeEdrgCONkAQ3ZA6VzAPaUq6LPEZo3j836DHPEXtjHv7GxzOkrmdaRRNMkDvn_-nQp0Emn3B8cou-zU54Tnmh5kI89I8fi-bCR-N0ZDAiX1Sb5I66pUDFB-795YF3TMGDkaA2-lP3Gm8ubSqW8s8e3XIdAJpvfyG9uv5RvzjBiOihsT1HOEHAzI8Ln8jAlUdGRyXVZFkISzKDSxB1zqEE4"/>
+                menufaktur
+            </div>
+<div class="text-[#ffffff]/70 space-y-2">
+<p>Berger Straße 204</p>
+<p>60385 Frankfurt am Main</p>
+<p class="pt-4">Tel: +49 (0)69 1234567</p>
+<p>Email: info@menufaktur.de</p>
+</div>
+</div>
+<!-- Nav -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Menü</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kurse</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Private Events</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Gutscheine</a></li>
+<li><a class="text-[#fdfadf] transition-colors duration-300 font-bold" href="#">Über uns</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Rechtliches</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Impressum</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Datenschutz</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">AGB</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kontakt</a></li>
+</ul>
+</div>
+<!-- Socials -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Social Media</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-2.25c0-1.176.21-1.75 1.25-1.75h2.75v-4h-3.75c-3.518 0-5.25 1.838-5.25 4.5v3.5z"></path></svg>
+</a>
+</div>
+<p class="text-[#ffffff]/50 text-xs">Abonnieren Sie unseren Newsletter für aktuelle Termine.</p>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-[#ffffff]/10 text-center text-[#ffffff]/40 text-xs">
+        © 2024 menufaktur. Alle Rechte vorbehalten.
+    </div>
+</footer>
+</body></html>

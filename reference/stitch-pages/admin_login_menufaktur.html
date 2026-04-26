@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Anmeldung | The Culinary Atelier</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#842600",
+                        "secondary": "#b02a3b",
+                        "error-container": "#ffdad6",
+                        "primary": "#5b0012",
+                        "on-tertiary-fixed": "#390b00",
+                        "inverse-on-surface": "#f5f2d7",
+                        "tertiary": "#511400",
+                        "outline": "#8b7171",
+                        "on-secondary-fixed": "#40000a",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#fdfadf",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "primary-fixed": "#ffdad9",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#772100",
+                        "error": "#ba1a1a",
+                        "primary-container": "#7e1423",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#574141",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ece9cf",
+                        "on-tertiary-container": "#ff8b64",
+                        "on-secondary-container": "#680017",
+                        "on-primary-fixed-variant": "#881c29",
+                        "surface-container-low": "#f8f5da",
+                        "surface-variant": "#e6e4c9",
+                        "on-surface": "#1c1c0c",
+                        "background": "#fdfadf",
+                        "secondary-container": "#ff6570",
+                        "surface-container-highest": "#e6e4c9",
+                        "outline-variant": "#debfbf",
+                        "on-primary-container": "#ff888c",
+                        "surface-container": "#f2efd4",
+                        "inverse-primary": "#ffb3b3",
+                        "surface": "#fdfadf",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdad9",
+                        "on-secondary-fixed-variant": "#8f0d26",
+                        "inverse-surface": "#323120",
+                        "surface-dim": "#dedbc1",
+                        "secondary-fixed-dim": "#ffb3b4",
+                        "primary-fixed-dim": "#ffb3b3",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#40000a",
+                        "surface-tint": "#a8353f",
+                        "on-background": "#1c1c0c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #fdfadf;
+            font-family: 'Manrope', sans-serif;
+        }
+        .editorial-shadow {
+            box-shadow: 0 32px 64px -12px rgba(91, 0, 18, 0.06);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col justify-center items-center p-6">
+<!-- The Navigation Shell is suppressed for this transactional login page per the Destination Rule -->
+<main class="w-full max-w-md">
+<!-- Logo Section -->
+<div class="flex flex-col items-center mb-12">
+<div class="text-primary text-3xl font-headline font-bold tracking-widest uppercase mb-2">
+                Menufaktur
+            </div>
+<div class="h-px w-12 bg-primary/20"></div>
+</div>
+<!-- Login Card -->
+<section class="bg-surface-container-lowest editorial-shadow rounded-xl p-8 md:p-12 border border-outline-variant/15">
+<h1 class="font-headline text-2xl font-bold text-primary mb-8 text-center tracking-tight">
+                Admin Anmeldung
+            </h1>
+<form action="#" class="space-y-6">
+<!-- Email Field -->
+<div class="space-y-2">
+<label class="block font-label text-xs font-medium uppercase tracking-widest text-on-surface-variant" for="email">
+                        Email Adresse
+                    </label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-lg px-4 py-4 text-on-surface placeholder:text-on-surface-variant/40 transition-all duration-300" id="email" name="email" placeholder="Geben Sie Ihre Email ein" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-2">
+<label class="block font-label text-xs font-medium uppercase tracking-widest text-on-surface-variant" for="password">
+                        Passwort
+                    </label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-lg px-4 py-4 text-on-surface placeholder:text-on-surface-variant/40 transition-all duration-300" id="password" name="password" placeholder="Geben Sie Ihr Passwort ein" type="password"/>
+</div>
+</div>
+<!-- 2FA Code Field -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="block font-label text-xs font-medium uppercase tracking-widest text-on-surface-variant" for="2fa">
+                            2FA Code
+                        </label>
+</div>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none border-b-2 border-outline-variant focus:border-primary focus:ring-0 rounded-t-lg px-4 py-4 text-on-surface placeholder:text-on-surface-variant/40 transition-all duration-300" id="2fa" name="2fa" placeholder="6-stelliger Code" type="text"/>
+</div>
+<p class="font-label text-[10px] text-on-surface-variant/60 leading-relaxed italic">
+                        Bitte geben Sie den Sicherheitscode aus Ihrer Authenticator-App ein.
+                    </p>
+</div>
+<!-- Submit Button -->
+<div class="pt-4">
+<button class="w-full bg-primary text-on-primary font-body font-semibold py-4 rounded-xl hover:bg-primary-container transition-colors duration-300 flex justify-center items-center gap-2 group" type="submit">
+<span>Anmelden</span>
+<span class="material-symbols-outlined text-lg group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<!-- Forgot Password -->
+<div class="text-center pt-2">
+<a class="text-primary font-label text-sm font-medium hover:underline decoration-primary/30 underline-offset-4 transition-all" href="#">
+                        Passwort vergessen?
+                    </a>
+</div>
+</form>
+</section>
+<!-- Footer Text -->
+<footer class="mt-12 text-center">
+<p class="font-label text-xs text-on-surface-variant/50 tracking-widest uppercase">
+                © menufaktur · Admin-Bereich
+            </p>
+</footer>
+</main>
+<!-- Visual Background Element (Editorial Asymmetry) -->
+<div class="fixed -bottom-24 -right-24 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="fixed -top-24 -left-24 w-64 h-64 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+</body></html>

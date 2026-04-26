@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kurskatalog | menufaktur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@700;800&amp;family=Manrope:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "secondary-container": "#ff6570",
+                "on-tertiary-fixed-variant": "#842600",
+                "on-primary-fixed": "#40000a",
+                "surface-tint": "#a8353f",
+                "primary": "#5b0012",
+                "surface-container-high": "#ece9cf",
+                "outline-variant": "#debfbf",
+                "outline": "#8b7171",
+                "on-error-container": "#93000a",
+                "surface-container-highest": "#e6e4c9",
+                "primary-fixed-dim": "#ffb3b3",
+                "tertiary-fixed-dim": "#ffb59d",
+                "tertiary-container": "#772100",
+                "error": "#ba1a1a",
+                "on-secondary-container": "#680017",
+                "on-secondary-fixed-variant": "#8f0d26",
+                "secondary-fixed-dim": "#ffb3b4",
+                "on-tertiary-fixed": "#390b00",
+                "on-primary-container": "#ff888c",
+                "surface-dim": "#dedbc1",
+                "surface-container-lowest": "#ffffff",
+                "primary-container": "#7e1423",
+                "on-tertiary-container": "#ff8b64",
+                "on-surface": "#1c1c0c",
+                "on-tertiary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "background": "#fdfadf",
+                "surface-container-low": "#f8f5da",
+                "secondary": "#b02a3b",
+                "surface-container": "#f2efd4",
+                "tertiary-fixed": "#ffdbd0",
+                "surface": "#fdfadf",
+                "primary-fixed": "#ffdad9",
+                "on-background": "#1c1c0c",
+                "error-container": "#ffdad6",
+                "on-secondary-fixed": "#40000a",
+                "inverse-primary": "#ffb3b3",
+                "surface-variant": "#e6e4c9",
+                "surface-bright": "#fdfadf",
+                "on-surface-variant": "#574141",
+                "on-primary-fixed-variant": "#881c29",
+                "secondary-fixed": "#ffdad9",
+                "on-error": "#ffffff",
+                "inverse-on-surface": "#f5f2d7",
+                "on-primary": "#ffffff",
+                "tertiary": "#511400",
+                "inverse-surface": "#323120"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "fontFamily": {
+                "headline": ["Epilogue"],
+                "body": ["Manrope"],
+                "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text- editorial-shadow {
+            text-shadow: 0 4px 12px rgba(91, 0, 18, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+<!-- TopNavBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-[#5b0012] flex justify-between items-center px-12 py-6 w-full max-w-none">
+<div class="text-2xl font-bold text-[#fdfadf] font-headline tracking-tight"><span class="flex items-center gap-2"><span class="material-symbols-outlined text-3xl text-[#fdfadf]">restaurant_menu</span><span>menufaktur</span></span></div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kurse</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Private Events</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Über uns</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kontakt</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight">Anmelden</button>
+<button class="bg-tertiary-container text-on-tertiary px-6 py-2 rounded-xl font-headline font-bold tracking-tight hover:opacity-90 transition-opacity duration-300 scale-95 duration-200">Kurs buchen</button>
+</div>
+</nav>
+<main class="pt-24 pb-20">
+<!-- Page Header -->
+<section class="max-w-screen-2xl mx-auto px-8 py-16 md:py-24">
+<div class="max-w-3xl">
+<h1 class="text-[3.5rem] leading-[1.1] font-headline font-bold text-primary-container editorial-shadow mb-6">
+                    Unsere Kurse
+                </h1>
+<p class="text-xl text-on-surface-variant font-body leading-relaxed">
+                    Entdecken Sie die Vielfalt unserer Kochkurse in Frankfurt-Bornheim. Erleben Sie kulinarische Perfektion in einer Atmosphäre, die zum Verweilen und Genießen einlädt.
+                </p>
+</div>
+</section>
+<!-- Filter Bar -->
+<section class="sticky top-[72px] z-40 bg-surface-container-low/95 backdrop-blur-md mb-12">
+<div class="max-w-screen-2xl mx-auto px-8 py-6 flex flex-wrap items-center gap-6">
+<div class="flex-1 min-w-[200px]">
+<label class="block text-[0.75rem] font-label font-medium uppercase tracking-[0.1em] text-on-surface-variant mb-2">Zeitraum</label>
+<div class="relative">
+<input class="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary" placeholder="Alle Termine" type="text"/>
+</div>
+</div>
+<div class="flex-1 min-w-[200px]">
+<label class="block text-[0.75rem] font-label font-medium uppercase tracking-[0.1em] text-on-surface-variant mb-2">Standort</label>
+<select class="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary appearance-none">
+<option>Frankfurt-Bornheim</option>
+<option>Atelier Westend</option>
+</select>
+</div>
+<div class="flex-1 min-w-[200px]">
+<label class="block text-[0.75rem] font-label font-medium uppercase tracking-[0.1em] text-on-surface-variant mb-2">Preisbereich</label>
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary" type="range"/>
+</div>
+<div class="flex-none min-w-[180px]">
+<label class="block text-[0.75rem] font-label font-medium uppercase tracking-[0.1em] text-on-surface-variant mb-2">Sortieren nach</label>
+<select class="w-full bg-surface-container-high border-none rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary appearance-none">
+<option>Datum aufsteigend</option>
+<option>Preis absteigend</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Course Grid -->
+<section class="max-w-screen-2xl mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+<!-- Card 1 -->
+<div class="group flex flex-col">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] mb-6">
+<img alt="Handgemachte Pasta" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Close-up of flour-dusted hands shaping fresh garganelli pasta on a rustic wooden table with soft natural light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdeULX6R05uWt-TEKvUX4CrWjQ61U_0mzNTIabuAlKTLufSb8hAVFNko3m_-xsf6TfH8l0c2v2EBkwrqiAY1ozFK1oHcOQiJ60-opw8K6TtTi-9uOopUBTFpZ8otVaftGyP5L4ZXtWwTFxRP7UHGF6GtPkiACo9tRWaBswBsLb-wkUs5NoJY-A8pHZ7q8An8p5DHprtLT4OrlbBWMso6uN2l5DgcmjNGxze3sj0DjlxR2F5qAkHBDoJe0FdS7GwbzwPFMJOIeLMZft"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[0.75rem] font-label font-medium text-emerald-800">noch 4 Plätze</span>
+</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Die Kunst der Pasta-Manufaktur</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">calendar_today</span> 12. Okt 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 18:00 Uhr</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span> Frankfurt-Bornheim
+                    </p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-lg font-headline font-bold text-primary">89 € <span class="text-xs font-label font-normal text-on-surface-variant uppercase tracking-wider">pro Person</span></span>
+<button class="bg-tertiary-container hover:bg-primary text-white px-6 py-2 rounded-xl text-sm font-medium transition-all">Details ansehen</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group flex flex-col">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] mb-6">
+<img alt="Weinbegleitung" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Deep red wine being poured into a crystal glass in a dimly lit wine cellar with warm ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4POVSr64mk1yOMil0MHcAyJpNUD9QfDUXLQPimG6RNIiiadf8mEZiY5MEgn2ZlGiGCx78iPtO78Q9xgsJ6X34J9S-gAGnMrsy-eS0FAv3_hsCZdlayU8jqDQR_6VA87YtDcj8sVo80gwIpMBNMBJPwOFwawch6ulpBCDSU7wNzdwGb888CSVy1ZOC2-lw6Qk8RxP8GcXjJfgGFiSe87mHuaPc3KcDH_66PLJRMzosqsRcgwWvp1WjlcjkDo0a8761q4jgK6vU_Ag7"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[0.75rem] font-label font-medium text-amber-800">nur noch 1 Platz</span>
+</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Wein &amp; Wild: Herbstliches Menü</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">calendar_today</span> 15. Okt 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 19:00 Uhr</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span> Frankfurt-Bornheim
+                    </p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-lg font-headline font-bold text-primary">125 € <span class="text-xs font-label font-normal text-on-surface-variant uppercase tracking-wider">pro Person</span></span>
+<button class="bg-tertiary-container hover:bg-primary text-white px-6 py-2 rounded-xl text-sm font-medium transition-all">Details ansehen</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="group flex flex-col">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] mb-6">
+<img alt="Vegane Küche" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale-[40%]" data-alt="Vibrant bowl of colorful roasted vegetables and chickpeas on a ceramic plate with morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2hkzTb0D4CjWStyirX13fRuierLWpEs_n4MvgF4PTqbkbKxQVkWRq_8LDx9ztErxwugpfA-DnoCcKCcmuOXNH3MAnEg6E7_0RjqNMsXwd-n-UH9ncLsKOy03ir-_wzE4bVGrk0llT4VkF01BMxu6LTzH6kuabULoj1eF3jBMBo5jslLFtiYEmH4NhqPUNp-iunmfqDBMmKHzn9bi3iK_Xpcw5vJ_jr0Y3PZp05Yny4hgDox6b6MkbC_TdNvoq794ZFDxSgRUsCv_u"/>
+<div class="absolute top-4 left-4">
+<span class="bg-neutral-200/90 backdrop-blur px-3 py-1 rounded-full text-[0.75rem] font-label font-medium text-neutral-600">Ausgebucht</span>
+</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-2">Plant-Based Gourmet: Vegan kochen</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">calendar_today</span> 18. Okt 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 17:30 Uhr</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span> Frankfurt-Bornheim
+                    </p>
+<div class="mt-auto flex items-center justify-between opacity-60">
+<span class="text-lg font-headline font-bold text-primary">95 € <span class="text-xs font-label font-normal text-on-surface-variant uppercase tracking-wider">pro Person</span></span>
+<button class="bg-surface-container-highest text-on-surface-variant px-6 py-2 rounded-xl text-sm font-medium cursor-not-allowed">Warteliste</button>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="group flex flex-col">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] mb-6">
+<img alt="Steak Tasting" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Perfectly seared wagyu beef steak resting on a slate board with rosemary sprigs and sea salt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRg7rqm2g1L7t2Fw9kfAUuh9mHXI_slrAWLNH2k1XcsFjpKdTDWquA88m5q249kJXW5ZpGneV1CnxLAiQCM_iFq2Jg5D8AAJi3yhWWWBt7X4OYs8h3CIebHOZ5vJm_5c3E3mxGqebhjmeFNSX9IpKrlNkKYmpiBGO6n6fLYgFgu6ayGAnlmcpcGwczXbsQ42omGJ53N8yVZhF7jDXCRqBvCWbQjJZBXxVLmxJmqlgapFY0zaHbkhvRLWUH7Ts2w373Uqlcn0pgvTn3"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[0.75rem] font-label font-medium text-emerald-800">noch 6 Plätze</span>
+</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Perfect Steak: Grillen &amp; Braten</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">calendar_today</span> 22. Okt 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 18:30 Uhr</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span> Frankfurt-Bornheim
+                    </p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-lg font-headline font-bold text-primary">139 € <span class="text-xs font-label font-normal text-on-surface-variant uppercase tracking-wider">pro Person</span></span>
+<button class="bg-tertiary-container hover:bg-primary text-white px-6 py-2 rounded-xl text-sm font-medium transition-all">Details ansehen</button>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="group flex flex-col">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] mb-6">
+<img alt="Französische Patisserie" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Dainty colorful macarons displayed in a boutique bakery window with elegant soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGZ8A0JYzDTOKOBslHbrqO6F4ZYJWAWbcJS6L9SLa-azjHLhUODky8WEgtH6cfVtTOGg-N5UkCsL_cKB6Yy5cZdWrp4Y0TGIT2REfegpCLreA91SDF-9T7L90L0jK_uiMKaGbBk9LsCWtcL72ydEcVcJSeNXF-7TQR-PP12CyXk69Ofz72VA79pftu0y3FdIBw-lzn6-rkx05sIFN0F_1EAdUWBzkgLN3xB9ro1o7ZiJk5egQ9ykaecRAs-BaZjn88q59uecrGAiYP"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[0.75rem] font-label font-medium text-emerald-800">noch 2 Plätze</span>
+</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Französische Patisserie: Macarons</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">calendar_today</span> 25. Okt 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 14:00 Uhr</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span> Frankfurt-Bornheim
+                    </p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-lg font-headline font-bold text-primary">79 € <span class="text-xs font-label font-normal text-on-surface-variant uppercase tracking-wider">pro Person</span></span>
+<button class="bg-tertiary-container hover:bg-primary text-white px-6 py-2 rounded-xl text-sm font-medium transition-all">Details ansehen</button>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="group flex flex-col">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] mb-6">
+<img alt="Sushi Masterclass" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Artistic arrangement of fresh nigiri sushi on a dark ceramic platter with ginger and wasabi" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPXfpssl3OQvhDqtl0uXIqU6jLDSo5Z0d07bJ9jpHvmYLvRooTZ60wL3jGwL6jnfIhaNWaHoeq0S3YaG4EYzHrJvdAA_3GsT1bqnnEfYVCDbDoy8jqRSMydA-I5wK1-OsTZeodtaHQhMvX2U_o9_otnzQC62IUrruTL7oHOp3blk75-cT_xXUnLkC5jPwzFnyLdL6GTCAGbcfgisy-2J2nl1aAhLks4Xw3HnjXHriDLfyMxFSLaNOBFDObkcV8ye_AZHpxUCcblZcM"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[0.75rem] font-label font-medium text-emerald-800">noch 5 Plätze</span>
+</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Sushi Masterclass: Von Maki bis Nigiri</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">calendar_today</span> 30. Okt 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 18:00 Uhr</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span> Frankfurt-Bornheim
+                    </p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-lg font-headline font-bold text-primary">109 € <span class="text-xs font-label font-normal text-on-surface-variant uppercase tracking-wider">pro Person</span></span>
+<button class="bg-tertiary-container hover:bg-primary text-white px-6 py-2 rounded-xl text-sm font-medium transition-all">Details ansehen</button>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="group flex flex-col">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] mb-6">
+<img alt="Healthy Bowls" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Two vibrant healthy buddha bowls with avocado, quinoa and roasted sweet potato on a light wood background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjB3GrAQEjDHXgmKxro72nrzflhe5b3U-4e0PGUqFOS9D6GHO2cwQ8p8jXvwgydxRCM7TPVmRSU4yJKQwAk3T8ANMVXYyMS6nzR64-kI9DjL9CNmRjam2IO1idxqbadJP4WPKcwj_GK2NuNPCfq2lVCPgOeZ_Lj7Y60g2urUZGQVLEcFaTPBpJtB-HQwkbAYaGPXaLVOC14YSSIS2BDYxAT9vXyZ-Yu56ZdjeqIUlduSW6VE4e_aITfJlPOa0YLUOh2tJgHecaMqyL"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[0.75rem] font-label font-medium text-emerald-800">noch 8 Plätze</span>
+</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Quick &amp; Healthy: After-Work Cooking</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">calendar_today</span> 02. Nov 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 19:00 Uhr</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span> Frankfurt-Bornheim
+                    </p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-lg font-headline font-bold text-primary">75 € <span class="text-xs font-label font-normal text-on-surface-variant uppercase tracking-wider">pro Person</span></span>
+<button class="bg-tertiary-container hover:bg-primary text-white px-6 py-2 rounded-xl text-sm font-medium transition-all">Details ansehen</button>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="group flex flex-col">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] mb-6">
+<img alt="Brot Backen" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Rustic loaf of sourdough bread with golden crust being sliced on a flour-covered wooden surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJh_GDNpzhKWnI2ZSZO8o6L3P_B1tkBSjBYyvikaiFfoDcO0B_ZQIKolt9vuswoDmgfJE0t_0c5HjExPPEF3aCx2x64vnj3xof0byin9AyOkI0GIdLKZVgIXfghjpb0lsqbrOwIU6WbIkJxM8XbFD-nnpYc0thm-9RfHKthNaDbAFiFn1BEY4StljBX6bprdgv2pYojXB2UBx_eFdK8qVy5YuGK5UrBXxkVu60a7jNq6HV3fRC3SVNozVynuzHmfVzMbt8tUU1eNSG"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[0.75rem] font-label font-medium text-amber-800">nur noch 1 Platz</span>
+</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Sauerteig-Geheimnisse: Brot backen</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">calendar_today</span> 05. Nov 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 10:00 Uhr</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span> Frankfurt-Bornheim
+                    </p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-lg font-headline font-bold text-primary">99 € <span class="text-xs font-label font-normal text-on-surface-variant uppercase tracking-wider">pro Person</span></span>
+<button class="bg-tertiary-container hover:bg-primary text-white px-6 py-2 rounded-xl text-sm font-medium transition-all">Details ansehen</button>
+</div>
+</div>
+<!-- Card 9 -->
+<div class="group flex flex-col">
+<div class="relative overflow-hidden rounded-lg aspect-[4/3] mb-6">
+<img alt="Thailändische Küche" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="Sizzling wok with fresh vegetables and shrimp being tossed over a flame in a professional kitchen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaPg7hmh5vHPF6vmJfJnaaGW9Uskan7p8MZVxs4ViCVaZu2gogq-N3mggxKp5Q7md7abt9_tX-7IsOlQ-qkHjKfSl8Y_nKVEFls3ZDwDOecaleL_GKxGJm6QvWk9HL3FtQ1PbY1N1CNzSS2siD3Op1jp92zb2C2ekWnNjhAHfceNu-BAHU_M6ElU11vLdAqZmjjhH5NVD0JEIvbndUfkCXmJdS0hP8uSkVES_iqP6bVeq8Z4N2OwKZHzwjs7b4kIoN3Jop1sej0Bok"/>
+<div class="absolute top-4 left-4">
+<span class="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[0.75rem] font-label font-medium text-emerald-800">noch 3 Plätze</span>
+</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-on-surface mb-2 group-hover:text-primary transition-colors">Thai Street Food: Würzig &amp; Authentisch</h3>
+<div class="flex items-center gap-4 text-sm text-on-surface-variant mb-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">calendar_today</span> 08. Nov 2024</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">schedule</span> 18:00 Uhr</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span> Frankfurt-Bornheim
+                    </p>
+<div class="mt-auto flex items-center justify-between">
+<span class="text-lg font-headline font-bold text-primary">85 € <span class="text-xs font-label font-normal text-on-surface-variant uppercase tracking-wider">pro Person</span></span>
+<button class="bg-tertiary-container hover:bg-primary text-white px-6 py-2 rounded-xl text-sm font-medium transition-all">Details ansehen</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Pagination -->
+<section class="max-w-screen-2xl mx-auto px-8 py-20 flex justify-center items-center gap-8">
+<button class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-primary hover:text-white transition-all disabled:opacity-30 disabled:cursor-not-allowed" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<span class="text-sm font-label font-medium uppercase tracking-widest text-on-surface">Seite 1 von 4</span>
+<button class="flex items-center justify-center w-12 h-12 rounded-full bg-surface-container-high text-on-surface-variant hover:bg-primary hover:text-white transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-[#5b0012] dark:bg-[#40000a] text-[#ffffff] font-manrope text-sm leading-relaxed tracking-wide">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full max-w-7xl mx-auto">
+<!-- Brand & Contact -->
+<div class="space-y-6">
+<div class="text-xl font-bold text-[#fdfadf] font-headline tracking-tight"><span class="flex items-center gap-2"><span class="material-symbols-outlined text-2xl text-[#fdfadf]">restaurant_menu</span><span>menufaktur</span></span></div>
+<div class="text-[#ffffff]/70 space-y-2">
+<p>Berger Straße 204</p>
+<p>60385 Frankfurt am Main</p>
+<p class="pt-4">Tel: +49 (0)69 1234567</p>
+<p>Email: info@menufaktur.de</p>
+</div>
+</div>
+<!-- Nav -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Menü</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kurse</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Private Events</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Gutscheine</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Über uns</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Rechtliches</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Impressum</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Datenschutz</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">AGB</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kontakt</a></li>
+</ul>
+</div>
+<!-- Socials -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Social Media</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-2.25c0-1.176.21-1.75 1.25-1.75h2.75v-4h-3.75c-3.518 0-5.25 1.838-5.25 4.5v3.5z"></path></svg>
+</a>
+</div>
+<p class="text-[#ffffff]/50 text-xs">Abonnieren Sie unseren Newsletter für aktuelle Termine.</p>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-[#ffffff]/10 text-center text-[#ffffff]/40 text-xs">
+            © 2024 menufaktur. Alle Rechte vorbehalten.
+        </div>
+</footer>
+</body></html>

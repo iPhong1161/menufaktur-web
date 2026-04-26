@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;700;800&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-surface": "#323120",
+                    "surface-tint": "#a8353f",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#5b0012",
+                    "primary-fixed-dim": "#ffb3b3",
+                    "tertiary-container": "#772100",
+                    "surface-container": "#f2efd4",
+                    "surface": "#fdfadf",
+                    "tertiary-fixed": "#ffdbd0",
+                    "on-primary-container": "#ff888c",
+                    "secondary-fixed-dim": "#ffb3b4",
+                    "surface-container-high": "#ece9cf",
+                    "on-secondary-container": "#680017",
+                    "on-tertiary-fixed-variant": "#842600",
+                    "primary-container": "#7e1423",
+                    "surface-bright": "#fdfadf",
+                    "outline": "#8b7171",
+                    "secondary-container": "#ff6570",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#1c1c0c",
+                    "on-primary-fixed": "#40000a",
+                    "on-tertiary-container": "#ff8b64",
+                    "error": "#ba1a1a",
+                    "tertiary": "#511400",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb59d",
+                    "on-background": "#1c1c0c",
+                    "inverse-primary": "#ffb3b3",
+                    "on-secondary-fixed": "#40000a",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#f8f5da",
+                    "on-error": "#ffffff",
+                    "on-tertiary-fixed": "#390b00",
+                    "on-surface-variant": "#574141",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-variant": "#e6e4c9",
+                    "secondary-fixed": "#ffdad9",
+                    "on-secondary": "#ffffff",
+                    "surface-container-highest": "#e6e4c9",
+                    "inverse-on-surface": "#f5f2d7",
+                    "surface-dim": "#dedbc1",
+                    "on-secondary-fixed-variant": "#8f0d26",
+                    "outline-variant": "#debfbf",
+                    "background": "#fdfadf",
+                    "primary-fixed": "#ffdad9",
+                    "secondary": "#b02a3b",
+                    "on-primary-fixed-variant": "#881c29"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Epilogue"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-shadow {
+            box-shadow: 0 32px 64px -12px rgba(91, 0, 18, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary/30">
+<!-- Top Navigation -->
+<nav class="fixed top-0 w-full z-50 bg-[#5b0012] dark:bg-[#40000a] flex justify-between items-center px-12 py-6 w-full max-w-none">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-[#fdfadf]/10 border border-[#fdfadf]/20 rounded-md flex-shrink-0"></div>
+<div class="text-2xl font-bold text-[#fdfadf] font-headline tracking-tight">menufaktur</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kurse</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Private Events</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Über uns</a>
+<a class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kontakt</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#ffffff]/80 hover:text-[#ffffff] transition-opacity duration-300 font-headline font-bold tracking-tight">Anmelden</button>
+<button class="bg-tertiary-container text-on-tertiary px-6 py-2 rounded-xl font-headline font-bold tracking-tight hover:opacity-90 transition-opacity duration-300 scale-95 duration-200">Kurs buchen</button>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-4 max-w-5xl mx-auto">
+<!-- Success Identity Section -->
+<div class="flex flex-col items-center text-center mb-16">
+<div class="w-24 h-24 bg-tertiary-container rounded-full flex items-center justify-center mb-8 editorial-shadow">
+<span class="material-symbols-outlined text-surface text-5xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h1 class="font-headline text-5xl md:text-6xl font-bold text-primary mb-4 tracking-tight">Vielen Dank für Ihre Buchung!</h1>
+<p class="font-headline text-xl text-secondary font-medium tracking-wide">Buchungsnummer: MF-2026-00142</p>
+<div class="mt-8 max-w-xl">
+<p class="text-on-surface-variant leading-relaxed text-lg">
+                Wir haben Ihnen soeben eine Bestätigung an Ihre E-Mail-Adresse gesendet. Wir freuen uns darauf, Sie bald in unserem Atelier begrüßen zu dürfen.
+            </p>
+</div>
+</div>
+<!-- Booking Summary "Recipe Sheet" Style -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden editorial-shadow flex flex-col md:flex-row min-h-[400px]">
+<!-- Asymmetric Image Column (40%) -->
+<div class="md:w-[40%] relative overflow-hidden">
+<img alt="Artisan cooking workshop" class="absolute inset-0 w-full h-full object-cover" data-alt="overhead view of professional chef hands preparing pasta on a flour-dusted marble surface with soft natural window lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUTMlScVhcDroDf1WXJY8vp_gZ2yhBYIhL2UL4vvEGmVP8tsy5OOI9Qxa9drily2x2RMZi68Kd-pvHbNVdlq9dvAn1eSlKLjNbMEGbxfrk7fo1NzYI6486mJFYSwzg2Pa3q5LiNU7SB8wIkC7y4b3gp9PPkW4uZYrlZR9seiCjKeYhFBiN5qKjNMUakAXhFAuIcWpVoFA9TLtu_xovL6sxtXb9j0LrnSTdA8GCNH4Wk01cyZjUu3Nw_73jiySAZl5_-ZrMhRI2Vvf3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent"></div>
+</div>
+<!-- Content Column (60%) -->
+<div class="md:w-[60%] p-10 md:p-14 flex flex-col justify-center bg-surface-container-lowest">
+<span class="font-label text-xs uppercase tracking-[0.2em] text-secondary mb-4">Ihre Buchungsdetails</span>
+<h2 class="font-headline text-3xl font-bold text-primary mb-8">Die Kunst der Saucen: Basiskurs</h2>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary-container">calendar_today</span>
+<div>
+<p class="font-label text-sm text-on-surface-variant">Datum &amp; Zeit</p>
+<p class="text-on-surface font-medium">14. Oktober 2026, 18:00 — 22:00 Uhr</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary-container">location_on</span>
+<div>
+<p class="font-label text-sm text-on-surface-variant">Ort</p>
+<p class="text-on-surface font-medium">The Culinary Atelier, Bordeauxplatz 4, München</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-tertiary-container">group</span>
+<div>
+<p class="font-label text-sm text-on-surface-variant">Teilnehmer</p>
+<p class="text-on-surface font-medium">2 Personen</p>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-outline-variant/20 flex justify-between items-end">
+<div>
+<p class="font-label text-sm text-on-surface-variant">Gesamtbetrag</p>
+<p class="font-headline text-3xl font-bold text-primary">258,00 €</p>
+</div>
+<p class="text-on-surface-variant text-sm italic">Inkl. gesetzl. MwSt.</p>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="mt-16 flex flex-col md:flex-row items-center justify-center gap-6">
+<a class="w-full md:w-auto px-12 py-4 bg-tertiary-container text-white rounded-xl font-headline font-bold text-lg hover:bg-tertiary transition-all active:scale-95 text-center editorial-shadow" href="#">
+            Zurück zu den Kursen
+        </a>
+<a class="w-full md:w-auto px-12 py-4 border-2 border-primary text-primary rounded-xl font-headline font-bold text-lg hover:bg-primary/5 transition-all active:scale-95 text-center" href="#">
+            Zu meinen Buchungen
+        </a>
+</div>
+<!-- Helpful Info (Secondary Surface) -->
+<div class="mt-24 p-12 bg-surface-container-low rounded-xl text-center">
+<h3 class="font-headline text-2xl font-bold text-primary mb-6">Wichtige Informationen vorab</h3>
+<div class="grid md:grid-cols-3 gap-12 text-left">
+<div>
+<h4 class="font-bold text-primary mb-2">Parkmöglichkeiten</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Nutzen Sie kostenfrei die Tiefgarage direkt unter dem Atelier. Einfahrt über die Rue de Gastronomie.</p>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-2">Kleidung</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Wir stellen Ihnen professionelle Kochschürzen. Bitte tragen Sie festes, geschlossenes Schuhwerk.</p>
+</div>
+<div>
+<h4 class="font-bold text-primary mb-2">Stornierung</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Kostenfreie Stornierungen sind bis 48 Stunden vor Kursbeginn über Ihr Profil möglich.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#5b0012] dark:bg-[#40000a] text-[#ffffff] font-body text-sm leading-relaxed tracking-wide">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full max-w-7xl mx-auto">
+<!-- Brand & Contact -->
+<div class="space-y-6">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 bg-[#fdfadf]/10 border border-[#fdfadf]/20 rounded-sm flex-shrink-0"></div>
+<div class="text-xl font-bold text-[#fdfadf]">menufaktur</div>
+</div>
+<div class="text-[#ffffff]/70 space-y-2">
+<p>Berger Straße 204</p>
+<p>60385 Frankfurt am Main</p>
+<p class="pt-4">Tel: +49 (0)69 1234567</p>
+<p>Email: info@menufaktur.de</p>
+</div>
+</div>
+<!-- Nav -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Menü</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kurse</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Private Events</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Gutscheine</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Über uns</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Rechtliches</h4>
+<ul class="space-y-4">
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Impressum</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Datenschutz</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">AGB</a></li>
+<li><a class="text-[#ffffff]/70 hover:text-[#fdfadf] transition-colors duration-300" href="#">Kontakt</a></li>
+</ul>
+</div>
+<!-- Socials -->
+<div class="space-y-6">
+<h4 class="text-[#fdfadf] font-bold uppercase tracking-widest text-xs">Social Media</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full border border-[#ffffff]/20 flex items-center justify-center hover:bg-[#fdfadf] hover:text-primary transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-2.25c0-1.176.21-1.75 1.25-1.75h2.75v-4h-3.75c-3.518 0-5.25 1.838-5.25 4.5v3.5z"></path></svg>
+</a>
+</div>
+<p class="text-[#ffffff]/50 text-xs">Abonnieren Sie unseren Newsletter für aktuelle Termine.</p>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-[#ffffff]/10 text-center text-[#ffffff]/40 text-xs">
+        © 2024 menufaktur. Alle Rechte vorbehalten.
+    </div>
+</footer>
+</body></html>

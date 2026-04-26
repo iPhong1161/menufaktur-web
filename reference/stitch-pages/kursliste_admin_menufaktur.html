@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kurse verwalten | menufaktur</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#842600",
+                        "secondary": "#b02a3b",
+                        "error-container": "#ffdad6",
+                        "primary": "#5b0012",
+                        "on-tertiary-fixed": "#390b00",
+                        "inverse-on-surface": "#f5f2d7",
+                        "tertiary": "#511400",
+                        "outline": "#8b7171",
+                        "on-secondary-fixed": "#40000a",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#fdfadf",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "primary-fixed": "#ffdad9",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#772100",
+                        "error": "#ba1a1a",
+                        "primary-container": "#7e1423",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#574141",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#ece9cf",
+                        "on-tertiary-container": "#ff8b64",
+                        "on-secondary-container": "#680017",
+                        "on-primary-fixed-variant": "#881c29",
+                        "surface-container-low": "#f8f5da",
+                        "surface-variant": "#e6e4c9",
+                        "on-surface": "#1c1c0c",
+                        "background": "#fdfadf",
+                        "secondary-container": "#ff6570",
+                        "surface-container-highest": "#e6e4c9",
+                        "outline-variant": "#debfbf",
+                        "on-primary-container": "#ff888c",
+                        "surface-container": "#f2efd4",
+                        "inverse-primary": "#ffb3b3",
+                        "surface": "#fdfadf",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed": "#ffdad9",
+                        "on-secondary-fixed-variant": "#8f0d26",
+                        "inverse-surface": "#323120",
+                        "surface-dim": "#dedbc1",
+                        "secondary-fixed-dim": "#ffb3b4",
+                        "primary-fixed-dim": "#ffb3b3",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#40000a",
+                        "surface-tint": "#a8353f",
+                        "on-background": "#1c1c0c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Epilogue', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+<!-- TopNavBar Shell -->
+<nav class="fixed top-0 w-full z-50 bg-[#fdfadf] dark:bg-[#1a1614] backdrop-blur-md bg-opacity-90 border-b border-[#5b0012]/10 dark:border-[#ffffff]/10 transition-all duration-300 ease-in-out">
+<div class="flex justify-between items-center h-20 px-8 w-full max-w-full">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3"><div class="w-10 h-10 bg-[#5b0012] dark:bg-[#ffb3b4] rounded-lg flex-shrink-0"></div><span class="text-2xl font-bold text-[#5b0012] dark:text-[#ffb3b4] lowercase tracking-widest font-['Epilogue']">menufaktur</span></div>
+<div class="hidden lg:flex items-center gap-6">
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Dashboard</a>
+<a class="text-[#5b0012] dark:text-[#ffb3b4] font-bold border-b-2 border-[#5b0012] pb-1 font-['Epilogue'] tracking-tight" href="#">Kurse</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Buchungen</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Kunden</a>
+<a class="text-[#5b0012]/60 dark:text-[#ffffff]/60 font-medium hover:text-[#5b0012] transition-colors font-['Epilogue'] tracking-tight" href="#">Einstellungen</a>
+</div>
+</div>
+<div class="flex items-center gap-4 text-[#5b0012] dark:text-[#ffb3b4]">
+<button class="p-2 hover:bg-[#7e1423]/5 dark:hover:bg-[#ffffff]/5 rounded-lg transition-all duration-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#7e1423]/5 dark:hover:bg-[#ffffff]/5 rounded-lg transition-all duration-300">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-28 pb-12 px-8 max-w-[1600px] mx-auto w-full">
+<!-- Header & Action Section -->
+<header class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-5xl font-bold tracking-tight text-primary mb-2">Kurse</h1>
+<p class="text-xl font-medium text-on-surface-variant font-body">Alle Kurse verwalten</p>
+</div>
+<button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-2 transition-all hover:bg-primary-container shadow-sm hover:shadow-md active:scale-[0.98]">
+<span class="material-symbols-outlined">add</span>
+                Neuer Kurs
+            </button>
+</header>
+<!-- Filters Section -->
+<section class="bg-surface-container-low rounded-xl p-6 mb-8 flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[300px] relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-high border-none rounded-xl text-on-surface focus:ring-2 focus:ring-primary" placeholder="Geben Sie den Kursnamen oder ID ein" type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<select class="bg-surface-container-high border-none rounded-xl px-4 py-3 text-on-surface font-medium focus:ring-2 focus:ring-primary min-w-[160px]">
+<option>Status: Alle</option>
+<option>Aktiv</option>
+<option>Entwurf</option>
+<option>Ausverkauft</option>
+</select>
+<div class="flex items-center bg-surface-container-high rounded-xl px-4 py-3 gap-3">
+<span class="material-symbols-outlined text-on-surface-variant">calendar_today</span>
+<span class="text-on-surface font-medium">Zeitraum wählen</span>
+</div>
+<button class="bg-surface-container-highest p-3 rounded-xl text-primary hover:bg-outline-variant/20 transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+</section>
+<!-- Table Container (Editorial Style) -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden border border-outline-variant/10">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50 border-b border-outline-variant/20">
+<th class="px-6 py-5 font-headline font-bold text-primary uppercase tracking-wider text-xs">Kurs</th>
+<th class="px-6 py-5 font-headline font-bold text-primary uppercase tracking-wider text-xs">Datum &amp; Uhrzeit</th>
+<th class="px-6 py-5 font-headline font-bold text-primary uppercase tracking-wider text-xs">Kapazität</th>
+<th class="px-6 py-5 font-headline font-bold text-primary uppercase tracking-wider text-xs">Preis</th>
+<th class="px-6 py-5 font-headline font-bold text-primary uppercase tracking-wider text-xs">Status</th>
+<th class="px-6 py-5 font-headline font-bold text-primary uppercase tracking-wider text-xs text-right">Aktionen</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<img class="w-14 h-14 rounded-lg object-cover" data-alt="close-up of fresh pasta dough on a wooden board with flour dust and soft afternoon window light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4h15QTDenXhMElpqgSclHRss-SjAaIMDRS2mGMlir1yM61Vksig2Xl2A84owEzvJRxNU9zfFr2hCOWfvH7ozanwN5FFVm4k7Pk-sOFcJvl4lm49xIeTiEdHp5RtVCLL1irGotVdh0KmtOoxXdNVCIrYzmUNibm5ATOo_6DAvj8UYuCTvMuQ4SFBJUB2aPeufMd8zgQDCpsEetNkCfSn-A2faf34JJXDUoyw6uoUzEbDw-KWQO5bqnQ1wE9NwRXfIsl-_JgVdgEzs"/>
+<div>
+<span class="block font-headline font-bold text-on-surface">Handgemachte Pasta Masterclass</span>
+<span class="text-xs text-on-surface-variant">ID: MOD-4921</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">12. Okt. 2024</span>
+<span class="text-sm text-on-surface-variant">18:00 - 21:30</span>
+</td>
+<td class="px-6 py-5">
+<div class="w-32">
+<div class="flex justify-between text-xs mb-1">
+<span class="font-bold text-primary">6 / 8</span>
+<span class="text-on-surface-variant">75%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 75%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-bold text-primary">129,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800 border border-green-200">Aktiv</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">content_copy</span></button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<img class="w-14 h-14 rounded-lg object-cover" data-alt="artisan sourdough bread being scored by a baker with natural morning light and deep shadows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyo0g2vYhoRG0qpmadRoqxjs2yAhRcesEBT04aDrozhe623XiDdjVtNeDtRW4PWMsrgpu3R0HaGQgLKpMvyj-f9aKFnPn4lJ3RRE0f1P4AlkSD1FqqRH4wEBCJRBle_Y8lKfwbp0lcGF0TBAChFKuu5jyIrr0GOQrHDmGYxuYd51kp_CkQjzrYxVv5dzRcdF7-UjDbQtCxylawMASncShHOrpIsQ2jrK0ODh9Vei5Rxjch98jkxMw00c3nF1rl6pdjnKexTHOqwFI"/>
+<div>
+<span class="block font-headline font-bold text-on-surface">Brotbacken: Die Sauerteig-Bibel</span>
+<span class="text-xs text-on-surface-variant">ID: BAK-1022</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">15. Okt. 2024</span>
+<span class="text-sm text-on-surface-variant">09:00 - 15:00</span>
+</td>
+<td class="px-6 py-5">
+<div class="w-32">
+<div class="flex justify-between text-xs mb-1">
+<span class="font-bold text-primary">8 / 8</span>
+<span class="text-on-surface-variant">100%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 100%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-bold text-primary">159,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-primary-container text-on-primary-container">Ausverkauft</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">content_copy</span></button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 3 (Entwurf example) -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<img class="w-14 h-14 rounded-lg object-cover grayscale opacity-60" data-alt="close-up of red wine being poured into a crystal glass in a dimly lit rustic cellar atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCohijMHrz3DIWcPBEJdwOl0FA5jGlDeCshxOwCg37ZauPphfAbk1MB6F3_gsTQq2nXd2Pcn7cjFQek9VsN89H3FOaPanq-ZafK9nvoxuZfv6DF5Emd4YsJQgA_I-nE0fYutpPL2ctSBZaY_AEJXgoYLLSH_U1h9V2GPv-6g07OZEhUwmFpn11bdFRkQzFrXJeidUr4Vr39iNBwqtqg5dGT9UL9NvxLf21s0JFwXIXARPIIBzB2zAo9Jk2gDKLZzbOCUnFov35Rwa0"/>
+<div>
+<span class="block font-headline font-bold text-on-surface-variant">Französische Weine &amp; Terroir</span>
+<span class="text-xs text-on-surface-variant">ID: WIN-5512</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">20. Okt. 2024</span>
+<span class="text-sm text-on-surface-variant">19:00 - 22:00</span>
+</td>
+<td class="px-6 py-5">
+<div class="w-32">
+<div class="flex justify-between text-xs mb-1">
+<span class="font-bold text-primary">0 / 12</span>
+<span class="text-on-surface-variant">0%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 0%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-bold text-primary">89,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-surface-container-highest text-on-surface-variant border border-outline-variant/30">Entwurf</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">content_copy</span></button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Repeats for rows 4-10 (Simplified for code clarity) -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<img class="w-14 h-14 rounded-lg object-cover" data-alt="professional chef plating a delicate dessert with tweezers in a high-end restaurant kitchen with warm bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFNYycdnoiBcvLx51ZjDhseS4-tbYF05hUVqkGA30OQCT3zRe7QVnS4dfhbM52I23M1UE99QdOa8jNyB7yPSczHffZcdFsnZ4gbeQTyEw31-KPSG4wJT9KiK0QhV2Ahj91spueOKkOYh190xkxGOFL3EQjT7BQI-Dc5WexsiR3U_uTP6umKWmoFb0daIHC1vcpUABxMOko1iZTZWegecE6hXsOEzBgNKHYQMj-hkIdIJvFP9JCLa1taRYBxnt-0aZFq3kJhNorzYA"/>
+<div>
+<span class="block font-headline font-bold text-on-surface">Pâtisserie Grundlagen</span>
+<span class="text-xs text-on-surface-variant">ID: PAT-3321</span>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="block font-medium">25. Okt. 2024</span>
+<span class="text-sm text-on-surface-variant">14:00 - 18:00</span>
+</td>
+<td class="px-6 py-5">
+<div class="w-32">
+<div class="flex justify-between text-xs mb-1">
+<span class="font-bold text-primary">4 / 10</span>
+<span class="text-on-surface-variant">40%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 40%"></div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 font-bold text-primary">145,00 €</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-800 border border-green-200">Aktiv</span>
+</td>
+<td class="px-6 py-5 text-right">
+<div class="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">visibility</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">edit</span></button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined text-xl">content_copy</span></button>
+<button class="p-2 text-on-surface-variant hover:text-error transition-colors"><span class="material-symbols-outlined text-xl">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Row 5-10 filler -->
+<tr class="hover:bg-surface-container-low/30 transition-colors group opacity-80">
+<td class="px-6 py-5" colspan="6">
+<div class="flex items-center justify-center py-4 text-on-surface-variant italic font-medium">Weitere 6 Kurse werden geladen...</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<nav class="mt-10 flex items-center justify-between border-t border-outline-variant/20 pt-8">
+<p class="text-sm text-on-surface-variant">Anzeige von <span class="font-bold text-on-surface">1 - 10</span> von <span class="font-bold text-on-surface">42</span> Kursen</p>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant/30 hover:bg-surface-container-high transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-high transition-colors font-medium">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-high transition-colors font-medium">3</button>
+<span class="px-2">...</span>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-surface-container-high transition-colors font-medium">5</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant/30 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</nav>
+</main>
+<!-- Footer Shell -->
+<footer class="bg-[#fdfadf] dark:bg-[#1a1614] border-t border-[#5b0012]/5 dark:border-[#ffffff]/5 w-full py-8 mt-auto opacity-80 hover:opacity-100 transition-opacity">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-7xl mx-auto">
+<span class="text-[#5b0012]/50 dark:text-[#ffffff]/50 font-['Manrope'] text-sm tracking-wide">© 2024 menufaktur. Alle Rechte vorbehalten.</span>
+<div class="flex items-center gap-8 mt-4 md:mt-0">
+<a class="text-[#5b0012]/50 dark:text-[#ffffff]/50 font-['Manrope'] text-sm tracking-wide hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-colors" href="#">Dokumentation</a>
+<a class="text-[#5b0012]/50 dark:text-[#ffffff]/50 font-['Manrope'] text-sm tracking-wide hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-colors" href="#">Support</a>
+<a class="text-[#5b0012]/50 dark:text-[#ffffff]/50 font-['Manrope'] text-sm tracking-wide hover:text-[#5b0012] dark:hover:text-[#ffb3b4] underline decoration-1 underline-offset-4 transition-colors" href="#">Impressum</a>
+</div>
+</div>
+</footer>
+</body></html>

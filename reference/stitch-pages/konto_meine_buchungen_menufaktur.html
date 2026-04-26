@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;800&amp;family=Manrope:wght@300;400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline": "#8b7171",
+                        "surface-container-high": "#ece9cf",
+                        "on-primary-container": "#ff888c",
+                        "primary": "#5b0012",
+                        "on-tertiary-container": "#ff8b64",
+                        "tertiary": "#511400",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#ffb3b3",
+                        "secondary-container": "#ff6570",
+                        "surface-tint": "#a8353f",
+                        "on-background": "#1c1c0c",
+                        "surface-dim": "#dedbc1",
+                        "on-secondary-fixed-variant": "#8f0d26",
+                        "on-tertiary-fixed-variant": "#842600",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "surface-container-highest": "#e6e4c9",
+                        "on-secondary-container": "#680017",
+                        "secondary-fixed-dim": "#ffb3b4",
+                        "inverse-primary": "#ffb3b3",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#772100",
+                        "on-primary-fixed": "#40000a",
+                        "on-secondary-fixed": "#40000a",
+                        "surface-container-low": "#f8f5da",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#b02a3b",
+                        "on-surface": "#1c1c0c",
+                        "on-tertiary-fixed": "#390b00",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "surface": "#fdfadf",
+                        "surface-bright": "#fdfadf",
+                        "surface-variant": "#e6e4c9",
+                        "outline-variant": "#debfbf",
+                        "on-primary-fixed-variant": "#881c29",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#7e1423",
+                        "on-error-container": "#93000a",
+                        "background": "#fdfadf",
+                        "on-surface-variant": "#574141",
+                        "primary-fixed": "#ffdad9",
+                        "inverse-on-surface": "#f5f2d7",
+                        "secondary-fixed": "#ffdad9",
+                        "inverse-surface": "#323120",
+                        "tertiary-fixed": "#ffdbd0",
+                        "surface-container": "#f2efd4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Epilogue"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Epilogue', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen selection:bg-secondary/30">
+<!-- TopNavBar updated to match SCREEN_60 with requested colors -->
+<nav class="fixed top-0 w-full z-50 bg-[#7E1423] flex justify-between items-center px-12 py-6 w-full max-w-none">
+<div class="flex items-center">
+<div class="h-8 w-8 bg-[#FFFCE1] rounded-sm mr-3 flex-shrink-0"></div>
+<div class="text-2xl font-bold text-[#FFFCE1] font-headline tracking-tight">Menufaktur</div>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kurse</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Private Events</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Über uns</a>
+<a class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight" href="#">Kontakt</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-[#FFFCE1]/80 hover:text-[#FFFCE1] transition-opacity duration-300 font-headline font-bold tracking-tight">Anmelden</button>
+<button class="bg-[#b02a3b] text-white px-6 py-2 rounded-xl font-headline font-bold tracking-tight hover:opacity-90 transition-opacity duration-300 scale-95 duration-200">Kurs buchen</button>
+</div>
+</nav>
+<main class="pt-32 pb-20 max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+<aside class="md:col-span-1">
+<nav class="flex flex-col gap-4 p-6 bg-[#fdfadf] dark:bg-stone-950 font-manrope text-lg sticky top-32 rounded-xl">
+<div class="mb-8">
+<h3 class="text-[#5b0012] font-headline font-bold text-xl uppercase tracking-wider">Menufaktur</h3>
+<p class="text-on-surface-variant text-sm">Guten Tag, Genießer</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-3 text-[#5b0012] font-bold border-l-4 border-[#5b0012] bg-[#7e1423]/10 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+                Meine Buchungen
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#511400]/60 hover:bg-[#7e1423]/10 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+                Profil
+            </a>
+<div class="mt-8 pt-8 border-t border-outline-variant/15">
+<a class="flex items-center gap-3 px-4 py-3 text-[#511400]/60 hover:bg-[#7e1423]/5 rounded-xl transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                    Abmelden
+                </a>
+</div>
+</nav>
+</aside>
+<section class="md:col-span-3">
+<header class="mb-12">
+<h1 class="text-4xl font-bold text-primary font-headline mb-4">Meine Buchungen</h1>
+<p class="text-on-surface-variant max-w-2xl leading-relaxed">
+                Hier finden Sie eine Übersicht Ihrer reservierten Kocherlebnisse. Wir freuen uns darauf, Sie bald in unserer Küche begrüßen zu dürfen.
+            </p>
+</header>
+<div class="space-y-16">
+<div>
+<h2 class="text-xl font-bold text-primary-container font-headline mb-8 flex items-center gap-2">
+<span class="w-2 h-2 bg-secondary rounded-full"></span>
+                    Bevorstehende Kurse
+                </h2>
+<div class="bg-surface-container-lowest rounded-xl p-8 transition-all hover:shadow-xl hover:shadow-primary/5 group relative overflow-hidden">
+<div class="flex flex-col lg:flex-row gap-8 items-center">
+<div class="w-full lg:w-48 h-48 rounded-lg overflow-hidden flex-shrink-0">
+<img alt="Pasta Kurs" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="Handmade tagliatelle pasta nests on a wooden board sprinkled with flour in warm natural kitchen light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuApfUNVBpuB4MbKQ0pc2N1iDM-sB2T7u60xmU_-CRJrfSP5_iw9SZkd9wnXr-5v9Rv8dISAZGxnlktGEY8WEl5twinOrYYzaSPNvr2AIdYTrjwQDnvvs6NG6nZ2KoqeNhFor97-lPMRcb35lLpExr5OCy-cN_bwHy_CkSPsv9yFHbn82V7HiXHMoQBAGWP4KskRyC1ZqchZerymTec4pqk4m_AAplAx1qMjsW7lRPlKT0evXndon_3GRXD7jTHMGpRZxwmMk4fFkdSf"/>
+</div>
+<div class="flex-grow space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-bold text-on-background font-headline">Handgemachte Pasta &amp; Saucen</h3>
+<div class="flex items-center gap-4 mt-2 text-on-surface-variant font-medium">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="event">event</span>
+                                            14. November 2024
+                                        </span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+                                            18:00 - 22:00 Uhr
+                                        </span>
+</div>
+</div>
+<span class="px-4 py-1.5 bg-secondary/10 text-secondary font-bold rounded-full text-xs tracking-wider uppercase">Bezahlt</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pt-6 border-t border-outline-variant/10">
+<div class="text-2xl font-bold text-primary">218 €</div>
+<div class="flex gap-6 mt-4 sm:mt-0">
+<a class="text-primary-container font-semibold flex items-center gap-1 hover:underline transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="description">description</span>
+                                        Rechnung herunterladen
+                                    </a>
+<a class="text-primary-container font-semibold flex items-center gap-1 hover:underline transition-all" href="#">
+                                        Details ansehen
+                                    </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h2 class="text-xl font-bold text-on-surface-variant font-headline mb-8 flex items-center gap-2">
+<span class="w-2 h-2 bg-outline-variant rounded-full"></span>
+                    Vergangene Kurse
+                </h2>
+<div class="bg-surface-container-low rounded-xl p-8 opacity-90 hover:opacity-100 transition-all">
+<div class="flex flex-col lg:flex-row gap-8 items-center">
+<div class="w-full lg:w-48 h-48 rounded-lg overflow-hidden flex-shrink-0 grayscale-[0.3]">
+<img alt="Thai Street Food" class="w-full h-full object-cover" data-alt="Colorful Thai street food display with fresh herbs, chillies, and steaming noodles in an authentic outdoor setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB5dMh8HAFjEn3nIWfA3QYFCUNmGfrkLvNWeWrBNSPdWmICwZ80cfwS_Q2S9gPnpyNcm3BSKBnVxud1Cln59_2L4ZvHmtoYQKAbK3GHku8QH_D3ZJjkyy9lD6gpGA_vhkhaR_LZpdJEAY13vMNUJC1d7O7t0LhACQOVO2XSpNhnm_p1rexjKkO4_BjZQZ8qALbEkubG1Y923nLYwARll1rcHitpFs9dyIamyruEIzxWlTsv7eNLPIsJzYl4vZnlhB8Kh3dWg2yHRU-"/>
+</div>
+<div class="flex-grow space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-bold text-on-background/70 font-headline">Thai Street Food Klassiker</h3>
+<div class="flex items-center gap-4 mt-2 text-on-surface-variant font-medium">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+                                            2. September 2024
+                                        </span>
+</div>
+</div>
+<span class="px-4 py-1.5 bg-outline-variant/20 text-on-surface-variant font-bold rounded-full text-xs tracking-wider uppercase">Bezahlt</span>
+</div>
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pt-6 border-t border-outline-variant/10">
+<div class="text-2xl font-bold text-primary/60">189 €</div>
+<div class="flex gap-6 mt-4 sm:mt-0">
+<a class="text-primary-container/70 font-semibold flex items-center gap-1 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="description">description</span>
+                                        Rechnung
+                                    </a>
+<a class="text-primary-container/70 font-semibold flex items-center gap-1 hover:text-primary transition-all" href="#">
+                                        Details
+                                    </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer updated to match SCREEN_60 with detailed columns and Wine Red background -->
+<footer class="bg-[#7E1423] text-white font-manrope text-sm leading-relaxed tracking-wide mt-20">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-12 px-12 py-20 w-full max-w-7xl mx-auto">
+<!-- Brand & Contact -->
+<div class="space-y-6">
+<div class="flex items-center">
+<div class="h-7 w-7 bg-[#FFFCE1] rounded-sm mr-3 flex-shrink-0"></div>
+<div class="text-xl font-bold text-[#FFFCE1]">Menufaktur</div>
+</div>
+<div class="text-white/70 space-y-2">
+<p>Berger Straße 204</p>
+<p>60385 Frankfurt am Main</p>
+<p class="pt-4">Tel: +49 (0)69 1234567</p>
+<p>Email: info@menufaktur.de</p>
+</div>
+</div>
+<!-- Nav -->
+<div class="space-y-6">
+<h4 class="text-[#FFFCE1] font-bold uppercase tracking-widest text-xs">Menü</h4>
+<ul class="space-y-4">
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Kurse</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Private Events</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Gutscheine</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Über uns</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div class="space-y-6">
+<h4 class="text-[#FFFCE1] font-bold uppercase tracking-widest text-xs">Rechtliches</h4>
+<ul class="space-y-4">
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Impressum</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Datenschutz</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">AGB</a></li>
+<li><a class="text-white/70 hover:text-[#FFFCE1] transition-colors duration-300" href="#">Kontakt</a></li>
+</ul>
+</div>
+<!-- Socials -->
+<div class="space-y-6">
+<h4 class="text-[#FFFCE1] font-bold uppercase tracking-widest text-xs">Social Media</h4>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FFFCE1] hover:text-[#7E1423] transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a class="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center hover:bg-[#FFFCE1] hover:text-[#7E1423] transition-all" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-2.25c0-1.176.21-1.75 1.25-1.75h2.75v-4h-3.75c-3.518 0-5.25 1.838-5.25 4.5v3.5z"></path></svg>
+</a>
+</div>
+<p class="text-white/50 text-xs">Abonnieren Sie unseren Newsletter für aktuelle Termine.</p>
+</div>
+</div>
+<div class="px-12 py-8 border-t border-white/10 text-center text-white/40 text-xs">
+        © 2024 Menufaktur Culinary Atelier. Alle Rechte vorbehalten.
+    </div>
+</footer>
+</body></html>
