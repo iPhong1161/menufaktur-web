@@ -46,7 +46,7 @@ Most recent session at top.
 | Course detail (/kurse/[slug]) | ✅ | Hero, 2-col layout, includes, instructor, reviews, related courses |
 | About us (/ueber-uns) | ✅ | Hero, story 2-col, philosophy section, CTA |
 | Private events (/private-events) | ✅ | Hero, intro, loft section (60 Gäste badge), catering + private cooking, Konditionen CTA |
-| Contact (/kontakt) | ⬜ | kontakt_menufaktur_updated (canonical) |
+| Contact (/kontakt) | ✅ | Hero, form (ContactForm client component), info sidebar, map placeholder |
 | Impressum (/impressum) | ⬜ | impressum_menufaktur |
 | Datenschutz (/datenschutz) | ⬜ | datenschutzerkl_rung_menufaktur |
 | AGB (/agb) | ⬜ | agb_menufaktur |
