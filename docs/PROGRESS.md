@@ -85,16 +85,16 @@ Most recent session at top.
 
 | Task | Status | Notes |
 |---|---|---|
-| Admin login (/admin/login) | ⬜ | admin_login_menufaktur |
-| Admin dashboard (/admin/dashboard) | ⬜ | admin_dashboard_menufaktur |
-| Course list (/admin/kurse) | ⬜ | kursliste_admin_menufaktur |
-| Create course (/admin/kurse/neu) | ⬜ | kurs_erstellen_bearbeiten_admin_menufaktur_1/2 |
-| Edit course (/admin/kurse/[id]/bearbeiten) | ⬜ | Same as create |
-| Booking list (/admin/buchungen) | ⬜ | buchungsliste_admin_menufaktur |
-| Booking detail (/admin/buchungen/[id]) | ⬜ | buchungsdetails_admin_menufaktur |
-| Voucher list (/admin/gutscheine) | ⬜ | No wireframe — follow buchungsliste style |
-| Customer list (/admin/kunden) | ⬜ | kundenliste_admin_menufaktur |
-| Settings (/admin/einstellungen) | ⬜ | einstellungen_admin_menufaktur |
+| Admin login (/admin/login) | ✅ | admin_login_menufaktur |
+| Admin dashboard (/admin/dashboard) | ✅ | admin_dashboard_menufaktur |
+| Course list (/admin/kurse) | ✅ | kursliste_admin_menufaktur |
+| Create course (/admin/kurse/neu) | ✅ | kurs_erstellen_bearbeiten_admin_menufaktur_1/2 |
+| Edit course (/admin/kurse/[id]/bearbeiten) | ✅ | Same as create |
+| Booking list (/admin/buchungen) | ✅ | buchungsliste_admin_menufaktur |
+| Booking detail (/admin/buchungen/[id]) | ✅ | buchungsdetails_admin_menufaktur |
+| Voucher list (/admin/gutscheine) | ✅ | No wireframe — follow buchungsliste style |
+| Customer list (/admin/kunden) | ✅ | kundenliste_admin_menufaktur |
+| Settings (/admin/einstellungen) | ✅ | einstellungen_admin_menufaktur |
 
 ## Phase 8 — Backend integration
 
