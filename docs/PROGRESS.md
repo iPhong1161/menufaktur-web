@@ -8,6 +8,7 @@ Most recent session at top.
 
 | Date | Summary |
 |---|---|
+| 2026-04-27 | Auth pages (login, registrieren, passwort-zuruecksetzen). Customer account /konto with sidebar layout, booking history (/konto/buchungen), voucher history (/konto/gutscheine) |
 | 2026-04-27 | Voucher purchase page (/gutschein), VoucherModal (single-form: buyer data, value selector, quantity, legal), VoucherButton, confirmation page (/gutschein/bestaetigung/[id]) |
 | 2026-04-26 | Course detail page (/kurse/[slug]), full booking flow (4-step modal + confirmation page), ImagePlaceholder two-tier system, shared lib/data/courses.ts |
 | 2026-04-25 | Finished scaffold. Built global layout (Header, Footer). Built home page with CourseCard component. Course catalog (/kurse) with filters and pagination. Build passing. |
@@ -76,9 +77,9 @@ Most recent session at top.
 | Login (/login) | ✅ | anmelden_menufaktur |
 | Register (/registrieren) | ✅ | konto_erstellen_menufaktur |
 | Password reset (/passwort-zuruecksetzen) | ✅ | |
-| Customer account (/konto) | ⬜ | |
-| Booking history tab | ⬜ | konto_meine_buchungen_menufaktur |
-| Voucher history tab | ⬜ | konto_meine_gutscheine_menufaktur |
+| Customer account (/konto) | ✅ | Redirects to /konto/buchungen |
+| Booking history tab | ✅ | konto_meine_buchungen_menufaktur |
+| Voucher history tab | ✅ | konto_meine_gutscheine_menufaktur |
 
 ## Phase 7 — Admin
 
