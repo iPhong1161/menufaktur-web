@@ -73,9 +73,9 @@ Most recent session at top.
 
 | Task | Status | Notes |
 |---|---|---|
-| Login (/login) | ⬜ | anmelden_menufaktur |
-| Register (/registrieren) | ⬜ | konto_erstellen_menufaktur |
-| Password reset (/passwort-zuruecksetzen) | ⬜ | |
+| Login (/login) | ✅ | anmelden_menufaktur |
+| Register (/registrieren) | ✅ | konto_erstellen_menufaktur |
+| Password reset (/passwort-zuruecksetzen) | ✅ | |
 | Customer account (/konto) | ⬜ | |
 | Booking history tab | ⬜ | konto_meine_buchungen_menufaktur |
 | Voucher history tab | ⬜ | konto_meine_gutscheine_menufaktur |
