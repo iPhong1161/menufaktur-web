@@ -47,9 +47,9 @@ Most recent session at top.
 | About us (/ueber-uns) | ✅ | Hero, story 2-col, philosophy section, CTA |
 | Private events (/private-events) | ✅ | Hero, intro, loft section (60 Gäste badge), catering + private cooking, Konditionen CTA |
 | Contact (/kontakt) | ✅ | Hero, form (ContactForm client component), info sidebar, map placeholder |
-| Impressum (/impressum) | ⬜ | impressum_menufaktur |
-| Datenschutz (/datenschutz) | ⬜ | datenschutzerkl_rung_menufaktur |
-| AGB (/agb) | ⬜ | agb_menufaktur |
+| Impressum (/impressum) | ✅ | Hero, company info card, registry details, newsletter teaser |
+| Datenschutz (/datenschutz) | ✅ | Hero, sticky sidebar nav, 5 sections, GDPR rights grid, contact CTA |
+| AGB (/agb) | ✅ | Hero, intro, 8-section card grid (incl. full-width Gruppen + Rechtliches), newsletter teaser |
 
 ## Phase 4 — Booking flow
 
