@@ -45,7 +45,7 @@ Most recent session at top.
 | Course catalog (/kurse) | ✅ | Filters (price range, sort), 6-per-page pagination, 9 hardcoded courses |
 | Course detail (/kurse/[slug]) | ✅ | Hero, 2-col layout, includes, instructor, reviews, related courses |
 | About us (/ueber-uns) | ✅ | Hero, story 2-col, philosophy section, CTA |
-| Private events (/private-events) | ⬜ | private_events_menufaktur |
+| Private events (/private-events) | ✅ | Hero, intro, loft section (60 Gäste badge), catering + private cooking, Konditionen CTA |
 | Contact (/kontakt) | ⬜ | kontakt_menufaktur_updated (canonical) |
 | Impressum (/impressum) | ⬜ | impressum_menufaktur |
 | Datenschutz (/datenschutz) | ⬜ | datenschutzerkl_rung_menufaktur |
