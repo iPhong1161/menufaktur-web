@@ -8,7 +8,9 @@ Most recent session at top.
 
 | Date | Summary |
 |---|---|
-| 2026-04-25 | Finished scaffold. Built global layout (Header, Footer). Built home page with CourseCard component. Build passing. |
+| 2026-04-27 | Voucher purchase page (/gutschein), VoucherModal (single-form: buyer data, value selector, quantity, legal), VoucherButton, confirmation page (/gutschein/bestaetigung/[id]) |
+| 2026-04-26 | Course detail page (/kurse/[slug]), full booking flow (4-step modal + confirmation page), ImagePlaceholder two-tier system, shared lib/data/courses.ts |
+| 2026-04-25 | Finished scaffold. Built global layout (Header, Footer). Built home page with CourseCard component. Course catalog (/kurse) with filters and pagination. Build passing. |
 | 2026-04-24 | Project set up: docs created, Next.js 15 scaffolded, Tailwind v4 brand colors, shadcn/ui, Sentry, Roboto fonts, globals.css, layout.tsx |
 
 ---
@@ -40,9 +42,9 @@ Most recent session at top.
 | Task | Status | Notes |
 |---|---|---|
 | Home page (/) | ✅ | Hero, Intro, Courses, Features, Testimonial, Voucher CTA |
-| Course catalog (/kurse) | ⬜ | kurse_menufaktur |
-| Course detail (/kurse/[slug]) | ⬜ | kursdetails_menufaktur |
-| About us (/ueber-uns) | ⬜ | ber_uns_menufaktur |
+| Course catalog (/kurse) | ✅ | Filters (price range, sort), 6-per-page pagination, 9 hardcoded courses |
+| Course detail (/kurse/[slug]) | ✅ | Hero, 2-col layout, includes, instructor, reviews, related courses |
+| About us (/ueber-uns) | ✅ | Hero, story 2-col, philosophy section, CTA |
 | Private events (/private-events) | ⬜ | private_events_menufaktur |
 | Contact (/kontakt) | ⬜ | kontakt_menufaktur_updated (canonical) |
 | Impressum (/impressum) | ⬜ | impressum_menufaktur |
@@ -53,19 +55,19 @@ Most recent session at top.
 
 | Task | Status | Notes |
 |---|---|---|
-| Booking modal wrapper | ⬜ | Triggered from course detail |
-| Step 1 — Teilnehmerzahl | ⬜ | step_1_teilnehmerzahl |
-| Step 2 — Teilnehmerdaten | ⬜ | step_2_teilnehmerdaten |
-| Step 3 — Rechnungsempfänger | ⬜ | step_3_rechnungsempf_nger |
-| Step 4 — Übersicht & Bestätigung | ⬜ | step_4_bersicht_best_tigung |
-| Step 5 — Bestätigungsseite | ⬜ | step_5_best_tigung_uniform |
+| Booking modal wrapper | ✅ | BookingModal.tsx + BookingButton.tsx; triggered from course detail |
+| Step 1 — Teilnehmerzahl | ✅ | Counter 1–capacity, price preview |
+| Step 2 — Teilnehmerdaten | ✅ | P1: name/email/phone/diet; others: name/diet; inline validation |
+| Step 3 — Rechnungsempfänger | ✅ | Radio: Teilnehmer 1 or custom address form with B2B toggle |
+| Step 4 — Übersicht & Bestätigung | ✅ | Sidebar, review sections, voucher (TEST123=−30€), AGB gate, console.log submit |
+| Step 5 — Bestätigungsseite | ✅ | /buchung/bestaetigung/[id] — booking summary card + info section |
 
 ## Phase 5 — Voucher
 
 | Task | Status | Notes |
 |---|---|---|
-| Voucher purchase page (/gutschein) | ⬜ | gutscheine_kauf_modal_menufaktur_1/2 |
-| Voucher confirmation page | ⬜ | |
+| Voucher purchase page (/gutschein) | ✅ | Hero, redeem info, buy section, VoucherModal, contact teaser |
+| Voucher confirmation page | ✅ | /gutschein/bestaetigung/[id] — order summary card + info section |
 
 ## Phase 6 — Auth & account
 
