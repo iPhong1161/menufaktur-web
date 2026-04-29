@@ -2,42 +2,17 @@ import Link from "next/link"
 import { ChefHat, Award, Users, ChevronRight } from "lucide-react"
 import { CourseCard } from "@/components/course/CourseCard"
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
+import { getCourses } from "@/lib/supabase/queries/courses"
 
-const FEATURED_COURSES = [
-  {
-    id: "1",
-    title: "Handgemachte Pasta & Saucen",
-    date: "14. Juni 2026",
-    startTime: "18:00",
-    endTime: "22:30",
-    location: "Frankfurt-Bornheim",
-    price: 129,
-    slug: "handgemachte-pasta-saucen",
-    remainingCapacity: 3,
-  },
-  {
-    id: "2",
-    title: "Die Kunst des perfekten Steaks",
-    date: "20. Juni 2026",
-    startTime: "17:30",
-    endTime: "22:00",
-    location: "Frankfurt-Bornheim",
-    price: 145,
-    slug: "kunst-des-perfekten-steaks",
-    remainingCapacity: 1,
-  },
-  {
-    id: "3",
-    title: "Thai-Küche: Aromen Bangkoks",
-    date: "27. Juni 2026",
-    startTime: "18:30",
-    endTime: "22:30",
-    location: "Frankfurt-Bornheim",
-    price: 115,
-    slug: "thai-kueche-aromen-bangkoks",
-    remainingCapacity: 6,
-  },
+const GERMAN_MONTHS = [
+  "Januar", "Februar", "März", "April", "Mai", "Juni",
+  "Juli", "August", "September", "Oktober", "November", "Dezember",
 ]
+
+function formatDate(iso: string): string {
+  const [year, month, day] = iso.split("-").map(Number)
+  return `${day}. ${GERMAN_MONTHS[month - 1]} ${year}`
+}
 
 const FEATURES = [
   {
@@ -57,7 +32,9 @@ const FEATURES = [
   },
 ]
 
-export default function HomePage() {
+export default async function HomePage() {
+  const allCourses = await getCourses()
+  const featuredCourses = allCourses.slice(0, 3)
   return (
     <>
       {/* Hero */}
@@ -143,11 +120,30 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {FEATURED_COURSES.map((course) => (
-              <CourseCard key={course.id} {...course} />
-            ))}
-          </div>
+          {featuredCourses.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-dark/40 font-condensed">
+                Neue Termine werden in Kürze bekannt gegeben.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {featuredCourses.map((course) => (
+                <CourseCard
+                  key={course.id}
+                  title={course.title}
+                  date={formatDate(course.date)}
+                  startTime={course.start_time.slice(0, 5)}
+                  endTime={course.end_time.slice(0, 5)}
+                  location={course.location}
+                  price={Number(course.price_per_person)}
+                  slug={course.slug}
+                  remainingCapacity={course.remaining_capacity}
+                  photoUrl={course.photo_url}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

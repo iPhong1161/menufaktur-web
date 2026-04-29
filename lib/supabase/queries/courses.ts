@@ -1,0 +1,95 @@
+import { createClient } from "@/lib/supabase/server"
+import type { Database } from "@/types/database"
+
+type CourseRow = Database["public"]["Tables"]["courses"]["Row"]
+
+export interface CourseWithCapacity extends CourseRow {
+  booked_count: number
+  remaining_capacity: number
+}
+
+export async function getCourses(): Promise<CourseWithCapacity[]> {
+  const supabase = await createClient()
+
+  const { data: courses, error } = await supabase
+    .from("courses")
+    .select("*")
+    .eq("status", "published")
+    .gte("date", new Date().toISOString().split("T")[0])
+    .order("date", { ascending: true })
+
+  if (error || !courses) return []
+
+  // Fetch booked counts for all returned courses in one query
+  const courseIds = courses.map((c) => c.id)
+  const { data: bookingCounts } = await supabase
+    .from("bookings")
+    .select("course_id")
+    .in("course_id", courseIds)
+    .in("status", ["pending", "confirmed"])
+
+  const countMap: Record<string, number> = {}
+  for (const row of bookingCounts ?? []) {
+    countMap[row.course_id] = (countMap[row.course_id] ?? 0) + 1
+  }
+
+  return courses.map((c) => ({
+    ...c,
+    booked_count: countMap[c.id] ?? 0,
+    remaining_capacity: c.capacity - (countMap[c.id] ?? 0),
+  }))
+}
+
+export async function getCourseBySlug(
+  slug: string
+): Promise<CourseWithCapacity | null> {
+  const supabase = await createClient()
+
+  const { data: course, error } = await supabase
+    .from("courses")
+    .select("*")
+    .eq("slug", slug)
+    .eq("status", "published")
+    .single()
+
+  if (error || !course) return null
+
+  const { count } = await supabase
+    .from("bookings")
+    .select("*", { count: "exact", head: true })
+    .eq("course_id", course.id)
+    .in("status", ["pending", "confirmed"])
+
+  return {
+    ...course,
+    booked_count: count ?? 0,
+    remaining_capacity: course.capacity - (count ?? 0),
+  }
+}
+
+export async function getCourseById(
+  id: string
+): Promise<CourseWithCapacity | null> {
+  const supabase = await createClient()
+
+  const { data: course, error } = await supabase
+    .from("courses")
+    .select("*")
+    .eq("id", id)
+    .eq("status", "published")
+    .single()
+
+  if (error || !course) return null
+
+  const { count } = await supabase
+    .from("bookings")
+    .select("*", { count: "exact", head: true })
+    .eq("course_id", course.id)
+    .in("status", ["pending", "confirmed"])
+
+  return {
+    ...course,
+    booked_count: count ?? 0,
+    remaining_capacity: course.capacity - (count ?? 0),
+  }
+}

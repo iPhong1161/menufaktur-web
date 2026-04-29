@@ -4,19 +4,27 @@ import { useState } from "react"
 import Link from "next/link"
 import { CheckCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { createClient } from "@/lib/supabase/client"
 
 export default function PasswortZuruecksetzenPage() {
   const [email, setEmail] = useState("")
   const [error, setError] = useState("")
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
 
-  function handleSubmit(ev: React.FormEvent) {
+  async function handleSubmit(ev: React.FormEvent) {
     ev.preventDefault()
     setSubmitted(true)
     if (!email.trim()) { setError("Pflichtfeld"); return }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("Ungültige E-Mail-Adresse"); return }
-    console.log("[PasswordReset] Requested for:", email)
+
+    setLoading(true)
+    const supabase = createClient()
+    await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/konto/passwort-aendern`,
+    })
+    // Always show success to avoid email enumeration
     setSuccess(true)
   }
 
@@ -75,9 +83,10 @@ export default function PasswortZuruecksetzenPage() {
 
                   <button
                     type="submit"
-                    className="w-full py-4 bg-wine-red hover:bg-garnet-red text-white font-bold rounded-xl transition-colors duration-200 active:scale-95"
+                    disabled={loading}
+                    className="w-full py-4 bg-wine-red hover:bg-garnet-red text-white font-bold rounded-xl transition-colors duration-200 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    Link anfordern
+                    {loading ? "Wird gesendet…" : "Link anfordern"}
                   </button>
                 </form>
 

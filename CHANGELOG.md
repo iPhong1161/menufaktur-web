@@ -7,8 +7,35 @@ All notable changes to this project. Format: [Keep a Changelog](https://keepacha
 ## [Unreleased]
 
 ### Next up
-- Course catalog page (/kurse)
-- Course detail page (/kurse/[slug])
+- API routes (POST /api/bookings, POST /api/vouchers)
+- Stripe Checkout integration
+- Resend transactional emails
+
+---
+
+## [0.3.0] — 2026-04-29
+
+### Added
+- `@supabase/supabase-js` and `@supabase/ssr` installed
+- `lib/supabase/client.ts` — browser client with `Database` generic
+- `lib/supabase/server.ts` — server client (anon) + service-role client, cookie-based session via `next/headers`
+- `.env.local` with real Supabase project credentials
+- `types/database.ts` — full typed schema for all 6 tables (`courses`, `bookings`, `participants`, `invoice_recipients`, `vouchers`, `profiles`) with correct `Relationships: []` fields required by `@supabase/postgrest-js`
+- `supabase/migrations/20260429000000_initial_schema.sql` — table definitions, `handle_new_user()` trigger, `booking_number_seq` sequence and `next_booking_number()` function (vouchers defined before bookings to satisfy FK)
+- `supabase/migrations/20260429000001_rls_policies.sql` — all RLS policies in a separate file as requested
+- `middleware.ts` — session refresh on every request; `/konto/*` → `/login?redirect=...` when unauthenticated; `/admin/*` → `/admin/login` when unauthenticated
+- `lib/supabase/queries/courses.ts` — `getCourses()`, `getCourseBySlug()`, `getCourseById()`
+- `lib/supabase/queries/bookings.ts` — `createBooking()`, `getBookingByNumber()`, `getUserBookings()`
+- `lib/supabase/queries/vouchers.ts` — `createVoucherOrder()` (MF-XX-XX-X codes, 3-year expiry), `getUserVouchers()`, `validateVoucherCode()`
+- `lib/supabase/queries/profiles.ts` — `getProfile()`, `upsertProfile()`
+
+### Changed
+- `/kurse/page.tsx` — replaced hardcoded `COURSES` array with `getCourses()` from Supabase; graceful empty state when no published courses exist
+- `/kurse/[slug]/page.tsx` — replaced hardcoded lookup with `getCourseBySlug()`; related courses fetched from DB; removed `generateStaticParams` (fully dynamic); German date/time formatting + duration calculation inline
+- `app/(public)/page.tsx` — featured courses section fetches first 3 upcoming published courses from Supabase; empty state message when none available
+- `app/(public)/login/page.tsx` — wired to `supabase.auth.signInWithPassword`; reads `?redirect=` param; wrapped in `<Suspense>` for Next.js 15 compatibility
+- `app/(public)/registrieren/page.tsx` — wired to `supabase.auth.signUp` with `first_name`/`last_name` metadata; loading state; form-level error display
+- `app/(public)/passwort-zuruecksetzen/page.tsx` — wired to `supabase.auth.resetPasswordForEmail`; always shows success to prevent email enumeration
 
 ---
 

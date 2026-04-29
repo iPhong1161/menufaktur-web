@@ -1,16 +1,21 @@
 "use client"
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { createClient } from "@/lib/supabase/client"
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const redirect = searchParams.get("redirect") ?? "/konto/buchungen"
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({})
+  const [errors, setErrors] = useState<{ email?: string; password?: string; form?: string }>({})
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   function validate() {
     const e: typeof errors = {}
@@ -20,14 +25,25 @@ export default function LoginPage() {
     return e
   }
 
-  function handleSubmit(ev: React.FormEvent) {
+  async function handleSubmit(ev: React.FormEvent) {
     ev.preventDefault()
     setSubmitted(true)
     const errs = validate()
     setErrors(errs)
     if (Object.keys(errs).length > 0) return
-    console.log("[Login] Submit:", { email })
-    router.push("/konto")
+
+    setLoading(true)
+    const supabase = createClient()
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
+
+    if (error) {
+      setErrors({ form: "E-Mail oder Passwort ist falsch." })
+      setLoading(false)
+      return
+    }
+
+    router.push(redirect)
+    router.refresh()
   }
 
   const inputClass = (field: "email" | "password") =>
@@ -40,7 +56,6 @@ export default function LoginPage() {
     <div className="bg-light-beige min-h-screen flex flex-col">
       <main className="flex-grow flex items-center justify-center px-4 pt-32 pb-20">
         <div className="w-full max-w-[480px]">
-          {/* Card */}
           <div className="bg-white rounded-xl p-10 shadow-[0_32px_64px_-12px_rgba(91,0,18,0.08)] border border-dark/5">
             <div className="text-center mb-10">
               <h1 className="text-4xl font-bold text-wine-red tracking-tight mb-2">
@@ -50,6 +65,12 @@ export default function LoginPage() {
                 Willkommen zurück in der menufaktur.
               </p>
             </div>
+
+            {errors.form && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-600 text-sm font-condensed">{errors.form}</p>
+              </div>
+            )}
 
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div>
@@ -63,10 +84,9 @@ export default function LoginPage() {
                   placeholder="Geben Sie Ihre E-Mail ein"
                   className={inputClass("email")}
                   autoComplete="email"
+                  disabled={loading}
                 />
-                {submitted && errors.email && (
-                  <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-                )}
+                {submitted && errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
               </div>
 
               <div>
@@ -74,10 +94,7 @@ export default function LoginPage() {
                   <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40">
                     Passwort
                   </label>
-                  <Link
-                    href="/passwort-zuruecksetzen"
-                    className="text-xs font-bold text-wine-red hover:underline underline-offset-4"
-                  >
+                  <Link href="/passwort-zuruecksetzen" className="text-xs font-bold text-wine-red hover:underline underline-offset-4">
                     Passwort vergessen?
                   </Link>
                 </div>
@@ -88,18 +105,18 @@ export default function LoginPage() {
                   placeholder="Ihr Passwort"
                   className={inputClass("password")}
                   autoComplete="current-password"
+                  disabled={loading}
                 />
-                {submitted && errors.password && (
-                  <p className="text-red-500 text-xs mt-1">{errors.password}</p>
-                )}
+                {submitted && errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-4 bg-wine-red hover:bg-garnet-red text-white font-bold rounded-xl transition-colors duration-200 shadow-lg active:scale-95"
+                  disabled={loading}
+                  className="w-full py-4 bg-wine-red hover:bg-garnet-red text-white font-bold rounded-xl transition-colors duration-200 shadow-lg active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Anmelden
+                  {loading ? "Anmelden…" : "Anmelden"}
                 </button>
               </div>
             </form>
@@ -116,10 +133,7 @@ export default function LoginPage() {
             <div className="text-center">
               <p className="text-dark/50 font-condensed text-sm">
                 Noch kein Konto?{" "}
-                <Link
-                  href="/registrieren"
-                  className="text-wine-red font-bold hover:underline underline-offset-4 ml-1"
-                >
+                <Link href="/registrieren" className="text-wine-red font-bold hover:underline underline-offset-4 ml-1">
                   Jetzt registrieren
                 </Link>
               </p>
@@ -135,5 +149,13 @@ export default function LoginPage() {
         </div>
       </main>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   )
 }

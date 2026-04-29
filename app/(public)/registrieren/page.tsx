@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { createClient } from "@/lib/supabase/client"
 
 interface FormData {
   firstName: string
@@ -31,6 +32,8 @@ export default function RegistrierenPage() {
   })
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [formError, setFormError] = useState("")
 
   function validate(): FieldErrors {
     const e: FieldErrors = {}
@@ -50,14 +53,39 @@ export default function RegistrierenPage() {
     return e
   }
 
-  function handleSubmit(ev: React.FormEvent) {
+  async function handleSubmit(ev: React.FormEvent) {
     ev.preventDefault()
     setSubmitted(true)
+    setFormError("")
     const errs = validate()
     setErrors(errs)
     if (Object.keys(errs).length > 0) return
-    console.log("[Register] Submit:", { ...form, password: "***" })
-    router.push("/konto")
+
+    setLoading(true)
+    const supabase = createClient()
+    const { error } = await supabase.auth.signUp({
+      email: form.email,
+      password: form.password,
+      options: {
+        data: {
+          first_name: form.firstName,
+          last_name: form.lastName,
+        },
+      },
+    })
+
+    if (error) {
+      setFormError(
+        error.message.includes("already registered")
+          ? "Diese E-Mail-Adresse ist bereits registriert."
+          : "Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut."
+      )
+      setLoading(false)
+      return
+    }
+
+    router.push("/konto/buchungen")
+    router.refresh()
   }
 
   function set(field: keyof FormData, value: string | boolean) {
@@ -89,6 +117,11 @@ export default function RegistrierenPage() {
 
           {/* Form card */}
           <div className="bg-white rounded-xl p-8 md:p-12 shadow-[0_32px_64px_-12px_rgba(91,0,18,0.08)] border border-dark/5">
+            {formError && (
+              <div className="mb-5 p-4 bg-red-50 border border-red-200 rounded-lg">
+                <p className="text-red-600 text-sm font-condensed">{formError}</p>
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
               {/* Name */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -188,9 +221,12 @@ export default function RegistrierenPage() {
               </div>
 
               <div className="pt-4">
-                <button type="submit"
-                  className="w-full bg-wine-red hover:bg-garnet-red text-white font-bold py-4 rounded-xl transition-colors duration-200 active:scale-95 shadow-lg">
-                  Konto erstellen
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-full bg-wine-red hover:bg-garnet-red text-white font-bold py-4 rounded-xl transition-colors duration-200 active:scale-95 shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {loading ? "Konto wird erstellt…" : "Konto erstellen"}
                 </button>
               </div>
             </form>

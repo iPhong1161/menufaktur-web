@@ -100,13 +100,28 @@ Most recent session at top.
 
 | Task | Status | Notes |
 |---|---|---|
-| Supabase client setup | ⬜ | Deferred |
-| Supabase schema migration | ⬜ | Deferred |
-| API routes (courses, bookings, vouchers) | ⬜ | Deferred |
+| Supabase packages installed | ✅ | @supabase/supabase-js + @supabase/ssr |
+| Supabase browser client | ✅ | lib/supabase/client.ts |
+| Supabase server client | ✅ | lib/supabase/server.ts (anon + service-role) |
+| .env.local with real credentials | ✅ | Project URL + publishable + secret keys |
+| TypeScript database types | ✅ | types/database.ts — all 6 tables with Relationships |
+| Initial schema migration | ✅ | supabase/migrations/20260429000000_initial_schema.sql |
+| RLS policies migration | ✅ | supabase/migrations/20260429000001_rls_policies.sql |
+| Next.js middleware | ✅ | Session refresh + /konto/* + /admin/* auth guards |
+| Query module: courses | ✅ | getCourses(), getCourseBySlug(), getCourseById() |
+| Query module: bookings | ✅ | createBooking(), getBookingByNumber(), getUserBookings() |
+| Query module: vouchers | ✅ | createVoucherOrder(), getUserVouchers(), validateVoucherCode() |
+| Query module: profiles | ✅ | getProfile(), upsertProfile() |
+| /kurse page — real data | ✅ | Fetches from Supabase, empty state if no courses |
+| /kurse/[slug] page — real data | ✅ | getCourseBySlug(), related courses from DB |
+| / home page — featured courses | ✅ | First 3 upcoming published courses from DB |
+| Login page — Supabase auth | ✅ | signInWithPassword, redirect param, Suspense wrapper |
+| Register page — Supabase auth | ✅ | signUp with first_name/last_name metadata |
+| Password reset page — Supabase auth | ✅ | resetPasswordForEmail, anti-enumeration pattern |
+| API routes (courses, bookings, vouchers) | ⬜ | Next up |
 | Stripe Checkout integration | ⬜ | Deferred |
 | Stripe webhook handler | ⬜ | Deferred |
 | Resend transactional emails | ⬜ | Deferred |
-| RLS policies | ⬜ | Deferred |
 | Admin auth guard | ⬜ | Deferred |
 
 ---
