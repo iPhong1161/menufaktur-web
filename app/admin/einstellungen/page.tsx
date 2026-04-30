@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { User, Lock, Bell, Settings, Camera, Save, ShieldCheck } from "lucide-react"
-import { AdminHeader } from "@/components/admin/AdminHeader"
 import { cn } from "@/lib/utils"
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 
@@ -21,8 +20,6 @@ export default function AdminEinstellungenPage() {
   const [tab, setTab] = useState<Tab>("profil")
 
   return (
-    <div className="bg-[#fdfadf] min-h-screen flex flex-col">
-      <AdminHeader />
       <main className="flex-grow pt-32 pb-20 px-8 max-w-screen-xl mx-auto w-full">
         <div className="mb-12">
           <h1 className="text-5xl font-bold text-wine-red tracking-tight mb-1">Einstellungen</h1>
@@ -180,9 +177,5 @@ export default function AdminEinstellungenPage() {
           </div>
         </div>
       </main>
-      <footer className="py-6 border-t border-wine-red/5 text-center">
-        <p className="text-[10px] text-dark/30 tracking-widest uppercase font-condensed">© 2026 menufaktur · Admin</p>
-      </footer>
-    </div>
   )
 }

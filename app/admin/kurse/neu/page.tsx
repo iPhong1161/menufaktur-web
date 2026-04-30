@@ -3,7 +3,6 @@
 import { useState } from "react"
 import Link from "next/link"
 import { ChevronRight, Eye, ImagePlus, Save } from "lucide-react"
-import { AdminHeader } from "@/components/admin/AdminHeader"
 
 export default function AdminKursNeuPage() {
   const [status, setStatus] = useState<"draft" | "publish">("draft")
@@ -12,8 +11,6 @@ export default function AdminKursNeuPage() {
   const labelClass = "block text-[10px] font-bold uppercase tracking-widest text-wine-red/70 mb-2"
 
   return (
-    <div className="bg-[#fdfadf] min-h-screen flex flex-col">
-      <AdminHeader />
       <main className="flex-grow pt-20 pb-24">
         <div className="max-w-screen-xl mx-auto px-8 pt-8">
           {/* Breadcrumb */}
@@ -161,9 +158,5 @@ export default function AdminKursNeuPage() {
           </div>
         </div>
       </main>
-      <footer className="py-6 border-t border-wine-red/5 text-center">
-        <p className="text-[10px] text-dark/30 tracking-widest uppercase font-condensed">© 2026 menufaktur · Admin</p>
-      </footer>
-    </div>
   )
 }

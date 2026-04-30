@@ -36,7 +36,7 @@ Most recent session at top.
 | Header component | ✅ | Fixed, Wine Red, text logo placeholder, mobile menu |
 | Footer component | ✅ | 4-col: brand, menu, legal, social |
 | Public route group layout | ✅ | app/(public)/layout.tsx |
-| Admin layout | ⬜ | Will build with admin pages |
+| Admin layout | ✅ | AdminHeader + footer + auth check in layout; all 9 pages cleaned |
 
 ## Phase 3 — Public site
 
