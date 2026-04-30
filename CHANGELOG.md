@@ -6,8 +6,15 @@ All notable changes to this project. Format: [Keep a Changelog](https://keepacha
 
 ## [Unreleased]
 
+### Added
+- `app/api/bookings/route.ts` — POST endpoint: maps modal payload to `CreateBookingPayload`, calls `createBooking()`, returns `{ booking_number, id }`; authenticated user attached if session present, otherwise anonymous booking with `user_id = null`
+- Booking confirmation page (`/buchung/bestaetigung/[id]`) — fetches real booking via `getBookingByNumber(id)`; displays course title, date/time, participant count (from `?count=` param), total amount; graceful "not found" state
+
+### Changed
+- `BookingModal.handleSubmit()` — wired to `POST /api/bookings`; loading state disables submit button and shows "Wird gesendet…"; error message shown inline on failure; redirects to `/buchung/bestaetigung/${booking_number}?count=${count}` on success
+
 ### Next up
-- API routes (POST /api/bookings, POST /api/vouchers)
+- POST /api/vouchers
 - Stripe Checkout integration
 - Resend transactional emails
 

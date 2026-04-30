@@ -118,7 +118,7 @@ Most recent session at top.
 | Login page — Supabase auth | ✅ | signInWithPassword, redirect param, Suspense wrapper |
 | Register page — Supabase auth | ✅ | signUp with first_name/last_name metadata |
 | Password reset page — Supabase auth | ✅ | resetPasswordForEmail, anti-enumeration pattern |
-| API routes (courses, bookings, vouchers) | ⬜ | Next up |
+| API routes (courses, bookings, vouchers) | ✅ | POST /api/bookings complete |
 | Stripe Checkout integration | ⬜ | Deferred |
 | Stripe webhook handler | ⬜ | Deferred |
 | Resend transactional emails | ⬜ | Deferred |
