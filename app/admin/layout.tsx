@@ -1,14 +1,34 @@
+import { headers } from "next/headers"
+import { redirect } from "next/navigation"
 import { AdminHeader } from "@/components/admin/AdminHeader"
-import { createClient } from "@/lib/supabase/server"
+import { createClient, createServiceClient } from "@/lib/supabase/server"
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const pathname = (await headers()).get("x-pathname") ?? ""
+
+  // The login page is intentionally unprotected — skip all auth checks to
+  // avoid a redirect loop (middleware skips /admin/login; the layout must too)
+  if (pathname === "/admin/login") {
+    return <>{children}</>
+  }
+
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Unauthenticated: render bare (middleware handles the /admin/login redirect;
-  // this path is only hit by the login page itself)
   if (!user) {
     return <>{children}</>
+  }
+
+  // Verify this authenticated user is a designated admin
+  const serviceClient = await createServiceClient()
+  const { data: adminRecord } = await serviceClient
+    .from("admin_users" as any)
+    .select("id")
+    .eq("user_id", user.id)
+    .single()
+
+  if (!adminRecord) {
+    redirect("/admin/login?unauthorised=1")
   }
 
   return (

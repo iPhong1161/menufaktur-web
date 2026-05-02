@@ -20,10 +20,9 @@ All reusable components. Update this file whenever a new component is created or
 
 | Component | Path | Status | Description |
 |---|---|---|---|
-| CourseCard | `components/course/CourseCard.tsx` | ✅ | Card with photo placeholder, capacity badge, date/time/location, price |
-| CourseGrid | `components/course/CourseGrid.tsx` | ⬜ | Responsive grid of CourseCards |
-| CourseBadge | `components/course/CourseBadge.tsx` | ⬜ | Status/availability badge |
-| CourseDetail | `components/course/CourseDetail.tsx` | ⬜ | Full course detail layout |
+| CourseCard | `components/course/CourseCard.tsx` | ✅ | Home page card — white bg, capacity badge, photo_url / ImagePlaceholder |
+| CatalogCourseCard | `components/course/CatalogCourseCard.tsx` | ✅ | Catalog grid card — no bg, aspect-[4/3] image, sold-out state |
+| CourseFiltersAndGrid | `components/course/CourseFiltersAndGrid.tsx` | ✅ | Client component: price slider, sort select, 6-per-page pagination |
 
 ---
 
@@ -31,17 +30,8 @@ All reusable components. Update this file whenever a new component is created or
 
 | Component | Path | Status | Description |
 |---|---|---|---|
-| BookingModal | `components/booking/BookingModal.tsx` | ⬜ | Modal overlay wrapper for booking flow |
-| BookingStep1 | `components/booking/BookingStep1.tsx` | ⬜ | Participant count selector |
-| BookingStep2 | `components/booking/BookingStep2.tsx` | ⬜ | Participant data forms |
-| BookingStep3 | `components/booking/BookingStep3.tsx` | ⬜ | Invoice recipient form |
-| BookingStep4 | `components/booking/BookingStep4.tsx` | ⬜ | Summary, voucher, confirmation |
-| BookingConfirmation | `components/booking/BookingConfirmation.tsx` | ⬜ | Post-booking confirmation page |
-| ParticipantForm | `components/booking/ParticipantForm.tsx` | ⬜ | Single participant card form |
-| FoodPreferenceChips | `components/booking/FoodPreferenceChips.tsx` | ⬜ | Multi-select food preference chips |
-| VoucherInput | `components/booking/VoucherInput.tsx` | ⬜ | Voucher code entry + validation |
-| PriceBreakdown | `components/booking/PriceBreakdown.tsx` | ⬜ | Price breakdown table (participants × price, VAT, total) |
-| StepIndicator | `components/booking/StepIndicator.tsx` | ⬜ | Step progress bar (Steps 1–4) |
+| BookingModal | `components/booking/BookingModal.tsx` | ✅ | 4-step modal: participant count → participant data → invoice recipient → overview + submit. Hardcoded data; console.log on submit. Voucher: TEST123 = −30 €. |
+| BookingButton | `components/booking/BookingButton.tsx` | ✅ | Client wrapper that renders the "Jetzt buchen" button and mounts BookingModal |
 
 ---
 
@@ -49,9 +39,8 @@ All reusable components. Update this file whenever a new component is created or
 
 | Component | Path | Status | Description |
 |---|---|---|---|
-| VoucherPurchaseForm | `components/voucher/VoucherPurchaseForm.tsx` | ⬜ | Full voucher purchase flow |
-| VoucherValueSelector | `components/voucher/VoucherValueSelector.tsx` | ⬜ | Preset + custom amount selector |
-| VoucherDeliveryForm | `components/voucher/VoucherDeliveryForm.tsx` | ⬜ | Delivery method + address form |
+| VoucherModal | `components/voucher/VoucherModal.tsx` | ✅ | Single-form modal: buyer/billing data, value pill selector (9 presets), quantity dropdown, legal (AGB required, postal delivery toggle, newsletter). console.log + route to /gutschein/bestaetigung/[id] on submit. |
+| VoucherButton | `components/voucher/VoucherButton.tsx` | ✅ | Client wrapper: "Gutschein jetzt kaufen" button + mounts VoucherModal |
 
 ---
 

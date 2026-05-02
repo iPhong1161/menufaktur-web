@@ -2,7 +2,11 @@ import { createServerClient } from "@supabase/ssr"
 import { NextResponse, type NextRequest } from "next/server"
 
 export async function middleware(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request })
+  // Forward pathname to server components via request headers
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set("x-pathname", request.nextUrl.pathname)
+
+  let supabaseResponse = NextResponse.next({ request: { headers: requestHeaders } })
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -16,7 +20,8 @@ export async function middleware(request: NextRequest) {
           cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           )
-          supabaseResponse = NextResponse.next({ request })
+          // Preserve x-pathname when Supabase refreshes the response
+          supabaseResponse = NextResponse.next({ request: { headers: requestHeaders } })
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
           )
@@ -36,15 +41,37 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url)
   }
 
-  // Redirect /admin/* (except /admin/login) to /admin/login if unauthenticated
-  if (
-    !user &&
-    request.nextUrl.pathname.startsWith("/admin") &&
-    request.nextUrl.pathname !== "/admin/login"
-  ) {
+  const isAdminRoute = request.nextUrl.pathname.startsWith("/admin")
+  const isAdminLogin = request.nextUrl.pathname === "/admin/login"
+
+  // Unauthenticated → /admin/login
+  if (!user && isAdminRoute && !isAdminLogin) {
     const url = request.nextUrl.clone()
     url.pathname = "/admin/login"
     return NextResponse.redirect(url)
+  }
+
+  // Authenticated but must verify the user holds an admin_users record
+  if (user && isAdminRoute && !isAdminLogin) {
+    const serviceClient = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!,
+      // Service role authenticates via the key in the header — no cookie handling needed
+      { cookies: { getAll: () => [], setAll: () => {} } }
+    )
+
+    const { data: adminRecord } = await serviceClient
+      .from("admin_users")
+      .select("id")
+      .eq("user_id", user.id)
+      .single()
+
+    if (!adminRecord) {
+      const url = request.nextUrl.clone()
+      url.pathname = "/admin/login"
+      url.searchParams.set("unauthorised", "1")
+      return NextResponse.redirect(url)
+    }
   }
 
   return supabaseResponse

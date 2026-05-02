@@ -1,50 +1,67 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { ArrowRight } from "lucide-react"
+import { Suspense, useState } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
+import { ArrowRight, AlertTriangle } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { createClient } from "@/lib/supabase/client"
 
-export default function AdminLoginPage() {
+function AdminLoginForm() {
   const router = useRouter()
+  const searchParams = useSearchParams()
+  const isUnauthorised = searchParams.get("unauthorised") === "1"
+
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [code, setCode] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [authError, setAuthError] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
   const [submitted, setSubmitted] = useState(false)
-  const [errors, setErrors] = useState<Record<string, string>>({})
 
   function validate() {
     const e: Record<string, string> = {}
     if (!email.trim()) e.email = "Pflichtfeld"
     if (!password) e.password = "Pflichtfeld"
-    if (!code.trim()) e.code = "Pflichtfeld"
     return e
   }
 
-  function handleSubmit(ev: React.FormEvent) {
+  async function handleSubmit(ev: React.FormEvent) {
     ev.preventDefault()
     setSubmitted(true)
+    setAuthError(null)
+
     const errs = validate()
-    setErrors(errs)
+    setFieldErrors(errs)
     if (Object.keys(errs).length > 0) return
-    console.log("[AdminLogin] Submit:", { email })
+
+    setLoading(true)
+    const supabase = createClient()
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    setLoading(false)
+
+    if (error) {
+      setAuthError("Ungültige E-Mail-Adresse oder Passwort.")
+      return
+    }
+
+    // Middleware will verify admin_users on arrival at /admin/dashboard
     router.push("/admin/dashboard")
   }
 
   const fieldClass = (field: string) =>
     cn(
       "w-full bg-[#ECE9CF] border-none border-b-2 rounded-t-lg px-4 py-4 text-dark placeholder:text-dark/30 outline-none transition-colors font-condensed",
-      submitted && errors[field] ? "border-b-2 border-red-500" : "focus:border-b-2 focus:border-wine-red"
+      submitted && fieldErrors[field]
+        ? "border-b-2 border-red-500"
+        : "focus:border-b-2 focus:border-wine-red"
     )
 
   return (
     <div className="bg-light-beige min-h-screen flex flex-col items-center justify-center p-6">
-      {/* Decorative blobs */}
       <div className="fixed -bottom-24 -right-24 w-96 h-96 bg-wine-red/5 rounded-full blur-3xl pointer-events-none" />
       <div className="fixed -top-24 -left-24 w-64 h-64 bg-garnet-red/5 rounded-full blur-3xl pointer-events-none" />
 
       <main className="w-full max-w-md relative">
-        {/* Logo */}
         <div className="flex flex-col items-center mb-12">
           <p className="text-wine-red text-3xl font-bold tracking-widest uppercase mb-2">
             menufaktur
@@ -52,11 +69,26 @@ export default function AdminLoginPage() {
           <div className="h-px w-12 bg-wine-red/20" />
         </div>
 
-        {/* Card */}
+        {isUnauthorised && (
+          <div className="mb-6 flex items-start gap-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+            <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 shrink-0" />
+            <p className="text-sm text-red-700 font-condensed">
+              Ihr Konto hat keinen Admin-Zugang. Bitte wenden Sie sich an den Administrator.
+            </p>
+          </div>
+        )}
+
         <section className="bg-white rounded-xl p-10 shadow-[0_32px_64px_-12px_rgba(91,0,18,0.06)] border border-dark/5">
           <h1 className="text-2xl font-bold text-wine-red mb-8 text-center tracking-tight">
             Admin Anmeldung
           </h1>
+
+          {authError && (
+            <div className="mb-6 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+              <p className="text-sm text-red-700 font-condensed">{authError}</p>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-6" noValidate>
             <div>
               <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2">
@@ -65,12 +97,18 @@ export default function AdminLoginPage() {
               <input
                 type="email"
                 value={email}
-                onChange={(e) => { setEmail(e.target.value); if (submitted) setErrors((p) => ({ ...p, email: "" })) }}
+                onChange={(e) => {
+                  setEmail(e.target.value)
+                  if (submitted) setFieldErrors((p) => ({ ...p, email: "" }))
+                }}
                 placeholder="Geben Sie Ihre E-Mail ein"
                 className={fieldClass("email")}
                 autoComplete="email"
+                disabled={loading}
               />
-              {submitted && errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+              {submitted && fieldErrors.email && (
+                <p className="text-red-500 text-xs mt-1">{fieldErrors.email}</p>
+              )}
             </div>
 
             <div>
@@ -80,50 +118,31 @@ export default function AdminLoginPage() {
               <input
                 type="password"
                 value={password}
-                onChange={(e) => { setPassword(e.target.value); if (submitted) setErrors((p) => ({ ...p, password: "" })) }}
+                onChange={(e) => {
+                  setPassword(e.target.value)
+                  if (submitted) setFieldErrors((p) => ({ ...p, password: "" }))
+                }}
                 placeholder="Geben Sie Ihr Passwort ein"
                 className={fieldClass("password")}
                 autoComplete="current-password"
+                disabled={loading}
               />
-              {submitted && errors.password && <p className="text-red-500 text-xs mt-1">{errors.password}</p>}
-            </div>
-
-            <div>
-              <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2">
-                2FA Code
-              </label>
-              <input
-                type="text"
-                value={code}
-                onChange={(e) => { setCode(e.target.value); if (submitted) setErrors((p) => ({ ...p, code: "" })) }}
-                placeholder="6-stelliger Code"
-                className={fieldClass("code")}
-                autoComplete="one-time-code"
-                maxLength={6}
-              />
-              {submitted && errors.code ? (
-                <p className="text-red-500 text-xs mt-1">{errors.code}</p>
-              ) : (
-                <p className="text-dark/40 text-[10px] mt-1.5 font-condensed italic">
-                  Bitte geben Sie den Sicherheitscode aus Ihrer Authenticator-App ein.
-                </p>
+              {submitted && fieldErrors.password && (
+                <p className="text-red-500 text-xs mt-1">{fieldErrors.password}</p>
               )}
             </div>
 
             <div className="pt-2">
               <button
                 type="submit"
-                className="w-full bg-wine-red hover:bg-garnet-red text-white font-bold py-4 rounded-xl transition-colors duration-200 flex items-center justify-center gap-2 group"
+                disabled={loading}
+                className="w-full bg-wine-red hover:bg-garnet-red disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl transition-colors duration-200 flex items-center justify-center gap-2 group"
               >
-                Anmelden
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                {loading ? "Anmelden …" : "Anmelden"}
+                {!loading && (
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                )}
               </button>
-            </div>
-
-            <div className="text-center">
-              <a href="#" className="text-wine-red text-sm font-bold hover:underline underline-offset-4 font-condensed">
-                Passwort vergessen?
-              </a>
             </div>
           </form>
         </section>
@@ -135,5 +154,13 @@ export default function AdminLoginPage() {
         </footer>
       </main>
     </div>
+  )
+}
+
+export default function AdminLoginPage() {
+  return (
+    <Suspense>
+      <AdminLoginForm />
+    </Suspense>
   )
 }
