@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import { MapPin, Phone, Mail, Train, ParkingSquare } from "lucide-react"
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 import { ContactForm } from "@/components/contact/ContactForm"
+import { MapEmbed } from "@/components/ui/MapEmbed"
 
 export const metadata: Metadata = {
   title: "Kontakt — menufaktur",
@@ -14,13 +15,15 @@ export default function KontaktPage() {
     <div className="bg-light-beige min-h-screen">
       {/* Hero */}
       <section className="relative h-[640px] flex items-end overflow-hidden">
-        <div className="absolute inset-0">
-          <ImagePlaceholder
-            label="about/atelier-interior.jpg"
-            className="w-full h-full"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-wine-red/40 to-transparent" />
-        </div>
+        <Image
+          src="/images/about/atelier-interior.png"
+          alt="Das menufaktur Atelier in Frankfurt-Bornheim"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-wine-red/40 to-transparent" />
         <div className="relative w-full max-w-screen-xl mx-auto px-6 md:px-12 pb-20">
           <h1 className="text-white text-6xl md:text-8xl font-bold tracking-tighter mb-4 leading-none">
             Kontakt
@@ -115,25 +118,22 @@ export default function KontaktPage() {
             </div>
 
             {/* Atelier image */}
-            <div className="pt-4 rounded-xl overflow-hidden aspect-video">
-              <ImagePlaceholder
-                label="about/atelier-exterior.jpg"
-                className="w-full h-full"
+            <div className="pt-4 relative rounded-xl overflow-hidden aspect-video">
+              <Image
+                src="/images/about/atelier-exterior.png"
+                alt="Die menufaktur von außen — Bornheimer Landwehr, Frankfurt"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 40vw"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Map placeholder */}
-      <section className="w-full h-[400px] bg-[#ECE9CF] flex items-center justify-center border-t border-dark/8">
-        <div className="text-center">
-          <MapPin className="w-12 h-12 text-dark/20 mx-auto mb-3" aria-hidden="true" />
-          <p className="text-xl font-bold text-dark/30">Google Maps</p>
-          <p className="text-dark/20 text-sm font-condensed mt-1">
-            Bornheimer Landwehr 46, 60385 Frankfurt am Main
-          </p>
-        </div>
+      {/* Map */}
+      <section className="border-t border-dark/8">
+        <MapEmbed className="w-full h-[400px]" />
       </section>
     </div>
   )

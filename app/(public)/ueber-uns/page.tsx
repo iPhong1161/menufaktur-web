@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { MapEmbed } from "@/components/ui/MapEmbed"
 
 export const metadata: Metadata = {
   title: "Über uns — menufaktur",
@@ -13,18 +14,16 @@ export default function UeberUnsPage() {
     <div className="bg-light-beige min-h-screen">
       {/* Hero */}
       <section className="relative h-[720px] flex items-end overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/images/about/atelier-interior.png"
-            alt="Das menufaktur Atelier in Frankfurt-Bornheim"
-            fill
-            className="object-cover"
-            priority
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-wine-red/50 to-transparent" />
-        </div>
-        <div className="relative w-full max-w-screen-xl mx-auto px-6 md:px-12 pb-20">
+        <Image
+          src="/images/about/atelier-interior.png"
+          alt="Das menufaktur Atelier in Frankfurt-Bornheim"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+        <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-12 pb-20">
           <h1 className="text-white text-6xl md:text-8xl font-bold tracking-tighter mb-4 leading-none">
             Über uns
           </h1>
@@ -141,6 +140,43 @@ export default function UeberUnsPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Location section */}
+      <section className="py-24 max-w-screen-xl mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="relative aspect-[3/2] rounded-xl overflow-hidden shadow-xl">
+            <Image
+              src="/images/about/atelier-exterior.png"
+              alt="Die menufaktur von außen — Bornheimer Landstraße, Frankfurt"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+          <div className="space-y-5">
+            <h2 className="text-3xl md:text-4xl font-bold text-wine-red leading-tight">
+              Unser Standort in Frankfurt-Bornheim
+            </h2>
+            <div className="space-y-4 text-dark/60 font-condensed text-lg leading-relaxed">
+              <p>
+                Mitten im lebendigen Stadtteil Bornheim haben wir seit 2007 unser
+                Zuhause. Das menufaktur-Atelier liegt im Herzen des Viertels und
+                ist mit öffentlichen Verkehrsmitteln bequem erreichbar.
+              </p>
+              <p>
+                Unser 155 m² großes Loft empfängt Sie mit einer einladenden
+                Atmosphäre — von der professionellen Kücheninsel über die
+                gemütliche Lounge bis hin zur Terrasse mit Garten.
+              </p>
+            </div>
+            <address className="not-italic text-wine-red font-bold text-base leading-relaxed">
+              Bornheimer Landwehr 46<br />
+              60385 Frankfurt am Main
+            </address>
+          </div>
+        </div>
+        <MapEmbed className="mt-12 w-full h-[360px] rounded-xl" />
       </section>
 
       {/* CTA section */}
