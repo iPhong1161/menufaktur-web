@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import { CourseFiltersAndGrid } from "@/components/course/CourseFiltersAndGrid"
 import { getCourses } from "@/lib/supabase/queries/courses"
 import type { CatalogCourse } from "@/components/course/CatalogCourseCard"
@@ -38,19 +39,31 @@ export default async function KursePage() {
   const courses: CatalogCourse[] = rawCourses.map(toCatalogCourse)
 
   return (
-    <div className="pt-16 md:pt-20 pb-20 bg-light-beige min-h-screen">
-      <section className="max-w-screen-xl mx-auto px-6 md:px-8 py-16 md:py-20">
-        <div className="max-w-2xl">
-          <h1 className="text-5xl md:text-6xl font-bold text-wine-red leading-tight mb-5">
+    <div className="pb-20 bg-light-beige min-h-screen">
+      {/* Hero */}
+      <section className="relative h-[480px] flex items-end overflow-hidden">
+        <Image
+          src="/images/hero/hero-kurse.png"
+          alt="Kochkurse in Frankfurt-Bornheim — menufaktur"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-wine-red/70 via-wine-red/30 to-transparent" />
+        <div className="relative z-10 w-full max-w-screen-xl mx-auto px-6 md:px-8 pb-16">
+          <h1 className="text-white text-5xl md:text-6xl font-bold leading-tight mb-3">
             Unsere Kurse
           </h1>
-          <p className="text-lg text-dark/60 font-condensed leading-relaxed">
+          <p className="text-white/80 text-lg font-condensed max-w-2xl leading-relaxed">
             Entdecken Sie die Vielfalt unserer Kochkurse in Frankfurt-Bornheim.
             Erleben Sie kulinarische Perfektion in einer Atmosphäre, die zum
             Verweilen und Genießen einlädt.
           </p>
         </div>
       </section>
+
+      <div className="pt-12" />
 
       {courses.length === 0 ? (
         <div className="max-w-screen-xl mx-auto px-6 md:px-8 py-20 text-center">

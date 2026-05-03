@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 
 export const metadata: Metadata = {
   title: "Über uns — menufaktur",
@@ -14,9 +14,13 @@ export default function UeberUnsPage() {
       {/* Hero */}
       <section className="relative h-[720px] flex items-end overflow-hidden">
         <div className="absolute inset-0">
-          <ImagePlaceholder
-            label="about/atelier-interior.jpg"
-            className="w-full h-full"
+          <Image
+            src="/images/about/atelier-interior.png"
+            alt="Das menufaktur Atelier in Frankfurt-Bornheim"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-wine-red/50 to-transparent" />
         </div>
@@ -38,10 +42,13 @@ export default function UeberUnsPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-wine-red leading-tight mb-8">
               Wieso eigentlich menufaktur?
             </h2>
-            <div className="aspect-[4/5] rounded-xl overflow-hidden">
-              <ImagePlaceholder
-                label="about/team-kitchen.jpg"
-                className="w-full h-full"
+            <div className="relative aspect-[4/5] rounded-xl overflow-hidden">
+              <Image
+                src="/images/about/team-kitchen.png"
+                alt="Das menufaktur Team in der Küche"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 40vw"
               />
             </div>
           </div>
@@ -115,10 +122,13 @@ export default function UeberUnsPage() {
 
             {/* Right: image + floating quote */}
             <div className="relative">
-              <div className="rounded-xl overflow-hidden aspect-square">
-                <ImagePlaceholder
-                  label="about/hands-dough.jpg"
-                  className="w-full h-full"
+              <div className="relative rounded-xl overflow-hidden aspect-square">
+                <Image
+                  src="/images/about/hands-dough.png"
+                  alt="Handwerk — Teig kneten in der menufaktur"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 bg-wine-red p-8 rounded-xl text-white hidden md:block max-w-xs shadow-xl">

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 
 export const metadata: Metadata = {
   title: "Private Events — menufaktur",
@@ -15,9 +15,13 @@ export default function PrivateEventsPage() {
       {/* Hero */}
       <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <ImagePlaceholder
-            label="private-events/loft-hero.jpg"
-            className="w-full h-full"
+          <Image
+            src="/images/private-events/loft-hero.png"
+            alt="Private Events in der menufaktur"
+            fill
+            className="object-cover"
+            priority
+            sizes="100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-wine-red/40 to-wine-red/80" />
         </div>
@@ -53,10 +57,13 @@ export default function PrivateEventsPage() {
               </p>
             </div>
           </div>
-          <div className="lg:col-span-5 aspect-[4/5] rounded-xl overflow-hidden shadow-2xl">
-            <ImagePlaceholder
-              label="private-events/atelier-space.jpg"
-              className="w-full h-full"
+          <div className="relative lg:col-span-5 aspect-[4/5] rounded-xl overflow-hidden shadow-2xl">
+            <Image
+              src="/images/private-events/atelier-space.png"
+              alt="Das menufaktur Atelier — Raum für Events"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 40vw"
             />
           </div>
         </div>
@@ -68,10 +75,13 @@ export default function PrivateEventsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
             {/* Image with floating badge */}
             <div className="relative">
-              <div className="w-full min-h-[480px] rounded-xl overflow-hidden shadow-lg">
-                <ImagePlaceholder
-                  label="private-events/loft-event.jpg"
-                  className="w-full min-h-[480px]"
+              <div className="relative w-full min-h-[480px] rounded-xl overflow-hidden shadow-lg">
+                <Image
+                  src="/images/private-events/team-cooking.png"
+                  alt="Feiern in der menufaktur"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 bg-wine-red p-8 hidden lg:block rounded-xl shadow-xl">
@@ -119,20 +129,26 @@ export default function PrivateEventsPage() {
                 Tischdekoration gegen Aufpreis mit.
               </p>
             </div>
-            <div className="md:w-1/2 aspect-video rounded-xl overflow-hidden shadow-xl">
-              <ImagePlaceholder
-                label="private-events/catering-home.jpg"
-                className="w-full h-full"
+            <div className="relative md:w-1/2 aspect-video rounded-xl overflow-hidden shadow-xl">
+              <Image
+                src="/images/private-events/catering-home.png"
+                alt="menufaktur Catering bei Ihnen zu Hause"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
           </div>
 
           {/* Private cooking: wide image left, narrow text right */}
           <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="md:w-2/3 aspect-video rounded-xl overflow-hidden shadow-xl">
-              <ImagePlaceholder
-                label="private-events/private-cooking-class.jpg"
-                className="w-full h-full"
+            <div className="relative md:w-2/3 aspect-video rounded-xl overflow-hidden shadow-xl">
+              <Image
+                src="/images/private-events/private-cooking-class.png"
+                alt="Privater Kochkurs in der menufaktur"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 66vw"
               />
             </div>
             <div className="md:w-1/3 space-y-5">

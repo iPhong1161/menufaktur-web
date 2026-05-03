@@ -1,7 +1,7 @@
+import Image from "next/image"
 import Link from "next/link"
 import { ChefHat, Award, Users, ChevronRight } from "lucide-react"
 import { CourseCard } from "@/components/course/CourseCard"
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 import { getCourses } from "@/lib/supabase/queries/courses"
 
 const GERMAN_MONTHS = [
@@ -38,8 +38,16 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-[#5b0011] via-wine-red to-garnet-red">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(255,252,225,0.3),transparent)]" />
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <Image
+          src="/images/hero/hero-main.png"
+          alt="menufaktur — Kochen als Handwerk"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#5b0011]/80 via-wine-red/75 to-garnet-red/80" />
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <h1 className="text-light-beige font-bold text-5xl md:text-7xl leading-tight mb-6">
             Kochen als Handwerk.
@@ -92,8 +100,14 @@ export default async function HomePage() {
             </Link>
           </div>
           <div className="relative">
-            <div className="aspect-[4/5] rounded-lg overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
-              <ImagePlaceholder label="about/atelier-interior.jpg" className="w-full h-full" />
+            <div className="relative aspect-[4/5] rounded-lg overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
+              <Image
+                src="/images/about/atelier-interior.png"
+                alt="Das menufaktur Atelier in Frankfurt-Bornheim"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
             <div className="absolute -bottom-8 -left-8 w-48 h-48 bg-wine-red rounded-lg -z-10 opacity-5" />
           </div>

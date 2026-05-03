@@ -1,6 +1,7 @@
+import Image from "next/image"
 import Link from "next/link"
 import { CalendarDays, Clock, MapPin } from "lucide-react"
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
+import { courseImageSrc } from "@/lib/courseImages"
 
 export interface CatalogCourse {
   id: string
@@ -54,16 +55,13 @@ export function CatalogCourseCard({
     <article className={`group flex flex-col${soldOut ? " opacity-70" : ""}`}>
       {/* Image */}
       <div className="relative overflow-hidden rounded-lg aspect-[4/3] mb-5">
-        {photo_url ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={photo_url}
-            alt={title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-        ) : (
-          <ImagePlaceholder label="Course photo — uploaded via admin" className="w-full h-full" />
-        )}
+        <Image
+          src={courseImageSrc(slug, photo_url)}
+          alt={title}
+          fill
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
         <div className="absolute top-4 left-4">
           <CapacityBadge remaining={remainingCapacity} />
         </div>

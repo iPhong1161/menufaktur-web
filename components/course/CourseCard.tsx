@@ -1,7 +1,8 @@
+import Image from "next/image"
 import Link from "next/link"
 import { CalendarDays, Clock, MapPin, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
+import { courseImageSrc } from "@/lib/courseImages"
 
 interface CourseCardProps {
   title: string
@@ -53,12 +54,13 @@ export function CourseCard({
   return (
     <article className="bg-white rounded-xl overflow-hidden shadow-[0_8px_32px_-8px_rgba(126,20,35,0.1)] hover:-translate-y-2 transition-transform duration-300 flex flex-col">
       <div className="h-56 relative overflow-hidden">
-        {photoUrl ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={photoUrl} alt={title} className="w-full h-full object-cover" />
-        ) : (
-          <ImagePlaceholder label="Course photo — uploaded via admin" className="w-full h-full" />
-        )}
+        <Image
+          src={courseImageSrc(slug, photoUrl)}
+          alt={title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 33vw"
+        />
         {remainingCapacity !== null && (
           <CapacityBadge remaining={remainingCapacity} />
         )}
