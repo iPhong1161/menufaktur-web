@@ -7,12 +7,13 @@ import { CatalogCourseCard, type CatalogCourse } from "./CatalogCourseCard"
 
 const COURSES_PER_PAGE = 6
 
-const DIETARY_OPTIONS = [
-  "Vegetarisch",
-  "Vegan",
-  "Glutenfrei",
-  "Laktosefrei",
-  "Nussallergie",
+// label → exact value stored in food_options column (lowercase)
+const DIETARY_OPTIONS: { label: string; value: string }[] = [
+  { label: "Vegetarisch", value: "vegetarisch" },
+  { label: "Vegan", value: "vegan" },
+  { label: "Glutenfrei", value: "glutenfrei" },
+  { label: "Laktosefrei", value: "lactosefrei" },
+  { label: "Nussallergie", value: "nussallergie" },
 ]
 
 type SortOption = "date" | "price-asc" | "price-desc"
@@ -89,19 +90,19 @@ export function CourseFiltersAndGrid({ courses, activeDietary }: Props) {
               Ernährung / Allergene
             </label>
             <div className="flex flex-wrap gap-2">
-              {DIETARY_OPTIONS.map((option) => {
-                const active = activeDietary.includes(option)
+              {DIETARY_OPTIONS.map(({ label, value }) => {
+                const active = activeDietary.includes(value)
                 return (
                   <button
-                    key={option}
-                    onClick={() => toggleDietary(option)}
+                    key={value}
+                    onClick={() => toggleDietary(value)}
                     className={
                       active
                         ? "px-3 py-1.5 rounded-full text-xs font-semibold border-2 border-wine-red bg-wine-red text-white transition-colors"
                         : "px-3 py-1.5 rounded-full text-xs font-semibold border-2 border-[#7E1423]/40 bg-white/80 text-dark/60 hover:border-[#7E1423] hover:text-[#7E1423] transition-colors"
                     }
                   >
-                    {option}
+                    {label}
                   </button>
                 )
               })}
