@@ -1,13 +1,14 @@
 import { headers } from "next/headers"
-import { redirect } from "next/navigation"
 import { AdminHeader } from "@/components/admin/AdminHeader"
-import { createClient, createServiceClient } from "@/lib/supabase/server"
+import { createClient } from "@/lib/supabase/server"
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = (await headers()).get("x-pathname") ?? ""
 
-  // The login page is intentionally unprotected — skip all auth checks to
-  // avoid a redirect loop (middleware skips /admin/login; the layout must too)
+  // Login page renders bare — no header, no auth check needed.
+  // Middleware already blocks unauthenticated and non-admin requests before
+  // they reach any layout, so the only role of this check is to decide
+  // whether to render the admin chrome (header + footer).
   if (pathname === "/admin/login") {
     return <>{children}</>
   }
@@ -15,20 +16,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
+  // No session — render bare children. Middleware will redirect on the next
+  // navigation; we avoid a double-check race condition by not re-querying
+  // admin_users here (middleware is the sole authority for that check).
   if (!user) {
     return <>{children}</>
-  }
-
-  // Verify this authenticated user is a designated admin
-  const serviceClient = await createServiceClient()
-  const { data: adminRecord } = await serviceClient
-    .from("admin_users" as any)
-    .select("id")
-    .eq("user_id", user.id)
-    .single()
-
-  if (!adminRecord) {
-    redirect("/admin/login?unauthorised=1")
   }
 
   return (
