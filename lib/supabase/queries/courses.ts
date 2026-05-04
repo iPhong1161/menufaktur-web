@@ -8,15 +8,21 @@ export interface CourseWithCapacity extends CourseRow {
   remaining_capacity: number
 }
 
-export async function getCourses(): Promise<CourseWithCapacity[]> {
+export async function getCourses(dietary?: string[]): Promise<CourseWithCapacity[]> {
   const supabase = await createClient()
 
-  const { data: courses, error } = await supabase
+  let query = supabase
     .from("courses")
     .select("*")
     .eq("status", "published")
     .gte("date", new Date().toISOString().split("T")[0])
     .order("date", { ascending: true })
+
+  if (dietary && dietary.length > 0) {
+    query = query.contains("food_options", dietary)
+  }
+
+  const { data: courses, error } = await query
 
   if (error || !courses) return []
 

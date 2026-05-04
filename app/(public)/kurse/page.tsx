@@ -34,8 +34,19 @@ function toCatalogCourse(c: Awaited<ReturnType<typeof getCourses>>[number]): Cat
   }
 }
 
-export default async function KursePage() {
-  const rawCourses = await getCourses()
+export default async function KursePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ dietary?: string | string[] }>
+}) {
+  const params = await searchParams
+  const dietary = params.dietary
+    ? Array.isArray(params.dietary)
+      ? params.dietary
+      : [params.dietary]
+    : undefined
+
+  const rawCourses = await getCourses(dietary)
   const courses: CatalogCourse[] = rawCourses.map(toCatalogCourse)
 
   return (
@@ -65,7 +76,7 @@ export default async function KursePage() {
 
       <div className="pt-12" />
 
-      {courses.length === 0 ? (
+      {courses.length === 0 && !dietary?.length ? (
         <div className="max-w-screen-xl mx-auto px-6 md:px-8 py-20 text-center">
           <p className="text-2xl font-bold text-wine-red mb-3">
             Keine Kurse verfügbar
@@ -76,7 +87,7 @@ export default async function KursePage() {
           </p>
         </div>
       ) : (
-        <CourseFiltersAndGrid courses={courses} />
+        <CourseFiltersAndGrid courses={courses} activeDietary={dietary ?? []} />
       )}
     </div>
   )
