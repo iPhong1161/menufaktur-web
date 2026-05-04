@@ -1,13 +1,12 @@
 "use client"
 
 import { Suspense, useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { ArrowRight, AlertTriangle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 
 function AdminLoginForm() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const isUnauthorised = searchParams.get("unauthorised") === "1"
 
@@ -44,8 +43,9 @@ function AdminLoginForm() {
       return
     }
 
-    // Middleware will verify admin_users on arrival at /admin/dashboard
-    router.push("/admin/dashboard")
+    // Full page load so the server renders the admin layout fresh (including
+    // AdminHeader) — same reason logout uses window.location.href.
+    window.location.href = "/admin/dashboard"
   }
 
   const fieldClass = (field: string) =>
