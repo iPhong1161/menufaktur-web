@@ -25,7 +25,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <div className="bg-[#fdfadf] min-h-screen flex flex-col">
-      <AdminHeader />
+      <AdminHeader pathname={pathname} />
       {children}
       <footer className="py-6 border-t border-wine-red/5 text-center">
         <p className="text-[10px] text-dark/30 tracking-widest uppercase font-condensed">

@@ -1,10 +1,7 @@
-"use client"
-
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
-import { Bell, CircleUser, Search, LogOut } from "lucide-react"
+import { Bell, CircleUser, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { createClient } from "@/lib/supabase/client"
+import { AdminLogoutButton } from "./AdminLogoutButton"
 
 const NAV_LINKS = [
   { href: "/admin/dashboard", label: "Dashboard" },
@@ -15,16 +12,7 @@ const NAV_LINKS = [
   { href: "/admin/einstellungen", label: "Einstellungen" },
 ]
 
-export function AdminHeader() {
-  const pathname = usePathname()
-  const router = useRouter()
-
-  async function handleSignOut() {
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    router.push("/admin/login")
-  }
-
+export function AdminHeader({ pathname }: { pathname: string }) {
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#fdfadf] border-b border-wine-red/10 h-20 flex items-center px-8">
       <div className="flex items-center justify-between w-full">
@@ -74,13 +62,7 @@ export function AdminHeader() {
             <CircleUser className="w-5 h-5" />
           </button>
           <div className="w-px h-5 bg-dark/10 mx-1" />
-          <button
-            onClick={handleSignOut}
-            className="flex items-center gap-1.5 text-sm text-dark/50 hover:text-wine-red transition-colors font-medium"
-          >
-            <LogOut className="w-4 h-4" />
-            <span className="hidden xl:inline">Abmelden</span>
-          </button>
+          <AdminLogoutButton />
         </div>
       </div>
     </nav>
