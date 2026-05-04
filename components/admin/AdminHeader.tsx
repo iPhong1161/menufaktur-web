@@ -9,7 +9,6 @@ const NAV_LINKS = [
   { href: "/admin/buchungen", label: "Buchungen" },
   { href: "/admin/gutscheine", label: "Gutscheine" },
   { href: "/admin/kunden", label: "Kunden" },
-  { href: "/admin/einstellungen", label: "Einstellungen" },
 ]
 
 export function AdminHeader({ pathname }: { pathname: string }) {
@@ -58,9 +57,9 @@ export function AdminHeader({ pathname }: { pathname: string }) {
           <button className="p-2 hover:bg-wine-red/5 rounded-lg text-dark/60 transition-colors">
             <Bell className="w-5 h-5" />
           </button>
-          <button className="p-2 hover:bg-wine-red/5 rounded-lg text-dark/60 transition-colors">
+          <Link href="/admin/einstellungen" className="p-2 hover:bg-wine-red/5 rounded-lg text-dark/60 transition-colors">
             <CircleUser className="w-5 h-5" />
-          </button>
+          </Link>
           <div className="w-px h-5 bg-dark/10 mx-1" />
           <AdminLogoutButton />
         </div>
