@@ -198,6 +198,7 @@ export type Database = {
           city: string | null
           country: string
           created_at: string
+          preferred_payment_method: "card" | "sepa" | "bank_transfer" | null
         }
         Insert: {
           id: string
@@ -210,8 +211,23 @@ export type Database = {
           city?: string | null
           country?: string
           created_at?: string
+          preferred_payment_method?: "card" | "sepa" | "bank_transfer" | null
         }
         Update: Partial<Omit<Database["public"]["Tables"]["profiles"]["Insert"], "id">>
+        Relationships: []
+      }
+      admin_users: {
+        Row: {
+          id: string
+          user_id: string
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          user_id: string
+          created_at?: string
+        }
+        Update: Partial<Omit<Database["public"]["Tables"]["admin_users"]["Insert"], "id">>
         Relationships: []
       }
     }
