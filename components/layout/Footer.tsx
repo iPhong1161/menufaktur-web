@@ -77,7 +77,9 @@ export function Footer() {
           <h4 className="text-xs font-bold uppercase tracking-widest">Social Media</h4>
           <div className="flex gap-3">
             <a
-              href="#"
+              href="https://www.instagram.com/menufaktur/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 rounded-full border border-light-beige/20 flex items-center justify-center hover:bg-light-beige hover:text-wine-red transition-all duration-200"
               aria-label="menufaktur auf Instagram"
             >
@@ -86,7 +88,9 @@ export function Footer() {
               </svg>
             </a>
             <a
-              href="#"
+              href="https://www.facebook.com/sharer/sharer.php?u=https://www.menufaktur.com/index.asp?&title=MENUFAKTUR%20-%20Startseite"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-10 h-10 rounded-full border border-light-beige/20 flex items-center justify-center hover:bg-light-beige hover:text-wine-red transition-all duration-200"
               aria-label="menufaktur auf Facebook"
             >
