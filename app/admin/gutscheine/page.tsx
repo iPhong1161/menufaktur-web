@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { Search, Download, Eye } from "lucide-react"
+import { AdminBackButton } from "@/components/admin/AdminBackButton"
 
 export const metadata: Metadata = { title: "Gutscheine — menufaktur Admin" }
 
@@ -35,6 +36,7 @@ function PayBadge({ status }: { status: string }) {
 export default function AdminGutscheinePage() {
   return (
       <main className="flex-grow pt-32 pb-16 px-8 max-w-screen-xl mx-auto w-full">
+        <AdminBackButton />
         {/* Header */}
         <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>

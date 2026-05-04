@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Search, Plus, Eye, Pencil, Copy, Trash2 } from "lucide-react"
+import { AdminBackButton } from "@/components/admin/AdminBackButton"
 
 export const metadata: Metadata = { title: "Kurse — menufaktur Admin" }
 
@@ -29,6 +30,7 @@ function StatusBadge({ status }: { status: string }) {
 export default function AdminKursePage() {
   return (
       <main className="flex-grow pt-28 pb-12 px-8 max-w-screen-xl mx-auto w-full">
+        <AdminBackButton />
         {/* Header */}
         <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div>

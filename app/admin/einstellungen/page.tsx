@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { User, Lock, Bell, Settings, Camera, Save, ShieldCheck } from "lucide-react"
+import { AdminBackButton } from "@/components/admin/AdminBackButton"
 import { cn } from "@/lib/utils"
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 
@@ -21,6 +22,7 @@ export default function AdminEinstellungenPage() {
 
   return (
       <main className="flex-grow pt-32 pb-20 px-8 max-w-screen-xl mx-auto w-full">
+        <AdminBackButton />
         <div className="mb-12">
           <h1 className="text-5xl font-bold text-wine-red tracking-tight mb-1">Einstellungen</h1>
           <p className="text-dark/50 text-lg font-condensed">Konto und Systemeinstellungen</p>

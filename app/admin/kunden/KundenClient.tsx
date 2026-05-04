@@ -4,6 +4,7 @@ import { useState } from "react"
 import { UserPlus } from "lucide-react"
 import { CustomerTable } from "@/components/admin/CustomerTable"
 import { CreateCustomerModal } from "@/components/admin/CreateCustomerModal"
+import { AdminBackButton } from "@/components/admin/AdminBackButton"
 import type { AdminCustomer } from "@/lib/supabase/queries/admin-customers"
 
 export function KundenClient({ customers }: { customers: AdminCustomer[] }) {
@@ -11,6 +12,7 @@ export function KundenClient({ customers }: { customers: AdminCustomer[] }) {
 
   return (
     <>
+      <AdminBackButton />
       {/* Header */}
       <div className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
