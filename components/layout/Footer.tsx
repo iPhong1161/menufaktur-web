@@ -23,9 +23,10 @@ export function Footer() {
         <div className="space-y-6">
           <Logo variant="light" height={32} />
           <address className="not-italic text-light-beige/70 space-y-1 text-sm leading-relaxed">
-            <p>Berger Straße 204</p>
+            <p>Bornheimer Landwehr 46</p>
             <p>60385 Frankfurt am Main</p>
-            <p className="pt-3">Tel: +49 (0)69 1234567</p>
+            <p className="pt-3">Tel: 069 / 977 63 666</p>
+            <p>Fax: 069 / 977 63 667</p>
             <p>
               <a
                 href="mailto:info@menufaktur.de"

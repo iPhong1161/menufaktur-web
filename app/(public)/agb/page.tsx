@@ -90,7 +90,7 @@ export default function AgbPage() {
       <main className="max-w-screen-lg mx-auto px-6 md:px-12 py-24 flex-grow">
         <div className="mb-14 max-w-3xl">
           <p className="text-dark/60 text-lg font-condensed leading-relaxed italic border-l-4 border-wine-red pl-6 py-2">
-            Allgemeine Geschäftsbedingungen der menufaktur GmbH. Hier finden Sie alle Details
+            Allgemeine Geschäftsbedingungen der menufaktur GmbH Kochschule. Hier finden Sie alle Details
             zu Buchungen, Stornierungen und Ihrer Teilnahme an unseren kulinarischen Erlebnissen.
           </p>
         </div>

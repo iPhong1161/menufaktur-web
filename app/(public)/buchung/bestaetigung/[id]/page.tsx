@@ -151,7 +151,7 @@ export default async function BookingConfirmationPage({ params, searchParams }: 
                     Ort
                   </p>
                   <p className="text-sm font-medium text-dark">
-                    menufaktur — Berger Straße 204, 60385 Frankfurt am Main
+                    menufaktur — Bornheimer Landwehr 46, 60385 Frankfurt am Main
                   </p>
                 </div>
               </div>
@@ -215,7 +215,7 @@ export default async function BookingConfirmationPage({ params, searchParams }: 
                 Parkmöglichkeiten
               </h4>
               <p className="text-sm text-dark/60 leading-relaxed font-condensed">
-                Öffentliche Parkplätze sind in der Umgebung der Berger Straße
+                Öffentliche Parkplätze sind in der Umgebung der Bornheimer Landwehr
                 vorhanden. Alternativ ist das Atelier gut mit dem ÖPNV
                 erreichbar (U4, Haltestelle Bornheim Mitte).
               </p>

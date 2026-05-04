@@ -62,10 +62,9 @@ export default function DatenschutzPage() {
               <div className="p-10 bg-white rounded-xl border border-dark/8 shadow-sm">
                 <h2 className="text-3xl font-bold text-wine-red mb-6">1. Verantwortlicher</h2>
                 <div className="flex flex-col gap-3 text-lg">
-                  <p className="font-bold text-dark">menufaktur GmbH</p>
+                  <p className="font-bold text-dark">menufaktur GmbH Kochschule</p>
                   <p className="text-dark/60 font-condensed leading-relaxed">
                     Bornheimer Landwehr 46<br />
-                    Hinterhof<br />
                     60385 Frankfurt am Main
                   </p>
                   <div className="mt-3 pt-4 border-t border-dark/8 space-y-2 text-sm font-condensed">
@@ -75,7 +74,7 @@ export default function DatenschutzPage() {
                     </p>
                     <p className="text-dark/60">
                       <span className="font-bold text-dark">Telefon:</span>{" "}
-                      +49 69 977 63 666
+                      069 / 977 63 666
                     </p>
                   </div>
                 </div>

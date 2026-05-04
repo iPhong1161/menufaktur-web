@@ -7,7 +7,7 @@ import { MapEmbed } from "@/components/ui/MapEmbed"
 export const metadata: Metadata = {
   title: "Kontakt — menufaktur",
   description:
-    "Schreiben Sie uns oder besuchen Sie die menufaktur in Frankfurt-Bornheim. Bornheimer Landwehr 46, 60385 Frankfurt am Main.",
+    "Schreiben Sie uns oder besuchen Sie die menufaktur in Frankfurt-Bornheim. Bornheimer Landwehr 46, 60385 Frankfurt am Main. Tel: 069 / 977 63 666.",
 }
 
 export default function KontaktPage() {
@@ -62,7 +62,11 @@ export default function KontaktPage() {
                 </div>
                 <div className="flex items-center gap-4">
                   <Phone className="w-5 h-5 text-wine-red shrink-0" aria-hidden="true" />
-                  <p className="text-lg text-dark/60 font-condensed">+49 69 977 63 666</p>
+                  <p className="text-lg text-dark/60 font-condensed">069 / 977 63 666</p>
+                </div>
+                <div className="flex items-center gap-4">
+                  <Phone className="w-5 h-5 text-wine-red shrink-0" aria-hidden="true" />
+                  <p className="text-lg text-dark/60 font-condensed">Fax: 069 / 977 63 667</p>
                 </div>
                 <div className="flex items-center gap-4">
                   <Mail className="w-5 h-5 text-wine-red shrink-0" aria-hidden="true" />

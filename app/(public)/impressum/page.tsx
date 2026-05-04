@@ -29,10 +29,9 @@ export default function ImpressumPage() {
                 Anbieterkennzeichnung gemäß § 5 TMG
               </h2>
               <div className="flex flex-col gap-4 text-lg">
-                <p className="font-bold text-dark">menufaktur GmbH</p>
+                <p className="font-bold text-dark">menufaktur GmbH Kochschule</p>
                 <p className="text-dark/60 font-condensed leading-relaxed">
                   Bornheimer Landwehr 46<br />
-                  Hinterhof<br />
                   60385 Frankfurt am Main
                 </p>
               </div>
@@ -47,7 +46,14 @@ export default function ImpressumPage() {
                   <Phone className="w-5 h-5 text-wine-red mt-0.5 shrink-0" aria-hidden="true" />
                   <div>
                     <p className="text-xs text-dark/40 mb-0.5">Telefon</p>
-                    <p className="text-base font-medium text-dark">+49 69 977 63 666</p>
+                    <p className="text-base font-medium text-dark">069 / 977 63 666</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <Phone className="w-5 h-5 text-wine-red mt-0.5 shrink-0" aria-hidden="true" />
+                  <div>
+                    <p className="text-xs text-dark/40 mb-0.5">Fax</p>
+                    <p className="text-base font-medium text-dark">069 / 977 63 667</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -77,7 +83,7 @@ export default function ImpressumPage() {
                   ["Registergericht", "Frankfurt am Main"],
                   ["Registernummer", "HRB 79483"],
                   ["USt-IdNr.", "DE814816219"],
-                  ["Urheberrecht", "©2007–2026 menufaktur GmbH"],
+                  ["Urheberrecht", "©2007–2026 menufaktur GmbH Kochschule"],
                 ].map(([label, value]) => (
                   <div key={label} className="space-y-1">
                     <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-wine-red/60">
