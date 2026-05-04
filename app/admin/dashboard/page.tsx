@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { CalendarDays, UserPlus, UtensilsCrossed, AlertCircle, Pencil } from "lucide-react"
+import { CalendarDays, UserPlus, UtensilsCrossed, AlertCircle, Pencil, Ticket, Users, Settings, BookOpen } from "lucide-react"
 import { getAdminDashboardStats } from "@/lib/supabase/queries/admin-stats"
 
 export const metadata: Metadata = { title: "Dashboard — menufaktur Admin" }
@@ -111,6 +111,63 @@ export default async function AdminDashboardPage() {
             <p className="text-[11px] font-bold uppercase tracking-wider text-dark/40 font-condensed">{label}</p>
           </div>
         ))}
+      </div>
+
+      {/* Quick-access cards */}
+      <div className="mb-12">
+        <h2 className="text-lg font-bold text-wine-red/60 uppercase tracking-widest text-[11px] mb-5 font-condensed">
+          Schnellzugriff
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {[
+            {
+              href: "/admin/kurse",
+              icon: UtensilsCrossed,
+              title: "Kurse",
+              description: "Kurse erstellen und verwalten",
+            },
+            {
+              href: "/admin/buchungen",
+              icon: BookOpen,
+              title: "Buchungen",
+              description: "Buchungsübersicht & Zahlungsstatus",
+            },
+            {
+              href: "/admin/gutscheine",
+              icon: Ticket,
+              title: "Gutscheine",
+              description: "Gutscheine ausgeben & prüfen",
+            },
+            {
+              href: "/admin/kunden",
+              icon: Users,
+              title: "Kunden",
+              description: "Profile, Buchungshistorie & Konten",
+            },
+            {
+              href: "/admin/einstellungen",
+              icon: Settings,
+              title: "Einstellungen",
+              description: "Systemkonfiguration",
+            },
+          ].map(({ href, icon: Icon, title, description }) => (
+            <Link
+              key={href}
+              href={href}
+              className="group bg-white hover:bg-wine-red rounded-xl p-6 border border-dark/5 shadow-sm transition-colors duration-200 flex flex-col gap-4"
+            >
+              <div className="w-10 h-10 rounded-lg bg-wine-red/8 group-hover:bg-white/20 flex items-center justify-center transition-colors">
+                <Icon className="w-5 h-5 text-wine-red group-hover:text-white transition-colors" />
+              </div>
+              <div>
+                <p className="font-bold text-dark group-hover:text-white text-sm transition-colors">{title}</p>
+                <p className="text-[11px] text-dark/40 group-hover:text-white/70 font-condensed leading-snug mt-0.5 transition-colors">
+                  {description}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* Main two-column */}

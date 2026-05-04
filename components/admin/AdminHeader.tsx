@@ -36,10 +36,10 @@ export function AdminHeader() {
                   key={href}
                   href={href}
                   className={cn(
-                    "text-sm tracking-tight transition-colors font-condensed pb-1",
+                    "text-sm transition-colors pb-1",
                     active
                       ? "text-wine-red font-bold border-b-2 border-wine-red"
-                      : "text-dark/60 hover:text-wine-red"
+                      : "text-dark/50 font-medium hover:text-wine-red"
                   )}
                 >
                   {label}

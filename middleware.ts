@@ -20,8 +20,17 @@ export async function middleware(request: NextRequest) {
           cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           )
-          // Preserve x-pathname when Supabase refreshes the response
-          supabaseResponse = NextResponse.next({ request: { headers: requestHeaders } })
+          // After mutating request.cookies, getAll() now returns the refreshed
+          // token values. Rebuild the Cookie header so server components that
+          // read next/headers() see the new tokens, not the consumed ones.
+          const cookieString = request.cookies
+            .getAll()
+            .map(({ name, value }) => `${name}=${value}`)
+            .join("; ")
+          const freshHeaders = new Headers(request.headers)
+          freshHeaders.set("cookie", cookieString)
+          freshHeaders.set("x-pathname", request.nextUrl.pathname)
+          supabaseResponse = NextResponse.next({ request: { headers: freshHeaders } })
           cookiesToSet.forEach(({ name, value, options }) =>
             supabaseResponse.cookies.set(name, value, options)
           )
@@ -79,6 +88,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|brand|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 }
