@@ -29,6 +29,7 @@ const FOOD_LABELS: Record<string, string> = {
 function ParticipantRow({ p }: { p: FlatParticipant }) {
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
+  const [confirming, setConfirming] = useState(false)
 
   function toggle() {
     setError(null)
@@ -84,17 +85,39 @@ function ParticipantRow({ p }: { p: FlatParticipant }) {
       </td>
       <td className="px-6 py-4 text-right">
         <div className="flex flex-col items-end gap-1">
-          <button
-            onClick={toggle}
-            disabled={isPending}
-            className={`text-[10px] font-bold uppercase tracking-wide px-3 py-1 rounded-full border transition-colors disabled:opacity-50 ${
-              p.cancelled
-                ? "border-green-300 text-green-700 hover:bg-green-50"
-                : "border-red-200 text-red-600 hover:bg-red-50"
-            }`}
-          >
-            {isPending ? "..." : p.cancelled ? "Wieder anmelden" : "Abmelden"}
-          </button>
+          {p.cancelled ? (
+            <button
+              onClick={toggle}
+              disabled={isPending}
+              className="text-[10px] font-bold uppercase tracking-wide px-3 py-1 rounded-full border border-green-300 text-green-700 hover:bg-green-50 transition-colors disabled:opacity-50"
+            >
+              {isPending ? "..." : "Wieder anmelden"}
+            </button>
+          ) : confirming ? (
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => { setConfirming(false); toggle() }}
+                disabled={isPending}
+                className="text-[10px] font-bold uppercase tracking-wide px-3 py-1 rounded-full border border-wine-red bg-wine-red text-white hover:bg-garnet-red transition-colors disabled:opacity-50"
+              >
+                {isPending ? "..." : "Ja, abmelden"}
+              </button>
+              <button
+                onClick={() => setConfirming(false)}
+                disabled={isPending}
+                className="text-[10px] font-bold uppercase tracking-wide px-3 py-1 rounded-full border border-dark/20 text-dark/40 hover:bg-dark/5 transition-colors disabled:opacity-50"
+              >
+                Abbrechen
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setConfirming(true)}
+              className="text-[10px] font-bold uppercase tracking-wide px-3 py-1 rounded-full border border-red-200 text-red-600 hover:bg-red-50 transition-colors"
+            >
+              Abmelden
+            </button>
+          )}
           {error && <p className="text-[10px] text-red-500">{error}</p>}
         </div>
       </td>
