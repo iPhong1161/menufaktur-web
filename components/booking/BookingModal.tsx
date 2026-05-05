@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react"
 import { createPortal } from "react-dom"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import {
   X,
   Minus,
@@ -244,7 +245,10 @@ function Step1({
   onClose: () => void
   onNext: () => void
 }) {
+  const MAX_BOOKING = 6
+  const maxCount = Math.min(MAX_BOOKING, course.remainingCapacity)
   const total = count * course.price
+  const atGroupLimit = count >= maxCount && maxCount === MAX_BOOKING
 
   return (
     <div className="flex flex-col flex-1 min-h-0">
@@ -296,10 +300,8 @@ function Step1({
             {count}
           </span>
           <button
-            onClick={() =>
-              onCountChange(Math.min(course.remainingCapacity, count + 1))
-            }
-            disabled={count >= course.remainingCapacity}
+            onClick={() => onCountChange(Math.min(maxCount, count + 1))}
+            disabled={count >= maxCount}
             className="w-14 h-14 rounded-full border-2 border-dark/15 flex items-center justify-center text-wine-red hover:bg-wine-red hover:text-white hover:border-wine-red transition-all disabled:opacity-30 disabled:cursor-not-allowed"
             aria-label="Mehr"
           >
@@ -319,6 +321,25 @@ function Step1({
         <p className="text-[0.65rem] uppercase tracking-widest text-dark/40 font-bold">
           Inkl. gesetzlicher MwSt.
         </p>
+
+        {/* Private Event upsell — shown when group limit is reached */}
+        <div
+          className={`mt-8 max-w-[300px] text-center transition-all duration-300 ${
+            atGroupLimit ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
+          }`}
+          aria-hidden={!atGroupLimit}
+        >
+          <p className="text-sm text-dark/70 leading-relaxed mb-3">
+            Sie möchten mit mehr als 6 Personen kochen? Für größere Gruppen empfehlen wir ein{" "}
+            <strong className="text-dark">Private Event</strong> — wir gestalten Ihnen einen unvergesslichen Abend nach Maß.
+          </p>
+          <Link
+            href="/kontakt"
+            className="inline-flex items-center gap-1 text-sm font-bold text-wine-red hover:text-garnet-red transition-colors"
+          >
+            Zum Private Event anfragen <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
       </div>
 
       {/* Footer */}
