@@ -30,14 +30,17 @@ function ParticipantRow({ p }: { p: FlatParticipant }) {
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
   const [confirming, setConfirming] = useState(false)
+  const [isCancelled, setIsCancelled] = useState(p.cancelled)
 
   function toggle() {
-    console.log("[ParticipantRow toggle]", { id: p.id, settingCancelled: !p.cancelled, courseId: p.courseId })
     setError(null)
     startTransition(async () => {
-      const result = await setParticipantCancelledAction(p.id, !p.cancelled, p.courseId)
-      console.log("[ParticipantRow toggle] action result:", result)
-      if ("error" in result) setError(result.error)
+      const result = await setParticipantCancelledAction(p.id, !isCancelled, p.courseId)
+      if ("error" in result) {
+        setError(result.error)
+      } else {
+        setIsCancelled(!isCancelled)
+      }
     })
   }
 
@@ -45,14 +48,14 @@ function ParticipantRow({ p }: { p: FlatParticipant }) {
   const initials = `${p.first_name[0] ?? ""}${p.last_name[0] ?? ""}`.toUpperCase()
 
   return (
-    <tr className={`border-b border-dark/5 last:border-0 ${p.cancelled ? "opacity-40" : "hover:bg-[#fdfadf]/60"}`}>
+    <tr className={`border-b border-dark/5 last:border-0 ${isCancelled ? "opacity-40" : "hover:bg-[#fdfadf]/60"}`}>
       <td className="px-6 py-4">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-full bg-wine-red/10 flex items-center justify-center text-wine-red font-bold text-xs shrink-0">
             {initials}
           </div>
           <div>
-            <p className={`font-bold text-dark ${p.cancelled ? "line-through" : ""}`}>
+            <p className={`font-bold text-dark ${isCancelled ? "line-through" : ""}`}>
               {p.first_name} {p.last_name}
               {p.is_primary && (
                 <span className="ml-2 text-[10px] text-wine-red/60 font-bold uppercase tracking-widest">Kontakt</span>
@@ -87,7 +90,7 @@ function ParticipantRow({ p }: { p: FlatParticipant }) {
       </td>
       <td className="px-6 py-4 text-right">
         <div className="flex flex-col items-end gap-1">
-          {p.cancelled ? (
+          {isCancelled ? (
             <button
               onClick={toggle}
               disabled={isPending}
