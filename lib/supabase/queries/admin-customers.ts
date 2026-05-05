@@ -31,7 +31,7 @@ export type CustomerVoucher = {
 }
 
 export async function getAdminCustomers(): Promise<AdminCustomer[]> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const [profilesResult, bookingsResult, adminUsersResult] = await Promise.all([
     supabase.from("profiles").select("*").order("created_at", { ascending: false }),
@@ -53,7 +53,7 @@ export async function getAdminCustomers(): Promise<AdminCustomer[]> {
 }
 
 export async function getAdminCustomer(id: string): Promise<(AdminCustomer) | null> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const [profileResult, adminResult] = await Promise.all([
     supabase.from("profiles").select("*").eq("id", id).single(),
@@ -75,7 +75,7 @@ export async function getAdminCustomer(id: string): Promise<(AdminCustomer) | nu
 }
 
 export async function getCustomerBookings(userId: string): Promise<CustomerBooking[]> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { data: bookings } = await supabase
     .from("bookings")
@@ -100,7 +100,7 @@ export async function getCustomerBookings(userId: string): Promise<CustomerBooki
 }
 
 export async function getCustomerVouchers(email: string): Promise<CustomerVoucher[]> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { data } = await supabase
     .from("vouchers")
@@ -112,7 +112,7 @@ export async function getCustomerVouchers(email: string): Promise<CustomerVouche
 }
 
 export async function getAdminCount(): Promise<number> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
   const { count } = await supabase
     .from("admin_users")
     .select("id", { count: "exact", head: true })

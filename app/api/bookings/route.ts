@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
   // Server-side capacity guard — prevents double-bookings under race conditions
   // Uses service client to see ALL participants regardless of user_id (bypasses RLS)
-  const serviceSupabase = await createServiceClient()
+  const serviceSupabase = createServiceClient()
   const { data: course } = await serviceSupabase
     .from("courses")
     .select("capacity")

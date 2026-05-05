@@ -18,7 +18,7 @@ export async function removeParticipantAction(
   bookingId: string,
   bookingNumber: string
 ): Promise<{ error: string } | { success: true }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const [bookingResult, participantResult] = await Promise.all([
     supabase
@@ -85,7 +85,7 @@ export async function addParticipantAction(
   courseId: string,
   data: AddParticipantData
 ): Promise<{ error: string } | { success: true }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { data: course } = await supabase
     .from("courses")

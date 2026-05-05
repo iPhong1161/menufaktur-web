@@ -10,7 +10,7 @@ export interface AdminCourse extends CourseRow {
 }
 
 export async function getCoursesAdmin(): Promise<AdminCourse[]> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { data: courses, error } = await supabase
     .from("courses")
@@ -78,7 +78,7 @@ export interface CourseDetailAdmin {
 }
 
 export async function getCourseDetailAdmin(id: string): Promise<CourseDetailAdmin | null> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const [courseResult, bookingsResult] = await Promise.all([
     supabase.from("courses").select("*").eq("id", id).single(),
@@ -133,7 +133,7 @@ export async function getCourseDetailAdmin(id: string): Promise<CourseDetailAdmi
 }
 
 export async function getCourseByIdAdmin(id: string): Promise<CourseRow | null> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
   const { data, error } = await supabase.from("courses").select("*").eq("id", id).single()
   if (error) return null
   return data
@@ -142,7 +142,7 @@ export async function getCourseByIdAdmin(id: string): Promise<CourseRow | null> 
 export async function createCourse(
   data: Omit<CourseInsert, "id">
 ): Promise<{ id: string } | { error: string }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
   const { data: row, error } = await supabase
     .from("courses")
     .insert(data)
@@ -156,7 +156,7 @@ export async function updateCourse(
   id: string,
   data: CourseUpdate
 ): Promise<{ success: true } | { error: string }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
   const { error } = await supabase.from("courses").update(data).eq("id", id)
   if (error) return { error: error.message }
   return { success: true }
@@ -165,7 +165,7 @@ export async function updateCourse(
 export async function deleteCourse(
   id: string
 ): Promise<{ success: true } | { error: string }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { count } = await supabase
     .from("bookings")
@@ -185,7 +185,7 @@ export async function deleteCourse(
 }
 
 export async function getUpcomingCoursesAdmin(): Promise<AdminCourse[]> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
   const today = new Date().toISOString().split("T")[0]
 
   const { data: courses, error } = await supabase
@@ -229,7 +229,7 @@ export async function getUpcomingCoursesAdmin(): Promise<AdminCourse[]> {
 export async function duplicateCourse(
   id: string
 ): Promise<{ success: true } | { error: string }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { data: original, error: fetchError } = await supabase
     .from("courses")

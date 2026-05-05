@@ -14,7 +14,7 @@ export async function createAdminCustomer(data: {
   city?: string
   preferred_payment_method?: string
 }): Promise<{ success: true; email: string; password: string } | { error: string }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { data: authData, error: authError } = await supabase.auth.admin.createUser({
     email: data.email,
@@ -53,7 +53,7 @@ export async function createAdminCustomer(data: {
 export async function promoteToAdmin(
   userId: string
 ): Promise<{ success: true } | { error: string }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { error } = await supabase.from("admin_users").insert({ user_id: userId })
 
@@ -67,7 +67,7 @@ export async function promoteToAdmin(
 export async function revokeAdmin(
   userId: string
 ): Promise<{ success: true } | { error: string }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { error } = await supabase.from("admin_users").delete().eq("user_id", userId)
 
@@ -81,7 +81,7 @@ export async function revokeAdmin(
 export async function sendPasswordReset(
   email: string
 ): Promise<{ success: true } | { error: string }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
 
@@ -96,7 +96,7 @@ export async function sendPasswordReset(
 export async function deactivateCustomer(
   userId: string
 ): Promise<{ success: true } | { error: string }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { error } = await supabase.auth.admin.updateUserById(userId, {
     ban_duration: "87600h",

@@ -1,7 +1,7 @@
 import { createServiceClient } from "@/lib/supabase/server"
 
 export async function getAdminDashboardStats() {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
   const today = new Date().toISOString().split("T")[0]
 

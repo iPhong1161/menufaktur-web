@@ -97,7 +97,7 @@ async function fetchBookingDeps(
 }
 
 export async function getBookingsAdmin(): Promise<AdminBookingRow[]> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { data: bookings, error } = await supabase
     .from("bookings")
@@ -119,7 +119,7 @@ export async function getBookingsAdmin(): Promise<AdminBookingRow[]> {
 export async function getBookingByNumberAdmin(
   booking_number: string
 ): Promise<AdminBookingDetail | null> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { data: booking, error } = await supabase
     .from("bookings")
@@ -152,7 +152,7 @@ export async function getBookingByNumberAdmin(
 }
 
 export async function getRecentBookingsAdmin(): Promise<AdminBookingRow[]> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
 
   const { data: bookings, error } = await supabase
     .from("bookings")
@@ -175,7 +175,7 @@ export async function getRecentBookingsAdmin(): Promise<AdminBookingRow[]> {
 export async function updateBookingPaymentStatus(
   id: string
 ): Promise<{ success: true } | { error: string }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
   const { error } = await supabase
     .from("bookings")
     .update({ payment_status: "paid", status: "confirmed" })

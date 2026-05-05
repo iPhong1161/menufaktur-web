@@ -57,7 +57,7 @@ export async function setParticipantCancelledAction(
   cancelled: boolean,
   courseId: string
 ): Promise<{ error: string } | { success: true }> {
-  const supabase = await createServiceClient()
+  const supabase = createServiceClient()
   const { error } = await supabase
     .from("participants")
     .update({ cancelled })

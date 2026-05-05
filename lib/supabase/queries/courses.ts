@@ -29,7 +29,7 @@ export async function getCourses(dietary?: string[]): Promise<CourseWithCapacity
   // Fetch booked participant counts for all returned courses
   // Service client bypasses RLS — needed to count participants across all bookings
   // (anon RLS only sees participants from the current user's own bookings)
-  const serviceSupabase = await createServiceClient()
+  const serviceSupabase = createServiceClient()
   const courseIds = courses.map((c) => c.id)
   const { data: activeBookings } = await serviceSupabase
     .from("bookings")
@@ -76,7 +76,7 @@ export async function getCourseBySlug(
 
   if (error || !course) return null
 
-  const serviceSupabase = await createServiceClient()
+  const serviceSupabase = createServiceClient()
   const { data: bookings } = await serviceSupabase
     .from("bookings")
     .select("id")
@@ -113,7 +113,7 @@ export async function getCourseById(
 
   if (error || !course) return null
 
-  const serviceSupabase = await createServiceClient()
+  const serviceSupabase = createServiceClient()
   const { data: bookings } = await serviceSupabase
     .from("bookings")
     .select("id")
