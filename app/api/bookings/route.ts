@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createBooking } from "@/lib/supabase/queries/bookings"
-import { createClient } from "@/lib/supabase/server"
+import { createClient, createServiceClient } from "@/lib/supabase/server"
 
 type ParticipantBody = {
   firstName: string
@@ -28,14 +28,16 @@ export async function POST(req: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
 
   // Server-side capacity guard — prevents double-bookings under race conditions
-  const { data: course } = await supabase
+  // Uses service client to see ALL participants regardless of user_id (bypasses RLS)
+  const serviceSupabase = await createServiceClient()
+  const { data: course } = await serviceSupabase
     .from("courses")
     .select("capacity")
     .eq("id", body.course.id)
     .single()
 
   if (course) {
-    const { data: activeBookings } = await supabase
+    const { data: activeBookings } = await serviceSupabase
       .from("bookings")
       .select("id")
       .eq("course_id", body.course.id)
@@ -43,7 +45,7 @@ export async function POST(req: NextRequest) {
 
     const bookingIds = (activeBookings ?? []).map((b: { id: string }) => b.id)
     const { count: bookedCount } = bookingIds.length > 0
-      ? await supabase
+      ? await serviceSupabase
           .from("participants")
           .select("*", { count: "exact", head: true })
           .in("booking_id", bookingIds)
