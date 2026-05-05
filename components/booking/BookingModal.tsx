@@ -249,6 +249,21 @@ function Step1({
   const maxCount = Math.min(MAX_BOOKING, course.remainingCapacity)
   const total = count * course.price
   const atGroupLimit = count >= maxCount && maxCount === MAX_BOOKING
+  const spotsAfter = maxCount - count
+  const spotsColor =
+    spotsAfter === 0
+      ? "text-red-500"
+      : spotsAfter === 1
+        ? "text-red-500"
+        : spotsAfter <= 3
+          ? "text-amber-500"
+          : "text-dark/40"
+  const spotsLabel =
+    spotsAfter === 0
+      ? "Ausgebucht"
+      : spotsAfter === 1
+        ? "Noch 1 Platz frei"
+        : `Noch ${spotsAfter} Plätze frei`
 
   return (
     <div className="flex flex-col flex-1 min-h-0">
@@ -287,7 +302,7 @@ function Step1({
         </p>
 
         {/* Counter */}
-        <div className="flex items-center gap-8 mb-10">
+        <div className="flex items-center gap-8 mb-4">
           <button
             onClick={() => onCountChange(Math.max(1, count - 1))}
             disabled={count <= 1}
@@ -308,6 +323,11 @@ function Step1({
             <Plus className="w-5 h-5" />
           </button>
         </div>
+
+        {/* Spots remaining */}
+        <p className={`text-xs font-bold uppercase tracking-widest mb-8 transition-colors duration-200 ${spotsColor}`}>
+          {spotsLabel}
+        </p>
 
         {/* Price */}
         <div className="bg-dark/5 px-6 py-3 rounded-full mb-2">
