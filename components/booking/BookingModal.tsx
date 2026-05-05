@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import { createPortal } from "react-dom"
 import { useRouter } from "next/navigation"
 import {
   X,
@@ -1174,7 +1175,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
     4: "max-w-4xl",
   }[step]
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
@@ -1259,6 +1260,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
             />
           )}
       </div>
-    </div>
+    </div>,
+    document.body
   )
 }
