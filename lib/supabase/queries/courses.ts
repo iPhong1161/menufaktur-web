@@ -24,35 +24,41 @@ export async function getCourses(dietary?: string[]): Promise<CourseWithCapacity
 
   const { data: courses, error } = await query
 
+  console.log("[getCourses] courses:", courses?.length ?? 0, "error:", error)
   if (error || !courses) return []
 
-  // Fetch booked participant counts for all returned courses
-  // Service client bypasses RLS — needed to count participants across all bookings
-  // (anon RLS only sees participants from the current user's own bookings)
-  const serviceSupabase = createServiceClient()
-  const courseIds = courses.map((c) => c.id)
-  const { data: activeBookings } = await serviceSupabase
-    .from("bookings")
-    .select("id, course_id")
-    .in("course_id", courseIds)
-    .in("status", ["pending", "confirmed"])
-
   const countMap: Record<string, number> = {}
-  if (activeBookings && activeBookings.length > 0) {
-    const bookingIds = activeBookings.map((b) => b.id)
-    const { data: participants } = await serviceSupabase
-      .from("participants")
-      .select("booking_id")
-      .in("booking_id", bookingIds)
-      .eq("cancelled", false)
+  try {
+    const serviceSupabase = createServiceClient()
+    const courseIds = courses.map((c) => c.id)
+    const { data: activeBookings, error: bookingsError } = await serviceSupabase
+      .from("bookings")
+      .select("id, course_id")
+      .in("course_id", courseIds)
+      .in("status", ["pending", "confirmed"])
 
-    const bookingCourseMap: Record<string, string> = {}
-    for (const b of activeBookings) bookingCourseMap[b.id] = b.course_id
+    console.log("[getCourses] activeBookings:", activeBookings?.length ?? 0, "bookingsError:", bookingsError)
 
-    for (const p of participants ?? []) {
-      const courseId = bookingCourseMap[p.booking_id]
-      if (courseId) countMap[courseId] = (countMap[courseId] ?? 0) + 1
+    if (activeBookings && activeBookings.length > 0) {
+      const bookingIds = activeBookings.map((b) => b.id)
+      const { data: participants, error: participantsError } = await serviceSupabase
+        .from("participants")
+        .select("booking_id")
+        .in("booking_id", bookingIds)
+        .eq("cancelled", false)
+
+      console.log("[getCourses] participants:", participants?.length ?? 0, "participantsError:", participantsError)
+
+      const bookingCourseMap: Record<string, string> = {}
+      for (const b of activeBookings) bookingCourseMap[b.id] = b.course_id
+
+      for (const p of participants ?? []) {
+        const courseId = bookingCourseMap[p.booking_id]
+        if (courseId) countMap[courseId] = (countMap[courseId] ?? 0) + 1
+      }
     }
+  } catch (err) {
+    console.error("[getCourses] service client threw:", err)
   }
 
   return courses.map((c) => ({
