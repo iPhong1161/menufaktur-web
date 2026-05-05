@@ -10,7 +10,15 @@ export const metadata: Metadata = {
     "Schreiben Sie uns oder besuchen Sie die menufaktur in Frankfurt-Bornheim. Bornheimer Landwehr 46, 60385 Frankfurt am Main. Tel: 069 / 977 63 666.",
 }
 
-export default function KontaktPage() {
+export default async function KontaktPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ betreff?: string; nachricht?: string }>
+}) {
+  const params = await searchParams
+  const initialSubject = params.betreff ?? ""
+  const initialMessage = params.nachricht ?? ""
+
   return (
     <div className="bg-light-beige min-h-screen">
       {/* Hero */}
@@ -42,7 +50,7 @@ export default function KontaktPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-wine-red leading-tight mb-8">
               Schreiben Sie uns
             </h2>
-            <ContactForm />
+            <ContactForm initialSubject={initialSubject} initialMessage={initialMessage} />
           </div>
 
           {/* Right: info */}

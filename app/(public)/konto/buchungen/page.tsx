@@ -130,7 +130,7 @@ export default async function KontoBuchungenPage() {
                         <span className="text-2xl font-bold text-wine-red">{formatPrice(Number(b.total_amount))}</span>
                         <div className="flex flex-wrap gap-6">
                           <Link
-                            href={`/buchung/bestaetigung/${b.id}`}
+                            href={`/konto/buchungen/${b.booking_number}`}
                             className="text-wine-red font-bold text-sm flex items-center gap-1.5 hover:underline underline-offset-4 font-condensed"
                           >
                             <FileText className="w-4 h-4" />
@@ -188,7 +188,7 @@ export default async function KontoBuchungenPage() {
                       <div className="mt-6 pt-5 border-t border-dark/8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <span className="text-2xl font-bold text-dark/40">{formatPrice(Number(b.total_amount))}</span>
                         <Link
-                          href={`/buchung/bestaetigung/${b.id}`}
+                          href={`/konto/buchungen/${b.booking_number}`}
                           className="text-dark/40 hover:text-wine-red font-bold text-sm flex items-center gap-1.5 transition-colors font-condensed"
                         >
                           <FileText className="w-4 h-4" />

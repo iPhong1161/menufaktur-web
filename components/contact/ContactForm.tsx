@@ -11,8 +11,13 @@ interface FormData {
   message: string
 }
 
-export function ContactForm() {
-  const [form, setForm] = useState<FormData>({ name: "", email: "", subject: "", message: "" })
+interface ContactFormProps {
+  initialSubject?: string
+  initialMessage?: string
+}
+
+export function ContactForm({ initialSubject = "", initialMessage = "" }: ContactFormProps) {
+  const [form, setForm] = useState<FormData>({ name: "", email: "", subject: initialSubject, message: initialMessage })
   const [errors, setErrors] = useState<Partial<FormData>>({})
   const [submitted, setSubmitted] = useState(false)
   const [success, setSuccess] = useState(false)

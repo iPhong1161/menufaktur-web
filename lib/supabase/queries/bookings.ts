@@ -93,6 +93,54 @@ export async function getBookingByNumber(booking_number: string) {
   return data
 }
 
+export interface BookingDetail {
+  id: string
+  booking_number: string
+  status: "pending" | "confirmed" | "cancelled" | "refunded"
+  total_amount: number
+  voucher_discount: number
+  payment_method: string
+  payment_status: string
+  created_at: string
+  course: {
+    title: string
+    date: string
+    start_time: string
+    end_time: string
+    location: string
+  } | null
+  participants: {
+    first_name: string
+    last_name: string
+    food_preferences: string[]
+    is_primary: boolean
+  }[]
+}
+
+export async function getUserBookingDetail(
+  booking_number: string
+): Promise<BookingDetail | null> {
+  const supabase = await createClient()
+
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return null
+
+  const { data, error } = await supabase
+    .from("bookings")
+    .select(`
+      id, booking_number, status, total_amount, voucher_discount,
+      payment_method, payment_status, created_at,
+      course:courses(title, date, start_time, end_time, location),
+      participants(first_name, last_name, food_preferences, is_primary)
+    `)
+    .eq("booking_number", booking_number)
+    .eq("user_id", user.id)
+    .single()
+
+  if (error || !data) return null
+  return data as BookingDetail
+}
+
 export async function getUserBookings(): Promise<UserBooking[]> {
   const supabase = await createClient()
 
