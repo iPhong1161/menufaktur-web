@@ -35,11 +35,19 @@ export async function POST(req: NextRequest) {
     .single()
 
   if (course) {
-    const { count: bookedCount } = await supabase
+    const { data: activeBookings } = await supabase
       .from("bookings")
-      .select("*", { count: "exact", head: true })
+      .select("id")
       .eq("course_id", body.course.id)
       .in("status", ["pending", "confirmed"])
+
+    const bookingIds = (activeBookings ?? []).map((b: { id: string }) => b.id)
+    const { count: bookedCount } = bookingIds.length > 0
+      ? await supabase
+          .from("participants")
+          .select("*", { count: "exact", head: true })
+          .in("booking_id", bookingIds)
+      : { count: 0 }
 
     const remaining = course.capacity - (bookedCount ?? 0)
     if (remaining < body.participants.length) {
