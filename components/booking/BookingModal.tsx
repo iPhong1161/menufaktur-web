@@ -246,7 +246,7 @@ function Step1({
   const total = count * course.price
 
   return (
-    <div className="flex flex-col max-h-[90vh]">
+    <div className="flex flex-col flex-1 min-h-0">
       {/* Header */}
       <ModalStepHeader currentStep={1} onClose={onClose} />
 
@@ -363,7 +363,7 @@ function Step2({
   onClose: () => void
 }) {
   return (
-    <div className="flex flex-col max-h-[90vh]">
+    <div className="flex flex-col flex-1 min-h-0">
       {/* Header */}
       <ModalStepHeader currentStep={2} onClose={onClose} />
 
@@ -497,7 +497,7 @@ function Step3({
   const p1 = participants[0]
 
   return (
-    <div className="flex flex-col max-h-[90vh]">
+    <div className="flex flex-col flex-1 min-h-0">
       {/* Header */}
       <ModalStepHeader currentStep={3} onClose={onClose} />
 
@@ -765,7 +765,7 @@ function Step4({
       }
 
   return (
-    <div className="flex flex-col max-h-[90vh]">
+    <div className="flex flex-col flex-1 min-h-0">
       {/* Header */}
       <ModalStepHeader currentStep={4} onClose={onClose} />
 
@@ -1175,7 +1175,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
   }[step]
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-wine-red/20 backdrop-blur-sm"
@@ -1183,7 +1183,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
       />
 
       <div
-        className={`relative bg-white rounded-2xl shadow-[0_32px_64px_-12px_rgba(126,20,35,0.2)] w-full ${maxWidthClass} max-h-[90vh] overflow-hidden transition-all duration-300`}
+        className={`relative bg-white rounded-2xl shadow-[0_32px_64px_-12px_rgba(126,20,35,0.2)] w-full ${maxWidthClass} max-h-[85vh] flex flex-col overflow-hidden transition-all duration-300`}
         onClick={(e) => e.stopPropagation()}
       >
           {step === 1 && (
