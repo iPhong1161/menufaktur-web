@@ -32,9 +32,11 @@ function ParticipantRow({ p }: { p: FlatParticipant }) {
   const [confirming, setConfirming] = useState(false)
 
   function toggle() {
+    console.log("[ParticipantRow toggle]", { id: p.id, settingCancelled: !p.cancelled, courseId: p.courseId })
     setError(null)
     startTransition(async () => {
       const result = await setParticipantCancelledAction(p.id, !p.cancelled, p.courseId)
+      console.log("[ParticipantRow toggle] action result:", result)
       if ("error" in result) setError(result.error)
     })
   }
