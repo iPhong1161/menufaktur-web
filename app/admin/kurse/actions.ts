@@ -57,14 +57,11 @@ export async function setParticipantCancelledAction(
   cancelled: boolean,
   courseId: string
 ): Promise<{ error: string } | { success: true }> {
-  console.log("[action] service key present:", !!process.env.SUPABASE_SERVICE_ROLE_KEY, "length:", process.env.SUPABASE_SERVICE_ROLE_KEY?.length)
   const supabase = await createServiceClient()
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("participants")
     .update({ cancelled })
     .eq("id", participantId)
-    .select("id")
-  console.log("[action] error:", error, "count:", data?.length ?? 0)
   if (error) return { error: error.message }
   revalidatePath(`/admin/kurse/${courseId}`)
   return { success: true }
