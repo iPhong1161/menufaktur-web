@@ -260,9 +260,9 @@ function Step1({
           : "text-dark/40"
   const spotsLabel =
     spotsAfter === 0
-      ? course.remainingCapacity === 0
-        ? "Kurs ist ausgebucht"
-        : "Maximale Gruppengröße erreicht"
+      ? count === 6
+        ? "Maximale Gruppengröße erreicht"
+        : "Kurs ausgebucht"
       : spotsAfter === 1
         ? "Sie können noch 1 weitere Person hinzufügen"
         : `Sie können noch ${spotsAfter} weitere Personen hinzufügen`
