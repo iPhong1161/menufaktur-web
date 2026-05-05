@@ -5,6 +5,7 @@ import { ChevronRight, Download, Banknote, Mail, ShoppingCart, Check } from "luc
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 import { getBookingByNumberAdmin } from "@/lib/supabase/queries/admin-bookings"
 import { MarkPaidButton } from "@/components/admin/MarkPaidButton"
+import { ParticipantManager } from "@/components/admin/ParticipantManager"
 
 export const metadata: Metadata = { title: "Buchungsdetail — menufaktur Admin" }
 
@@ -145,56 +146,13 @@ export default async function AdminBuchungDetailPage({
             </div>
           </section>
 
-          {/* Teilnehmer */}
-          <section className="bg-white rounded-xl p-8 shadow-sm border border-dark/5">
-            <h2 className="text-2xl font-bold text-wine-red mb-6">
-              Teilnehmer ({booking.participants.length})
-            </h2>
-            <div className="space-y-5">
-              {booking.participants.map((p, i) => {
-                const initials = `${p.first_name[0] ?? ""}${p.last_name[0] ?? ""}`.toUpperCase()
-                const foods = p.food_preferences.length > 0 ? p.food_preferences : ["Keine Angabe"]
-                return (
-                  <div
-                    key={p.id}
-                    className={`flex items-center justify-between ${i < booking.participants.length - 1 ? "pb-5 border-b border-dark/8" : ""}`}
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-11 h-11 rounded-full bg-wine-red/10 flex items-center justify-center text-wine-red font-bold text-sm shrink-0">
-                        {initials}
-                      </div>
-                      <div>
-                        <p className="font-bold text-dark">
-                          {p.first_name} {p.last_name}
-                          {p.is_primary && (
-                            <span className="ml-2 text-[10px] text-wine-red/60 font-bold uppercase tracking-widest">
-                              Kontakt
-                            </span>
-                          )}
-                        </p>
-                        <p className="text-xs text-dark/40 font-condensed">{p.email}</p>
-                        <div className="flex gap-2 mt-1 flex-wrap">
-                          {foods.map((f) => (
-                            <span
-                              key={f}
-                              className="text-xs px-2 py-0.5 rounded bg-dark/8 text-dark/50 font-bold"
-                            >
-                              {f}
-                            </span>
-                          ))}
-                        </div>
-                        {p.food_notes && (
-                          <p className="text-xs text-dark/50 font-condensed mt-1 italic">
-                            {p.food_notes}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          </section>
+          <ParticipantManager
+            bookingId={booking.id}
+            bookingNumber={id}
+            courseId={booking.course_id}
+            participants={booking.participants}
+            isCancelled={isCancelled}
+          />
 
           {/* Rechnungsempfänger */}
           {booking.invoice_recipient && (

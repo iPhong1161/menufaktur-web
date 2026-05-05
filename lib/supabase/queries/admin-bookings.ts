@@ -33,6 +33,8 @@ export interface AdminBookingDetail {
     start_time: string
     end_time: string
     photo_url: string | null
+    price_per_person: number
+    capacity: number
   } | null
   participants: Array<{
     id: string
@@ -130,7 +132,7 @@ export async function getBookingByNumberAdmin(
   const [courseResult, participantsResult, invoiceResult] = await Promise.all([
     supabase
       .from("courses")
-      .select("id, title, date, start_time, end_time, photo_url")
+      .select("id, title, date, start_time, end_time, photo_url, price_per_person, capacity")
       .eq("id", booking.course_id)
       .single(),
     supabase.from("participants").select("*").eq("booking_id", booking.id),
