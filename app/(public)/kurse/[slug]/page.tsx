@@ -19,7 +19,6 @@ import { getCourseBySlug, getCourses } from "@/lib/supabase/queries/courses"
 import {
   COURSE_INCLUDES,
   FOOD_NOTE,
-  INSTRUCTOR,
   COURSE_REVIEWS,
 } from "@/lib/data/courses"
 import type { CourseData } from "@/lib/data/courses"
@@ -180,26 +179,6 @@ export default async function CourseDetailPage({ params }: Props) {
               </p>
             </div>
 
-            {/* Instructor */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 bg-white p-7 rounded-xl shadow-sm">
-              <div className="w-24 h-24 rounded-full overflow-hidden shrink-0">
-                <ImagePlaceholder
-                  label="about/instructor.jpg"
-                  className="w-full h-full"
-                />
-              </div>
-              <div>
-                <p className="text-xs font-bold uppercase tracking-widest text-dark/40 mb-1">
-                  Ihr Gastgeber
-                </p>
-                <h3 className="text-lg font-bold text-wine-red mb-2">
-                  {INSTRUCTOR.name}
-                </h3>
-                <p className="text-sm text-dark/70 leading-relaxed font-condensed">
-                  {INSTRUCTOR.bio}
-                </p>
-              </div>
-            </div>
           </div>
 
           {/* Right column — booking card */}
