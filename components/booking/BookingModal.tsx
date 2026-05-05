@@ -11,7 +11,6 @@ import {
   CalendarDays,
   Clock,
   Users,
-  CheckCircle,
   AlertCircle,
   Tag,
   Check,
@@ -71,17 +70,57 @@ function makeParticipant(): ParticipantData {
 
 // ─── Shared sub-components ────────────────────────────────────────────────────
 
-function SegmentedProgress({ current }: { current: number }) {
+const STEP_LABELS = ["Anzahl", "Teilnehmerdaten", "Rechnungsempfänger", "Bestätigung"]
+
+function ModalStepHeader({
+  currentStep,
+  onClose,
+}: {
+  currentStep: 1 | 2 | 3 | 4
+  onClose: () => void
+}) {
   return (
-    <div className="flex gap-1">
-      {[1, 2, 3, 4].map((i) => (
-        <div
-          key={i}
-          className={`h-1 flex-1 rounded-full transition-colors duration-300 ${
-            i <= current ? "bg-wine-red" : "bg-dark/10"
-          }`}
-        />
-      ))}
+    <div className="bg-[#F8F5DA] px-8 pt-6 pb-5 shrink-0">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center">
+          {([1, 2, 3, 4] as const).map((step, i) => {
+            const isDone = step < currentStep
+            const isCurrent = step === currentStep
+            return (
+              <div key={step} className="flex items-center">
+                <div
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold transition-colors ${
+                    isCurrent
+                      ? "bg-wine-red text-white"
+                      : isDone
+                      ? "bg-wine-red/15 text-wine-red"
+                      : "bg-dark/8 text-dark/30"
+                  }`}
+                >
+                  {isDone ? <Check className="w-3 h-3" /> : step}
+                </div>
+                {i < 3 && (
+                  <div
+                    className={`w-7 h-px mx-1 ${
+                      step < currentStep ? "bg-wine-red/30" : "bg-dark/10"
+                    }`}
+                  />
+                )}
+              </div>
+            )
+          })}
+          <span className="ml-3 text-sm font-bold text-wine-red">
+            {STEP_LABELS[currentStep - 1]}
+          </span>
+        </div>
+        <button
+          onClick={onClose}
+          className="text-dark/40 hover:text-dark transition-colors"
+          aria-label="Schließen"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      </div>
     </div>
   )
 }
@@ -209,23 +248,10 @@ function Step1({
   return (
     <div className="flex flex-col max-h-[90vh]">
       {/* Header */}
-      <div className="bg-[#F8F5DA] px-8 pt-8 pb-6 shrink-0">
-        <div className="flex items-start justify-between mb-5">
-          <div>
-            <p className="text-[0.65rem] font-bold uppercase tracking-widest text-wine-red/60 mb-2">
-              Buchungsschritt 1 von 4
-            </p>
-            <SegmentedProgress current={1} />
-          </div>
-          <button
-            onClick={onClose}
-            className="text-dark/40 hover:text-dark transition-colors ml-6"
-            aria-label="Schließen"
-          >
-            <X className="w-5 h-5" />
-          </button>
-        </div>
-        {/* Course strip */}
+      <ModalStepHeader currentStep={1} onClose={onClose} />
+
+      {/* Course strip */}
+      <div className="bg-[#F8F5DA] px-8 pb-5 shrink-0">
         <div className="flex items-center gap-3 bg-white p-3 rounded-xl border border-dark/5">
           <div className="w-12 h-12 rounded-lg overflow-hidden shrink-0">
             {course.photo_url ? (
@@ -247,7 +273,7 @@ function Step1({
       </div>
 
       {/* Body */}
-      <div className="px-8 py-10 flex flex-col items-center text-center flex-1 overflow-y-auto">
+      <div className="px-8 py-10 flex flex-col items-center text-center flex-1 min-h-0 overflow-y-auto">
         <h2 className="text-3xl font-bold text-wine-red mb-3">
           Wie viele Teilnehmer?
         </h2>
@@ -324,6 +350,7 @@ function Step2({
   onUpdateParticipant,
   onBack,
   onNext,
+  onClose,
 }: {
   course: CourseData
   count: number
@@ -333,25 +360,18 @@ function Step2({
   onUpdateParticipant: (i: number, field: keyof ParticipantData, value: string) => void
   onBack: () => void
   onNext: () => void
+  onClose: () => void
 }) {
   return (
     <div className="flex flex-col max-h-[90vh]">
       {/* Header */}
-      <div className="bg-[#F8F5DA] px-8 pt-8 pb-5 shrink-0">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-2xl font-bold text-wine-red">Teilnehmerdaten</h2>
-          <span className="text-xs font-bold uppercase tracking-widest text-wine-red/60">
-            Schritt 2 von 4
-          </span>
-        </div>
-        <SegmentedProgress current={2} />
-      </div>
+      <ModalStepHeader currentStep={2} onClose={onClose} />
 
       {/* Course strip */}
       <CourseStrip course={course} count={count} total={total} />
 
       {/* Scrollable form */}
-      <div className="flex-1 overflow-y-auto px-8 py-8 space-y-10">
+      <div className="flex-1 min-h-0 overflow-y-auto px-8 py-8 space-y-10">
         {participants.map((participant, i) => {
           const isPrimary = i === 0
           return (
@@ -463,6 +483,7 @@ function Step3({
   onInvoiceChange,
   onBack,
   onNext,
+  onClose,
 }: {
   course: CourseData
   total: number
@@ -471,15 +492,14 @@ function Step3({
   onInvoiceChange: (updates: Partial<InvoiceData>) => void
   onBack: () => void
   onNext: () => void
+  onClose: () => void
 }) {
   const p1 = participants[0]
 
   return (
     <div className="flex flex-col max-h-[90vh]">
-      {/* Progress bar */}
-      <div className="px-8 pt-6 pb-0 bg-[#F8F5DA] shrink-0">
-        <SegmentedProgress current={3} />
-      </div>
+      {/* Header */}
+      <ModalStepHeader currentStep={3} onClose={onClose} />
 
       {/* Course strip */}
       <div className="bg-wine-red text-white px-8 py-3 flex items-center justify-between gap-4 shrink-0">
@@ -510,7 +530,7 @@ function Step3({
       </div>
 
       {/* Content */}
-      <div className="flex-1 overflow-y-auto px-8 py-8">
+      <div className="flex-1 min-h-0 overflow-y-auto px-8 py-8">
         <p className="text-xs font-bold uppercase tracking-widest text-wine-red/60 mb-1">
           Schritt 3 von 4
         </p>
@@ -707,6 +727,7 @@ function Step4({
   onSubmit,
   submitting = false,
   submitError,
+  onClose,
 }: {
   course: CourseData
   count: number
@@ -726,6 +747,7 @@ function Step4({
   onSubmit: () => void
   submitting?: boolean
   submitError?: string | null
+  onClose: () => void
 }) {
   const totalBeforeDiscount = count * course.price
   const total = totalBeforeDiscount - voucherDiscount
@@ -742,66 +764,38 @@ function Step4({
           .join(", "),
       }
 
-  const PROGRESS_STEPS = ["Kursauswahl", "Teilnehmer", "Zahlung", "Bestätigung"]
-
   return (
-    <div className="flex max-h-[90vh] overflow-hidden">
-      {/* Sidebar */}
-      <aside className="hidden md:flex flex-col w-60 bg-[#F8F5DA] border-r border-dark/8 p-8 gap-10 shrink-0 overflow-y-auto">
-        <div>
-          <p className="text-[0.6rem] font-bold uppercase tracking-widest text-wine-red/60 mb-4">
-            Fortschritt
-          </p>
-          <div className="space-y-3">
-            {PROGRESS_STEPS.map((label, i) => {
-              const isCurrent = i === 3
-              const isDone = i < 3
-              return (
-                <div
-                  key={label}
-                  className={`flex items-center gap-3 ${
-                    isCurrent ? "text-wine-red" : "text-dark/35"
-                  }`}
-                >
-                  {isDone ? (
-                    <CheckCircle className="w-5 h-5 shrink-0 fill-current" />
-                  ) : (
-                    <div className="w-5 h-5 rounded-full border-2 border-wine-red flex items-center justify-center text-[9px] font-bold shrink-0">
-                      4
-                    </div>
-                  )}
-                  <span className={`text-sm ${isCurrent ? "font-bold" : "font-medium"}`}>
-                    {label}
-                  </span>
-                </div>
-              )
-            })}
-          </div>
-        </div>
+    <div className="flex flex-col max-h-[90vh]">
+      {/* Header */}
+      <ModalStepHeader currentStep={4} onClose={onClose} />
 
-        {/* Course card */}
-        <div className="p-4 bg-white rounded-xl space-y-3">
-          <div className="aspect-video rounded-lg overflow-hidden">
-            {course.photo_url ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={course.photo_url} alt={course.title} className="w-full h-full object-cover" />
-            ) : (
-              <ImagePlaceholder label="Course photo" className="w-full h-full" />
-            )}
+      {/* Two-column body */}
+      <div className="flex flex-1 min-h-0 overflow-hidden">
+        {/* Sidebar */}
+        <aside className="hidden md:flex flex-col w-60 bg-[#F8F5DA] border-r border-dark/8 p-8 shrink-0 min-h-0 overflow-y-auto">
+          {/* Course card */}
+          <div className="p-4 bg-white rounded-xl space-y-3">
+            <div className="aspect-video rounded-lg overflow-hidden">
+              {course.photo_url ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={course.photo_url} alt={course.title} className="w-full h-full object-cover" />
+              ) : (
+                <ImagePlaceholder label="Course photo" className="w-full h-full" />
+              )}
+            </div>
+            <p className="text-[0.6rem] text-wine-red/50 uppercase tracking-widest font-bold">
+              Kurs
+            </p>
+            <p className="text-xs font-bold text-wine-red leading-snug">{course.title}</p>
+            <p className="text-xs text-dark/50">
+              {course.dateFormatted}, {course.startTime} Uhr
+            </p>
           </div>
-          <p className="text-[0.6rem] text-wine-red/50 uppercase tracking-widest font-bold">
-            Kurs
-          </p>
-          <p className="text-xs font-bold text-wine-red leading-snug">{course.title}</p>
-          <p className="text-xs text-dark/50">
-            {course.dateFormatted}, {course.startTime} Uhr
-          </p>
-        </div>
-      </aside>
+        </aside>
 
-      {/* Main content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="flex-1 overflow-y-auto px-8 md:px-10 py-8 space-y-8">
+        {/* Main content */}
+        <div className="flex-1 flex flex-col overflow-hidden min-h-0">
+          <div className="flex-1 min-h-0 overflow-y-auto px-8 md:px-10 py-8 space-y-8">
           <div>
             <h2 className="text-2xl font-bold text-wine-red mb-1">
               Übersicht &amp; Bestätigung
@@ -1015,6 +1009,7 @@ function Step4({
         </div>
       </div>
     </div>
+  </div>
   )
 }
 
@@ -1215,6 +1210,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
               onNext={() => {
                 if (validateStep2()) setStep(3)
               }}
+              onClose={handleClose}
             />
           )}
 
@@ -1229,6 +1225,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
               }
               onBack={() => setStep(2)}
               onNext={() => setStep(4)}
+              onClose={handleClose}
             />
           )}
 
@@ -1258,6 +1255,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
               onSubmit={handleSubmit}
               submitting={submitting}
               submitError={submitError}
+              onClose={handleClose}
             />
           )}
       </div>
