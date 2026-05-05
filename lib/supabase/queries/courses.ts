@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server"
+import { createClient, createServiceClient } from "@/lib/supabase/server"
 import type { Database } from "@/types/database"
 
 type CourseRow = Database["public"]["Tables"]["courses"]["Row"]
@@ -27,8 +27,11 @@ export async function getCourses(dietary?: string[]): Promise<CourseWithCapacity
   if (error || !courses) return []
 
   // Fetch booked participant counts for all returned courses
+  // Service client bypasses RLS — needed to count participants across all bookings
+  // (anon RLS only sees participants from the current user's own bookings)
+  const serviceSupabase = await createServiceClient()
   const courseIds = courses.map((c) => c.id)
-  const { data: activeBookings } = await supabase
+  const { data: activeBookings } = await serviceSupabase
     .from("bookings")
     .select("id, course_id")
     .in("course_id", courseIds)
@@ -37,7 +40,7 @@ export async function getCourses(dietary?: string[]): Promise<CourseWithCapacity
   const countMap: Record<string, number> = {}
   if (activeBookings && activeBookings.length > 0) {
     const bookingIds = activeBookings.map((b) => b.id)
-    const { data: participants } = await supabase
+    const { data: participants } = await serviceSupabase
       .from("participants")
       .select("booking_id")
       .in("booking_id", bookingIds)
@@ -72,7 +75,8 @@ export async function getCourseBySlug(
 
   if (error || !course) return null
 
-  const { data: bookings } = await supabase
+  const serviceSupabase = await createServiceClient()
+  const { data: bookings } = await serviceSupabase
     .from("bookings")
     .select("id")
     .eq("course_id", course.id)
@@ -80,7 +84,7 @@ export async function getCourseBySlug(
 
   const bookingIds = (bookings ?? []).map((b) => b.id)
   const { count } = bookingIds.length > 0
-    ? await supabase
+    ? await serviceSupabase
         .from("participants")
         .select("*", { count: "exact", head: true })
         .in("booking_id", bookingIds)
@@ -107,7 +111,8 @@ export async function getCourseById(
 
   if (error || !course) return null
 
-  const { data: bookings } = await supabase
+  const serviceSupabase = await createServiceClient()
+  const { data: bookings } = await serviceSupabase
     .from("bookings")
     .select("id")
     .eq("course_id", course.id)
@@ -115,7 +120,7 @@ export async function getCourseById(
 
   const bookingIds = (bookings ?? []).map((b) => b.id)
   const { count } = bookingIds.length > 0
-    ? await supabase
+    ? await serviceSupabase
         .from("participants")
         .select("*", { count: "exact", head: true })
         .in("booking_id", bookingIds)
