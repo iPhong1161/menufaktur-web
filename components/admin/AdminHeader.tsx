@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Bell, CircleUser, Search } from "lucide-react"
+import { Bell, CircleUser } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { AdminLogoutButton } from "./AdminLogoutButton"
 
@@ -54,15 +54,7 @@ export function AdminHeader() {
 
         {/* Right side */}
         <div className="flex items-center gap-3">
-          <div className="relative hidden lg:block">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark/30" />
-            <input
-              type="text"
-              placeholder="Suchen..."
-              className="pl-9 pr-4 py-2 bg-[#ECE9CF] border-none rounded-xl text-sm w-56 focus:outline-none focus:ring-2 focus:ring-wine-red/20 text-dark placeholder:text-dark/30"
-            />
-          </div>
-          <button className="p-2 hover:bg-wine-red/5 rounded-lg text-dark/60 transition-colors">
+<button className="p-2 hover:bg-wine-red/5 rounded-lg text-dark/60 transition-colors">
             <Bell className="w-5 h-5" />
           </button>
           <Link href="/admin/einstellungen" className="p-2 hover:bg-wine-red/5 rounded-lg text-dark/60 transition-colors">
