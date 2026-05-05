@@ -2,40 +2,36 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { CalendarDays, UserPlus, UtensilsCrossed, AlertCircle, Pencil, Ticket, Users, Settings, BookOpen } from "lucide-react"
 import { getAdminDashboardStats } from "@/lib/supabase/queries/admin-stats"
+import { getUpcomingCoursesAdmin } from "@/lib/supabase/queries/admin-courses"
+import { getRecentBookingsAdmin } from "@/lib/supabase/queries/admin-bookings"
 
 export const metadata: Metadata = { title: "Dashboard — menufaktur Admin" }
 
-const UPCOMING_COURSES = [
-  { date: "24. Mai, 18:00", name: "Die Kunst der Saucen", booked: 12, total: 12 },
-  { date: "25. Mai, 17:30", name: "Sommerküche: Leicht & Edel", booked: 8, total: 12 },
-  { date: "27. Mai, 19:00", name: "Wild & Wein Pairing", booked: 10, total: 12 },
-  { date: "01. Jun, 18:00", name: "Grundlagen: Brot backen", booked: 4, total: 10 },
-  { date: "03. Jun, 17:00", name: "Meeresfrüchte & Krustentiere", booked: 11, total: 12 },
-]
-
-const RECENT_BOOKINGS = [
-  { initials: "MW", name: "Dr. Marcus Weber", course: "Die Kunst der Saucen", time: "Vor 12 Min.", status: "Bezahlt" },
-  { initials: "EF", name: "Elena Fischer", course: "Wild & Wein Pairing", time: "Vor 45 Min.", status: "Offen" },
-  { initials: "TM", name: "Thomas Müller", course: "Sommerküche", time: "Vor 2 Std.", status: "Bezahlt" },
-  { initials: "SB", name: "Sarah Berger", course: "Grundlagen: Brot", time: "Vor 3 Std.", status: "Offen" },
-  { initials: "HS", name: "Hans-Peter Schmidt", course: "Die Kunst der Saucen", time: "Vor 5 Std.", status: "Bezahlt" },
-]
+const PAYMENT_STATUS: Record<string, { label: string; cls: string }> = {
+  paid: { label: "Bezahlt", cls: "bg-green-100 text-green-800" },
+  unpaid: { label: "Offen", cls: "bg-amber-100 text-amber-800" },
+  refunded: { label: "Erstattet", cls: "bg-dark/8 text-dark/50" },
+}
 
 function StatusBadge({ status }: { status: string }) {
-  const map: Record<string, string> = {
-    Bezahlt: "bg-green-100 text-green-800",
-    Offen: "bg-amber-100 text-amber-800",
-    Storniert: "bg-red-100 text-red-800",
-  }
+  const { label, cls } = PAYMENT_STATUS[status] ?? { label: status, cls: "bg-dark/8 text-dark/50" }
   return (
-    <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${map[status] ?? "bg-dark/8 text-dark/50"}`}>
-      {status}
+    <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${cls}`}>
+      {label}
     </span>
   )
 }
 
+function fmtCourseDate(d: string) {
+  return new Date(d).toLocaleDateString("de-DE", { day: "2-digit", month: "short" })
+}
+
 export default async function AdminDashboardPage() {
-  const stats = await getAdminDashboardStats()
+  const [stats, upcomingCourses, recentBookings] = await Promise.all([
+    getAdminDashboardStats(),
+    getUpcomingCoursesAdmin(),
+    getRecentBookingsAdmin(),
+  ])
 
   const KPIs = [
     {
@@ -191,22 +187,36 @@ export default async function AdminDashboardPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-dark/5">
-                {UPCOMING_COURSES.map((c) => {
-                  const pct = Math.round((c.booked / c.total) * 100)
+                {upcomingCourses.length === 0 && (
+                  <tr>
+                    <td colSpan={4} className="px-6 py-8 text-center text-dark/40 font-condensed text-sm">
+                      Keine anstehenden Kurse.
+                    </td>
+                  </tr>
+                )}
+                {upcomingCourses.map((c) => {
+                  const pct = c.capacity > 0 ? Math.round((c.booked_count / c.capacity) * 100) : 0
                   return (
-                    <tr key={c.name} className="hover:bg-[#F8F5DA]/30 transition-colors">
-                      <td className="px-6 py-5 text-sm text-wine-red font-condensed">{c.date}</td>
-                      <td className="px-6 py-5 font-bold text-dark text-sm">{c.name}</td>
+                    <tr key={c.id} className="hover:bg-[#F8F5DA]/30 transition-colors">
+                      <td className="px-6 py-5 text-sm text-wine-red font-condensed whitespace-nowrap">
+                        {fmtCourseDate(c.date)}, {c.start_time.slice(0, 5)}
+                      </td>
+                      <td className="px-6 py-5 font-bold text-dark text-sm">{c.title}</td>
                       <td className="px-6 py-5">
                         <div className="flex items-center gap-2">
                           <div className="w-20 h-1.5 bg-wine-red/10 rounded-full overflow-hidden">
                             <div className="h-full bg-wine-red rounded-full" style={{ width: `${pct}%` }} />
                           </div>
-                          <span className="text-xs font-bold text-dark/60">{c.booked}/{c.total}</span>
+                          <span className="text-xs font-bold text-dark/60">
+                            {c.booked_count}/{c.capacity}
+                          </span>
                         </div>
                       </td>
                       <td className="px-6 py-5 text-right">
-                        <Link href="/admin/kurse" className="p-2 hover:bg-wine-red/5 rounded-lg inline-flex text-dark/40 hover:text-wine-red transition-colors">
+                        <Link
+                          href={`/admin/kurse/${c.id}/bearbeiten`}
+                          className="p-2 hover:bg-wine-red/5 rounded-lg inline-flex text-dark/40 hover:text-wine-red transition-colors"
+                        >
                           <Pencil className="w-4 h-4" />
                         </Link>
                       </td>
@@ -225,20 +235,35 @@ export default async function AdminDashboardPage() {
           </div>
           <div className="bg-white rounded-xl p-6 shadow-sm border border-dark/5">
             <div className="space-y-5">
-              {RECENT_BOOKINGS.map((b) => (
-                <div key={b.name} className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-wine-red/10 flex items-center justify-center text-wine-red font-bold text-xs shrink-0">
-                    {b.initials}
-                  </div>
-                  <div className="flex-grow min-w-0">
-                    <p className="font-bold text-dark text-sm truncate">{b.name}</p>
-                    <p className="text-[10px] text-dark/40 font-condensed uppercase tracking-wide">
-                      {b.course} · {b.time}
-                    </p>
-                  </div>
-                  <StatusBadge status={b.status} />
-                </div>
-              ))}
+              {recentBookings.length === 0 && (
+                <p className="text-center text-dark/40 font-condensed text-sm py-4">
+                  Keine Buchungen vorhanden.
+                </p>
+              )}
+              {recentBookings.map((b) => {
+                const firstName = b.profile?.first_name ?? ""
+                const lastName = b.profile?.last_name ?? ""
+                const name = `${firstName} ${lastName}`.trim() || "Gast"
+                const initials = `${firstName[0] ?? ""}${lastName[0] ?? ""}`.toUpperCase() || "G"
+                return (
+                  <Link
+                    key={b.id}
+                    href={`/admin/buchungen/${b.booking_number}`}
+                    className="flex items-center gap-4 hover:bg-[#F8F5DA]/40 -mx-2 px-2 py-1 rounded-lg transition-colors"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-wine-red/10 flex items-center justify-center text-wine-red font-bold text-xs shrink-0">
+                      {initials}
+                    </div>
+                    <div className="flex-grow min-w-0">
+                      <p className="font-bold text-dark text-sm truncate">{name}</p>
+                      <p className="text-[10px] text-dark/40 font-condensed uppercase tracking-wide truncate">
+                        {b.course?.title ?? "—"}
+                      </p>
+                    </div>
+                    <StatusBadge status={b.payment_status} />
+                  </Link>
+                )
+              })}
             </div>
             <Link
               href="/admin/buchungen"
