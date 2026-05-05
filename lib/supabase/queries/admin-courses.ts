@@ -36,6 +36,88 @@ export async function getCoursesAdmin(): Promise<AdminCourse[]> {
   return courses.map((c) => ({ ...c, booked_count: countMap[c.id] ?? 0 }))
 }
 
+export interface CourseBookingAdmin {
+  id: string
+  booking_number: string
+  status: "pending" | "confirmed" | "cancelled" | "refunded"
+  payment_status: "unpaid" | "paid" | "refunded"
+  payment_method: string
+  total_amount: number
+  created_at: string
+  participants: Array<{
+    id: string
+    first_name: string
+    last_name: string
+    email: string
+    phone: string | null
+    food_preferences: string[]
+    is_primary: boolean
+  }>
+}
+
+export interface CourseDetailAdmin {
+  course: CourseRow
+  bookings: CourseBookingAdmin[]
+  total_booked_spots: number
+  remaining_spots: number
+  total_revenue: number
+}
+
+export async function getCourseDetailAdmin(id: string): Promise<CourseDetailAdmin | null> {
+  const supabase = await createServiceClient()
+
+  const [courseResult, bookingsResult] = await Promise.all([
+    supabase.from("courses").select("*").eq("id", id).single(),
+    supabase
+      .from("bookings")
+      .select("id, booking_number, status, payment_status, payment_method, total_amount, created_at")
+      .eq("course_id", id)
+      .order("created_at", { ascending: false }),
+  ])
+
+  if (courseResult.error || !courseResult.data) return null
+
+  const course = courseResult.data
+  const bookings = bookingsResult.data ?? []
+
+  if (bookings.length === 0) {
+    return { course, bookings: [], total_booked_spots: 0, remaining_spots: course.capacity, total_revenue: 0 }
+  }
+
+  const bookingIds = bookings.map((b) => b.id)
+  const { data: participants } = await supabase
+    .from("participants")
+    .select("id, booking_id, first_name, last_name, email, phone, food_preferences, is_primary")
+    .in("booking_id", bookingIds)
+
+  const participantsByBooking: Record<string, CourseBookingAdmin["participants"]> = {}
+  for (const p of participants ?? []) {
+    if (!participantsByBooking[p.booking_id]) participantsByBooking[p.booking_id] = []
+    participantsByBooking[p.booking_id].push(p as CourseBookingAdmin["participants"][number])
+  }
+
+  const activeStatuses = new Set(["pending", "confirmed"])
+  let total_booked_spots = 0
+  let total_revenue = 0
+
+  const enrichedBookings: CourseBookingAdmin[] = bookings.map((b) => {
+    const bParticipants = participantsByBooking[b.id] ?? []
+    if (activeStatuses.has(b.status)) {
+      total_booked_spots += bParticipants.length
+      total_revenue += Number(b.total_amount)
+    }
+    return { ...b, participants: bParticipants }
+  })
+
+  return {
+    course,
+    bookings: enrichedBookings,
+    total_booked_spots,
+    remaining_spots: course.capacity - total_booked_spots,
+    total_revenue,
+  }
+}
+
 export async function getCourseByIdAdmin(id: string): Promise<CourseRow | null> {
   const supabase = await createServiceClient()
   const { data, error } = await supabase.from("courses").select("*").eq("id", id).single()

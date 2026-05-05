@@ -2,8 +2,8 @@
 
 import { useState, useTransition } from "react"
 import Link from "next/link"
-import { Search, Eye, Pencil, Copy, Trash2 } from "lucide-react"
-import { deleteCourseAction, duplicateCourseAction } from "@/app/admin/kurse/actions"
+import { Search, Eye, Pencil, LayoutList, Trash2 } from "lucide-react"
+import { deleteCourseAction } from "@/app/admin/kurse/actions"
 import type { AdminCourse } from "@/lib/supabase/queries/admin-courses"
 
 const STATUS_STYLES: Record<string, string> = {
@@ -46,7 +46,6 @@ export function KurseClient({ courses }: { courses: AdminCourse[] }) {
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("")
   const [, startTransition] = useTransition()
-  const [rowErrors, setRowErrors] = useState<Record<string, string>>({})
 
   const filtered = courses.filter((c) => {
     const matchesSearch =
@@ -62,18 +61,7 @@ export function KurseClient({ courses }: { courses: AdminCourse[] }) {
     startTransition(async () => {
       const result = await deleteCourseAction(id)
       if ("error" in result) {
-        setRowErrors((prev) => ({ ...prev, [id]: result.error }))
-      } else {
-        window.location.reload()
-      }
-    })
-  }
-
-  function handleDuplicate(id: string) {
-    startTransition(async () => {
-      const result = await duplicateCourseAction(id)
-      if ("error" in result) {
-        setRowErrors((prev) => ({ ...prev, [id]: result.error }))
+        alert(result.error)
       } else {
         window.location.reload()
       }
@@ -151,9 +139,6 @@ export function KurseClient({ courses }: { courses: AdminCourse[] }) {
                     <p className="text-xs text-dark/40 font-mono mt-0.5">
                       {c.id.slice(0, 8)}…
                     </p>
-                    {rowErrors[c.id] && (
-                      <p className="text-xs text-red-600 mt-1">{rowErrors[c.id]}</p>
-                    )}
                   </td>
                   <td className="px-6 py-5">
                     <p className="font-bold text-sm text-dark">{fmtDate(c.date)}</p>
@@ -186,25 +171,27 @@ export function KurseClient({ courses }: { courses: AdminCourse[] }) {
                   <td className="px-6 py-5 text-right">
                     <div className="flex items-center justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Link
+                        href={`/admin/kurse/${c.id}`}
+                        className="p-2 text-dark/40 hover:text-wine-red rounded-lg transition-colors inline-flex"
+                        title="Kursdetails"
+                      >
+                        <LayoutList className="w-4 h-4" />
+                      </Link>
+                      <Link
                         href={`/kurse/${c.slug}`}
                         target="_blank"
                         className="p-2 text-dark/40 hover:text-wine-red rounded-lg transition-colors inline-flex"
+                        title="Öffentliche Vorschau"
                       >
                         <Eye className="w-4 h-4" />
                       </Link>
                       <Link
                         href={`/admin/kurse/${c.id}/bearbeiten`}
                         className="p-2 text-dark/40 hover:text-wine-red rounded-lg transition-colors inline-flex"
+                        title="Bearbeiten"
                       >
                         <Pencil className="w-4 h-4" />
                       </Link>
-                      <button
-                        onClick={() => handleDuplicate(c.id)}
-                        className="p-2 text-dark/40 hover:text-wine-red rounded-lg transition-colors"
-                        title="Kurs duplizieren"
-                      >
-                        <Copy className="w-4 h-4" />
-                      </button>
                       <button
                         onClick={() => handleDelete(c.id)}
                         className="p-2 text-dark/40 hover:text-red-500 rounded-lg transition-colors"
