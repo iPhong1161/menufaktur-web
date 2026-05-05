@@ -1,6 +1,24 @@
 import { createClient } from "@/lib/supabase/server"
 import type { Database } from "@/types/database"
 
+export interface UserBooking {
+  id: string
+  booking_number: string
+  status: "pending" | "confirmed" | "cancelled" | "refunded"
+  total_amount: number
+  created_at: string
+  user_id: string
+  course_id: string
+  course: {
+    id: string
+    title: string
+    date: string
+    start_time: string
+    end_time: string
+    photo_url: string | null
+  } | null
+}
+
 type BookingInsert = Database["public"]["Tables"]["bookings"]["Insert"]
 type ParticipantInsert = Database["public"]["Tables"]["participants"]["Insert"]
 type InvoiceRecipientInsert = Database["public"]["Tables"]["invoice_recipients"]["Insert"]
@@ -75,7 +93,7 @@ export async function getBookingByNumber(booking_number: string) {
   return data
 }
 
-export async function getUserBookings() {
+export async function getUserBookings(): Promise<UserBooking[]> {
   const supabase = await createClient()
 
   const { data: { user } } = await supabase.auth.getUser()

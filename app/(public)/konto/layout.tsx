@@ -1,9 +1,11 @@
-"use client"
-
+import { headers } from "next/headers"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { Calendar, Ticket, User, LogOut } from "lucide-react"
+import { redirect } from "next/navigation"
+import { Calendar, Ticket, User } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { createClient } from "@/lib/supabase/server"
+import { getProfile } from "@/lib/supabase/queries/profiles"
+import { KontoLogoutButton } from "@/components/konto/KontoLogoutButton"
 
 const NAV_ITEMS = [
   { href: "/konto/buchungen", icon: Calendar, label: "Meine Buchungen" },
@@ -11,8 +13,17 @@ const NAV_ITEMS = [
   { href: "/konto/profil", icon: User, label: "Profil" },
 ]
 
-export default function KontoLayout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
+export default async function KontoLayout({ children }: { children: React.ReactNode }) {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+
+  if (!user) {
+    const pathname = (await headers()).get("x-pathname") ?? "/konto/buchungen"
+    redirect(`/login?redirect=${encodeURIComponent(pathname)}`)
+  }
+
+  const profile = await getProfile()
+  const pathname = (await headers()).get("x-pathname") ?? ""
 
   return (
     <div className="bg-light-beige min-h-screen">
@@ -24,7 +35,9 @@ export default function KontoLayout({ children }: { children: React.ReactNode })
                 <p className="text-[10px] font-bold uppercase tracking-widest text-wine-red/60 mb-1">
                   menufaktur
                 </p>
-                <p className="text-dark/50 font-condensed text-sm">Guten Tag, Anna</p>
+                <p className="text-dark/50 font-condensed text-sm truncate">
+                  Guten Tag, {profile?.first_name ?? user.email}
+                </p>
               </div>
               <ul className="space-y-1">
                 {NAV_ITEMS.map(({ href, icon: Icon, label }) => (
@@ -45,13 +58,7 @@ export default function KontoLayout({ children }: { children: React.ReactNode })
                 ))}
               </ul>
               <div className="mt-8 pt-6 border-t border-dark/8">
-                <Link
-                  href="/login"
-                  className="flex items-center gap-3 px-4 py-3 text-sm font-condensed text-dark/40 hover:bg-wine-red/5 rounded-xl transition-all"
-                >
-                  <LogOut className="w-4 h-4 shrink-0" />
-                  Abmelden
-                </Link>
+                <KontoLogoutButton />
               </div>
             </nav>
           </aside>

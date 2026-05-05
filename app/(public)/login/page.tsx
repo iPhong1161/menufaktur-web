@@ -2,12 +2,11 @@
 
 import { Suspense, useState } from "react"
 import Link from "next/link"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 
 function LoginForm() {
-  const router = useRouter()
   const searchParams = useSearchParams()
   const redirect = searchParams.get("redirect") ?? "/konto/buchungen"
 
@@ -42,8 +41,7 @@ function LoginForm() {
       return
     }
 
-    router.push(redirect)
-    router.refresh()
+    window.location.href = redirect
   }
 
   const inputClass = (field: "email" | "password") =>
