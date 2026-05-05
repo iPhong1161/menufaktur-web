@@ -78,7 +78,7 @@ async function fetchBookingDeps(
       ? supabase.from("profiles").select("id, first_name, last_name, email").in("id", userIds)
       : Promise.resolve({ data: [] as Array<{ id: string } & ProfileRow> }),
     bookingIds.length > 0
-      ? supabase.from("participants").select("booking_id").in("booking_id", bookingIds)
+      ? supabase.from("participants").select("booking_id").in("booking_id", bookingIds).eq("cancelled", false)
       : Promise.resolve({ data: [] as Array<{ booking_id: string }> }),
   ])
 

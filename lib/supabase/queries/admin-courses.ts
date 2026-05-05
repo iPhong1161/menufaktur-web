@@ -35,6 +35,7 @@ export async function getCoursesAdmin(): Promise<AdminCourse[]> {
       .from("participants")
       .select("booking_id")
       .in("booking_id", bookingIds)
+      .eq("cancelled", false)
 
     const bookingCourseMap: Record<string, string> = {}
     for (const b of activeBookings) bookingCourseMap[b.id] = b.course_id
@@ -64,6 +65,7 @@ export interface CourseBookingAdmin {
     phone: string | null
     food_preferences: string[]
     is_primary: boolean
+    cancelled: boolean
   }>
 }
 
@@ -99,7 +101,7 @@ export async function getCourseDetailAdmin(id: string): Promise<CourseDetailAdmi
   const bookingIds = bookings.map((b) => b.id)
   const { data: participants } = await supabase
     .from("participants")
-    .select("id, booking_id, first_name, last_name, email, phone, food_preferences, is_primary")
+    .select("id, booking_id, first_name, last_name, email, phone, food_preferences, is_primary, cancelled")
     .in("booking_id", bookingIds)
 
   const participantsByBooking: Record<string, CourseBookingAdmin["participants"]> = {}
@@ -115,7 +117,7 @@ export async function getCourseDetailAdmin(id: string): Promise<CourseDetailAdmi
   const enrichedBookings: CourseBookingAdmin[] = bookings.map((b) => {
     const bParticipants = participantsByBooking[b.id] ?? []
     if (activeStatuses.has(b.status)) {
-      total_booked_spots += bParticipants.length
+      total_booked_spots += bParticipants.filter((p) => !p.cancelled).length
       total_revenue += Number(b.total_amount)
     }
     return { ...b, participants: bParticipants }
@@ -210,6 +212,7 @@ export async function getUpcomingCoursesAdmin(): Promise<AdminCourse[]> {
       .from("participants")
       .select("booking_id")
       .in("booking_id", bookingIds)
+      .eq("cancelled", false)
 
     const bookingCourseMap: Record<string, string> = {}
     for (const b of activeBookings) bookingCourseMap[b.id] = b.course_id

@@ -97,6 +97,7 @@ export type Database = {
           food_preferences: string[]
           food_notes: string | null
           is_primary: boolean
+          cancelled: boolean
         }
         Insert: {
           id?: string
@@ -108,6 +109,7 @@ export type Database = {
           food_preferences?: string[]
           food_notes?: string | null
           is_primary?: boolean
+          cancelled?: boolean
         }
         Update: Partial<Database["public"]["Tables"]["participants"]["Insert"]>
         Relationships: []

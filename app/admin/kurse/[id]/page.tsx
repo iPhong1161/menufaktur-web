@@ -11,6 +11,7 @@ import {
   ExternalLink,
 } from "lucide-react"
 import { getCourseDetailAdmin } from "@/lib/supabase/queries/admin-courses"
+import ParticipantListAdmin from "@/components/admin/ParticipantListAdmin"
 
 const GERMAN_MONTHS = [
   "Januar","Februar","März","April","Mai","Juni",
@@ -71,6 +72,16 @@ export default async function AdminKursDetailPage({
 
   const { course, bookings, total_booked_spots, remaining_spots, total_revenue } = detail
   const courseStatus = COURSE_STATUS[course.status] ?? { label: course.status, style: "bg-dark/8 text-dark/40" }
+
+  const flatParticipants = bookings
+    .filter((b) => b.status === "pending" || b.status === "confirmed")
+    .flatMap((b) =>
+      b.participants.map((p) => ({
+        ...p,
+        booking_number: b.booking_number,
+        courseId: id,
+      }))
+    )
 
   return (
     <main className="flex-grow pt-28 pb-16 px-8 max-w-screen-xl mx-auto w-full">
@@ -254,6 +265,17 @@ export default async function AdminKursDetailPage({
             </table>
           </div>
         )}
+      </div>
+
+      {/* Teilnehmerliste */}
+      <div className="bg-white rounded-xl border border-dark/5 shadow-sm overflow-hidden mt-6">
+        <div className="px-8 py-5 border-b border-dark/5">
+          <h2 className="text-sm font-bold text-dark">
+            Teilnehmerliste
+            <span className="ml-2 text-dark/40 font-normal">({flatParticipants.length})</span>
+          </h2>
+        </div>
+        <ParticipantListAdmin participants={flatParticipants} />
       </div>
     </main>
   )

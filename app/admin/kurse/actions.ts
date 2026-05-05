@@ -8,6 +8,7 @@ import {
   deleteCourse,
   duplicateCourse,
 } from "@/lib/supabase/queries/admin-courses"
+import { createServiceClient } from "@/lib/supabase/server"
 import type { Database } from "@/types/database"
 
 type CourseInsert = Database["public"]["Tables"]["courses"]["Insert"]
@@ -48,5 +49,20 @@ export async function duplicateCourseAction(
   const result = await duplicateCourse(id)
   if ("error" in result) return { error: result.error }
   revalidatePath("/admin/kurse")
+  return { success: true }
+}
+
+export async function setParticipantCancelledAction(
+  participantId: string,
+  cancelled: boolean,
+  courseId: string
+): Promise<{ error: string } | { success: true }> {
+  const supabase = await createServiceClient()
+  const { error } = await supabase
+    .from("participants")
+    .update({ cancelled })
+    .eq("id", participantId)
+  if (error) return { error: error.message }
+  revalidatePath(`/admin/kurse/${courseId}`)
   return { success: true }
 }

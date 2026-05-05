@@ -49,6 +49,7 @@ export async function POST(req: NextRequest) {
           .from("participants")
           .select("*", { count: "exact", head: true })
           .in("booking_id", bookingIds)
+          .eq("cancelled", false)
       : { count: 0 }
 
     const remaining = course.capacity - (bookedCount ?? 0)

@@ -44,6 +44,7 @@ export async function getCourses(dietary?: string[]): Promise<CourseWithCapacity
       .from("participants")
       .select("booking_id")
       .in("booking_id", bookingIds)
+      .eq("cancelled", false)
 
     const bookingCourseMap: Record<string, string> = {}
     for (const b of activeBookings) bookingCourseMap[b.id] = b.course_id
@@ -88,6 +89,7 @@ export async function getCourseBySlug(
         .from("participants")
         .select("*", { count: "exact", head: true })
         .in("booking_id", bookingIds)
+        .eq("cancelled", false)
     : { count: 0 }
 
   return {
@@ -124,6 +126,7 @@ export async function getCourseById(
         .from("participants")
         .select("*", { count: "exact", head: true })
         .in("booking_id", bookingIds)
+        .eq("cancelled", false)
     : { count: 0 }
 
   return {
