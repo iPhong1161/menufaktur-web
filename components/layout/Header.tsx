@@ -1,7 +1,7 @@
 import { headers } from "next/headers"
 import Link from "next/link"
+import { UserCircle } from "lucide-react"
 import { Logo } from "@/components/layout/Logo"
-import { HeaderLogoutButton } from "@/components/layout/HeaderLogoutButton"
 import { HeaderMobileMenu } from "@/components/layout/HeaderMobileMenu"
 import { createClient } from "@/lib/supabase/server"
 
@@ -47,19 +47,17 @@ export async function Header() {
         {/* Desktop actions */}
         <div className="hidden md:flex items-center gap-6">
           {isLoggedIn ? (
-            <>
-              <Link
-                href="/konto/buchungen"
-                className="text-light-beige/80 hover:text-light-beige text-sm font-bold tracking-tight transition-colors duration-200"
-              >
-                Mein Konto
-              </Link>
-              <HeaderLogoutButton />
-            </>
+            <Link
+              href="/konto/buchungen"
+              aria-label="Mein Konto"
+              className="text-light-beige/70 hover:text-light-beige transition-colors duration-200"
+            >
+              <UserCircle className="w-6 h-6" />
+            </Link>
           ) : (
             <Link
               href="/login"
-              className="text-light-beige/80 hover:text-light-beige text-sm font-bold tracking-tight transition-colors duration-200"
+              className="text-light-beige/70 hover:text-light-beige text-sm font-bold tracking-tight transition-colors duration-200"
             >
               Anmelden
             </Link>

@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { HeaderLogoutButton } from "./HeaderLogoutButton"
+import { UserCircle } from "lucide-react"
 
 const navLinks = [
   { href: "/kurse", label: "Kurse" },
@@ -59,16 +59,14 @@ export function HeaderMobileMenu({ pathname, isLoggedIn }: Props) {
           </nav>
           <div className="mt-4 pt-4 border-t border-light-beige/10 flex flex-col gap-3">
             {isLoggedIn ? (
-              <>
-                <Link
-                  href="/konto/buchungen"
-                  onClick={() => setOpen(false)}
-                  className="text-light-beige/80 text-sm font-bold"
-                >
-                  Mein Konto
-                </Link>
-                <HeaderLogoutButton />
-              </>
+              <Link
+                href="/konto/buchungen"
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2 text-light-beige/80 hover:text-light-beige text-sm font-bold transition-colors"
+              >
+                <UserCircle className="w-5 h-5" />
+                Mein Konto
+              </Link>
             ) : (
               <Link
                 href="/login"
