@@ -207,9 +207,9 @@ function Step1({
   const total = count * course.price
 
   return (
-    <>
+    <div className="flex flex-col max-h-[90vh]">
       {/* Header */}
-      <div className="bg-[#F8F5DA] px-8 pt-8 pb-6">
+      <div className="bg-[#F8F5DA] px-8 pt-8 pb-6 shrink-0">
         <div className="flex items-start justify-between mb-5">
           <div>
             <p className="text-[0.65rem] font-bold uppercase tracking-widest text-wine-red/60 mb-2">
@@ -247,7 +247,7 @@ function Step1({
       </div>
 
       {/* Body */}
-      <div className="px-8 py-10 flex flex-col items-center text-center">
+      <div className="px-8 py-10 flex flex-col items-center text-center flex-1 overflow-y-auto">
         <h2 className="text-3xl font-bold text-wine-red mb-3">
           Wie viele Teilnehmer?
         </h2>
@@ -295,7 +295,7 @@ function Step1({
       </div>
 
       {/* Footer */}
-      <div className="px-8 pb-8 flex items-center justify-between">
+      <div className="px-8 pb-8 flex items-center justify-between shrink-0">
         <button
           onClick={onClose}
           className="text-dark/50 font-bold hover:text-dark transition-colors text-sm"
@@ -309,7 +309,7 @@ function Step1({
           Weiter <ArrowRight className="w-4 h-4" />
         </button>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -1180,18 +1180,17 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
   }[step]
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-wine-red/20 backdrop-blur-sm"
         onClick={handleClose}
       />
 
-      <div className="flex min-h-full items-center justify-center p-4">
-        <div
-          className={`relative bg-white rounded-2xl shadow-[0_32px_64px_-12px_rgba(126,20,35,0.2)] w-full ${maxWidthClass} overflow-hidden transition-all duration-300`}
-          onClick={(e) => e.stopPropagation()}
-        >
+      <div
+        className={`relative bg-white rounded-2xl shadow-[0_32px_64px_-12px_rgba(126,20,35,0.2)] w-full ${maxWidthClass} max-h-[90vh] overflow-hidden transition-all duration-300`}
+        onClick={(e) => e.stopPropagation()}
+      >
           {step === 1 && (
             <Step1
               course={course}
@@ -1261,7 +1260,6 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
               submitError={submitError}
             />
           )}
-        </div>
       </div>
     </div>
   )
