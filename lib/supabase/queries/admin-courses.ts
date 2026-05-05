@@ -22,15 +22,27 @@ export async function getCoursesAdmin(): Promise<AdminCourse[]> {
   const courseIds = courses.map((c) => c.id)
   if (courseIds.length === 0) return courses.map((c) => ({ ...c, booked_count: 0 }))
 
-  const { data: bookingRows } = await supabase
+  const { data: activeBookings } = await supabase
     .from("bookings")
-    .select("course_id")
+    .select("id, course_id")
     .in("course_id", courseIds)
     .in("status", ["pending", "confirmed"])
 
   const countMap: Record<string, number> = {}
-  for (const row of bookingRows ?? []) {
-    countMap[row.course_id] = (countMap[row.course_id] ?? 0) + 1
+  if (activeBookings && activeBookings.length > 0) {
+    const bookingIds = activeBookings.map((b) => b.id)
+    const { data: participants } = await supabase
+      .from("participants")
+      .select("booking_id")
+      .in("booking_id", bookingIds)
+
+    const bookingCourseMap: Record<string, string> = {}
+    for (const b of activeBookings) bookingCourseMap[b.id] = b.course_id
+
+    for (const p of participants ?? []) {
+      const courseId = bookingCourseMap[p.booking_id]
+      if (courseId) countMap[courseId] = (countMap[courseId] ?? 0) + 1
+    }
   }
 
   return courses.map((c) => ({ ...c, booked_count: countMap[c.id] ?? 0 }))
@@ -185,15 +197,27 @@ export async function getUpcomingCoursesAdmin(): Promise<AdminCourse[]> {
   if (error || !courses || courses.length === 0) return []
 
   const courseIds = courses.map((c) => c.id)
-  const { data: bookingRows } = await supabase
+  const { data: activeBookings } = await supabase
     .from("bookings")
-    .select("course_id")
+    .select("id, course_id")
     .in("course_id", courseIds)
     .in("status", ["pending", "confirmed"])
 
   const countMap: Record<string, number> = {}
-  for (const row of bookingRows ?? []) {
-    countMap[row.course_id] = (countMap[row.course_id] ?? 0) + 1
+  if (activeBookings && activeBookings.length > 0) {
+    const bookingIds = activeBookings.map((b) => b.id)
+    const { data: participants } = await supabase
+      .from("participants")
+      .select("booking_id")
+      .in("booking_id", bookingIds)
+
+    const bookingCourseMap: Record<string, string> = {}
+    for (const b of activeBookings) bookingCourseMap[b.id] = b.course_id
+
+    for (const p of participants ?? []) {
+      const courseId = bookingCourseMap[p.booking_id]
+      if (courseId) countMap[courseId] = (countMap[courseId] ?? 0) + 1
+    }
   }
 
   return courses.map((c) => ({ ...c, booked_count: countMap[c.id] ?? 0 }))
