@@ -1,4 +1,7 @@
+"use client"
+
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Bell, CircleUser, Search } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { AdminLogoutButton } from "./AdminLogoutButton"
@@ -11,7 +14,9 @@ const NAV_LINKS = [
   { href: "/admin/kunden", label: "Kunden" },
 ]
 
-export function AdminHeader({ pathname }: { pathname: string }) {
+export function AdminHeader() {
+  const pathname = usePathname()
+
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#fdfadf] border-b border-wine-red/10 h-20 flex items-center px-8">
       <div className="flex items-center justify-between w-full">
@@ -25,7 +30,10 @@ export function AdminHeader({ pathname }: { pathname: string }) {
           </Link>
           <div className="hidden lg:flex items-center gap-6">
             {NAV_LINKS.map(({ href, label }) => {
-              const active = pathname === href || pathname.startsWith(href + "/")
+              const active =
+                pathname === href ||
+                pathname.startsWith(href + "/") ||
+                (href === "/admin/dashboard" && pathname === "/admin")
               return (
                 <Link
                   key={href}
