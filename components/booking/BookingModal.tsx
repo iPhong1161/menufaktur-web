@@ -260,10 +260,12 @@ function Step1({
           : "text-dark/40"
   const spotsLabel =
     spotsAfter === 0
-      ? "Ausgebucht"
+      ? course.remainingCapacity === 0
+        ? "Kurs ist ausgebucht"
+        : "Maximale Gruppengröße erreicht"
       : spotsAfter === 1
-        ? "Noch 1 Platz frei"
-        : `Noch ${spotsAfter} Plätze frei`
+        ? "Sie können noch 1 weitere Person hinzufügen"
+        : `Sie können noch ${spotsAfter} weitere Personen hinzufügen`
 
   return (
     <div className="flex flex-col flex-1 min-h-0">
