@@ -27,6 +27,29 @@ export async function POST(req: NextRequest) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
+  // Server-side capacity guard — prevents double-bookings under race conditions
+  const { data: course } = await supabase
+    .from("courses")
+    .select("capacity")
+    .eq("id", body.course.id)
+    .single()
+
+  if (course) {
+    const { count: bookedCount } = await supabase
+      .from("bookings")
+      .select("*", { count: "exact", head: true })
+      .eq("course_id", body.course.id)
+      .in("status", ["pending", "confirmed"])
+
+    const remaining = course.capacity - (bookedCount ?? 0)
+    if (remaining < body.participants.length) {
+      return NextResponse.json(
+        { error: "Leider sind nicht mehr genug Plätze verfügbar" },
+        { status: 409 }
+      )
+    }
+  }
+
   const inv: InvoiceBody = body.invoiceRecipient
 
   const result = await createBooking({
