@@ -75,10 +75,10 @@ export async function createBooking(
   return { booking_number: booking.booking_number, id: booking.id }
 }
 
-export async function getBookingByNumber(booking_number: string) {
+export async function getBookingByNumber(booking_number: string, userId: string | null = null) {
   const supabase = await createClient()
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("bookings")
     .select(
       `*,
@@ -87,7 +87,12 @@ export async function getBookingByNumber(booking_number: string) {
        invoice_recipient:invoice_recipients(*)`
     )
     .eq("booking_number", booking_number)
-    .single()
+
+  if (userId !== null) {
+    query = query.eq("user_id", userId)
+  }
+
+  const { data, error } = await query.single()
 
   if (error) return null
   return data

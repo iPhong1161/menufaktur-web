@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { CalendarDays, MapPin, Users, CheckCircle } from "lucide-react"
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
+import { createClient } from "@/lib/supabase/server"
 import { getBookingByNumber } from "@/lib/supabase/queries/bookings"
 
 type CourseFields = {
@@ -47,7 +48,9 @@ export default async function BookingConfirmationPage({ params, searchParams }: 
   const { id } = await params
   const { count } = await searchParams
 
-  const booking = await getBookingByNumber(id) as BookingDetails | null
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  const booking = await getBookingByNumber(id, user?.id ?? null) as BookingDetails | null
 
   if (!booking || !booking.course) {
     return (
