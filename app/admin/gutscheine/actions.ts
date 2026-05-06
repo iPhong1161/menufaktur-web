@@ -57,3 +57,17 @@ export async function createAdminVoucherAction(payload: {
   revalidatePath("/admin/gutscheine")
   return { code: data.code, value: data.value, expires_at: payload.expires_at }
 }
+
+export async function updateVoucherStatusAction(
+  id: string,
+  status: "active" | "redeemed" | "expired"
+): Promise<{ success: true } | { error: string }> {
+  const supabase = createServiceClient()
+  const { error } = await supabase
+    .from("vouchers")
+    .update({ status })
+    .eq("id", id)
+  if (error) return { error: error.message }
+  revalidatePath("/admin/gutscheine")
+  return { success: true }
+}

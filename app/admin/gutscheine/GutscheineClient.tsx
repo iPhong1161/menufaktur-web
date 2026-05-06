@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { Search, Download, Eye, Plus } from "lucide-react"
+import { Search, Download, Eye, Plus, Pencil, Check } from "lucide-react"
 import { AdminBackButton } from "@/components/admin/AdminBackButton"
 import { CreateVoucherModal } from "@/components/admin/CreateVoucherModal"
+import { updateVoucherStatusAction } from "./actions"
 import type { AdminVoucher } from "@/lib/supabase/queries/vouchers"
 
 const STATUS_LABEL: Record<AdminVoucher["status"], string> = {
@@ -32,10 +33,116 @@ const PAY_STYLE: Record<AdminVoucher["payment_status"], string> = {
   refunded: "bg-dark/8 text-dark/50",
 }
 
+type EditableStatus = "active" | "redeemed" | "expired"
+const EDITABLE_STATUSES: EditableStatus[] = ["active", "redeemed", "expired"]
+
 function formatDate(iso: string | null): string {
   if (!iso) return "—"
   return new Date(iso).toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" })
 }
+
+// ─── Status toggle button ─────────────────────────────────────────────────────
+
+function VoucherStatusButton({ id, status }: { id: string; status: AdminVoucher["status"] }) {
+  const initial = (status === "cancelled" ? "expired" : status) as EditableStatus
+  const [localStatus, setLocalStatus] = useState<EditableStatus>(initial)
+  const [open, setOpen] = useState(false)
+  const [confirming, setConfirming] = useState<EditableStatus | null>(null)
+  const [pending, setPending] = useState(false)
+
+  async function apply(next: EditableStatus) {
+    const prev = localStatus
+    setLocalStatus(next)
+    setOpen(false)
+    setConfirming(null)
+    setPending(true)
+    const result = await updateVoucherStatusAction(id, next)
+    setPending(false)
+    if ("error" in result) setLocalStatus(prev)
+  }
+
+  function handleOption(next: EditableStatus) {
+    if (next === localStatus) { setOpen(false); return }
+    if (next === "active") {
+      apply(next)
+    } else {
+      setConfirming(next)
+    }
+  }
+
+  return (
+    <div className="flex items-center gap-2">
+      <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest whitespace-nowrap ${STATUS_STYLE[localStatus]} ${pending ? "opacity-50" : ""}`}>
+        {STATUS_LABEL[localStatus]}
+      </span>
+
+      <div className="relative">
+        {open && (
+          <div
+            className="fixed inset-0 z-10"
+            onClick={() => { setOpen(false); setConfirming(null) }}
+          />
+        )}
+        <button
+          onClick={() => { setOpen(!open); setConfirming(null) }}
+          disabled={pending}
+          className="p-1 text-dark/25 hover:text-wine-red rounded transition-colors disabled:opacity-30"
+          title="Status ändern"
+        >
+          <Pencil className="w-3 h-3" />
+        </button>
+
+        {open && (
+          <div className="absolute left-0 top-full mt-1 z-20 bg-white rounded-xl shadow-lg border border-dark/8 overflow-hidden min-w-[170px]">
+            {confirming ? (
+              <div className="p-3 space-y-2.5">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-dark/40">
+                  Status setzen auf
+                </p>
+                <span className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest inline-block ${STATUS_STYLE[confirming]}`}>
+                  {STATUS_LABEL[confirming]}
+                </span>
+                <div className="flex gap-2 pt-0.5">
+                  <button
+                    onClick={() => apply(confirming)}
+                    className="flex-1 py-1.5 bg-wine-red hover:bg-garnet-red text-white rounded-lg text-xs font-bold transition-colors"
+                  >
+                    Bestätigen
+                  </button>
+                  <button
+                    onClick={() => setConfirming(null)}
+                    className="flex-1 py-1.5 bg-dark/8 hover:bg-dark/12 text-dark/60 rounded-lg text-xs font-bold transition-colors"
+                  >
+                    Abbrechen
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="p-1">
+                {EDITABLE_STATUSES.map((s) => (
+                  <button
+                    key={s}
+                    onClick={() => handleOption(s)}
+                    className={`w-full text-left px-3 py-2 rounded-lg transition-colors flex items-center justify-between gap-3 ${
+                      s === localStatus ? "cursor-default" : "hover:bg-[#F8F5DA]"
+                    }`}
+                  >
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${STATUS_STYLE[s]}`}>
+                      {STATUS_LABEL[s]}
+                    </span>
+                    {s === localStatus && <Check className="w-3 h-3 text-dark/30 shrink-0" />}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+// ─── Main page client ─────────────────────────────────────────────────────────
 
 export function GutscheineClient({ vouchers }: { vouchers: AdminVoucher[] }) {
   const [search, setSearch] = useState("")
@@ -156,9 +263,7 @@ export function GutscheineClient({ vouchers }: { vouchers: AdminVoucher[] }) {
                       {formatDate(v.expires_at)}
                     </td>
                     <td className="px-6 py-5">
-                      <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest whitespace-nowrap ${STATUS_STYLE[v.status]}`}>
-                        {STATUS_LABEL[v.status]}
-                      </span>
+                      <VoucherStatusButton id={v.id} status={v.status} />
                     </td>
                     <td className="px-6 py-5">
                       <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest whitespace-nowrap ${PAY_STYLE[v.payment_status]}`}>
