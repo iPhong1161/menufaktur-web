@@ -1,8 +1,7 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import { getProfile, upsertProfile } from "@/lib/supabase/queries/profiles"
-import { ProfilForm } from "./ProfilForm"
+import { getProfile } from "@/lib/supabase/queries/profiles"
 import { DeleteAccountSection } from "@/components/konto/DeleteAccountSection"
 
 export const metadata: Metadata = {
@@ -17,18 +16,7 @@ export default async function KontoProfilPage() {
 
   const profile = await getProfile()
 
-  async function saveProfile(formData: FormData) {
-    "use server"
-    await upsertProfile({
-      first_name: (formData.get("first_name") as string) || null,
-      last_name: (formData.get("last_name") as string) || null,
-      phone: (formData.get("phone") as string) || null,
-      address_line1: (formData.get("address_line1") as string) || null,
-      postal_code: (formData.get("postal_code") as string) || null,
-      city: (formData.get("city") as string) || null,
-      country: (formData.get("country") as string) || "DE",
-    })
-  }
+  const displayName = [profile?.first_name, profile?.last_name].filter(Boolean).join(" ") || "—"
 
   return (
     <div>
@@ -37,15 +25,26 @@ export default async function KontoProfilPage() {
           Mein Profil
         </h1>
         <p className="text-dark/50 font-condensed leading-relaxed max-w-2xl">
-          Verwalten Sie Ihre persönlichen Daten und Kontaktinformationen.
+          Ihre persönlichen Daten und Kontaktinformationen.
         </p>
       </header>
 
-      <ProfilForm
-        profile={profile}
-        email={user.email ?? ""}
-        saveAction={saveProfile}
-      />
+      <div className="bg-white rounded-xl border border-dark/8 shadow-sm p-8 max-w-xl mb-12">
+        <dl className="space-y-6">
+          <div>
+            <dt className="text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-1">
+              Name
+            </dt>
+            <dd className="text-dark font-medium">{displayName}</dd>
+          </div>
+          <div>
+            <dt className="text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-1">
+              E-Mail
+            </dt>
+            <dd className="text-dark font-medium">{user.email}</dd>
+          </div>
+        </dl>
+      </div>
 
       <DeleteAccountSection />
     </div>
