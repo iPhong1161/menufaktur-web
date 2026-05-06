@@ -17,7 +17,6 @@ export async function getCoursesAdmin(): Promise<AdminCourse[]> {
     .select("*")
     .order("date", { ascending: false })
 
-  console.log("[getCoursesAdmin] courses:", courses?.length ?? 0, "error:", error)
   if (error || !courses) return []
 
   const courseIds = courses.map((c) => c.id)
@@ -25,13 +24,11 @@ export async function getCoursesAdmin(): Promise<AdminCourse[]> {
 
   const countMap: Record<string, number> = {}
   try {
-    const { data: activeBookings, error: bookingsError } = await supabase
+    const { data: activeBookings } = await supabase
       .from("bookings")
       .select("id, course_id")
       .in("course_id", courseIds)
       .in("status", ["pending", "confirmed"])
-
-    console.log("[getCoursesAdmin] activeBookings:", activeBookings?.length ?? 0, "bookingsError:", bookingsError)
 
     if (activeBookings && activeBookings.length > 0) {
       const bookingIds = activeBookings.map((b) => b.id)
@@ -49,8 +46,8 @@ export async function getCoursesAdmin(): Promise<AdminCourse[]> {
         if (courseId) countMap[courseId] = (countMap[courseId] ?? 0) + 1
       }
     }
-  } catch (err) {
-    console.error("[getCoursesAdmin] service client threw:", err)
+  } catch {
+    // capacity count failed — return courses with 0 booked
   }
 
   return courses.map((c) => ({ ...c, booked_count: countMap[c.id] ?? 0 }))

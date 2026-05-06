@@ -24,30 +24,25 @@ export async function getCourses(dietary?: string[]): Promise<CourseWithCapacity
 
   const { data: courses, error } = await query
 
-  console.log("[getCourses] courses:", courses?.length ?? 0, "error:", error)
   if (error || !courses) return []
 
   const countMap: Record<string, number> = {}
   try {
     const serviceSupabase = createServiceClient()
     const courseIds = courses.map((c) => c.id)
-    const { data: activeBookings, error: bookingsError } = await serviceSupabase
+    const { data: activeBookings } = await serviceSupabase
       .from("bookings")
       .select("id, course_id")
       .in("course_id", courseIds)
       .in("status", ["pending", "confirmed"])
 
-    console.log("[getCourses] activeBookings:", activeBookings?.length ?? 0, "bookingsError:", bookingsError)
-
     if (activeBookings && activeBookings.length > 0) {
       const bookingIds = activeBookings.map((b) => b.id)
-      const { data: participants, error: participantsError } = await serviceSupabase
+      const { data: participants } = await serviceSupabase
         .from("participants")
         .select("booking_id")
         .in("booking_id", bookingIds)
         .eq("cancelled", false)
-
-      console.log("[getCourses] participants:", participants?.length ?? 0, "participantsError:", participantsError)
 
       const bookingCourseMap: Record<string, string> = {}
       for (const b of activeBookings) bookingCourseMap[b.id] = b.course_id
@@ -57,8 +52,8 @@ export async function getCourses(dietary?: string[]): Promise<CourseWithCapacity
         if (courseId) countMap[courseId] = (countMap[courseId] ?? 0) + 1
       }
     }
-  } catch (err) {
-    console.error("[getCourses] service client threw:", err)
+  } catch {
+    // capacity count failed — return courses with 0 booked
   }
 
   return courses.map((c) => ({
