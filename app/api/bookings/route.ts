@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createBooking } from "@/lib/supabase/queries/bookings"
 import { createClient, createServiceClient } from "@/lib/supabase/server"
 
 type ParticipantBody = {
@@ -61,41 +60,44 @@ export async function POST(req: NextRequest) {
     }
   }
 
+  const totalAmount: number = body.totalAmount
+  const vatAmount = Math.round((totalAmount - totalAmount / 1.19) * 100) / 100
   const inv: InvoiceBody = body.invoiceRecipient
 
-  const result = await createBooking({
-    booking: {
-      course_id: body.course.id,
-      user_id: user?.id ?? null,
-      payment_method: "bank_transfer",
-      total_amount: body.totalAmount,
-      vat_amount: 0,
-      voucher_discount: body.voucher?.discount ?? 0,
-    },
-    participants: body.participants.map((p: ParticipantBody, i: number) => ({
-      first_name: p.firstName,
-      last_name: p.lastName,
-      email: p.email ?? "",
-      phone: p.phone ?? null,
+  const { data, error } = await supabase.rpc("create_booking_atomic", {
+    p_course_id:         body.course.id,
+    p_user_id:           user?.id ?? null,
+    p_payment_method:    "bank_transfer",
+    p_total_amount:      totalAmount,
+    p_vat_amount:        vatAmount,
+    p_voucher_discount:  body.voucher?.discount ?? 0,
+    p_participants:      body.participants.map((p: ParticipantBody, i: number) => ({
+      first_name:       p.firstName,
+      last_name:        p.lastName,
+      email:            p.email ?? "",
+      phone:            p.phone ?? "",
       food_preferences: p.foodPreferences ?? [],
-      is_primary: i === 0,
+      food_notes:       "",
+      is_primary:       i === 0,
     })),
-    invoiceRecipient: {
-      first_name: inv.firstName,
-      last_name: inv.lastName,
-      company_name: inv.companyName || null,
-      address_line1: inv.addressLine1 || "",
-      postal_code: inv.postalCode || "",
-      city: inv.city || "",
-      email: inv.email,
-      is_business: inv.isBusiness ?? false,
-      vat_id: inv.vatId || null,
+    p_invoice_recipient: {
+      first_name:    inv.firstName,
+      last_name:     inv.lastName,
+      company_name:  inv.companyName ?? "",
+      address_line1: inv.addressLine1 ?? "",
+      postal_code:   inv.postalCode ?? "",
+      city:          inv.city ?? "",
+      country:       "Deutschland",
+      email:         inv.email,
+      vat_id:        inv.vatId ?? "",
+      is_business:   inv.isBusiness ?? false,
     },
   })
 
-  if ("error" in result) {
-    return NextResponse.json({ error: result.error }, { status: 400 })
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 })
   }
 
+  const result = data as { booking_number: string; id: string }
   return NextResponse.json({ booking_number: result.booking_number, id: result.id })
 }

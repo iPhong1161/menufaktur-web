@@ -7,7 +7,7 @@ export interface UserBooking {
   status: "pending" | "confirmed" | "cancelled" | "refunded"
   total_amount: number
   created_at: string
-  user_id: string
+  user_id: string | null
   course_id: string
   course: {
     id: string
@@ -138,7 +138,7 @@ export async function getUserBookingDetail(
     .single()
 
   if (error || !data) return null
-  return data as BookingDetail
+  return data as unknown as BookingDetail
 }
 
 export async function getUserBookings(): Promise<UserBooking[]> {
@@ -154,5 +154,5 @@ export async function getUserBookings(): Promise<UserBooking[]> {
     .order("created_at", { ascending: false })
 
   if (error) return []
-  return data ?? []
+  return (data ?? []) as unknown as UserBooking[]
 }

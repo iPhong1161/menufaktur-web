@@ -234,7 +234,25 @@ export type Database = {
       }
     }
     Views: Record<string, never>
-    Functions: Record<string, never>
+    Functions: {
+      create_booking_atomic: {
+        Args: {
+          p_course_id: string
+          p_user_id: string | null
+          p_payment_method: string
+          p_total_amount: number
+          p_vat_amount: number
+          p_voucher_discount: number
+          p_participants: unknown
+          p_invoice_recipient: unknown
+        }
+        Returns: { booking_number: string; id: string }
+      }
+      next_booking_number: {
+        Args: Record<PropertyKey, never>
+        Returns: string
+      }
+    }
     Enums: Record<string, never>
   }
 }
