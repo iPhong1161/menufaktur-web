@@ -60,7 +60,7 @@ const AGB_SECTIONS = [
     bg: "bg-white",
     paragraphs: [
       "Gutscheine der menufaktur haben eine gesetzliche Gültigkeit von 3 Jahren ab Ende des Ausstellungsjahres.",
-      "Eine Barauszahlung von Gutscheinbeträgen oder Restguthaben ist ausgeschlossen. Gutscheine sind übertragbar.",
+      "Übersteigt der Wert des Gutscheines die Kursgebühr, so verfällt der Differenzbetrag. Eine Auszahlung des Differenzbetrages ist nicht möglich. Gutscheine sind übertragbar.",
     ],
   },
   {
