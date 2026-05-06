@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react"
 import { Search, Download, Eye, Plus } from "lucide-react"
 import { AdminBackButton } from "@/components/admin/AdminBackButton"
+import { CreateVoucherModal } from "@/components/admin/CreateVoucherModal"
 import type { AdminVoucher } from "@/lib/supabase/queries/vouchers"
 
 const STATUS_LABEL: Record<AdminVoucher["status"], string> = {
@@ -39,6 +40,7 @@ function formatDate(iso: string | null): string {
 export function GutscheineClient({ vouchers }: { vouchers: AdminVoucher[] }) {
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState<"" | AdminVoucher["status"]>("")
+  const [showModal, setShowModal] = useState(false)
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim()
@@ -68,7 +70,10 @@ export function GutscheineClient({ vouchers }: { vouchers: AdminVoucher[] }) {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <button className="inline-flex items-center gap-2 bg-wine-red text-white px-8 py-4 rounded-xl font-bold hover:bg-garnet-red transition-colors shadow-sm">
+          <button
+            onClick={() => setShowModal(true)}
+            className="inline-flex items-center gap-2 bg-wine-red text-white px-8 py-4 rounded-xl font-bold hover:bg-garnet-red transition-colors shadow-sm"
+          >
             <Plus className="w-4 h-4" />
             Neuer Gutschein
           </button>
@@ -180,6 +185,8 @@ export function GutscheineClient({ vouchers }: { vouchers: AdminVoucher[] }) {
           </table>
         </div>
       </div>
+
+      {showModal && <CreateVoucherModal onClose={() => setShowModal(false)} />}
     </>
   )
 }

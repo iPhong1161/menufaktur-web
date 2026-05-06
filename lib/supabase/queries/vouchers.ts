@@ -27,7 +27,7 @@ export async function getVouchersAdmin(): Promise<AdminVoucher[]> {
 
 type VoucherInsert = Database["public"]["Tables"]["vouchers"]["Insert"]
 
-function generateVoucherCode(): string {
+export function generateVoucherCode(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
   let code = "MF-"
   for (let i = 0; i < 2; i++) {

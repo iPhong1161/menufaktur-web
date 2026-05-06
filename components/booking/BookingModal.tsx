@@ -18,6 +18,7 @@ import {
   Check,
 } from "lucide-react"
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
+import { validateVoucherAction } from "@/app/actions/voucher"
 import type { CourseData } from "@/lib/data/courses"
 
 // ─── Types ───────────────────────────────────────────────────────────────────
@@ -63,8 +64,6 @@ export interface BookingModalProps {
   onClose: () => void
 }
 
-const TEST_VOUCHER_CODE = "TEST123"
-const TEST_VOUCHER_DISCOUNT = 30
 
 function makeParticipant(): ParticipantData {
   return { firstName: "", lastName: "", email: "", phone: "", foodPreferences: ["keine"] }
@@ -778,7 +777,7 @@ function Step4({
   participants: ParticipantData[]
   invoice: InvoiceData
   voucherCode: string
-  voucherState: "idle" | "valid" | "invalid"
+  voucherState: "idle" | "loading" | "valid" | "invalid"
   voucherDiscount: number
   agbAccepted: boolean
   datenschutzAccepted: boolean
@@ -965,13 +964,15 @@ function Step4({
                       ? "border-red-400 bg-red-50"
                       : "border-dark/15 bg-white"
                   }`}
+                disabled={voucherState === "loading"}
                 />
               </div>
               <button
                 onClick={onApplyVoucher}
-                className="bg-wine-red hover:bg-garnet-red text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors"
+                disabled={voucherState === "loading" || !voucherCode.trim()}
+                className="bg-wine-red hover:bg-garnet-red disabled:opacity-50 text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors"
               >
-                Anwenden
+                {voucherState === "loading" ? "…" : "Anwenden"}
               </button>
             </div>
             {voucherState === "valid" && (
@@ -981,7 +982,7 @@ function Step4({
             )}
             {voucherState === "invalid" && (
               <p className="text-xs text-red-600 mt-1 flex items-center gap-1">
-                <AlertCircle className="w-3 h-3" /> Ungültiger Gutscheincode
+                <AlertCircle className="w-3 h-3" /> Ungültiger oder abgelaufener Gutscheincode
               </p>
             )}
 
@@ -1077,7 +1078,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
     vatId: "",
   })
   const [voucherCode, setVoucherCode] = useState("")
-  const [voucherState, setVoucherState] = useState<"idle" | "valid" | "invalid">("idle")
+  const [voucherState, setVoucherState] = useState<"idle" | "loading" | "valid" | "invalid">("idle")
   const [voucherDiscount, setVoucherDiscount] = useState(0)
   const [agbAccepted, setAgbAccepted] = useState(false)
   const [datenschutzAccepted, setDatenschutzAccepted] = useState(false)
@@ -1143,10 +1144,13 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
     return Object.keys(errors).length === 0
   }
 
-  function handleApplyVoucher() {
-    if (voucherCode.trim().toUpperCase() === TEST_VOUCHER_CODE) {
+  async function handleApplyVoucher() {
+    setVoucherState("loading")
+    const result = await validateVoucherAction(voucherCode.trim())
+    if (result) {
+      const discount = Math.min(result.value, total)
       setVoucherState("valid")
-      setVoucherDiscount(TEST_VOUCHER_DISCOUNT)
+      setVoucherDiscount(discount)
     } else {
       setVoucherState("invalid")
       setVoucherDiscount(0)
