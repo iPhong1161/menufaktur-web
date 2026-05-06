@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { getProfile, upsertProfile } from "@/lib/supabase/queries/profiles"
 import { ProfilForm } from "./ProfilForm"
+import { DeleteAccountSection } from "@/components/konto/DeleteAccountSection"
 
 export const metadata: Metadata = {
   title: "Mein Profil — menufaktur",
@@ -45,6 +46,8 @@ export default async function KontoProfilPage() {
         email={user.email ?? ""}
         saveAction={saveProfile}
       />
+
+      <DeleteAccountSection />
     </div>
   )
 }
