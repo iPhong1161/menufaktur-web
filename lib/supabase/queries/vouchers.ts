@@ -28,17 +28,12 @@ export async function getVouchersAdmin(): Promise<AdminVoucher[]> {
 type VoucherInsert = Database["public"]["Tables"]["vouchers"]["Insert"]
 
 export function generateVoucherCode(): string {
-  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
-  let code = "MF-"
-  for (let i = 0; i < 2; i++) {
-    for (let j = 0; j < 2; j++) {
-      code += chars[Math.floor(Math.random() * chars.length)]
-    }
-    if (i === 0) code += "-"
+  const chars = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"
+  let code = ""
+  for (let i = 0; i < 10; i++) {
+    code += chars[Math.floor(Math.random() * chars.length)]
   }
-  code += "-"
-  code += chars[Math.floor(Math.random() * chars.length)]
-  return code  // e.g. MF-XJ-99-L
+  return code  // e.g. X7K2M9PQ4R
 }
 
 export async function createVoucherOrder(
