@@ -29,10 +29,10 @@ export function Footer() {
             <p>Fax: 069 / 977 63 667</p>
             <p>
               <a
-                href="mailto:info@menufaktur.de"
+                href="mailto:post@menufaktur.de"
                 className="hover:text-light-beige transition-colors"
               >
-                info@menufaktur.de
+                post@menufaktur.de
               </a>
             </p>
           </address>
