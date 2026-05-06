@@ -9,6 +9,7 @@ import {
   Scale,
   Users,
   BookOpen,
+  FileText,
 } from "lucide-react"
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 
@@ -134,11 +135,27 @@ export default function AgbPage() {
             </div>
           </div>
 
+          {/* Wide card: Widerrufsrecht */}
+          <div className="md:col-span-2 p-10 bg-white rounded-xl border border-dark/8 shadow-sm">
+            <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-wine-red/60 mb-5 flex items-center gap-2">
+              <FileText className="w-4 h-4" aria-hidden="true" />
+              13. Widerrufsrecht
+            </h3>
+            <p className="text-dark/60 font-condensed leading-relaxed text-sm">
+              Gemäß § 312g Abs. 2 Nr. 9 BGB besteht kein Widerrufsrecht für Verträge über die
+              Erbringung von Dienstleistungen im Zusammenhang mit Freizeitbetätigungen, wenn der
+              Vertrag für einen bestimmten Termin geschlossen wird. Da Kochkurse der menufaktur
+              GmbH als termingebundene Freizeitveranstaltungen gelten, ist das gesetzliche
+              Widerrufsrecht ausgeschlossen. Es gelten ausschließlich die Stornierungsbedingungen
+              gemäß Ziffer 2 dieser AGB.
+            </p>
+          </div>
+
           {/* Wide card: Rechtliches */}
           <div className="md:col-span-2 p-10 bg-white rounded-xl border border-dark/8 shadow-sm">
             <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-wine-red/60 mb-5 flex items-center gap-2">
               <BookOpen className="w-4 h-4" aria-hidden="true" />
-              8. Rechtliches
+              14. Rechtliches
             </h3>
             <div className="grid md:grid-cols-2 gap-7 text-dark/60 font-condensed leading-relaxed text-sm">
               <p>
