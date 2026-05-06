@@ -9,7 +9,7 @@ const STATUS_LABEL: Record<AdminVoucher["status"], string> = {
   active: "Aktiv",
   redeemed: "Eingelöst",
   expired: "Abgelaufen",
-  cancelled: "Storniert",
+  cancelled: "Abgelaufen",
 }
 
 const STATUS_STYLE: Record<AdminVoucher["status"], string> = {
@@ -95,7 +95,6 @@ export function GutscheineClient({ vouchers }: { vouchers: AdminVoucher[] }) {
               <option value="active">Aktiv</option>
               <option value="redeemed">Eingelöst</option>
               <option value="expired">Abgelaufen</option>
-              <option value="cancelled">Storniert</option>
             </select>
           </div>
           <div className="flex flex-col gap-1.5">
