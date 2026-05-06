@@ -1,5 +1,29 @@
-import { createClient } from "@/lib/supabase/server"
+import { createClient, createServiceClient } from "@/lib/supabase/server"
 import type { Database } from "@/types/database"
+
+export type AdminVoucher = {
+  id: string
+  code: string
+  value: number
+  remaining_value: number
+  status: "active" | "redeemed" | "expired" | "cancelled"
+  payment_status: "unpaid" | "paid" | "refunded"
+  expires_at: string | null
+  purchaser_name: string
+  purchaser_email: string
+  recipient_name: string
+  created_at: string
+}
+
+export async function getVouchersAdmin(): Promise<AdminVoucher[]> {
+  const supabase = createServiceClient()
+  const { data, error } = await supabase
+    .from("vouchers")
+    .select("id, code, value, remaining_value, status, payment_status, expires_at, purchaser_name, purchaser_email, recipient_name, created_at")
+    .order("created_at", { ascending: false })
+  if (error) return []
+  return (data ?? []) as AdminVoucher[]
+}
 
 type VoucherInsert = Database["public"]["Tables"]["vouchers"]["Insert"]
 
