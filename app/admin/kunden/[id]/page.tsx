@@ -90,10 +90,14 @@ export default async function CustomerDetailPage({ params }: { params: Promise<{
             <h1 className="text-4xl font-bold text-wine-red tracking-tight">{fullName}</h1>
             <span
               className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-                customer.is_admin ? "bg-wine-red text-white" : "bg-wine-red/8 text-wine-red"
+                !customer.is_admin
+                  ? "bg-wine-red/8 text-wine-red"
+                  : customer.admin_role === "moderator"
+                  ? "bg-amber-100 text-amber-800"
+                  : "bg-wine-red text-white"
               }`}
             >
-              {customer.is_admin ? "Admin" : "Kunde"}
+              {!customer.is_admin ? "Kunde" : customer.admin_role === "moderator" ? "Moderator" : "Admin"}
             </span>
           </div>
           <p className="text-dark/50 font-condensed">

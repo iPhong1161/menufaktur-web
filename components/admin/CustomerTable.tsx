@@ -139,12 +139,14 @@ export function CustomerTable({ customers }: { customers: AdminCustomer[] }) {
                       <td className="px-6 py-5">
                         <span
                           className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest ${
-                            c.is_admin
-                              ? "bg-wine-red text-white"
-                              : "bg-wine-red/8 text-wine-red"
+                            !c.is_admin
+                              ? "bg-wine-red/8 text-wine-red"
+                              : c.admin_role === "moderator"
+                              ? "bg-amber-100 text-amber-800"
+                              : "bg-wine-red text-white"
                           }`}
                         >
-                          {c.is_admin ? "Admin" : "Kunde"}
+                          {!c.is_admin ? "Kunde" : c.admin_role === "moderator" ? "Moderator" : "Admin"}
                         </span>
                       </td>
                       <td className="px-6 py-5">

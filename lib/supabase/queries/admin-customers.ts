@@ -6,6 +6,7 @@ type ProfileRow = Database["public"]["Tables"]["profiles"]["Row"]
 export type AdminCustomer = ProfileRow & {
   booking_count: number
   is_admin: boolean
+  admin_role: string | null
 }
 
 export type CustomerBooking = {
@@ -36,19 +37,22 @@ export async function getAdminCustomers(): Promise<AdminCustomer[]> {
   const [profilesResult, bookingsResult, adminUsersResult] = await Promise.all([
     supabase.from("profiles").select("*").order("created_at", { ascending: false }),
     supabase.from("bookings").select("user_id").not("user_id", "is", null),
-    supabase.from("admin_users").select("user_id"),
+    supabase.from("admin_users").select("user_id, role"),
   ])
 
   const bookingCounts: Record<string, number> = {}
   for (const b of bookingsResult.data ?? []) {
     if (b.user_id) bookingCounts[b.user_id] = (bookingCounts[b.user_id] ?? 0) + 1
   }
-  const adminIds = new Set((adminUsersResult.data ?? []).map((a) => a.user_id))
+  const adminMap = Object.fromEntries(
+    (adminUsersResult.data ?? []).map((a) => [a.user_id, a.role ?? "admin"])
+  )
 
   return (profilesResult.data ?? []).map((p) => ({
     ...p,
     booking_count: bookingCounts[p.id] ?? 0,
-    is_admin: adminIds.has(p.id),
+    is_admin: p.id in adminMap,
+    admin_role: adminMap[p.id] ?? null,
   }))
 }
 
@@ -57,7 +61,7 @@ export async function getAdminCustomer(id: string): Promise<(AdminCustomer) | nu
 
   const [profileResult, adminResult] = await Promise.all([
     supabase.from("profiles").select("*").eq("id", id).single(),
-    supabase.from("admin_users").select("id").eq("user_id", id).maybeSingle(),
+    supabase.from("admin_users").select("id, role").eq("user_id", id).maybeSingle(),
   ])
 
   if (!profileResult.data) return null
@@ -71,6 +75,7 @@ export async function getAdminCustomer(id: string): Promise<(AdminCustomer) | nu
     ...profileResult.data,
     booking_count: bookingResult.count ?? 0,
     is_admin: !!adminResult.data,
+    admin_role: adminResult.data?.role ?? null,
   }
 }
 
