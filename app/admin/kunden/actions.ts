@@ -28,7 +28,7 @@ export async function createAdminCustomer(data: {
 
   const userId = authData.user.id
 
-  const { error: profileError } = await supabase.from("profiles").insert({
+  const { error: profileError } = await supabase.from("profiles").upsert({
     id: userId,
     first_name: data.first_name,
     last_name: data.last_name,
@@ -39,7 +39,7 @@ export async function createAdminCustomer(data: {
     city: data.city || null,
     preferred_payment_method:
       (data.preferred_payment_method as "card" | "sepa" | "bank_transfer") || null,
-  })
+  }, { onConflict: "id" })
 
   if (profileError) {
     await supabase.auth.admin.deleteUser(userId)
