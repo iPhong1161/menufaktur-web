@@ -55,7 +55,12 @@ export async function promoteToAdmin(
 ): Promise<{ success: true } | { error: string }> {
   const supabase = createServiceClient()
 
-  const { error } = await supabase.from("admin_users").insert({ user_id: userId, role: "moderator" })
+  const { data: { user }, error: userError } = await supabase.auth.admin.getUserById(userId)
+  if (userError || !user) return { error: "Benutzer nicht gefunden." }
+
+  const { error } = await supabase
+    .from("admin_users")
+    .insert({ user_id: userId, role: "moderator", email: user.email })
 
   if (error) return { error: error.message }
 
