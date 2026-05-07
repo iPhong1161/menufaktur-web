@@ -91,7 +91,7 @@ export default function AgbPage() {
       <main className="max-w-screen-lg mx-auto px-6 md:px-12 py-24 flex-grow">
         <div className="mb-14 max-w-3xl">
           <p className="text-dark/60 text-lg font-condensed leading-relaxed italic border-l-4 border-wine-red pl-6 py-2">
-            Allgemeine Geschäftsbedingungen der menufaktur GmbH Kochschule. Hier finden Sie alle Details
+            Allgemeine Geschäftsbedingungen der Kids Event and Catering GmbH (menufaktur Kochschule). Hier finden Sie alle Details
             zu Buchungen, Stornierungen und Ihrer Teilnahme an unseren kulinarischen Erlebnissen.
           </p>
         </div>
@@ -139,13 +139,13 @@ export default function AgbPage() {
           <div className="md:col-span-2 p-10 bg-white rounded-xl border border-dark/8 shadow-sm">
             <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-wine-red/60 mb-5 flex items-center gap-2">
               <FileText className="w-4 h-4" aria-hidden="true" />
-              13. Widerrufsrecht
+              8. Widerrufsrecht
             </h3>
             <p className="text-dark/60 font-condensed leading-relaxed text-sm">
               Gemäß § 312g Abs. 2 Nr. 9 BGB besteht kein Widerrufsrecht für Verträge über die
               Erbringung von Dienstleistungen im Zusammenhang mit Freizeitbetätigungen, wenn der
-              Vertrag für einen bestimmten Termin geschlossen wird. Da Kochkurse der menufaktur
-              GmbH als termingebundene Freizeitveranstaltungen gelten, ist das gesetzliche
+              Vertrag für einen bestimmten Termin geschlossen wird. Da Kochkurse der
+              Kids Event and Catering GmbH (menufaktur Kochschule) als termingebundene Freizeitveranstaltungen gelten, ist das gesetzliche
               Widerrufsrecht ausgeschlossen. Es gelten ausschließlich die Stornierungsbedingungen
               gemäß Ziffer 2 dieser AGB.
             </p>
@@ -155,7 +155,7 @@ export default function AgbPage() {
           <div className="md:col-span-2 p-10 bg-white rounded-xl border border-dark/8 shadow-sm">
             <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-wine-red/60 mb-5 flex items-center gap-2">
               <BookOpen className="w-4 h-4" aria-hidden="true" />
-              14. Rechtliches
+              9. Rechtliches
             </h3>
             <div className="grid md:grid-cols-2 gap-7 text-dark/60 font-condensed leading-relaxed text-sm">
               <p>
