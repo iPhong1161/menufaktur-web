@@ -10,9 +10,10 @@ interface Props {
   userName: string
   isAdmin: boolean
   adminCount: number
+  admin_role: string | null
 }
 
-export function AdminActions({ userId, userEmail, userName, isAdmin, adminCount }: Props) {
+export function AdminActions({ userId, userEmail, userName, isAdmin, adminCount, admin_role }: Props) {
   const [loading, setLoading] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [resetSent, setResetSent] = useState(false)
@@ -60,7 +61,9 @@ export function AdminActions({ userId, userEmail, userName, isAdmin, adminCount 
           <p className="font-bold text-dark text-sm">
             {confirmAction === "promote"
               ? `Möchten Sie ${userName} als Moderator registrieren?`
-              : `Admin-Rechte von ${userName} wirklich entziehen?`}
+              : admin_role === "moderator"
+                ? `Moderator-Rechte von ${userName} wirklich entziehen?`
+                : `Admin-Rechte von ${userName} wirklich entziehen?`}
           </p>
           <div className="flex gap-3">
             <button
@@ -105,7 +108,9 @@ export function AdminActions({ userId, userEmail, userName, isAdmin, adminCount 
           >
             <ShieldOff className="w-5 h-5 text-red-500 shrink-0" />
             <div>
-              <p className="font-bold text-dark text-sm">Admin-Rechte entziehen</p>
+              <p className="font-bold text-dark text-sm">
+                {admin_role === "moderator" ? "Moderator-Rechte entziehen" : "Admin-Rechte entziehen"}
+              </p>
               <p className="text-xs text-dark/40 font-condensed">Entfernt den Administrator-Zugriff</p>
             </div>
           </button>

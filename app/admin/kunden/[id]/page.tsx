@@ -155,6 +155,7 @@ export default async function CustomerDetailPage({ params }: { params: Promise<{
             userName={fullName}
             isAdmin={customer.is_admin}
             adminCount={adminCount}
+            admin_role={customer.admin_role}
           />
         </div>
 
