@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { Mail } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { createClient } from "@/lib/supabase/client"
 
@@ -23,7 +23,7 @@ interface FormData {
 type FieldErrors = Partial<Record<keyof FormData, string>>
 
 export default function RegistrierenPage() {
-  const router = useRouter()
+  const [success, setSuccess] = useState(false)
   const [form, setForm] = useState<FormData>({
     firstName: "", lastName: "", email: "",
     password: "", passwordConfirm: "",
@@ -84,8 +84,7 @@ export default function RegistrierenPage() {
       return
     }
 
-    router.push("/konto/buchungen")
-    router.refresh()
+    setSuccess(true)
   }
 
   function set(field: keyof FormData, value: string | boolean) {
@@ -100,6 +99,32 @@ export default function RegistrierenPage() {
     )
 
   const labelClass = "block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-1.5"
+
+  if (success) {
+    return (
+      <div className="bg-light-beige min-h-screen flex items-center justify-center px-4">
+        <div className="max-w-md w-full bg-white rounded-xl p-10 md:p-14 shadow-[0_32px_64px_-12px_rgba(91,0,18,0.08)] border border-dark/5 flex flex-col items-center text-center gap-6">
+          <div className="w-16 h-16 bg-wine-red rounded-full flex items-center justify-center shrink-0">
+            <Mail className="w-8 h-8 text-white" aria-hidden="true" />
+          </div>
+          <div className="space-y-3">
+            <h1 className="text-2xl font-bold text-wine-red">Konto erstellt</h1>
+            <p className="text-dark/60 font-condensed leading-relaxed">
+              Ihr Konto wurde erstellt. Bitte bestätigen Sie Ihre E-Mail-Adresse — wir haben
+              Ihnen eine Bestätigungsmail gesendet. Erst nach der Bestätigung können Sie sich
+              einloggen.
+            </p>
+          </div>
+          <Link
+            href="/login"
+            className="mt-2 px-8 py-3 bg-wine-red hover:bg-garnet-red text-white rounded-xl font-bold transition-colors text-sm"
+          >
+            Zur Anmeldung
+          </Link>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="bg-light-beige min-h-screen flex flex-col">
