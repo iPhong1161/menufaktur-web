@@ -25,6 +25,7 @@ function toCatalogCourse(c: Awaited<ReturnType<typeof getCourses>>[number]): Cat
     id: c.id,
     slug: c.slug,
     title: c.title,
+    date: c.date,
     dateFormatted: formatDate(c.date),
     startTime: c.start_time.slice(0, 5),
     location: c.location,

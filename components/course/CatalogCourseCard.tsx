@@ -4,6 +4,7 @@ import { CalendarDays, Clock, MapPin } from "lucide-react"
 import { courseImageSrc } from "@/lib/courseImages"
 
 export interface CatalogCourse {
+  date: string        // ISO yyyy-mm-dd — used for chronological sorting
   id: string
   slug: string
   title: string

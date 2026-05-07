@@ -19,7 +19,7 @@ export async function getCourses(dietary?: string[]): Promise<CourseWithCapacity
     .order("date", { ascending: true })
 
   if (dietary && dietary.length > 0) {
-    query = query.overlaps("food_options", dietary)
+    query = query.contains("food_options", dietary)
   }
 
   const { data: courses, error } = await query

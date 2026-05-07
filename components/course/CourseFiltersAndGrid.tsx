@@ -55,7 +55,7 @@ export function CourseFiltersAndGrid({ courses, activeDietary }: Props) {
     result.sort((a, b) => {
       if (sort === "price-desc") return b.price - a.price
       if (sort === "price-asc") return a.price - b.price
-      return a.dateFormatted.localeCompare(b.dateFormatted)
+      return new Date(a.date).getTime() - new Date(b.date).getTime()
     })
     return result
   }, [courses, sort])
