@@ -6,23 +6,28 @@ import { Bell, CircleUser } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { AdminLogoutButton } from "./AdminLogoutButton"
 
-const ADMIN_NAV = [
-  { href: "/admin/dashboard", label: "Dashboard" },
+type NavItem = { href: string; label: string; badge?: number }
+
+function buildAdminNav(unreadCount: number): NavItem[] {
+  return [
+    { href: "/admin/dashboard", label: "Dashboard" },
+    { href: "/admin/kurse", label: "Kurse" },
+    { href: "/admin/buchungen", label: "Buchungen" },
+    { href: "/admin/gutscheine", label: "Gutscheine" },
+    { href: "/admin/kunden", label: "Kunden" },
+    { href: "/admin/nachrichten", label: "Nachrichten", badge: unreadCount > 0 ? unreadCount : undefined },
+  ]
+}
+
+const MODERATOR_NAV: NavItem[] = [
   { href: "/admin/kurse", label: "Kurse" },
   { href: "/admin/buchungen", label: "Buchungen" },
   { href: "/admin/gutscheine", label: "Gutscheine" },
-  { href: "/admin/kunden", label: "Kunden" },
 ]
 
-const MODERATOR_NAV = [
-  { href: "/admin/kurse", label: "Kurse" },
-  { href: "/admin/buchungen", label: "Buchungen" },
-  { href: "/admin/gutscheine", label: "Gutscheine" },
-]
-
-export function AdminHeader({ role }: { role: "admin" | "moderator" }) {
+export function AdminHeader({ role, unreadMessages = 0 }: { role: "admin" | "moderator"; unreadMessages?: number }) {
   const pathname = usePathname()
-  const navLinks = role === "admin" ? ADMIN_NAV : MODERATOR_NAV
+  const navLinks = role === "admin" ? buildAdminNav(unreadMessages) : MODERATOR_NAV
   const brandHref = role === "admin" ? "/admin/dashboard" : "/admin/kurse"
 
   return (
@@ -37,7 +42,7 @@ export function AdminHeader({ role }: { role: "admin" | "moderator" }) {
             </span>
           </Link>
           <div className="hidden lg:flex items-center gap-6">
-            {navLinks.map(({ href, label }) => {
+            {navLinks.map(({ href, label, badge }) => {
               const active =
                 pathname === href ||
                 pathname.startsWith(href + "/") ||
@@ -47,13 +52,18 @@ export function AdminHeader({ role }: { role: "admin" | "moderator" }) {
                   key={href}
                   href={href}
                   className={cn(
-                    "text-sm transition-colors pb-1",
+                    "relative text-sm transition-colors pb-1",
                     active
                       ? "text-wine-red font-bold border-b-2 border-wine-red"
                       : "text-dark/50 font-medium hover:text-wine-red"
                   )}
                 >
                   {label}
+                  {badge !== undefined && (
+                    <span className="absolute -top-2 -right-4 min-w-[18px] h-[18px] bg-wine-red text-white text-[10px] font-bold rounded-full flex items-center justify-center px-1">
+                      {badge}
+                    </span>
+                  )}
                 </Link>
               )
             })}

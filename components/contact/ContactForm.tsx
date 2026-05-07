@@ -1,8 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useTransition } from "react"
 import { Send, CheckCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { submitContactFormAction } from "@/app/actions/contact"
 
 interface FormData {
   name: string
@@ -21,6 +22,8 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
   const [errors, setErrors] = useState<Partial<FormData>>({})
   const [submitted, setSubmitted] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [serverError, setServerError] = useState<string | null>(null)
+  const [isPending, startTransition] = useTransition()
 
   function validate(): Partial<FormData> {
     const e: Partial<FormData> = {}
@@ -37,11 +40,19 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setSubmitted(true)
+    setServerError(null)
     const errs = validate()
     setErrors(errs)
     if (Object.keys(errs).length > 0) return
-    console.log("[ContactForm] Message submitted:", form)
-    setSuccess(true)
+
+    startTransition(async () => {
+      const result = await submitContactFormAction(form)
+      if ("error" in result) {
+        setServerError(result.error)
+      } else {
+        setSuccess(true)
+      }
+    })
   }
 
   function update(field: keyof FormData, value: string) {
@@ -63,8 +74,7 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
         </div>
         <h3 className="text-2xl font-bold text-wine-red">Vielen Dank für Ihre Nachricht!</h3>
         <p className="text-dark/60 font-condensed text-lg max-w-sm leading-relaxed">
-          Wir melden uns in Kürze bei Ihnen. Bis dahin freuen wir uns auf Ihren Besuch in
-          der menufaktur.
+          Ihre Nachricht wurde gesendet. Wir melden uns so bald wie möglich.
         </p>
       </div>
     )
@@ -128,13 +138,18 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
           {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
         </div>
 
+        {serverError && (
+          <p className="text-red-600 text-sm font-condensed">{serverError}</p>
+        )}
+
         <div className="pt-2">
           <button
             type="submit"
-            className="inline-flex items-center gap-3 bg-wine-red hover:bg-garnet-red text-white font-bold uppercase tracking-tight text-sm px-12 py-5 rounded-xl transition-colors duration-200"
+            disabled={isPending}
+            className="inline-flex items-center gap-3 bg-wine-red hover:bg-garnet-red text-white font-bold uppercase tracking-tight text-sm px-12 py-5 rounded-xl transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            Nachricht senden
-            <Send className="w-4 h-4" aria-hidden="true" />
+            {isPending ? "Wird gesendet…" : "Nachricht senden"}
+            {!isPending && <Send className="w-4 h-4" aria-hidden="true" />}
           </button>
         </div>
       </form>

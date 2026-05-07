@@ -1,0 +1,26 @@
+"use server"
+
+import { createClient } from "@/lib/supabase/server"
+
+export async function submitContactFormAction(payload: {
+  name: string
+  email: string
+  subject: string
+  message: string
+}): Promise<{ success: true } | { error: string }> {
+  if (!payload.name.trim()) return { error: "Name darf nicht leer sein." }
+  if (!payload.email.trim()) return { error: "E-Mail darf nicht leer sein." }
+  if (!payload.subject.trim()) return { error: "Betreff darf nicht leer sein." }
+  if (!payload.message.trim()) return { error: "Nachricht darf nicht leer sein." }
+
+  const supabase = await createClient()
+  const { error } = await supabase.from("contact_messages").insert({
+    name: payload.name.trim(),
+    email: payload.email.trim(),
+    subject: payload.subject.trim(),
+    message: payload.message.trim(),
+  })
+
+  if (error) return { error: "Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut." }
+  return { success: true }
+}

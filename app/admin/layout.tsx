@@ -1,6 +1,6 @@
 import { headers } from "next/headers"
 import { AdminHeader } from "@/components/admin/AdminHeader"
-import { createClient } from "@/lib/supabase/server"
+import { createClient, createServiceClient } from "@/lib/supabase/server"
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const hdrs = await headers()
@@ -26,9 +26,19 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   const role = (hdrs.get("x-admin-role") ?? "moderator") as "admin" | "moderator"
 
+  let unreadMessages = 0
+  if (role === "admin") {
+    const service = createServiceClient()
+    const { count } = await service
+      .from("contact_messages")
+      .select("*", { count: "exact", head: true })
+      .eq("read", false)
+    unreadMessages = count ?? 0
+  }
+
   return (
     <div className="bg-[#fdfadf] min-h-screen flex flex-col">
-      <AdminHeader role={role} />
+      <AdminHeader role={role} unreadMessages={unreadMessages} />
       {children}
       <footer className="py-6 border-t border-wine-red/5 text-center">
         <p className="text-[10px] text-dark/30 tracking-widest uppercase font-condensed">

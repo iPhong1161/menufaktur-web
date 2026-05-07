@@ -234,6 +234,28 @@ export type Database = {
         Update: Partial<Omit<Database["public"]["Tables"]["admin_users"]["Insert"], "id">>
         Relationships: []
       }
+      contact_messages: {
+        Row: {
+          id: string
+          created_at: string
+          name: string
+          email: string
+          subject: string
+          message: string
+          read: boolean
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          name: string
+          email: string
+          subject: string
+          message: string
+          read?: boolean
+        }
+        Update: Partial<Database["public"]["Tables"]["contact_messages"]["Insert"]>
+        Relationships: []
+      }
     }
     Views: Record<string, never>
     Functions: {

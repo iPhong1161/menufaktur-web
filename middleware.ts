@@ -90,7 +90,12 @@ export async function middleware(request: NextRequest) {
     // Moderators cannot access dashboard or kunden
     if (role === "moderator") {
       const path = request.nextUrl.pathname
-      if (path === "/admin" || path === "/admin/dashboard" || path.startsWith("/admin/kunden")) {
+      if (
+        path === "/admin" ||
+        path === "/admin/dashboard" ||
+        path.startsWith("/admin/kunden") ||
+        path.startsWith("/admin/nachrichten")
+      ) {
         const url = request.nextUrl.clone()
         url.pathname = "/admin/kurse"
         return NextResponse.redirect(url)
