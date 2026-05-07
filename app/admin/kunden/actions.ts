@@ -74,6 +74,16 @@ export async function revokeAdmin(
 ): Promise<{ success: true } | { error: string }> {
   const supabase = createServiceClient()
 
+  const { data: adminRecord } = await supabase
+    .from("admin_users")
+    .select("role")
+    .eq("user_id", userId)
+    .single()
+
+  if (adminRecord?.role !== "moderator") {
+    return { error: "Admin-Rechte können nur direkt in der Datenbank entzogen werden." }
+  }
+
   const { error } = await supabase.from("admin_users").delete().eq("user_id", userId)
 
   if (error) return { error: error.message }

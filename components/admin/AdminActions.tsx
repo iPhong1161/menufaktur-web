@@ -42,7 +42,7 @@ export function AdminActions({ userId, userEmail, userName, isAdmin, adminCount,
     }
   }
 
-  const canRevokeAdmin = isAdmin && adminCount > 1
+  const canRevokeAdmin = isAdmin && admin_role === "moderator"
 
   return (
     <div className="bg-white rounded-xl border border-dark/5 shadow-sm p-8 space-y-6">
