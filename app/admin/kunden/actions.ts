@@ -56,7 +56,7 @@ export async function promoteToAdmin(
   const supabase = createServiceClient()
 
   const { data: { user }, error: userError } = await supabase.auth.admin.getUserById(userId)
-  if (userError || !user) return { error: "Benutzer nicht gefunden." }
+  if (userError || !user || !user.email) return { error: "Benutzer nicht gefunden." }
 
   const { error } = await supabase
     .from("admin_users")

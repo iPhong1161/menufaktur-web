@@ -224,12 +224,14 @@ export type Database = {
           user_id: string
           created_at: string
           role: string | null
+          email: string
         }
         Insert: {
           id?: string
           user_id: string
           created_at?: string
           role?: string | null
+          email: string
         }
         Update: Partial<Omit<Database["public"]["Tables"]["admin_users"]["Insert"], "id">>
         Relationships: []
