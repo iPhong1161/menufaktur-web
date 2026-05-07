@@ -59,7 +59,7 @@ export function AdminActions({ userId, userEmail, userName, isAdmin, adminCount 
         <div className="p-5 bg-[#F8F5DA] rounded-xl border border-wine-red/20 space-y-4">
           <p className="font-bold text-dark text-sm">
             {confirmAction === "promote"
-              ? `Möchten Sie ${userName} als Admin registrieren? Diese Person erhält vollen Zugriff auf das Admin-Dashboard.`
+              ? `Möchten Sie ${userName} als Moderator registrieren?`
               : `Admin-Rechte von ${userName} wirklich entziehen?`}
           </p>
           <div className="flex gap-3">
@@ -90,8 +90,8 @@ export function AdminActions({ userId, userEmail, userName, isAdmin, adminCount 
           >
             <ShieldCheck className="w-5 h-5 text-wine-red shrink-0" />
             <div>
-              <p className="font-bold text-dark text-sm">Als Admin registrieren</p>
-              <p className="text-xs text-dark/40 font-condensed">Gewährt vollen Zugriff auf das Admin-Dashboard</p>
+              <p className="font-bold text-dark text-sm">Zum Moderator machen</p>
+              <p className="text-xs text-dark/40 font-condensed">Gewährt eingeschränkten Zugriff auf das Admin-Dashboard</p>
             </div>
           </button>
         )}
