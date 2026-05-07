@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { headers } from "next/headers"
 import { ChevronRight, Download, Banknote, Mail, ShoppingCart, Check } from "lucide-react"
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 import { getBookingByNumberAdmin } from "@/lib/supabase/queries/admin-bookings"
@@ -34,6 +35,7 @@ export default async function AdminBuchungDetailPage({
   const booking = await getBookingByNumberAdmin(id)
   if (!booking) notFound()
 
+  const role = ((await headers()).get("x-admin-role") ?? "moderator") as "admin" | "moderator"
   const isPaid = booking.payment_status === "paid"
   const isCancelled = booking.status === "cancelled" || booking.status === "refunded"
 
@@ -91,7 +93,7 @@ export default async function AdminBuchungDetailPage({
             <Download className="w-4 h-4" />
             Rechnung herunterladen
           </button>
-          {!isPaid && !isCancelled && <MarkPaidButton bookingId={booking.id} />}
+          {role === "admin" && !isPaid && !isCancelled && <MarkPaidButton bookingId={booking.id} />}
         </div>
       </div>
 

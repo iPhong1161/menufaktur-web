@@ -71,7 +71,7 @@ export async function middleware(request: NextRequest) {
 
     const { data: adminRecord } = await serviceClient
       .from("admin_users")
-      .select("id")
+      .select("id, role")
       .eq("user_id", user.id)
       .single()
 
@@ -80,6 +80,21 @@ export async function middleware(request: NextRequest) {
       url.pathname = "/admin/login"
       url.searchParams.set("unauthorised", "1")
       return NextResponse.redirect(url)
+    }
+
+    const role = (adminRecord.role as string) ?? "moderator"
+
+    // Forward role to server components
+    supabaseResponse.headers.set("x-admin-role", role)
+
+    // Moderators cannot access dashboard or kunden
+    if (role === "moderator") {
+      const path = request.nextUrl.pathname
+      if (path === "/admin" || path === "/admin/dashboard" || path.startsWith("/admin/kunden")) {
+        const url = request.nextUrl.clone()
+        url.pathname = "/admin/kurse"
+        return NextResponse.redirect(url)
+      }
     }
   }
 

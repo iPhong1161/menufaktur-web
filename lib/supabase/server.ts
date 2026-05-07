@@ -35,3 +35,26 @@ export function createServiceClient() {
     { auth: { autoRefreshToken: false, persistSession: false } }
   )
 }
+
+export async function getAdminUser(): Promise<{
+  id: string
+  email: string
+  role: "admin" | "moderator"
+} | null> {
+  const supabase = await createClient()
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return null
+
+  const service = createServiceClient()
+  const { data } = await service
+    .from("admin_users")
+    .select("id, role")
+    .eq("user_id", user.id)
+    .single()
+
+  if (!data) return null
+  // Rows without a role are existing admins (column added post-launch)
+  const role: "admin" | "moderator" =
+    data.role === "moderator" ? "moderator" : "admin"
+  return { id: user.id, email: user.email ?? "", role }
+}

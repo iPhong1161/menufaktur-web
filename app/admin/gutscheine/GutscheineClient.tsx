@@ -144,7 +144,7 @@ function VoucherStatusButton({ id, status }: { id: string; status: AdminVoucher[
 
 // ─── Main page client ─────────────────────────────────────────────────────────
 
-export function GutscheineClient({ vouchers }: { vouchers: AdminVoucher[] }) {
+export function GutscheineClient({ vouchers, role }: { vouchers: AdminVoucher[]; role: "admin" | "moderator" }) {
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState<"" | AdminVoucher["status"]>("")
   const [showModal, setShowModal] = useState(false)
@@ -177,13 +177,15 @@ export function GutscheineClient({ vouchers }: { vouchers: AdminVoucher[] }) {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setShowModal(true)}
-            className="inline-flex items-center gap-2 bg-wine-red text-white px-8 py-4 rounded-xl font-bold hover:bg-garnet-red transition-colors shadow-sm"
-          >
-            <Plus className="w-4 h-4" />
-            Neuer Gutschein
-          </button>
+          {role === "admin" && (
+            <button
+              onClick={() => setShowModal(true)}
+              className="inline-flex items-center gap-2 bg-wine-red text-white px-8 py-4 rounded-xl font-bold hover:bg-garnet-red transition-colors shadow-sm"
+            >
+              <Plus className="w-4 h-4" />
+              Neuer Gutschein
+            </button>
+          )}
           <button className="inline-flex items-center gap-2 border border-dark/15 text-dark/60 px-6 py-4 rounded-xl font-bold hover:bg-dark/5 transition-colors">
             <Download className="w-4 h-4" />
             CSV
@@ -263,7 +265,13 @@ export function GutscheineClient({ vouchers }: { vouchers: AdminVoucher[] }) {
                       {formatDate(v.expires_at)}
                     </td>
                     <td className="px-6 py-5">
-                      <VoucherStatusButton id={v.id} status={v.status} />
+                      {role === "admin" ? (
+                        <VoucherStatusButton id={v.id} status={v.status} />
+                      ) : (
+                        <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest whitespace-nowrap ${STATUS_STYLE[v.status]}`}>
+                          {STATUS_LABEL[v.status]}
+                        </span>
+                      )}
                     </td>
                     <td className="px-6 py-5">
                       <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest whitespace-nowrap ${PAY_STYLE[v.payment_status]}`}>

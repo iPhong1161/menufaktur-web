@@ -1,8 +1,14 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
-import { createServiceClient } from "@/lib/supabase/server"
+import { createServiceClient, getAdminUser } from "@/lib/supabase/server"
 import { generateVoucherCode } from "@/lib/supabase/queries/vouchers"
+
+async function requireAdmin(): Promise<{ error: string } | null> {
+  const adminUser = await getAdminUser()
+  if (!adminUser || adminUser.role !== "admin") return { error: "Keine Berechtigung." }
+  return null
+}
 
 export interface CreateAdminVoucherResult {
   code: string
@@ -17,6 +23,8 @@ export async function createAdminVoucherAction(payload: {
   expires_at: string
   personal_message: string
 }): Promise<CreateAdminVoucherResult | { error: string }> {
+  const guard = await requireAdmin()
+  if (guard) return guard
   const supabase = createServiceClient()
 
   // Generate unique code with retry on collision
@@ -62,6 +70,8 @@ export async function updateVoucherStatusAction(
   id: string,
   status: "active" | "redeemed" | "expired"
 ): Promise<{ success: true } | { error: string }> {
+  const guard = await requireAdmin()
+  if (guard) return guard
   const supabase = createServiceClient()
   const { error } = await supabase
     .from("vouchers")

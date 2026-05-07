@@ -1,11 +1,15 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { ChevronRight } from "lucide-react"
+import { headers } from "next/headers"
+import { redirect } from "next/navigation"
 import { KursForm } from "@/components/admin/KursForm"
 
 export const metadata: Metadata = { title: "Neuer Kurs — menufaktur Admin" }
 
-export default function AdminKursNeuPage() {
+export default async function AdminKursNeuPage() {
+  const role = (await headers()).get("x-admin-role") ?? "moderator"
+  if (role !== "admin") redirect("/admin/kurse")
   return (
     <main className="flex-grow pt-20 pb-24">
       <div className="max-w-screen-xl mx-auto px-8 pt-8">

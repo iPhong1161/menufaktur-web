@@ -42,7 +42,7 @@ function fmtTime(t: string) {
   return t.slice(0, 5)
 }
 
-export function KurseClient({ courses }: { courses: AdminCourse[] }) {
+export function KurseClient({ courses, role }: { courses: AdminCourse[]; role: "admin" | "moderator" }) {
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("")
   const [, startTransition] = useTransition()
@@ -185,20 +185,24 @@ export function KurseClient({ courses }: { courses: AdminCourse[] }) {
                       >
                         <Eye className="w-4 h-4" />
                       </Link>
-                      <Link
-                        href={`/admin/kurse/${c.id}/bearbeiten`}
-                        className="p-2 text-dark/40 hover:text-wine-red rounded-lg transition-colors inline-flex"
-                        title="Bearbeiten"
-                      >
-                        <Pencil className="w-4 h-4" />
-                      </Link>
-                      <button
-                        onClick={() => handleDelete(c.id)}
-                        className="p-2 text-dark/40 hover:text-red-500 rounded-lg transition-colors"
-                        title="Kurs löschen"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
+                      {role === "admin" && (
+                        <>
+                          <Link
+                            href={`/admin/kurse/${c.id}/bearbeiten`}
+                            className="p-2 text-dark/40 hover:text-wine-red rounded-lg transition-colors inline-flex"
+                            title="Bearbeiten"
+                          >
+                            <Pencil className="w-4 h-4" />
+                          </Link>
+                          <button
+                            onClick={() => handleDelete(c.id)}
+                            className="p-2 text-dark/40 hover:text-red-500 rounded-lg transition-colors"
+                            title="Kurs löschen"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </>
+                      )}
                     </div>
                   </td>
                 </tr>

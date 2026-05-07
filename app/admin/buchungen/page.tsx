@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { headers } from "next/headers"
 import { AdminBackButton } from "@/components/admin/AdminBackButton"
 import { getBookingsAdmin } from "@/lib/supabase/queries/admin-bookings"
 import { BuchungenClient } from "@/components/admin/BuchungenClient"
@@ -7,6 +8,7 @@ export const metadata: Metadata = { title: "Buchungen — menufaktur Admin" }
 
 export default async function AdminBuchungenPage() {
   const bookings = await getBookingsAdmin()
+  const role = ((await headers()).get("x-admin-role") ?? "moderator") as "admin" | "moderator"
 
   return (
     <main className="flex-grow pt-32 pb-16 px-8 max-w-screen-xl mx-auto w-full">
@@ -19,7 +21,7 @@ export default async function AdminBuchungenPage() {
           </p>
         </div>
       </header>
-      <BuchungenClient bookings={bookings} />
+      <BuchungenClient bookings={bookings} role={role} />
     </main>
   )
 }
