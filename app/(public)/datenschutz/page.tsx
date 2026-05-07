@@ -62,9 +62,10 @@ export default function DatenschutzPage() {
               <div className="p-10 bg-white rounded-xl border border-dark/8 shadow-sm">
                 <h2 className="text-3xl font-bold text-wine-red mb-6">1. Verantwortlicher</h2>
                 <div className="flex flex-col gap-3 text-lg">
-                  <p className="font-bold text-dark">menufaktur GmbH Kochschule</p>
+                  <p className="font-bold text-dark">Kids Event and Catering GmbH</p>
+                  <p className="text-dark/50 font-condensed text-sm">(menufaktur Kochschule)</p>
                   <p className="text-dark/60 font-condensed leading-relaxed">
-                    Bornheimer Landwehr 46<br />
+                    Bornheimer Landwehr 46, Hinterhaus<br />
                     60385 Frankfurt am Main
                   </p>
                   <div className="mt-3 pt-4 border-t border-dark/8 space-y-2 text-sm font-condensed">
@@ -74,7 +75,7 @@ export default function DatenschutzPage() {
                     </p>
                     <p className="text-dark/60">
                       <span className="font-bold text-dark">Telefon:</span>{" "}
-                      069 / 977 63 666
+                      +49 69 977 63 666
                     </p>
                   </div>
                 </div>
@@ -134,23 +135,52 @@ export default function DatenschutzPage() {
               <div className="space-y-4">
                 {[
                   {
-                    name: "Google Analytics",
-                    desc: "Zur Analyse des Nutzerverhaltens und Verbesserung unserer Kursangebote.",
+                    name: "Vercel Inc.",
+                    role: "Hosting & Serverless-Funktionen",
+                    detail: "340 Pine Street, San Francisco, CA 94104, USA",
+                    desc: "Bereitstellung und Auslieferung dieser Website sowie Ausführung serverseitiger Funktionen. Datenübermittlung in die USA auf Basis der EU-Standardvertragsklauseln.",
+                    badge: null,
                   },
                   {
-                    name: "Stripe Payments",
-                    desc: "Sichere Abwicklung Ihrer Zahlungen für unsere Events und Kurse.",
+                    name: "Supabase Inc.",
+                    role: "Datenbank",
+                    detail: "EU-Region (Frankfurt, Deutschland)",
+                    desc: "Speicherung und Verwaltung von Buchungs-, Kunden- und Gutscheindaten in einer DSGVO-konformen Cloud-Datenbank auf EU-Servern. Keine Drittlandsübermittlung.",
+                    badge: null,
                   },
                   {
-                    name: "Supabase",
-                    desc: "Speicherung und Verwaltung von Buchungsdaten in einer DSGVO-konformen Cloud-Datenbank (EU-Server).",
+                    name: "Stripe Inc.",
+                    role: "Zahlungsabwicklung",
+                    detail: null,
+                    desc: "Verarbeitung von Zahlungsdaten bei Kursbuchungen. Stripe ist PCI-DSS-zertifiziert; Kartendaten werden ausschließlich bei Stripe gespeichert, nicht auf unseren Servern.",
+                    badge: "Demnächst aktiv",
                   },
-                ].map(({ name, desc }) => (
+                  {
+                    name: "Resend Inc.",
+                    role: "Transaktions-E-Mail",
+                    detail: null,
+                    desc: "Versand von Buchungsbestätigungen und sonstigen systemseitigen E-Mails. Datenübermittlung in die USA auf Basis der EU-Standardvertragsklauseln.",
+                    badge: "Demnächst aktiv",
+                  },
+                ].map(({ name, role, detail, desc, badge }) => (
                   <div
                     key={name}
                     className="p-6 border border-dark/10 rounded-xl bg-white"
                   >
-                    <h4 className="font-bold text-wine-red mb-2 text-sm">{name}</h4>
+                    <div className="flex items-start justify-between gap-4 mb-2">
+                      <div>
+                        <h4 className="font-bold text-wine-red text-sm">{name}</h4>
+                        <p className="text-[10px] uppercase tracking-widest font-bold text-dark/40 mt-0.5">{role}</p>
+                      </div>
+                      {badge && (
+                        <span className="shrink-0 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-yellow-100 text-yellow-800">
+                          {badge}
+                        </span>
+                      )}
+                    </div>
+                    {detail && (
+                      <p className="text-xs text-dark/40 font-condensed mb-2">{detail}</p>
+                    )}
                     <p className="text-dark/60 font-condensed text-sm">{desc}</p>
                   </div>
                 ))}
