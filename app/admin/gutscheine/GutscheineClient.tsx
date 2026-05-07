@@ -166,7 +166,7 @@ export function GutscheineClient({ vouchers, role }: { vouchers: AdminVoucher[];
 
   return (
     <>
-      <AdminBackButton />
+      <AdminBackButton role={role} />
 
       {/* Header */}
       <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">

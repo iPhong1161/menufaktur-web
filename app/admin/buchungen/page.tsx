@@ -12,7 +12,7 @@ export default async function AdminBuchungenPage() {
 
   return (
     <main className="flex-grow pt-32 pb-16 px-8 max-w-screen-xl mx-auto w-full">
-      <AdminBackButton />
+      <AdminBackButton role={role} />
       <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
           <h1 className="text-5xl font-bold text-wine-red tracking-tight mb-1">Buchungen</h1>
