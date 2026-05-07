@@ -26,15 +26,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   const role = (hdrs.get("x-admin-role") ?? "moderator") as "admin" | "moderator"
 
-  let unreadMessages = 0
-  if (role === "admin") {
-    const service = createServiceClient()
-    const { count } = await service
-      .from("contact_messages")
-      .select("*", { count: "exact", head: true })
-      .eq("read", false)
-    unreadMessages = count ?? 0
-  }
+  const service = createServiceClient()
+  const { count: unreadCount } = await service
+    .from("contact_messages")
+    .select("*", { count: "exact", head: true })
+    .eq("read", false)
+  const unreadMessages = unreadCount ?? 0
 
   return (
     <div className="bg-[#fdfadf] min-h-screen flex flex-col">

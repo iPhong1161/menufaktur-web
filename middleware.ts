@@ -93,8 +93,7 @@ export async function middleware(request: NextRequest) {
       if (
         path === "/admin" ||
         path === "/admin/dashboard" ||
-        path.startsWith("/admin/kunden") ||
-        path.startsWith("/admin/nachrichten")
+        path.startsWith("/admin/kunden")
       ) {
         const url = request.nextUrl.clone()
         url.pathname = "/admin/kurse"

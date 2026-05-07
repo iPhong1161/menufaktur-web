@@ -19,15 +19,18 @@ function buildAdminNav(unreadCount: number): NavItem[] {
   ]
 }
 
-const MODERATOR_NAV: NavItem[] = [
-  { href: "/admin/kurse", label: "Kurse" },
-  { href: "/admin/buchungen", label: "Buchungen" },
-  { href: "/admin/gutscheine", label: "Gutscheine" },
-]
+function buildModeratorNav(unreadCount: number): NavItem[] {
+  return [
+    { href: "/admin/kurse", label: "Kurse" },
+    { href: "/admin/buchungen", label: "Buchungen" },
+    { href: "/admin/gutscheine", label: "Gutscheine" },
+    { href: "/admin/nachrichten", label: "Nachrichten", badge: unreadCount > 0 ? unreadCount : undefined },
+  ]
+}
 
 export function AdminHeader({ role, unreadMessages = 0 }: { role: "admin" | "moderator"; unreadMessages?: number }) {
   const pathname = usePathname()
-  const navLinks = role === "admin" ? buildAdminNav(unreadMessages) : MODERATOR_NAV
+  const navLinks = role === "admin" ? buildAdminNav(unreadMessages) : buildModeratorNav(unreadMessages)
   const brandHref = role === "admin" ? "/admin/dashboard" : "/admin/kurse"
 
   return (

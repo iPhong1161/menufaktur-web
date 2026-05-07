@@ -62,7 +62,7 @@ function MessageRow({ msg, role }: { msg: ContactMessage; role: "admin" | "moder
         <td className="px-4 py-4 text-sm text-dark/70 font-condensed max-w-xs truncate">{msg.subject}</td>
         <td className="px-4 py-4 text-xs text-dark/40 font-condensed whitespace-nowrap">{formatDate(msg.created_at)}</td>
         <td className="px-4 py-4 text-right">
-          {role === "admin" && !read && (
+          {!read && (
             <button
               onClick={(e) => { e.stopPropagation(); markRead() }}
               disabled={isPending}
