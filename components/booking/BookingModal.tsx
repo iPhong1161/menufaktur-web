@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback, useRef } from "react"
 import { createPortal } from "react-dom"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
@@ -1080,6 +1080,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
   const [voucherCode, setVoucherCode] = useState("")
   const [voucherState, setVoucherState] = useState<"idle" | "loading" | "valid" | "invalid">("idle")
   const [voucherDiscount, setVoucherDiscount] = useState(0)
+  const voucherIdRef = useRef<string | null>(null)
   const [agbAccepted, setAgbAccepted] = useState(false)
   const [datenschutzAccepted, setDatenschutzAccepted] = useState(false)
   const [step2Errors, setStep2Errors] = useState<Record<string, string>>({})
@@ -1151,9 +1152,11 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
       const discount = Math.min(result.value, total)
       setVoucherState("valid")
       setVoucherDiscount(discount)
+      voucherIdRef.current = result.id
     } else {
       setVoucherState("invalid")
       setVoucherDiscount(0)
+      voucherIdRef.current = null
     }
   }
 
@@ -1189,7 +1192,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
           },
       voucher:
         voucherState === "valid"
-          ? { code: voucherCode.toUpperCase(), discount: voucherDiscount }
+          ? { code: voucherCode.toUpperCase(), discount: voucherDiscount, id: voucherIdRef.current }
           : null,
     }
 

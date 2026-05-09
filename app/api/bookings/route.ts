@@ -71,6 +71,7 @@ export async function POST(req: NextRequest) {
     p_total_amount:      totalAmount,
     p_vat_amount:        vatAmount,
     p_voucher_discount:  body.voucher?.discount ?? 0,
+    p_voucher_id:        body.voucher?.id ?? null,
     p_participants:      body.participants.map((p: ParticipantBody, i: number) => ({
       first_name:       p.firstName,
       last_name:        p.lastName,
