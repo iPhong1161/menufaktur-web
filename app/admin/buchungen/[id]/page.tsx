@@ -271,6 +271,41 @@ export default async function AdminBuchungDetailPage({
             </div>
           </section>
 
+          {/* Gutschein */}
+          {booking.voucher_id && booking.voucher && (() => {
+            const VOUCHER_STATUS: Record<string, { label: string; cls: string }> = {
+              active:   { label: "Aktiv",      cls: "bg-green-100 text-green-800 border border-green-200" },
+              redeemed: { label: "Eingelöst",  cls: "bg-dark/8 text-dark/50" },
+              expired:  { label: "Abgelaufen", cls: "bg-amber-100 text-amber-800 border border-amber-200" },
+              cancelled:{ label: "Storniert",  cls: "bg-red-100 text-red-800 border border-red-200" },
+            }
+            const badge = VOUCHER_STATUS[booking.voucher.status] ?? { label: booking.voucher.status, cls: "bg-dark/8 text-dark/50" }
+            return (
+              <section className="bg-white rounded-xl p-8 shadow-sm border border-dark/5">
+                <h2 className="text-xl font-bold text-wine-red mb-5">Gutschein verwendet</h2>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-wine-red font-bold text-base tracking-wider">
+                      {booking.voucher.code}
+                    </span>
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${badge.cls}`}>
+                      {badge.label}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm font-condensed text-dark/60">
+                    <span>Rabatt</span>
+                    <span className="font-bold text-dark">− {fmtAmount(booking.voucher_discount)}</span>
+                  </div>
+                  {booking.voucher.status === "active" && (
+                    <div className="mt-3 flex gap-2 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800 font-condensed">
+                      Bitte Gutschein nach Zahlungseingang als eingelöst markieren.
+                    </div>
+                  )}
+                </div>
+              </section>
+            )
+          })()}
+
           {/* Timeline */}
           <section className="bg-white rounded-xl p-8 shadow-sm border border-dark/5">
             <h2 className="text-xl font-bold text-wine-red mb-6">Aktivität</h2>

@@ -58,6 +58,9 @@ export interface AdminBookingDetail {
     vat_id: string | null
     is_business: boolean
   } | null
+  voucher_id: string | null
+  voucher_discount: number
+  voucher: { code: string; status: string } | null
 }
 
 type ProfileRow = { first_name: string | null; last_name: string | null; email: string | null }
@@ -129,7 +132,7 @@ export async function getBookingByNumberAdmin(
 
   if (error || !booking) return null
 
-  const [courseResult, participantsResult, invoiceResult] = await Promise.all([
+  const [courseResult, participantsResult, invoiceResult, voucherResult] = await Promise.all([
     supabase
       .from("courses")
       .select("id, title, date, start_time, end_time, photo_url, price_per_person, capacity")
@@ -141,6 +144,9 @@ export async function getBookingByNumberAdmin(
       .select("*")
       .eq("booking_id", booking.id)
       .maybeSingle(),
+    booking.voucher_id
+      ? supabase.from("vouchers").select("code, status").eq("id", booking.voucher_id).single()
+      : Promise.resolve({ data: null }),
   ])
 
   return {
@@ -148,6 +154,7 @@ export async function getBookingByNumberAdmin(
     course: courseResult.data ?? null,
     participants: (participantsResult.data ?? []) as AdminBookingDetail["participants"],
     invoice_recipient: invoiceResult.data ?? null,
+    voucher: voucherResult.data ?? null,
   }
 }
 
