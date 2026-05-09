@@ -269,6 +269,7 @@ export type Database = {
           p_total_amount: number
           p_vat_amount: number
           p_voucher_discount: number
+          p_voucher_id: string | null
           p_participants: unknown
           p_invoice_recipient: unknown
         }
