@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import { Ticket, ShoppingBasket, ShieldCheck } from "lucide-react"
-import { VoucherButton } from "@/components/voucher/VoucherButton"
+import { Ticket, ShoppingBasket } from "lucide-react"
+import { GutscheinAnfrageForm } from "@/components/voucher/GutscheinAnfrageForm"
 
 export const metadata: Metadata = {
   title: "Gutscheine — menufaktur",
@@ -86,38 +86,17 @@ export default function GutscheinPage() {
               <div className="absolute top-0 right-0 p-8 opacity-[0.04] pointer-events-none">
                 <Ticket className="w-32 h-32 text-wine-red" />
               </div>
-              <div className="relative z-10 space-y-7">
+              <div className="relative z-10 space-y-8">
                 <div className="flex items-center gap-4">
                   <ShoppingBasket
                     className="w-8 h-8 text-wine-red shrink-0"
                     aria-hidden="true"
                   />
                   <h2 className="text-wine-red font-bold text-3xl md:text-4xl tracking-tight">
-                    Sie möchten einen Gutschein kaufen
+                    Gutschein bestellen
                   </h2>
                 </div>
-                <div className="space-y-5 max-w-2xl">
-                  <p className="text-dark/60 text-lg leading-relaxed font-condensed">
-                    Sie können Gutscheine im Wert zwischen{" "}
-                    <span className="font-bold text-wine-red">25,– €</span> und{" "}
-                    <span className="font-bold text-wine-red">145,– €</span> kaufen.
-                    Bei den meisten Kochkursen beträgt die Teilnahmegebühr 109,– € pro
-                    Person. Ein Gutschein kann für jeden menufaktur Kochkurs
-                    eingelöst werden.
-                  </p>
-                  <p className="text-dark/60 text-lg leading-relaxed font-condensed">
-                    Bitte lesen Sie vor dem Kauf aufmerksam unsere allgemeinen
-                    Geschäftsbedingungen und informieren Sie sich im FAQ zum
-                    Thema Gutschein.
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row items-center gap-6 pt-2">
-                  <VoucherButton />
-                  <div className="flex items-center gap-2 text-sm text-dark/40">
-                    <ShieldCheck className="w-5 h-5 shrink-0" aria-hidden="true" />
-                    <span>Sichere Zahlung &amp; Sofortversand</span>
-                  </div>
-                </div>
+                <GutscheinAnfrageForm />
               </div>
             </div>
           </div>
