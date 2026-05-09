@@ -256,6 +256,7 @@ export async function duplicateCourse(
     slug = `${baseSlug}-${attempt++}`
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { id: _id, created_at: _ca, ...rest } = original
   const { error: insertError } = await supabase.from("courses").insert({
     ...rest,

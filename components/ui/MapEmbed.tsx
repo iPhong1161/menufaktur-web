@@ -35,7 +35,7 @@ export function MapEmbed({ className = "" }: MapEmbedProps) {
           Bornheimer Landwehr 46, 60385 Frankfurt am Main
         </p>
         <p className="text-xs text-dark/30 font-condensed max-w-xs leading-relaxed">
-          Durch Klick auf „Karte anzeigen" stimmen Sie der Übertragung von Daten an Google zu.
+          Durch Klick auf &bdquo;Karte anzeigen&ldquo; stimmen Sie der Übertragung von Daten an Google zu.
         </p>
       </div>
       <button

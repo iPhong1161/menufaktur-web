@@ -13,7 +13,7 @@ interface Props {
   admin_role: string | null
 }
 
-export function AdminActions({ userId, userEmail, userName, isAdmin, adminCount, admin_role }: Props) {
+export function AdminActions({ userId, userEmail, userName, isAdmin, admin_role }: Props) {
   const [loading, setLoading] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [resetSent, setResetSent] = useState(false)

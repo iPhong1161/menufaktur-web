@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { headers } from "next/headers"
+import Image from "next/image"
 import { ChevronRight, Download, Banknote, Mail, ShoppingCart, Check } from "lucide-react"
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 import { getBookingByNumberAdmin } from "@/lib/supabase/queries/admin-bookings"
@@ -104,12 +105,14 @@ export default async function AdminBuchungDetailPage({
           <section className="bg-white rounded-xl p-8 shadow-sm border border-dark/5">
             <h2 className="text-2xl font-bold text-wine-red mb-6">Kurs</h2>
             <div className="flex flex-col md:flex-row gap-8">
-              <div className="w-full md:w-1/3 aspect-[4/3] rounded-lg overflow-hidden shrink-0">
+              <div className="relative w-full md:w-1/3 aspect-[4/3] rounded-lg overflow-hidden shrink-0">
                 {booking.course?.photo_url ? (
-                  <img
+                  <Image
                     src={booking.course.photo_url}
                     alt={booking.course.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                   />
                 ) : (
                   <ImagePlaceholder label="Kursfoto" className="w-full h-full" />

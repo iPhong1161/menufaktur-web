@@ -47,7 +47,7 @@ function fmtCourseDate(d: string) {
   })
 }
 
-export function BuchungenClient({ bookings, role: _role }: { bookings: AdminBookingRow[]; role: "admin" | "moderator" }) {
+export function BuchungenClient({ bookings }: { bookings: AdminBookingRow[]; role: "admin" | "moderator" }) {
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("")
   const [methodFilter, setMethodFilter] = useState("")

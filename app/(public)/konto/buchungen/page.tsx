@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { CalendarDays, Clock, FileText, History, Inbox } from "lucide-react"
 import { getUserBookings } from "@/lib/supabase/queries/bookings"
@@ -92,11 +93,15 @@ export default async function KontoBuchungenPage() {
                 >
                   <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center">
                     {b.course?.photo_url ? (
-                      <img
-                        src={b.course.photo_url}
-                        alt={b.course.title}
-                        className="w-full lg:w-40 h-40 rounded-lg object-cover shrink-0"
-                      />
+                      <div className="relative w-full lg:w-40 h-40 rounded-lg overflow-hidden shrink-0">
+                        <Image
+                          src={b.course.photo_url}
+                          alt={b.course.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 100vw, 160px"
+                        />
+                      </div>
                     ) : (
                       <div className="w-full lg:w-40 h-40 rounded-lg bg-dark/8 shrink-0 flex items-center justify-center">
                         <CalendarDays className="w-8 h-8 text-dark/20" />
@@ -161,11 +166,15 @@ export default async function KontoBuchungenPage() {
                 >
                   <div className="flex flex-col lg:flex-row gap-8 items-start lg:items-center">
                     {b.course?.photo_url ? (
-                      <img
-                        src={b.course.photo_url}
-                        alt={b.course.title}
-                        className="w-full lg:w-40 h-40 rounded-lg object-cover shrink-0 grayscale-[0.4]"
-                      />
+                      <div className="relative w-full lg:w-40 h-40 rounded-lg overflow-hidden shrink-0 grayscale-[0.4]">
+                        <Image
+                          src={b.course.photo_url}
+                          alt={b.course.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 1024px) 100vw, 160px"
+                        />
+                      </div>
                     ) : (
                       <div className="w-full lg:w-40 h-40 rounded-lg bg-dark/8 shrink-0 grayscale-[0.4] flex items-center justify-center">
                         <History className="w-8 h-8 text-dark/20" />

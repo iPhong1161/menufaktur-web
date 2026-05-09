@@ -25,7 +25,7 @@ function formatDate(iso: string) {
   })
 }
 
-function MessageRow({ msg, role }: { msg: ContactMessage; role: "admin" | "moderator" }) {
+function MessageRow({ msg }: { msg: ContactMessage; role: "admin" | "moderator" }) {
   const [expanded, setExpanded] = useState(false)
   const [read, setRead] = useState(msg.read)
   const [isPending, startTransition] = useTransition()

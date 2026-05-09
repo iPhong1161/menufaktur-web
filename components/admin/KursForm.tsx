@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useTransition } from "react"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { Eye, ImagePlus, Save, Trash2 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
@@ -289,10 +290,13 @@ export function KursForm({ course }: Props) {
             <label className={labelClass}>Kursfoto</label>
             <label className="block border-2 border-dashed border-dark/15 rounded-xl p-12 flex flex-col items-center justify-center gap-4 hover:bg-[#F8F5DA] transition-colors cursor-pointer">
               {photoPreview ? (
-                <img
+                <Image
                   src={photoPreview}
                   alt="Vorschau"
+                  width={400}
+                  height={192}
                   className="max-h-48 rounded-lg object-cover"
+                  unoptimized
                 />
               ) : (
                 <>
