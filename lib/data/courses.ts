@@ -221,18 +221,18 @@ export const INSTRUCTOR = {
 
 export const COURSE_REVIEWS = [
   {
-    author: "Saskia K.",
-    text: "Ein unvergesslicher Abend! Marco hat eine so ruhige und kompetente Art. Man vergisst völlig die Zeit.",
+    author: "Sabine Gügel aus Hattersheim",
+    text: "Meine Erwartungen wurden zur vollsten Zufriedenheit erfüllt. Alle Köche waren sehr nett und haben jede aufkommende Frage gerne beantwortet. Zum Empfang gab es einen Sekt und ein leckeres Pilzsüppchen. Es gab auch wertvolle Tipps und Tricks für die Zubereitung der selbstgemachten Pasta. Ich kann die menufaktur besten Gewissens weiterempfehlen.",
     stars: 5,
   },
   {
-    author: "Thomas M.",
-    text: "Hätte nie gedacht, dass ich das selbst so gut hinbekomme. Die Qualität der Zutaten war einfach überragend.",
+    author: "Kirsten Winkler aus Wettenberg",
+    text: "Wir haben den Kurs als Teamevent unseres Büros gebucht. Es hat uns allen viel Spaß gemacht und wir hatten eine sehr schöne gemeinsame Zeit. Vielen Dank dafür, wir kommen gerne wieder!",
     stars: 5,
   },
   {
-    author: "Dr. Elena V.",
-    text: "Die Atmosphäre in der menufaktur ist magisch. Es fühlt sich an wie ein Abendessen unter Freunden, bei dem man nebenbei noch Profi-Tipps lernt.",
+    author: "Antje Bühring-Uhle aus Frankfurt",
+    text: "Tolles Team, kurzweilige Erklärungen und unterhaltsame Führung durch einen rundum köstlichen Abend.",
     stars: 5,
   },
 ]
