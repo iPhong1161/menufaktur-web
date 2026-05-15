@@ -1,8 +1,10 @@
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
+import { createServiceClient } from "@/lib/supabase/server"
 import { getProfile } from "@/lib/supabase/queries/profiles"
 import { DeleteAccountSection } from "@/components/konto/DeleteAccountSection"
+import { NewsletterToggle } from "@/components/konto/NewsletterToggle"
 
 export const metadata: Metadata = {
   title: "Mein Profil — menufaktur",
@@ -17,6 +19,14 @@ export default async function KontoProfilPage() {
   const profile = await getProfile()
 
   const displayName = [profile?.first_name, profile?.last_name].filter(Boolean).join(" ") || "—"
+
+  const service = createServiceClient()
+  const { data: subscriber } = await service
+    .from("newsletter_subscribers")
+    .select("id")
+    .eq("email", user.email!.toLowerCase())
+    .maybeSingle()
+  const isSubscribed = subscriber !== null
 
   return (
     <div>
@@ -44,6 +54,10 @@ export default async function KontoProfilPage() {
             <dd className="text-dark font-medium">{user.email}</dd>
           </div>
         </dl>
+      </div>
+
+      <div className="mb-12">
+        <NewsletterToggle isSubscribed={isSubscribed} />
       </div>
 
       <DeleteAccountSection />

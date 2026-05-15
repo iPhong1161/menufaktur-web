@@ -7,6 +7,16 @@ import { CatalogCourseCard, type CatalogCourse } from "./CatalogCourseCard"
 
 const COURSES_PER_PAGE = 6
 
+const GERMAN_MONTHS = [
+  "Januar", "Februar", "März", "April", "Mai", "Juni",
+  "Juli", "August", "September", "Oktober", "November", "Dezember",
+]
+
+function monthLabel(yearMonth: string): string {
+  const [year, month] = yearMonth.split("-").map(Number)
+  return `${GERMAN_MONTHS[month - 1]} ${year}`
+}
+
 // label → exact value stored in food_options column (lowercase)
 const DIETARY_OPTIONS: { label: string; value: string }[] = [
   { label: "Vegetarisch", value: "vegetarisch" },
@@ -28,7 +38,13 @@ export function CourseFiltersAndGrid({ courses, activeDietary }: Props) {
   const searchParams = useSearchParams()
 
   const [sort, setSort] = useState<SortOption>("date")
+  const [selectedMonth, setSelectedMonth] = useState("")
   const [page, setPage] = useState(1)
+
+  const availableMonths = useMemo(() => {
+    const months = new Set(courses.map((c) => c.date.slice(0, 7)))
+    return Array.from(months).sort()
+  }, [courses])
 
   function toggleDietary(option: string) {
     const current = new Set(activeDietary)
@@ -47,18 +63,21 @@ export function CourseFiltersAndGrid({ courses, activeDietary }: Props) {
 
   function clearFilters() {
     router.push("/kurse")
+    setSelectedMonth("")
     setPage(1)
   }
 
   const sorted = useMemo(() => {
-    const result = [...courses]
+    const result = courses.filter(
+      (c) => !selectedMonth || c.date.startsWith(selectedMonth)
+    )
     result.sort((a, b) => {
       if (sort === "price-desc") return b.price - a.price
       if (sort === "price-asc") return a.price - b.price
       return new Date(a.date).getTime() - new Date(b.date).getTime()
     })
     return result
-  }, [courses, sort])
+  }, [courses, sort, selectedMonth])
 
   const totalPages = Math.max(1, Math.ceil(sorted.length / COURSES_PER_PAGE))
   const safePage = Math.min(page, totalPages)
@@ -77,11 +96,21 @@ export function CourseFiltersAndGrid({ courses, activeDietary }: Props) {
             <label className="block text-[0.7rem] font-bold uppercase tracking-widest text-dark/40 mb-2">
               Zeitraum
             </label>
-            <input
-              type="text"
-              placeholder="Alle Termine"
-              className="w-full bg-white/80 border border-dark/10 rounded-lg px-3 py-2.5 text-sm text-dark placeholder:text-dark/30 focus:outline-none focus:ring-2 focus:ring-wine-red/30"
-            />
+            <select
+              value={selectedMonth}
+              onChange={(e) => {
+                setSelectedMonth(e.target.value)
+                setPage(1)
+              }}
+              className="w-full bg-white/80 border border-dark/10 rounded-lg px-3 py-2.5 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-wine-red/30 appearance-none"
+            >
+              <option value="">Alle Termine</option>
+              {availableMonths.map((ym) => (
+                <option key={ym} value={ym}>
+                  {monthLabel(ym)}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Ernährung / Allergene */}

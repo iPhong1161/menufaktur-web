@@ -1,7 +1,6 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
-import { MapEmbed } from "@/components/ui/MapEmbed"
 
 export const metadata: Metadata = {
   title: "Über uns — menufaktur",
@@ -176,7 +175,6 @@ export default function UeberUnsPage() {
             </address>
           </div>
         </div>
-        <MapEmbed className="mt-12 w-full h-[360px] rounded-xl" />
       </section>
 
       {/* CTA section */}

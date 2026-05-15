@@ -3,7 +3,9 @@ import { NextResponse, type NextRequest } from "next/server"
 
 export async function middleware(request: NextRequest) {
   // Forward pathname to server components via request headers
+  // Strip x-admin-role so clients cannot inject a trusted role value
   const requestHeaders = new Headers(request.headers)
+  requestHeaders.delete("x-admin-role")
   requestHeaders.set("x-pathname", request.nextUrl.pathname)
 
   let supabaseResponse = NextResponse.next({ request: { headers: requestHeaders } })
@@ -28,6 +30,7 @@ export async function middleware(request: NextRequest) {
             .map(({ name, value }) => `${name}=${value}`)
             .join("; ")
           const freshHeaders = new Headers(request.headers)
+          freshHeaders.delete("x-admin-role")
           freshHeaders.set("cookie", cookieString)
           freshHeaders.set("x-pathname", request.nextUrl.pathname)
           supabaseResponse = NextResponse.next({ request: { headers: freshHeaders } })

@@ -71,6 +71,9 @@ export async function setParticipantCancelledAction(
   cancelled: boolean,
   courseId: string
 ): Promise<{ error: string } | { success: true }> {
+  const adminUser = await getAdminUser()
+  if (!adminUser) return { error: "Keine Berechtigung." }
+
   const supabase = createServiceClient()
   const { error } = await supabase
     .from("participants")

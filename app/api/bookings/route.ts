@@ -26,52 +26,87 @@ export async function POST(req: NextRequest) {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Server-side capacity guard — prevents double-bookings under race conditions
-  // Uses service client to see ALL participants regardless of user_id (bypasses RLS)
+  // Fetch course server-side — authoritative source for pricing and capacity
   const serviceSupabase = createServiceClient()
   const { data: course } = await serviceSupabase
     .from("courses")
-    .select("capacity")
+    .select("capacity, price_per_person")
     .eq("id", body.course.id)
     .single()
 
-  if (course) {
-    const { data: activeBookings } = await serviceSupabase
-      .from("bookings")
-      .select("id")
-      .eq("course_id", body.course.id)
-      .in("status", ["pending", "confirmed"])
+  if (!course) return NextResponse.json({ error: "Kurs nicht gefunden." }, { status: 400 })
 
-    const bookingIds = (activeBookings ?? []).map((b: { id: string }) => b.id)
-    const { count: bookedCount } = bookingIds.length > 0
-      ? await serviceSupabase
-          .from("participants")
-          .select("*", { count: "exact", head: true })
-          .in("booking_id", bookingIds)
-          .eq("cancelled", false)
-      : { count: 0 }
+  // Validate participant count
+  const participantCount: number = body.participants?.length ?? 0
+  if (participantCount < 1)
+    return NextResponse.json({ error: "Mindestens ein Teilnehmer erforderlich." }, { status: 400 })
 
-    const remaining = course.capacity - (bookedCount ?? 0)
-    if (remaining < body.participants.length) {
-      return NextResponse.json(
-        { error: "Leider sind nicht mehr genug Plätze verfügbar" },
-        { status: 409 }
-      )
-    }
+  // Capacity guard — uses service client to bypass RLS and see all bookings
+  const { data: activeBookings } = await serviceSupabase
+    .from("bookings")
+    .select("id")
+    .eq("course_id", body.course.id)
+    .in("status", ["pending", "confirmed"])
+
+  const bookingIds = (activeBookings ?? []).map((b: { id: string }) => b.id)
+  const { count: bookedCount } = bookingIds.length > 0
+    ? await serviceSupabase
+        .from("participants")
+        .select("*", { count: "exact", head: true })
+        .in("booking_id", bookingIds)
+        .eq("cancelled", false)
+    : { count: 0 }
+
+  const remaining = course.capacity - (bookedCount ?? 0)
+  if (remaining < participantCount) {
+    return NextResponse.json(
+      { error: "Leider sind nicht mehr genug Plätze verfügbar" },
+      { status: 409 }
+    )
   }
 
-  const totalAmount: number = body.totalAmount
-  const vatAmount = Math.round((totalAmount - totalAmount / 1.19) * 100) / 100
+  // Server-side pricing — client-supplied totalAmount is ignored
+  const serverTotal = course.price_per_person * participantCount
+
+  // Voucher re-validation — client-supplied discount amount is ignored
+  let serverDiscount = 0
+  let validatedVoucherId: string | null = null
+  if (body.voucher?.id) {
+    const { data: voucher } = await serviceSupabase
+      .from("vouchers")
+      .select("id, remaining_value, status, expires_at")
+      .eq("id", body.voucher.id)
+      .eq("status", "active")
+      .single()
+    if (!voucher || (voucher.expires_at && new Date(voucher.expires_at) < new Date())) {
+      return NextResponse.json({ error: "Ungültiger oder abgelaufener Gutscheincode." }, { status: 400 })
+    }
+    serverDiscount = Math.min(voucher.remaining_value, serverTotal)
+    validatedVoucherId = voucher.id
+  }
+
+  // Input length validation on participant fields
+  for (const p of body.participants as ParticipantBody[]) {
+    if ((p.firstName?.length ?? 0) > 200 || (p.lastName?.length ?? 0) > 200)
+      return NextResponse.json({ error: "Eingabe zu lang." }, { status: 400 })
+    if ((p.email?.length ?? 0) > 254)
+      return NextResponse.json({ error: "Eingabe zu lang." }, { status: 400 })
+    if ((p.phone?.length ?? 0) > 50)
+      return NextResponse.json({ error: "Eingabe zu lang." }, { status: 400 })
+  }
+
+  const finalTotal = serverTotal - serverDiscount
+  const vatAmount = Math.round((finalTotal - finalTotal / 1.19) * 100) / 100
   const inv: InvoiceBody = body.invoiceRecipient
 
   const { data, error } = await supabase.rpc("create_booking_atomic", {
     p_course_id:         body.course.id,
     p_user_id:           user?.id ?? null,
     p_payment_method:    "bank_transfer",
-    p_total_amount:      totalAmount,
+    p_total_amount:      finalTotal,
     p_vat_amount:        vatAmount,
-    p_voucher_discount:  body.voucher?.discount ?? 0,
-    p_voucher_id:        body.voucher?.id ?? null,
+    p_voucher_discount:  serverDiscount,
+    p_voucher_id:        validatedVoucherId,
     p_participants:      body.participants.map((p: ParticipantBody, i: number) => ({
       first_name:       p.firstName,
       last_name:        p.lastName,
@@ -96,7 +131,8 @@ export async function POST(req: NextRequest) {
   })
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 })
+    console.error("[api/bookings]", error)
+    return NextResponse.json({ error: "Buchung konnte nicht erstellt werden." }, { status: 400 })
   }
 
   const result = data as { booking_number: string; id: string }

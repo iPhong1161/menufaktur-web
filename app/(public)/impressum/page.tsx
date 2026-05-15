@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { Phone, Mail, Printer } from "lucide-react"
 
 export const metadata: Metadata = {
@@ -140,26 +139,6 @@ export default function ImpressumPage() {
         </div>
       </main>
 
-      {/* Newsletter teaser */}
-      <aside className="max-w-5xl mx-auto px-6 md:px-12 pb-24">
-        <div className="relative overflow-hidden bg-[#ECE9CF] rounded-xl p-12 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="relative z-10 max-w-xl">
-            <h4 className="text-3xl font-bold text-wine-red mb-2">
-              Kulinarische Post erhalten?
-            </h4>
-            <p className="text-dark/60 font-condensed">
-              Melden Sie sich für unseren Newsletter an und erhalten Sie exklusive Rezepte
-              und Kurstermine.
-            </p>
-          </div>
-          <Link
-            href="/kontakt"
-            className="relative z-10 px-8 py-4 bg-wine-red hover:bg-garnet-red text-white rounded-xl font-bold transition-colors shrink-0"
-          >
-            Jetzt anmelden
-          </Link>
-        </div>
-      </aside>
     </div>
   )
 }

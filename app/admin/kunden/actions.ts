@@ -1,6 +1,6 @@
 "use server"
 
-import { createServiceClient } from "@/lib/supabase/server"
+import { createServiceClient, getAdminUser } from "@/lib/supabase/server"
 import { revalidatePath } from "next/cache"
 
 export async function createAdminCustomer(data: {
@@ -14,6 +14,9 @@ export async function createAdminCustomer(data: {
   city?: string
   preferred_payment_method?: string
 }): Promise<{ success: true; email: string; password: string } | { error: string }> {
+  const adminUser = await getAdminUser()
+  if (!adminUser) return { error: "Keine Berechtigung." }
+
   const supabase = createServiceClient()
 
   const { data: authData, error: authError } = await supabase.auth.admin.createUser({
@@ -53,6 +56,9 @@ export async function createAdminCustomer(data: {
 export async function promoteToAdmin(
   userId: string
 ): Promise<{ success: true } | { error: string }> {
+  const adminUser = await getAdminUser()
+  if (!adminUser || adminUser.role !== "admin") return { error: "Keine Berechtigung." }
+
   const supabase = createServiceClient()
 
   const { data: { user }, error: userError } = await supabase.auth.admin.getUserById(userId)
@@ -72,6 +78,9 @@ export async function promoteToAdmin(
 export async function revokeAdmin(
   userId: string
 ): Promise<{ success: true } | { error: string }> {
+  const adminUser = await getAdminUser()
+  if (!adminUser || adminUser.role !== "admin") return { error: "Keine Berechtigung." }
+
   const supabase = createServiceClient()
 
   const { data: adminRecord } = await supabase
@@ -96,9 +105,12 @@ export async function revokeAdmin(
 export async function sendPasswordReset(
   email: string
 ): Promise<{ success: true } | { error: string }> {
+  const adminUser = await getAdminUser()
+  if (!adminUser) return { error: "Keine Berechtigung." }
+
   const supabase = createServiceClient()
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://menufaktur-web.vercel.app"
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `${siteUrl}/konto/passwort-reset`,
@@ -111,6 +123,9 @@ export async function sendPasswordReset(
 export async function deactivateCustomer(
   userId: string
 ): Promise<{ success: true } | { error: string }> {
+  const adminUser = await getAdminUser()
+  if (!adminUser || adminUser.role !== "admin") return { error: "Keine Berechtigung." }
+
   const supabase = createServiceClient()
 
   const { error } = await supabase.auth.admin.updateUserById(userId, {

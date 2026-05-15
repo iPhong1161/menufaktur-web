@@ -2,11 +2,14 @@
 
 import { revalidatePath } from "next/cache"
 import { updateBookingPaymentStatus } from "@/lib/supabase/queries/admin-bookings"
-import { createServiceClient } from "@/lib/supabase/server"
+import { createServiceClient, getAdminUser } from "@/lib/supabase/server"
 
 export async function markBookingPaidAction(
   id: string
 ): Promise<{ error: string } | { success: true }> {
+  const adminUser = await getAdminUser()
+  if (!adminUser) return { error: "Keine Berechtigung." }
+
   const result = await updateBookingPaymentStatus(id)
   if ("error" in result) return { error: result.error }
   revalidatePath("/admin/buchungen")
@@ -18,6 +21,9 @@ export async function removeParticipantAction(
   bookingId: string,
   bookingNumber: string
 ): Promise<{ error: string } | { success: true }> {
+  const adminUser = await getAdminUser()
+  if (!adminUser) return { error: "Keine Berechtigung." }
+
   const supabase = createServiceClient()
 
   const [bookingResult, participantResult] = await Promise.all([
@@ -53,7 +59,10 @@ export async function removeParticipantAction(
     .delete()
     .eq("id", participantId)
 
-  if (deleteError) return { error: deleteError.message }
+  if (deleteError) {
+    console.error("[removeParticipantAction] delete", deleteError)
+    return { error: "Teilnehmer konnte nicht entfernt werden." }
+  }
 
   const newTotal = Number(bookingResult.data.total_amount) - pricePerPerson
 
@@ -62,7 +71,10 @@ export async function removeParticipantAction(
     .update({ total_amount: Math.max(0, newTotal) })
     .eq("id", bookingId)
 
-  if (updateError) return { error: updateError.message }
+  if (updateError) {
+    console.error("[removeParticipantAction] update total", updateError)
+    return { error: "Buchungsbetrag konnte nicht aktualisiert werden." }
+  }
 
   // TODO: if payment_status is paid, admin should be notified that a partial refund
   // may be needed — implement in v1.1 with Stripe refund API
@@ -85,6 +97,9 @@ export async function addParticipantAction(
   courseId: string,
   data: AddParticipantData
 ): Promise<{ error: string } | { success: true }> {
+  const adminUser = await getAdminUser()
+  if (!adminUser) return { error: "Keine Berechtigung." }
+
   const supabase = createServiceClient()
 
   const { data: course } = await supabase
@@ -125,7 +140,10 @@ export async function addParticipantAction(
       is_primary: false,
     })
 
-  if (insertError) return { error: insertError.message }
+  if (insertError) {
+    console.error("[addParticipantAction] insert", insertError)
+    return { error: "Teilnehmer konnte nicht hinzugefügt werden." }
+  }
 
   const { data: booking } = await supabase
     .from("bookings")

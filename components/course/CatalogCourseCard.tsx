@@ -114,7 +114,7 @@ export function CatalogCourseCard({
         ) : (
           <Link
             href={`/kurse/${slug}`}
-            className="bg-gold-yellow hover:bg-wine-red text-white px-5 py-2 rounded-xl text-sm font-bold transition-colors duration-200"
+            className="bg-wine-red hover:bg-garnet-red text-white px-5 py-2 rounded-xl text-sm font-bold transition-colors duration-200"
           >
             Details ansehen
           </Link>

@@ -3,6 +3,7 @@ import Link from "next/link"
 import { ChefHat, Award, Users, ChevronRight } from "lucide-react"
 import { CourseCard } from "@/components/course/CourseCard"
 import { getCourses } from "@/lib/supabase/queries/courses"
+import { NewsletterSection } from "@/components/newsletter/NewsletterSection"
 
 const GERMAN_MONTHS = [
   "Januar", "Februar", "März", "April", "Mai", "Juni",
@@ -223,6 +224,8 @@ export default async function HomePage() {
           </Link>
         </div>
       </section>
+
+      <NewsletterSection />
     </>
   )
 }

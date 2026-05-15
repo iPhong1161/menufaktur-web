@@ -102,7 +102,7 @@ export function VoucherModal({ onClose }: VoucherModalProps) {
       newsletter,
       total,
     }
-    console.log("[VoucherModal] Voucher order submitted:", orderData)
+
     router.push("/gutschein/bestaetigung/GS-2026-00047")
     onClose()
   }

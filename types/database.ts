@@ -258,6 +258,22 @@ export type Database = {
         Update: Partial<Database["public"]["Tables"]["contact_messages"]["Insert"]>
         Relationships: []
       }
+      newsletter_subscribers: {
+        Row: {
+          id: string
+          email: string
+          created_at: string
+          confirmed: boolean
+        }
+        Insert: {
+          id?: string
+          email: string
+          created_at?: string
+          confirmed?: boolean
+        }
+        Update: Partial<Database["public"]["Tables"]["newsletter_subscribers"]["Insert"]>
+        Relationships: []
+      }
     }
     Views: Record<string, never>
     Functions: {
