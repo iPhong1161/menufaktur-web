@@ -3,6 +3,8 @@
 import { revalidatePath } from "next/cache"
 import { updateBookingPaymentStatus } from "@/lib/supabase/queries/admin-bookings"
 import { createServiceClient, getAdminUser } from "@/lib/supabase/server"
+import { resend } from "@/lib/resend/client"
+import { buildBookingConfirmedEmail, formatGermanDate, formatTime } from "@/lib/email/templates"
 
 export async function markBookingPaidAction(
   id: string
@@ -12,6 +14,45 @@ export async function markBookingPaidAction(
 
   const result = await updateBookingPaymentStatus(id)
   if ("error" in result) return { error: result.error }
+
+  // Send booking confirmed email (fire-and-forget)
+  const supabase = createServiceClient()
+  ;(async () => {
+    const { data: booking } = await supabase
+      .from("bookings")
+      .select("booking_number, total_amount, course_id")
+      .eq("id", id)
+      .single()
+    if (!booking) return
+    const [{ data: course }, { data: participant }] = await Promise.all([
+      supabase
+        .from("courses")
+        .select("title, date, start_time")
+        .eq("id", booking.course_id)
+        .single(),
+      supabase
+        .from("participants")
+        .select("first_name, email")
+        .eq("booking_id", id)
+        .eq("is_primary", true)
+        .single(),
+    ])
+    if (!course || !participant?.email) return
+    await resend.emails.send({
+      from: "onboarding@resend.dev",
+      to: participant.email,
+      subject: "Buchung bestätigt — wir freuen uns auf Sie!",
+      html: buildBookingConfirmedEmail({
+        firstName: participant.first_name,
+        bookingNumber: booking.booking_number,
+        courseTitle: course.title,
+        dateFormatted: formatGermanDate(course.date),
+        startTime: formatTime(course.start_time),
+        total: Number(booking.total_amount),
+      }),
+    })
+  })().catch((err) => console.error("[markBookingPaidAction] confirmation email", err))
+
   revalidatePath("/admin/buchungen")
   return { success: true }
 }

@@ -16,6 +16,9 @@ import {
   AlertCircle,
   Tag,
   Check,
+  CreditCard,
+  Building2,
+  Landmark,
 } from "lucide-react"
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 import { validateVoucherAction } from "@/app/actions/voucher"
@@ -58,6 +61,8 @@ interface InvoiceData {
   isBusiness: boolean
   vatId: string
 }
+
+export type PaymentMethod = "bank_transfer" | "card" | "sepa"
 
 export interface BookingModalProps {
   course: CourseData
@@ -761,10 +766,12 @@ function Step4({
   voucherDiscount,
   agbAccepted,
   datenschutzAccepted,
+  paymentMethod,
   onVoucherCodeChange,
   onApplyVoucher,
   onAgbChange,
   onDatenschutzChange,
+  onPaymentMethodChange,
   onGoToStep,
   onBack,
   onSubmit,
@@ -785,6 +792,8 @@ function Step4({
   onApplyVoucher: () => void
   onAgbChange: (v: boolean) => void
   onDatenschutzChange: (v: boolean) => void
+  paymentMethod: PaymentMethod
+  onPaymentMethodChange: (v: PaymentMethod) => void
   onGoToStep: (s: 1 | 2 | 3) => void
   onBack: () => void
   onSubmit: () => void
@@ -995,6 +1004,47 @@ function Step4({
             </div>
           </section>
 
+          {/* Zahlungsart */}
+          <section>
+            <div className="border-b border-dark/8 pb-2 mb-4">
+              <h3 className="text-[0.65rem] font-bold uppercase tracking-widest text-dark/40">
+                Zahlungsart
+              </h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {(
+                [
+                  { value: "bank_transfer", label: "Überweisung", Icon: Building2, sub: "Rechnung per E-Mail" },
+                  { value: "card", label: "Kreditkarte", Icon: CreditCard, sub: "Visa, Mastercard" },
+                  { value: "sepa", label: "SEPA-Lastschrift", Icon: Landmark, sub: "EU Bankeinzug" },
+                ] as const
+              ).map(({ value, label, Icon, sub }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => onPaymentMethodChange(value)}
+                  className={[
+                    "flex flex-col items-start gap-1.5 p-4 rounded-xl border-2 text-left transition-colors",
+                    paymentMethod === value
+                      ? "border-wine-red bg-wine-red/5"
+                      : "border-dark/10 bg-white hover:border-wine-red/30",
+                  ].join(" ")}
+                >
+                  <Icon
+                    className={`w-4 h-4 ${paymentMethod === value ? "text-wine-red" : "text-dark/40"}`}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className={`text-xs font-bold ${paymentMethod === value ? "text-wine-red" : "text-dark"}`}
+                  >
+                    {label}
+                  </span>
+                  <span className="text-[0.65rem] text-dark/50">{sub}</span>
+                </button>
+              ))}
+            </div>
+          </section>
+
           {/* AGB & Datenschutz */}
           <section className="space-y-4">
             <label className="flex items-start gap-3 cursor-pointer group">
@@ -1048,7 +1098,9 @@ function Step4({
               disabled={!canSubmit || submitting}
               className="w-full sm:w-auto bg-wine-red hover:bg-garnet-red disabled:bg-dark/15 disabled:cursor-not-allowed text-white disabled:text-dark/40 px-10 py-3.5 rounded-xl font-bold transition-colors duration-200"
             >
-              {submitting ? "Wird gesendet…" : "Buchung absenden"}
+              {submitting
+                ? paymentMethod === "bank_transfer" ? "Wird gesendet…" : "Weiterleiten…"
+                : paymentMethod === "bank_transfer" ? "Buchung absenden" : "Weiter zur Zahlung →"}
             </button>
           </div>
         </div>
@@ -1081,6 +1133,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
   const [voucherState, setVoucherState] = useState<"idle" | "loading" | "valid" | "invalid">("idle")
   const [voucherDiscount, setVoucherDiscount] = useState(0)
   const voucherIdRef = useRef<string | null>(null)
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("bank_transfer")
   const [agbAccepted, setAgbAccepted] = useState(false)
   const [datenschutzAccepted, setDatenschutzAccepted] = useState(false)
   const [step2Errors, setStep2Errors] = useState<Record<string, string>>({})
@@ -1166,6 +1219,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
       course: { id: course.id },
       count,
       totalAmount: total,
+      paymentMethod,
       participants: participants.map((p) => ({
         firstName: p.firstName,
         lastName: p.lastName,
@@ -1199,6 +1253,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
     setSubmitting(true)
     setSubmitError(null)
     try {
+      // Step 1: Create booking in DB
       const res = await fetch("/api/bookings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -1209,8 +1264,29 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
         setSubmitError(data.error ?? "Buchung fehlgeschlagen. Bitte versuchen Sie es erneut.")
         return
       }
-      router.push(`/buchung/bestaetigung/${data.booking_number}?count=${count}`)
-      onClose()
+
+      if (paymentMethod === "bank_transfer") {
+        // Bank transfer: go straight to confirmation
+        router.push(`/buchung/bestaetigung/${data.booking_number}?count=${count}`)
+        onClose()
+      } else {
+        // Card / SEPA: create Stripe Checkout Session and redirect
+        const stripePaymentMethod = paymentMethod === "card" ? "card" : "sepa_debit"
+        const stripeRes = await fetch("/api/stripe/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            bookingNumber: data.booking_number,
+            paymentMethod: stripePaymentMethod,
+          }),
+        })
+        const stripeData = await stripeRes.json()
+        if (!stripeRes.ok || !stripeData.url) {
+          setSubmitError(stripeData.error ?? "Fehler beim Weiterleiten zur Zahlung.")
+          return
+        }
+        window.location.href = stripeData.url
+      }
     } catch {
       setSubmitError("Verbindungsfehler. Bitte versuchen Sie es erneut.")
     } finally {
@@ -1291,6 +1367,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
               voucherDiscount={voucherDiscount}
               agbAccepted={agbAccepted}
               datenschutzAccepted={datenschutzAccepted}
+              paymentMethod={paymentMethod}
               onVoucherCodeChange={(v) => {
                 setVoucherCode(v)
                 if (voucherState !== "idle") {
@@ -1301,6 +1378,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
               onApplyVoucher={handleApplyVoucher}
               onAgbChange={setAgbAccepted}
               onDatenschutzChange={setDatenschutzAccepted}
+              onPaymentMethodChange={setPaymentMethod}
               onGoToStep={(s) => setStep(s)}
               onBack={() => setStep(3)}
               onSubmit={handleSubmit}

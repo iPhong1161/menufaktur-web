@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { createClient, createServiceClient } from "@/lib/supabase/server"
+import { resend } from "@/lib/resend/client"
+import { buildBankTransferEmail, formatGermanDate } from "@/lib/email/templates"
 
 type ParticipantBody = {
   firstName: string
@@ -30,7 +32,7 @@ export async function POST(req: NextRequest) {
   const serviceSupabase = createServiceClient()
   const { data: course } = await serviceSupabase
     .from("courses")
-    .select("capacity, price_per_person")
+    .select("capacity, price_per_person, title, date")
     .eq("id", body.course.id)
     .single()
 
@@ -99,10 +101,14 @@ export async function POST(req: NextRequest) {
   const vatAmount = Math.round((finalTotal - finalTotal / 1.19) * 100) / 100
   const inv: InvoiceBody = body.invoiceRecipient
 
+  const paymentMethod = ["card", "sepa", "bank_transfer"].includes(body.paymentMethod)
+    ? body.paymentMethod
+    : "bank_transfer"
+
   const { data, error } = await supabase.rpc("create_booking_atomic", {
     p_course_id:         body.course.id,
     p_user_id:           user?.id ?? null,
-    p_payment_method:    "bank_transfer",
+    p_payment_method:    paymentMethod,
     p_total_amount:      finalTotal,
     p_vat_amount:        vatAmount,
     p_voucher_discount:  serverDiscount,
@@ -131,10 +137,37 @@ export async function POST(req: NextRequest) {
   })
 
   if (error) {
+    if (error.message?.includes("VOUCHER_ALREADY_USED")) {
+      return NextResponse.json(
+        { error: "Dieser Gutschein wurde bereits eingelöst oder ist nicht mehr gültig." },
+        { status: 409 }
+      )
+    }
     console.error("[api/bookings]", error)
     return NextResponse.json({ error: "Buchung konnte nicht erstellt werden." }, { status: 400 })
   }
 
   const result = data as { booking_number: string; id: string }
+
+  // Send bank transfer payment instructions email
+  if (paymentMethod === "bank_transfer") {
+    const primaryEmail = body.participants[0]?.email
+    if (primaryEmail && course.title && course.date) {
+      resend.emails.send({
+        from: "onboarding@resend.dev",
+        to: primaryEmail,
+        subject: "Buchungsanfrage eingegangen — menufaktur Kochschule",
+        html: buildBankTransferEmail({
+          firstName: body.participants[0].firstName,
+          bookingNumber: result.booking_number,
+          courseTitle: course.title,
+          dateFormatted: formatGermanDate(course.date),
+          participantCount: participantCount,
+          total: finalTotal,
+        }),
+      }).catch((err) => console.error("[api/bookings] bank transfer email", err))
+    }
+  }
+
   return NextResponse.json({ booking_number: result.booking_number, id: result.id })
 }
