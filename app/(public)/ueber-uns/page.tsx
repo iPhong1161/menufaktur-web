@@ -42,7 +42,7 @@ export default function UeberUnsPage() {
             </h2>
             <div className="relative aspect-[4/5] rounded-xl overflow-hidden">
               <Image
-                src="/images/about/team-kitchen.png"
+                src="/images/ueber-uns-pasta.jpg"
                 alt="Das menufaktur Team in der Küche"
                 fill
                 className="object-cover"
@@ -122,7 +122,7 @@ export default function UeberUnsPage() {
             <div className="relative">
               <div className="relative rounded-xl overflow-hidden aspect-square">
                 <Image
-                  src="/images/about/hands-dough.png"
+                  src="/images/ueber-uns-teig.jpg"
                   alt="Handwerk — Teig kneten in der menufaktur"
                   fill
                   className="object-cover"

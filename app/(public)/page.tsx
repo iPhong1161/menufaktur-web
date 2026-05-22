@@ -41,7 +41,7 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <Image
-          src="/images/hero/hero-main.png"
+          src="/images/hero-kochschule.jpg"
           alt="menufaktur — Kochen als Handwerk"
           fill
           className="object-cover"

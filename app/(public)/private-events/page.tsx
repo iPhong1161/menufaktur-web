@@ -16,7 +16,7 @@ export default function PrivateEventsPage() {
       <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
           <Image
-            src="/images/private-events/loft-hero.png"
+            src="/images/private-events-loft.jpg"
             alt="Private Events in der menufaktur"
             fill
             className="object-cover"
@@ -59,7 +59,7 @@ export default function PrivateEventsPage() {
           </div>
           <div className="relative lg:col-span-5 aspect-[4/5] rounded-xl overflow-hidden shadow-2xl">
             <Image
-              src="/images/private-events/atelier-space.png"
+              src="/images/private-events-gedeckt.jpg"
               alt="Das menufaktur Atelier — Raum für Events"
               fill
               className="object-cover"
@@ -77,7 +77,7 @@ export default function PrivateEventsPage() {
             <div className="relative">
               <div className="relative w-full min-h-[480px] rounded-xl overflow-hidden shadow-lg">
                 <Image
-                  src="/images/private-events/team-cooking.png"
+                  src="/images/private-events-tisch.jpg"
                   alt="Feiern in der menufaktur"
                   fill
                   className="object-cover"
