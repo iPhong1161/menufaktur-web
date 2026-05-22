@@ -87,6 +87,17 @@ export function KursForm({ course }: Props) {
   function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]
     if (!file) return
+    if (file.size > 5 * 1024 * 1024) {
+      setError("Das Bild darf maximal 5 MB groß sein.")
+      e.target.value = ""
+      return
+    }
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      setError("Bitte nur JPG, PNG oder WebP Bilder hochladen.")
+      e.target.value = ""
+      return
+    }
+    setError(null)
     setPhotoFile(file)
     setPhotoPreview(URL.createObjectURL(file))
   }
