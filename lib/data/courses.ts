@@ -206,13 +206,12 @@ export const COURSES: CourseData[] = [
 
 export const COURSE_INCLUDES = [
   "Alle hochwertigen Zutaten & Utensilien",
-  "Leihschürze für den Abend",
-  "Wein, Mineralwasser & Espresso",
-  "Digitales Rezeptbuch zum Nachkochen",
+  "Hochwertige Schürze zum Mitnehmen",
+  "Getränke inklusive",
 ]
 
 export const FOOD_NOTE =
-  "Vegetarische Optionen sind bei uns Standard. Auf Wunsch bereiten wir gerne vegane oder glutenfreie Alternativen für Sie vor. Bitte teilen Sie uns dies bei der Buchung mit."
+  "Gerne berücksichtigen wir Allergien und Unverträglichkeiten, soweit möglich. Bitte geben Sie diese bei der Buchung im Bemerkungsfeld an."
 
 export const INSTRUCTOR = {
   name: "Chef Marco Ferretti",

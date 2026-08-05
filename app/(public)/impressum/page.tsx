@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Phone, Mail, Printer } from "lucide-react"
+import { Phone, Mail } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Impressum — menufaktur",
@@ -47,13 +47,6 @@ export default function ImpressumPage() {
                   <div>
                     <p className="text-xs text-dark/40 mb-0.5">Telefon</p>
                     <p className="text-base font-medium text-dark">+49 69 977 63 666</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Printer className="w-5 h-5 text-wine-red mt-0.5 shrink-0" aria-hidden="true" />
-                  <div>
-                    <p className="text-xs text-dark/40 mb-0.5">Telefax</p>
-                    <p className="text-base font-medium text-dark">+49 69 977 63 667</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -130,8 +123,9 @@ export default function ImpressumPage() {
                 <h3 className="text-[10px] uppercase tracking-[0.2em] font-bold text-wine-red/60 mb-3">
                   Bildnachweis
                 </h3>
-                <p className="text-sm text-dark/40 font-condensed italic">
-                  TODO: Fotografennachweise werden nach Abschluss der Fotoproduktion ergänzt.
+                <p className="text-sm text-dark/60 font-condensed leading-relaxed">
+                  Foto Scheiber, Patrick Scheiber, August-Hecht-Straße 39,
+                  63067 Offenbach
                 </p>
               </div>
             </div>

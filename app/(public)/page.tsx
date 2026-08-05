@@ -19,7 +19,7 @@ const FEATURES = [
   {
     icon: ChefHat,
     title: "Vollständige Menüs selbst kochen",
-    text: "Vom Amuse-Bouche bis zum Dessert – Sie erlernen die Koordination ganzer Menüfolgen unter professioneller Anleitung.",
+    text: "Hochwertige Zutaten, professionelle Anleitung und ehrliches Handwerk.",
   },
   {
     icon: Award,
@@ -72,21 +72,23 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-20 items-center">
           <div className="space-y-6">
             <h2 className="font-bold text-4xl md:text-5xl text-wine-red leading-tight">
-              Die Kunst der bewussten Zubereitung.
+              Handwerkliches Kochen lernen und genießen
             </h2>
             <div className="space-y-5 text-dark/70 leading-relaxed font-condensed text-lg">
               <p>
-                In der menufaktur verstehen wir Kochen nicht als bloße
-                Notwendigkeit, sondern als eine Form des Dialogs – mit den
-                Zutaten, der Tradition und Ihren Gästen. Seit über 15 Jahren
-                begleiten wir Genießer dabei, ihre handwerklichen Fähigkeiten
-                zu verfeinern.
+                Kochen ist für uns vor allem eines: solides Handwerk. Bei uns
+                lernen Sie die Grundlagen richtig – vom sauberen Schneiden bis
+                zum Abschmecken. Klar erklärt & direkt anwendbar.
               </p>
               <p>
-                In unseren Kursen im Herzen von Frankfurt-Bornheim legen wir
-                Wert auf Ruhe, Präzision und die Freude am gemeinsamen
-                Entdecken. Wir laden Sie ein, den hektischen Alltag vor der Tür
-                zu lassen und sich ganz dem Moment des Kreierens zu widmen.
+                Seit 2007 geben wir unser Wissen weiter und zeigen Schritt für
+                Schritt, worauf es in der Küche ankommt: gute Zutaten, saubere
+                Techniken und ein sicheres Gefühl für guten Geschmack.
+              </p>
+              <p>
+                In unseren Kursen in Frankfurt-Bornheim kochen wir gemeinsam
+                in ruhiger Atmosphäre. Sie lernen in der Praxis und nehmen
+                Fähigkeiten mit, die auch zu Hause funktionieren.
               </p>
             </div>
             <Link
@@ -103,8 +105,8 @@ export default async function HomePage() {
           <div className="relative">
             <div className="relative aspect-[4/5] rounded-lg overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
               <Image
-                src="/images/about/atelier-interior.png"
-                alt="Das menufaktur Atelier in Frankfurt-Bornheim"
+                src="/images/hero-kochstation.jpg"
+                alt="Kochstation in der menufaktur — Handwerk in der Küche"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"

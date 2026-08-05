@@ -23,7 +23,7 @@ interface BuyerData {
 }
 
 const VOUCHER_VALUES = [25, 50, 75, 95, 99, 109, 115, 125, 145]
-const BASE_POSTAL_FEE = 2.0
+const BASE_POSTAL_FEE = 3.5
 const PER_VOUCHER_POSTAL_FEE = 0.2
 
 function makeBuyer(): BuyerData {
@@ -53,7 +53,7 @@ export function VoucherModal({ onClose }: VoucherModalProps) {
   const [errors, setErrors] = useState<Partial<Record<keyof BuyerData | "agb", string>>>({})
   const [submitted, setSubmitted] = useState(false)
 
-  const postalFee = postalDelivery ? BASE_POSTAL_FEE + quantity * PER_VOUCHER_POSTAL_FEE : 0
+  const postalFee = postalDelivery ? BASE_POSTAL_FEE + (quantity - 1) * PER_VOUCHER_POSTAL_FEE : 0
   const total = selectedValue * quantity + postalFee
 
   // Scroll lock
@@ -402,7 +402,7 @@ export function VoucherModal({ onClose }: VoucherModalProps) {
                 <span className="text-sm text-dark/80 leading-snug">
                   Ja, ich möchte den/die Gutschein/e zusätzlich per Post erhalten.{" "}
                   <span className="font-bold text-wine-red">
-                    (+ {(BASE_POSTAL_FEE + quantity * PER_VOUCHER_POSTAL_FEE).toLocaleString("de-DE", { minimumFractionDigits: 2 })} € Servicegebühr)
+                    (+ {(BASE_POSTAL_FEE + (quantity - 1) * PER_VOUCHER_POSTAL_FEE).toLocaleString("de-DE", { minimumFractionDigits: 2 })} € Servicegebühr)
                   </span>
                 </span>
               </label>

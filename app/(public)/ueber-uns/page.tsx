@@ -52,37 +52,33 @@ export default function UeberUnsPage() {
           </div>
 
           {/* Right column */}
-          <div className="md:col-span-7 pt-0 md:pt-12 space-y-7 text-dark/60 font-condensed text-lg leading-relaxed">
-            <p className="text-xl font-bold text-wine-red/90 leading-snug font-sans">
-              Weil Kochen vor allem Handwerk ist. Ein Handwerk, das bei sorgsamer Auswahl
-              der Grundprodukte, dem Wissen um die richtigen Techniken der Zubereitung
-              und der gebotenen Aufmerksamkeit bei der Umsetzung Speisen zum Ergebnis hat,
-              die ein Essen zu Genuss werden lassen.
-            </p>
-            <p>
-              Unser Anliegen ist es, mit Ihnen gemeinsam das Kochen wieder in die eigenen
-              Hände zu nehmen, zumindest für einen Abend. Sie werden feststellen, dass es
-              einen großen Unterschied macht, wenn beispielsweise ein vermeintlich profanes
-              Gericht wie Gnocchi mit Tomatensauce frisch auf den Tisch kommt und sich fortan
-              schwer tun, es irgendwo zu bestellen, weil es Ihnen niemand mit derselben Hingabe
-              kochen wird, wie Sie sich selbst.
-            </p>
-            <p>
-              <span className="font-bold text-wine-red block mb-1">menufaktur – Konzept</span>
-              Zudem sind viele Lebensmittel heute aus der Tüte erhältlich, viele Kochtechniken
-              der Generation unserer Großmütter haben den Sprung in die nächste Generation nicht
-              geschafft, ein Lebensmittelskandal jagt den anderen. Wir möchten Ihnen zeigen,
-              dass es oftmals nicht aufwändig ist, Lebensmittel frisch zuzubereiten anstatt
-              die Tüte aufzureißen und anzurühren.
-            </p>
-            <p>
-              Wer ist noch in der Lage, Omas Sonntagsbraten mit Serviettenknödeln zu kochen?
-              Wie erkenne und schmecke ich, ob ein Stück Fleisch oder Fisch guter Qualität
-              entspringt? Wir helfen Ihnen, diese Fragen zu beantworten und Ihnen einen
-              Leitfaden mitzugeben. Kehren Sie zum einen wieder auf die alten und bewährten
-              Wege der Kochkunst zurück und lassen Sie sich zum anderen dabei auch von neuen
-              Ideen inspirieren. Wir freuen uns darauf, mit Ihnen zu kochen.
-            </p>
+          <div className="md:col-span-7 pt-0 md:pt-12 space-y-8 text-dark/60 font-condensed text-lg leading-relaxed">
+            <div className="space-y-4">
+              <p className="text-xl font-bold text-wine-red/90 leading-snug font-sans">
+                Weil Kochen vor allem Handwerk ist.
+              </p>
+              <p>
+                Mit guten Zutaten, den richtigen Techniken und viel
+                Aufmerksamkeit entstehen Speisen, die Genuss schaffen.
+              </p>
+            </div>
+
+            <div className="space-y-4 border-t border-dark/8 pt-8">
+              <h3 className="text-2xl font-bold text-wine-red font-sans">
+                Unser Konzept
+              </h3>
+              <p>
+                Wir haben über die Jahre ein einzigartiges Kochkurskonzept
+                entwickelt:
+              </p>
+              <p>
+                Bei uns erlebt jeder Gast das komplette Menü. Statt nur einen
+                einzelnen Gang zuzubereiten, lernen Sie alle Schritte und
+                Komponenten kennen – vom ersten Handgriff bis zum fertigen
+                Gericht. So entsteht ein ganzheitliches Kocherlebnis, das
+                inspiriert, Wissen vermittelt und vor allem Freude macht.
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -97,16 +93,22 @@ export default function UeberUnsPage() {
                 <h3 className="text-3xl font-bold text-wine-red mb-6">Unsere Philosophie</h3>
                 <div className="space-y-5 text-dark/60 font-condensed text-lg leading-relaxed">
                   <p>
-                    Wir glauben an die Entschleunigung. In einer hektischen Welt bietet das
-                    gemeinsame Kochen einen Ankerpunkt. Es geht darum, sich Zeit zu nehmen –
-                    für die Auswahl der Produkte, die Präzision des Schnitts und das gemeinsame
-                    Genießen am gedeckten Tisch.
+                    Ein wesentlicher Bestandteil unseres Erfolgs ist unser
+                    eingespieltes Küchenteam. Viele unserer Köchinnen und
+                    Köche begleiten uns bereits seit Jahren und bereichern
+                    jedes Menü mit Erfahrung, Leidenschaft und Persönlichkeit
+                    – spürbar in jedem Detail.
                   </p>
-                  <p>
-                    Ob Anfänger oder ambitionierter Hobbykoch: Wir begleiten Sie auf Ihrem
-                    individuellen Weg zu neuen kulinarischen Horizonten. In entspannter Atmosphäre
-                    lernen Sie, wie man Aromen balanciert und Texturen perfektioniert.
-                  </p>
+                  <div>
+                    <p className="font-bold text-wine-red mb-1">
+                      Ob Anfänger oder ambitionierter Hobbykoch:
+                    </p>
+                    <p>
+                      In der menufaktur kochen wir auf Augenhöhe – unabhängig
+                      von Erfahrung oder Vorkenntnissen. Willkommen ist jeder,
+                      der Freude an gutem Essen und Genuss mitbringt.
+                    </p>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-6">
@@ -155,18 +157,14 @@ export default function UeberUnsPage() {
           </div>
           <div className="space-y-5">
             <h2 className="text-3xl md:text-4xl font-bold text-wine-red leading-tight">
-              Unser Standort in Frankfurt-Bornheim
+              Unser Standort
             </h2>
             <div className="space-y-4 text-dark/60 font-condensed text-lg leading-relaxed">
               <p>
-                Mitten im lebendigen Stadtteil Bornheim haben wir seit 2007 unser
-                Zuhause. Das menufaktur-Atelier liegt im Herzen des Viertels und
-                ist mit öffentlichen Verkehrsmitteln bequem erreichbar.
-              </p>
-              <p>
-                Unser 155 m² großes Loft empfängt Sie mit einer einladenden
-                Atmosphäre — von der professionellen Kücheninsel über die
-                gemütliche Lounge bis hin zur Terrasse mit Garten.
+                Seit 2007 befinden sich unsere Kochschulen zentral in
+                Frankfurt-Bornheim und sind über verschiedene Anfahrtswege
+                bequem erreichbar. Weitere Informationen zur Anreise finden
+                Sie unter „Kontakt".
               </p>
             </div>
             <address className="not-italic text-wine-red font-bold text-base leading-relaxed">
@@ -174,6 +172,16 @@ export default function UeberUnsPage() {
               60385 Frankfurt am Main
             </address>
           </div>
+        </div>
+
+        <div className="relative mt-16 aspect-[16/9] rounded-xl overflow-hidden shadow-xl">
+          <Image
+            src="/images/eingangsbereich.png"
+            alt="Eingangsbereich der menufaktur Kochschule"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1280px) 100vw, 1280px"
+          />
         </div>
       </section>
 

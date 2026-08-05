@@ -41,19 +41,23 @@ export default function PrivateEventsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           <div className="lg:col-span-7 space-y-6">
             <h2 className="text-4xl md:text-5xl font-bold text-wine-red leading-[1.1]">
-              Events in der menufaktur
+              Sie sind auf der Suche nach einem besonderen Ort für Ihre Feier –
             </h2>
             <div className="space-y-5 text-lg text-dark/60 font-condensed leading-relaxed">
               <p>
-                Sie suchen einen Ort, um Ereignisse wie Geburtstag, Hochzeit oder Taufe
-                gebührend zu feiern? Dann sind Sie bei uns vielleicht richtig. Denn bei der
-                Gestaltung der menufaktur haben wir nicht nur auf die Einrichtung der Küche,
-                sondern auch auf die Architektur unserer Räumlichkeiten großen Wert gelegt.
-                Wir hoffen, dass sie ebenso einladend wirkt wie unser kulinarisches Angebot.
+                Ob Firmenevents, Produktpräsentationen, Geburtstagsfeiern,
+                Hochzeiten, Taufen, Junggesellenabschiede oder private Feiern
+                jeder Art: Bei uns wird jedes Event zu einem besonderen
+                Erlebnis, das Genuss und Gemeinschaft verbindet.
               </p>
               <p>
-                Sollten Sie für Ihre Veranstaltung also einen Raum mit Atmosphäre suchen,
-                schauen Sie doch mal bei uns rein oder besuchen Sie unsere Galerie!
+                Bei der Gestaltung unserer Räumlichkeiten haben wir großen Wert
+                auf ein stimmiges Zusammenspiel aus Architektur, Atmosphäre und
+                Funktionalität gelegt. So entsteht ein Ambiente, das ebenso
+                einladend ist wie unser kulinarisches Angebot. Wenn Sie einen
+                Ort mit Charakter und Persönlichkeit suchen, laden wir Sie
+                herzlich ein, uns kennenzulernen oder einen Blick in unsere
+                Galerie zu werfen.
               </p>
             </div>
           </div>
@@ -92,20 +96,33 @@ export default function PrivateEventsPage() {
 
             {/* Text */}
             <div className="flex flex-col justify-center space-y-5 text-dark/60 font-condensed text-lg leading-relaxed">
-              <h2 className="text-4xl font-bold text-wine-red">Feiern in der menufaktur</h2>
+              <h2 className="text-4xl font-bold text-wine-red">Zwei Räume für besondere Anlässe</h2>
+              <div>
+                <p className="font-bold text-wine-red mb-2">Die große Küche:</p>
+                <p>
+                  Unser 155 m² großes Loft bietet Platz für Veranstaltungen
+                  mit bis zu 60 Gästen und schafft einen stilvollen Rahmen für
+                  unvergessliche Momente. Der offene Raum wird durch eine
+                  zentral platzierte Kücheninsel geprägt und kann durch einen
+                  zweiten Küchenblock erweitert werden. Auch die Nutzung der
+                  Terrasse mit Sitzmöglichkeiten im Grünen ist bei allen
+                  Veranstaltungen inkludiert.
+                </p>
+              </div>
+              <div>
+                <p className="font-bold text-wine-red mb-2">Die kleine Küche:</p>
+                <p>
+                  In unserer kleinen Kochschule empfangen wir Gruppen mit bis
+                  zu 16 Personen. Fühlen Sie sich in unseren Räumlichkeiten
+                  wie zu Hause und erleben Sie das Kochen hautnah an unserem
+                  zentralen Küchenblock.
+                </p>
+              </div>
               <p>
-                Unser 155 m² großes Loft bietet Veranstaltungen mit bis zu 60 Gästen einen
-                würdigen und angenehmen Rahmen. Der großzügige Raum ist von der zentral
-                angeordneten Kücheninsel geprägt und lässt sich durch eine große Terrasse mit
-                anschließendem Garten erweitern, die Ihnen bei Ihrer Feier selbstverständlich
-                auch zur Verfügung steht.
-              </p>
-              <p>
-                Sofern Ihr Anlass nicht ohnehin in der Küche stattfindet (wie etwa beim
-                Gruppenkochen), erlaubt Ihnen die offene Anordnung, uns bei der frischen
-                Zubereitung Ihres Menüs zuzusehen. Je nach Bedarf oder Art der Veranstaltung
-                können Sie unseren Gastraum so gestalten, wie Sie es sich vorstellen. Eine
-                Feuerstelle und eine Lounge runden das Angebot ab.
+                Die offene Gestaltung unserer Küchen ermöglicht es Ihnen und
+                Ihren Gästen, die Zubereitung der Speisen live mitzuerleben.
+                Alternativ können die Räume flexibel an Ihre individuellen
+                Wünsche und die Art Ihrer Veranstaltung angepasst werden.
               </p>
             </div>
           </div>
@@ -117,16 +134,26 @@ export default function PrivateEventsPage() {
         <div className="max-w-screen-xl mx-auto px-6 md:px-12 space-y-28">
           {/* Catering: text left, image right */}
           <div className="flex flex-col md:flex-row gap-12 items-center">
-            <div className="md:w-1/2 space-y-5">
+            <div className="md:w-1/2 space-y-5 text-lg text-dark/60 font-condensed leading-relaxed">
               <h2 className="text-4xl font-bold text-wine-red leading-tight">
                 Die menufaktur besucht Sie auch zu Hause
               </h2>
-              <p className="text-lg text-dark/60 font-condensed leading-relaxed">
-                Sie planen eine Feier daheim und möchten mal nicht in der Küche stehen, sondern
-                sich voll und ganz Ihren Gästen widmen? Die menufaktur kommt gern zu Ihnen nach
-                Hause. Wir bereiten das Menü in Ihrer Küche vor und servieren es Ihnen
-                anschließend. Auf Wunsch bringen wir Geschirr, Gläser, Besteck, Tischwäsche und
-                Tischdekoration gegen Aufpreis mit.
+              <p>
+                Möchten Sie Ihre Feier zu Hause, im Garten oder am
+                Arbeitsplatz entspannt genießen, ohne selbst kochen zu müssen?
+                Dann kommt die menufaktur gerne zu Ihnen.
+              </p>
+              <p>
+                Wir bereiten Ihr Menü frisch direkt in Ihrer Küche vor Ort zu
+                und servieren es anschließend stilvoll und professionell. Auf
+                Wunsch kümmern wir uns außerdem gegen Aufpreis um Geschirr,
+                Gläser, Besteck sowie Tischwäsche und passende Dekoration.
+              </p>
+              <p>
+                Alternativ gestalten wir Ihr Event auch als exklusiven
+                Kochkurs, bei dem Sie und Ihre Gäste gemeinsam mit uns
+                kochen, neue Techniken entdecken und kulinarische Erlebnisse
+                aktiv mitgestalten können.
               </p>
             </div>
             <div className="relative md:w-1/2 aspect-video rounded-xl overflow-hidden shadow-xl">
@@ -172,22 +199,23 @@ export default function PrivateEventsPage() {
           <div className="text-[24rem] font-bold leading-none">M</div>
         </div>
         <div className="max-w-screen-md mx-auto px-6 md:px-12 text-center relative z-10">
-          <h2 className="text-4xl font-bold mb-8">Konditionen</h2>
+          <h2 className="text-4xl font-bold mb-8">Individuelle Angebote</h2>
           <div className="space-y-5 text-xl text-white/80 mb-12 leading-relaxed text-left font-condensed">
             <p>
-              Sicher würden Sie gern an dieser Stelle zur Orientierung einen Preis lesen. Bitte
-              haben Sie dafür Verständnis, dass es uns aufgrund der Fülle an Möglichkeiten
-              schwer fällt, Ihnen einen solchen zu nennen.
+              Jede Veranstaltung ist einzigartig – daher verzichten wir
+              bewusst auf standardisierte Preisangaben. Umfang, Ablauf und
+              kulinarische Gestaltung werden individuell auf Ihre Wünsche
+              abgestimmt.
             </p>
             <p>
-              Jede Veranstaltung ist einzigartig, und so gibt es in der menufaktur kein
-              standardisiertes Repertoire, auf das wir für die Vorbereitung Ihres Events
-              zurückgreifen. Wir überlegen mit Ihnen gemeinsam, was Ihre Feier hier bei uns
-              oder bei Ihnen daheim unvergesslich macht. Anschließend erstellen wir ein
-              unverbindliches, individuelles Angebot, das an die Teilnehmerzahl gebunden ist.
+              Gemeinsam entwickeln wir ein Konzept, das Ihre Feier zu einem
+              besonderen Erlebnis macht. Auf dieser Basis erstellen wir Ihnen
+              ein unverbindliches Angebot, das sich an der Teilnehmerzahl
+              orientiert.
             </p>
             <p>
-              Haben Sie keine Scheu, uns zu kontaktieren. Wir freuen uns auf Ihre Anfragen.
+              Zögern Sie nicht, uns zu kontaktieren – wir beraten Sie gern
+              persönlich.
             </p>
           </div>
           <Link

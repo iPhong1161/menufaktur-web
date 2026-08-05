@@ -436,7 +436,7 @@ function Step2({
                   {i + 1}
                 </div>
                 <h3 className="text-base font-bold text-wine-red">
-                  {isPrimary ? "Teilnehmer 1 (Hauptbucher)" : `Teilnehmer ${i + 1}`}
+                  {`Teilnehmer ${i + 1}`}
                 </h3>
               </div>
 
@@ -897,7 +897,6 @@ function Step4({
                 >
                   <p className="text-[0.6rem] text-wine-red/50 font-bold uppercase tracking-widest mb-1">
                     Teilnehmer {i + 1}
-                    {i === 0 && " (Hauptbucher)"}
                   </p>
                   <p className="text-sm font-medium text-dark">
                     {p.firstName || "—"} {p.lastName}

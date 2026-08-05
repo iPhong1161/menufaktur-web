@@ -32,8 +32,7 @@ const AGB_SECTIONS = [
     title: "2. Kursumfang",
     bg: "bg-[#F8F5DA]",
     paragraphs: [
-      "Unsere Standard-Kochkurse beinhalten die Zubereitung eines 4-Gänge-Menüs unter professioneller Anleitung.",
-      "Inklusive sind alle Zutaten, Leihschürzen, begleitende Weine, Wasser, Kaffeespezialitäten sowie die Rezeptunterlagen in digitaler oder gedruckter Form.",
+      "Die Kursgebühr umfasst bei den meisten Kochkursen die Zubereitung eines 4-gängigen Menüs, das anschließend gemeinsam verspeist wird, alle im Rahmen des Kochkurses verwendeten Lebensmittel und Getränke (Wein, Bier, Softdrinks, Espresso), den Rezepten des Kurses sowie die gesetzliche Mehrwertsteuer. Abweichungen sind bei den jeweiligen Kursbeschreibungen aufgeführt. Alle notwendigen Kochutensilien werden Ihnen gestellt, Ihre Kochschürze dürfen Sie mit nach Hause nehmen.",
     ],
   },
   {
@@ -41,8 +40,7 @@ const AGB_SECTIONS = [
     title: "3. Stornierung",
     bg: "bg-[#ECE9CF]",
     paragraphs: [
-      "Stornierungen müssen schriftlich erfolgen. Bei Absagen bis 14 Tage vor Kursbeginn wird die Gebühr als Gutschein erstattet.",
-      "Bei kürzeren Fristen oder Nichterscheinen verfällt der Anspruch auf Rückerstattung oder Umbuchung, sofern kein Ersatzteilnehmer gestellt wird.",
+      "Bei Stornierung einer Anmeldung zum Kochkurs von mehr als 7 Tage vor Kurstermin erhält der/die Teilnehmer*in einen Gutschein über den vollen gezahlten Betrag, der eine Gültigkeit von drei Jahren hat. Eine Barauszahlung oder Rücküberweisung ist ausgeschlossen. Ab 6 Tagen bis 72 Stunden vor Kursbeginn erhält der/die Teilnehmer*in einen Gutschein über 50% der Teilnahmegebühr. Bei weniger als 72 Stunden vor Kursbeginn ist keine Stornierung mehr möglich, jedoch kann immer eine andere Person als Teilnehmer*in einspringen. Die Stornierung eines Kochkurses muss schriftlich erfolgen. Ohne schriftliche Stornierung bzw. bei Nichterscheinen zu einem gebuchten Kurs, besteht kein Anspruch auf einen Gutschein oder Rückerstattung.",
     ],
   },
   {
@@ -59,8 +57,7 @@ const AGB_SECTIONS = [
     title: "5. Gutscheine",
     bg: "bg-white",
     paragraphs: [
-      "Gutscheine der menufaktur haben eine gesetzliche Gültigkeit von 3 Jahren ab Ende des Ausstellungsjahres.",
-      "Übersteigt der Wert des Gutscheines die Kursgebühr, so verfällt der Differenzbetrag. Eine Auszahlung des Differenzbetrages ist nicht möglich. Gutscheine sind übertragbar.",
+      "Gutscheine sind drei Jahre nach Ausstellungsdatum gültig und können zu jedem beliebigen, freien Kochkurstermin eingelöst werden. Ist der Wert des Gutscheines geringer als die Kochkursgebühr, so ist der Differenzbetrag zu begleichen. Im umgekehrten Fall stellen wir einen Gutschein über den Differenzbetrag aus. Eine Barauszahlung eines Kochkurs-Gutscheines oder des Differenzbetrages ist nicht möglich.",
     ],
   },
   {

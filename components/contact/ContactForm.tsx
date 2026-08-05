@@ -7,6 +7,7 @@ import { submitContactFormAction } from "@/app/actions/contact"
 
 interface FormData {
   name: string
+  company: string
   email: string
   subject: string
   message: string
@@ -18,7 +19,7 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ initialSubject = "", initialMessage = "" }: ContactFormProps) {
-  const [form, setForm] = useState<FormData>({ name: "", email: "", subject: initialSubject, message: initialMessage })
+  const [form, setForm] = useState<FormData>({ name: "", company: "", email: "", subject: initialSubject, message: initialMessage })
   const [errors, setErrors] = useState<Partial<FormData>>({})
   const [submitted, setSubmitted] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -95,6 +96,19 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
             className={inputClass("name")}
           />
           {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+        </div>
+
+        <div>
+          <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2">
+            Firma <span className="font-normal normal-case tracking-normal text-dark/40">(optional)</span>
+          </label>
+          <input
+            type="text"
+            value={form.company}
+            onChange={(e) => update("company", e.target.value)}
+            placeholder="Firmenname"
+            className={inputClass("company")}
+          />
         </div>
 
         <div>

@@ -8,7 +8,6 @@ import {
   UtensilsCrossed,
   Shirt,
   Wine,
-  BookOpen,
   Star,
   ChevronLeft,
   AlertCircle,
@@ -23,7 +22,7 @@ import {
 } from "@/lib/data/courses"
 import type { CourseData } from "@/lib/data/courses"
 
-const INCLUDE_ICONS = [UtensilsCrossed, Shirt, Wine, BookOpen]
+const INCLUDE_ICONS = [UtensilsCrossed, Shirt, Wine]
 
 const GERMAN_MONTHS = [
   "Januar", "Februar", "März", "April", "Mai", "Juni",

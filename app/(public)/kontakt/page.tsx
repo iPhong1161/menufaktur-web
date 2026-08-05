@@ -73,39 +73,20 @@ export default async function KontaktPage({
                   <p className="text-lg text-dark/60 font-condensed">069 / 977 63 666</p>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Phone className="w-5 h-5 text-wine-red shrink-0" aria-hidden="true" />
-                  <p className="text-lg text-dark/60 font-condensed">Fax: 069 / 977 63 667</p>
-                </div>
-                <div className="flex items-center gap-4">
                   <Mail className="w-5 h-5 text-wine-red shrink-0" aria-hidden="true" />
                   <p className="text-lg text-dark/60 font-condensed">post@menufaktur.de</p>
                 </div>
               </div>
             </div>
 
-            {/* Öffnungszeiten */}
+            {/* Büroöffnungszeiten */}
             <div className="pt-8 border-t border-dark/8">
               <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-garnet-red mb-5">
-                Öffnungszeiten
+                Büroöffnungszeiten
               </h3>
-              <div className="space-y-2 text-base text-dark/60 font-condensed">
-                {[
-                  ["Montag", "09:00 – 17:30"],
-                  ["Dienstag", "09:00 – 17:30"],
-                  ["Mittwoch", "09:00 – 17:30"],
-                  ["Donnerstag", "09:00 – 17:30"],
-                  ["Freitag", "09:00 – 17:30"],
-                  ["Samstag", "Geschlossen"],
-                  ["Sonntag", "Geschlossen"],
-                ].map(([day, hours]) => (
-                  <div key={day} className="flex justify-between">
-                    <span>{day}</span>
-                    <span className={hours === "Geschlossen" ? "text-dark/30" : "font-medium text-dark/80"}>
-                      {hours}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <p className="text-base text-dark/60 font-condensed">
+                Montag – Freitag <span className="font-medium text-dark/80">10:00 – 16:00 Uhr</span>
+              </p>
             </div>
 
             {/* Anfahrt */}
@@ -116,16 +97,36 @@ export default async function KontaktPage({
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <Train className="w-5 h-5 text-wine-red mt-0.5 shrink-0" aria-hidden="true" />
-                  <p className="text-base text-dark/60 font-condensed">
-                    U4 Höhenstraße oder Bornheim Mitte
-                  </p>
+                  <div className="text-base text-dark/60 font-condensed space-y-1.5">
+                    <p>
+                      U4 Haltestelle Bornheim Mitte oder Höhenstraße
+                      (Fußweg ca. 7 Minuten)
+                    </p>
+                    <p>
+                      U7 Haltestelle Parlamentsplatz (Fußweg ca. 9 Minuten)
+                    </p>
+                    <p>
+                      Straßenbahn Linie 14 Haltestelle Freiligrathstraße
+                      (Fußweg ca. 5 Minuten)
+                    </p>
+                  </div>
                 </div>
                 <div className="flex items-start gap-4">
                   <ParkingSquare className="w-5 h-5 text-wine-red mt-0.5 shrink-0" aria-hidden="true" />
                   <p className="text-base text-dark/60 font-condensed">
-                    Saalbau Bornheim oder Parkhaus Im Prüfling
+                    Parkhaus BH Bornheim (Fußweg ca. 5 Minuten)
                   </p>
                 </div>
+              </div>
+
+              <div className="mt-6 relative rounded-xl overflow-hidden aspect-video shadow-md">
+                <Image
+                  src="/images/einfahrt-zur-kochschule.png"
+                  alt="Einfahrt zur menufaktur Kochschule"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 40vw"
+                />
               </div>
             </div>
 

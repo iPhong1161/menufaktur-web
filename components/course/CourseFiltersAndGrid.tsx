@@ -19,14 +19,9 @@ function monthLabel(yearMonth: string): string {
 
 // label → exact value stored in food_options column (lowercase)
 const DIETARY_OPTIONS: { label: string; value: string }[] = [
-  { label: "Vegetarisch", value: "vegetarisch" },
-  { label: "Vegan", value: "vegan" },
-  { label: "Glutenfrei", value: "glutenfrei" },
   { label: "Laktosefrei", value: "lactosefrei" },
-  { label: "Nussallergie", value: "nussallergie" },
+  { label: "Glutenfrei", value: "glutenfrei" },
 ]
-
-type SortOption = "date" | "price-asc" | "price-desc"
 
 interface Props {
   courses: CatalogCourse[]
@@ -37,13 +32,18 @@ export function CourseFiltersAndGrid({ courses, activeDietary }: Props) {
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const [sort, setSort] = useState<SortOption>("date")
   const [selectedMonth, setSelectedMonth] = useState("")
+  const [selectedTheme, setSelectedTheme] = useState("")
   const [page, setPage] = useState(1)
 
   const availableMonths = useMemo(() => {
     const months = new Set(courses.map((c) => c.date.slice(0, 7)))
     return Array.from(months).sort()
+  }, [courses])
+
+  const availableThemes = useMemo(() => {
+    const titles = new Set(courses.map((c) => c.title))
+    return Array.from(titles).sort((a, b) => a.localeCompare(b, "de"))
   }, [courses])
 
   function toggleDietary(option: string) {
@@ -64,24 +64,25 @@ export function CourseFiltersAndGrid({ courses, activeDietary }: Props) {
   function clearFilters() {
     router.push("/kurse")
     setSelectedMonth("")
+    setSelectedTheme("")
     setPage(1)
   }
 
-  const sorted = useMemo(() => {
+  const filtered = useMemo(() => {
     const result = courses.filter(
-      (c) => !selectedMonth || c.date.startsWith(selectedMonth)
+      (c) =>
+        (!selectedMonth || c.date.startsWith(selectedMonth)) &&
+        (!selectedTheme || c.title === selectedTheme)
     )
-    result.sort((a, b) => {
-      if (sort === "price-desc") return b.price - a.price
-      if (sort === "price-asc") return a.price - b.price
-      return new Date(a.date).getTime() - new Date(b.date).getTime()
-    })
+    result.sort(
+      (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
+    )
     return result
-  }, [courses, sort, selectedMonth])
+  }, [courses, selectedMonth, selectedTheme])
 
-  const totalPages = Math.max(1, Math.ceil(sorted.length / COURSES_PER_PAGE))
+  const totalPages = Math.max(1, Math.ceil(filtered.length / COURSES_PER_PAGE))
   const safePage = Math.min(page, totalPages)
-  const paginated = sorted.slice(
+  const paginated = filtered.slice(
     (safePage - 1) * COURSES_PER_PAGE,
     safePage * COURSES_PER_PAGE
   )
@@ -113,8 +114,30 @@ export function CourseFiltersAndGrid({ courses, activeDietary }: Props) {
             </select>
           </div>
 
+          {/* Kochkursthema */}
+          <div className="flex-1 min-w-[200px]">
+            <label className="block text-[0.7rem] font-bold uppercase tracking-widest text-dark/40 mb-2">
+              Kochkursthema
+            </label>
+            <select
+              value={selectedTheme}
+              onChange={(e) => {
+                setSelectedTheme(e.target.value)
+                setPage(1)
+              }}
+              className="w-full bg-white/80 border border-dark/10 rounded-lg px-3 py-2.5 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-wine-red/30 appearance-none"
+            >
+              <option value="">Alle Kochkursthemen</option>
+              {availableThemes.map((title) => (
+                <option key={title} value={title}>
+                  {title}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Ernährung / Allergene */}
-          <div className="flex-[2] min-w-[260px]">
+          <div className="flex-[2] min-w-[220px]">
             <label className="block text-[0.7rem] font-bold uppercase tracking-widest text-dark/40 mb-2">
               Ernährung / Allergene
             </label>
@@ -136,25 +159,6 @@ export function CourseFiltersAndGrid({ courses, activeDietary }: Props) {
                 )
               })}
             </div>
-          </div>
-
-          {/* Sortieren nach */}
-          <div className="flex-none min-w-[180px]">
-            <label className="block text-[0.7rem] font-bold uppercase tracking-widest text-dark/40 mb-2">
-              Sortieren nach
-            </label>
-            <select
-              value={sort}
-              onChange={(e) => {
-                setSort(e.target.value as SortOption)
-                setPage(1)
-              }}
-              className="w-full bg-white/80 border border-dark/10 rounded-lg px-3 py-2.5 text-sm text-dark focus:outline-none focus:ring-2 focus:ring-wine-red/30 appearance-none"
-            >
-              <option value="date">Datum aufsteigend</option>
-              <option value="price-desc">Preis absteigend</option>
-              <option value="price-asc">Preis aufsteigend</option>
-            </select>
           </div>
         </div>
       </section>
