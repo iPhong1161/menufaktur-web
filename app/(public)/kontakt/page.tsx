@@ -24,8 +24,8 @@ export default async function KontaktPage({
       {/* Hero */}
       <section className="relative h-[640px] flex items-end overflow-hidden">
         <Image
-          src="/images/about/atelier-interior.png"
-          alt="Das menufaktur Atelier in Frankfurt-Bornheim"
+          src="/images/einfahrt-zur-kochschule.png"
+          alt="Einfahrt zur menufaktur Kochschule"
           fill
           className="object-cover"
           priority
@@ -130,16 +130,6 @@ export default async function KontaktPage({
               </div>
             </div>
 
-            {/* Atelier image */}
-            <div className="pt-4 relative rounded-xl overflow-hidden aspect-video">
-              <Image
-                src="/images/about/atelier-exterior.png"
-                alt="Die menufaktur von außen — Bornheimer Landwehr, Frankfurt"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 40vw"
-              />
-            </div>
           </div>
         </div>
       </section>

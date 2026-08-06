@@ -14,8 +14,8 @@ export default function UeberUnsPage() {
       {/* Hero */}
       <section className="relative h-[720px] flex items-end overflow-hidden">
         <Image
-          src="/images/about/atelier-interior.png"
-          alt="Das menufaktur Atelier in Frankfurt-Bornheim"
+          src="/images/eingangsbereich.png"
+          alt="Eingangsbereich der menufaktur Kochschule"
           fill
           className="object-cover"
           priority
@@ -145,33 +145,22 @@ export default function UeberUnsPage() {
 
       {/* Location section */}
       <section className="py-24 max-w-screen-xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="relative aspect-[3/2] rounded-xl overflow-hidden shadow-xl">
-            <Image
-              src="/images/about/atelier-exterior.png"
-              alt="Die menufaktur von außen — Bornheimer Landstraße, Frankfurt"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 50vw"
-            />
+        <div className="max-w-2xl space-y-5">
+          <h2 className="text-3xl md:text-4xl font-bold text-wine-red leading-tight">
+            Unser Standort
+          </h2>
+          <div className="space-y-4 text-dark/60 font-condensed text-lg leading-relaxed">
+            <p>
+              Seit 2007 befinden sich unsere Kochschulen zentral in
+              Frankfurt-Bornheim und sind über verschiedene Anfahrtswege
+              bequem erreichbar. Weitere Informationen zur Anreise finden
+              Sie unter „Kontakt".
+            </p>
           </div>
-          <div className="space-y-5">
-            <h2 className="text-3xl md:text-4xl font-bold text-wine-red leading-tight">
-              Unser Standort
-            </h2>
-            <div className="space-y-4 text-dark/60 font-condensed text-lg leading-relaxed">
-              <p>
-                Seit 2007 befinden sich unsere Kochschulen zentral in
-                Frankfurt-Bornheim und sind über verschiedene Anfahrtswege
-                bequem erreichbar. Weitere Informationen zur Anreise finden
-                Sie unter „Kontakt".
-              </p>
-            </div>
-            <address className="not-italic text-wine-red font-bold text-base leading-relaxed">
-              Bornheimer Landwehr 46<br />
-              60385 Frankfurt am Main
-            </address>
-          </div>
+          <address className="not-italic text-wine-red font-bold text-base leading-relaxed">
+            Bornheimer Landwehr 46<br />
+            60385 Frankfurt am Main
+          </address>
         </div>
 
         <div className="relative mt-16 aspect-[16/9] rounded-xl overflow-hidden shadow-xl">
