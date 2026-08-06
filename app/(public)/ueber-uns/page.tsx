@@ -154,7 +154,7 @@ export default function UeberUnsPage() {
               Seit 2007 befinden sich unsere Kochschulen zentral in
               Frankfurt-Bornheim und sind über verschiedene Anfahrtswege
               bequem erreichbar. Weitere Informationen zur Anreise finden
-              Sie unter „Kontakt".
+              Sie unter &bdquo;Kontakt&ldquo;.
             </p>
           </div>
           <address className="not-italic text-wine-red font-bold text-base leading-relaxed">

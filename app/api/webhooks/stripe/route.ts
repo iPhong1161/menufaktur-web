@@ -24,7 +24,6 @@ export async function POST(req: NextRequest) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session
     const bookingNumber = session.metadata?.bookingNumber
-    const voucherId = session.metadata?.voucherId
 
     if (!bookingNumber) {
       return NextResponse.json({ received: true })

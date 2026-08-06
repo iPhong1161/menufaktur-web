@@ -93,16 +93,6 @@ export function VoucherModal({ onClose }: VoucherModalProps) {
     setErrors(errs)
     if (Object.keys(errs).length > 0) return
 
-    const orderData = {
-      buyer,
-      selectedValue,
-      quantity,
-      postalDelivery,
-      postalFee,
-      newsletter,
-      total,
-    }
-
     router.push("/gutschein/bestaetigung/GS-2026-00047")
     onClose()
   }
