@@ -9,6 +9,7 @@ type ParticipantBody = {
   email?: string
   phone?: string
   foodPreferences?: string[]
+  foodNotes?: string
 }
 
 type InvoiceBody = {
@@ -19,6 +20,7 @@ type InvoiceBody = {
   postalCode?: string
   city?: string
   email: string
+  phone?: string | null
   isBusiness?: boolean
   vatId?: string | null
 }
@@ -119,7 +121,7 @@ export async function POST(req: NextRequest) {
       email:            p.email ?? "",
       phone:            p.phone ?? "",
       food_preferences: p.foodPreferences ?? [],
-      food_notes:       "",
+      food_notes:       p.foodNotes ?? "",
       is_primary:       i === 0,
     })),
     p_invoice_recipient: {
@@ -131,6 +133,7 @@ export async function POST(req: NextRequest) {
       city:          inv.city ?? "",
       country:       "Deutschland",
       email:         inv.email,
+      phone:         inv.phone ?? "",
       vat_id:        inv.vatId ?? "",
       is_business:   inv.isBusiness ?? false,
     },

@@ -47,6 +47,7 @@ interface ParticipantData {
   email: string
   phone: string
   foodPreferences: FoodOption[]
+  food_notes: string
 }
 
 interface InvoiceData {
@@ -58,6 +59,7 @@ interface InvoiceData {
   postalCode: string
   city: string
   email: string
+  phone: string
   isBusiness: boolean
   vatId: string
 }
@@ -71,7 +73,7 @@ export interface BookingModalProps {
 
 
 function makeParticipant(): ParticipantData {
-  return { firstName: "", lastName: "", email: "", phone: "", foodPreferences: ["keine"] }
+  return { firstName: "", lastName: "", email: "", phone: "", foodPreferences: ["keine"], food_notes: "" }
 }
 
 // ─── Shared sub-components ────────────────────────────────────────────────────
@@ -471,7 +473,7 @@ function Step2({
                         onChange={(e) => onUpdateParticipant(i, "email", e.target.value)}
                       />
                     </FormField>
-                    <FormField label="Telefon (optional)">
+                    <FormField label="Telefon">
                       <input
                         type="tel"
                         className={inputClass}
@@ -491,6 +493,17 @@ function Step2({
                   onChange={(prefs) =>
                     onUpdateParticipant(i, "foodPreferences" as keyof ParticipantData, prefs as unknown as string)
                   }
+                />
+              </div>
+
+              <div className="mt-6">
+                <p className={labelClass}>Sonstige Anmerkungen &amp; Allergien</p>
+                <textarea
+                  rows={2}
+                  className={`${inputClass} resize-none`}
+                  placeholder="z.B. starke Nussallergie, Laktoseintoleranz, sonstige Hinweise..."
+                  value={participant.food_notes}
+                  onChange={(e) => onUpdateParticipant(i, "food_notes", e.target.value)}
                 />
               </div>
 
@@ -697,6 +710,17 @@ function Step3({
                         className={inputClass}
                         value={invoice.email}
                         onChange={(e) => onInvoiceChange({ email: e.target.value })}
+                      />
+                    </FormField>
+                  </div>
+                  <div className="sm:col-span-2">
+                    <FormField label="Telefon">
+                      <input
+                        type="tel"
+                        className={inputClass}
+                        placeholder="+49 69 ..."
+                        value={invoice.phone}
+                        onChange={(e) => onInvoiceChange({ phone: e.target.value })}
                       />
                     </FormField>
                   </div>
@@ -1125,6 +1149,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
     postalCode: "",
     city: "",
     email: "",
+    phone: "",
     isBusiness: false,
     vatId: "",
   })
@@ -1225,6 +1250,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
         email: p.email || "",
         phone: p.phone || null,
         foodPreferences: p.foodPreferences,
+        foodNotes: p.food_notes || "",
       })),
       invoiceRecipient: invoice.useParticipant1
         ? {
@@ -1240,6 +1266,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
             postalCode: invoice.postalCode,
             city: invoice.city,
             email: invoice.email,
+            phone: invoice.phone || null,
             isBusiness: invoice.isBusiness,
             vatId: invoice.vatId || null,
           },

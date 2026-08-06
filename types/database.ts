@@ -126,6 +126,7 @@ export type Database = {
           city: string
           country: string
           email: string
+          phone: string | null
           vat_id: string | null
           is_business: boolean
         }
@@ -140,6 +141,7 @@ export type Database = {
           city: string
           country?: string
           email: string
+          phone?: string | null
           vat_id?: string | null
           is_business?: boolean
         }
