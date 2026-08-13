@@ -6,27 +6,29 @@ import { cn } from "@/lib/utils"
 import { submitContactFormAction } from "@/app/actions/contact"
 
 interface FormData {
-  wert: string
   empfaengerName: string
   empfaengerEmail: string
   lieferung: "email" | "post"
   absenderName: string
   absenderEmail: string
-  nachricht: string
 }
 
 type FieldErrors = Partial<Record<keyof FormData, string>>
 
+const VOUCHER_VALUES = [50, 75, 99, 109, 115, 119, 125, 145]
+const MIN_QUANTITY = 1
+const MAX_QUANTITY = 10
+
 export function GutscheinAnfrageForm() {
   const [form, setForm] = useState<FormData>({
-    wert: "",
     empfaengerName: "",
     empfaengerEmail: "",
     lieferung: "email",
     absenderName: "",
     absenderEmail: "",
-    nachricht: "",
   })
+  const [wert, setWert] = useState<number>(109)
+  const [quantity, setQuantity] = useState<number>(1)
   const [errors, setErrors] = useState<FieldErrors>({})
   const [submitted, setSubmitted] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -35,9 +37,6 @@ export function GutscheinAnfrageForm() {
 
   function validate(): FieldErrors {
     const e: FieldErrors = {}
-    const wertNum = parseFloat(form.wert)
-    if (!form.wert) e.wert = "Pflichtfeld"
-    else if (isNaN(wertNum) || wertNum < 10) e.wert = "Mindestbetrag: 10 €"
     if (!form.empfaengerName.trim()) e.empfaengerName = "Pflichtfeld"
     if (!form.absenderName.trim()) e.absenderName = "Pflichtfeld"
     if (!form.absenderEmail.trim()) {
@@ -65,15 +64,18 @@ export function GutscheinAnfrageForm() {
     if (Object.keys(errs).length > 0) return
 
     const lieferungLabel = form.lieferung === "email" ? "Per E-Mail" : "Per Post (Postkarte)"
-    const subject = `Gutschein-Anfrage: ${form.wert} € für ${form.empfaengerName} (${lieferungLabel})`
+    const subject =
+      quantity > 1
+        ? `Gutschein-Anfrage: ${quantity}x ${wert}€ für ${form.empfaengerName} (${lieferungLabel})`
+        : `Gutschein-Anfrage: ${wert}€ für ${form.empfaengerName} (${lieferungLabel})`
     const message = [
-      `Wert: ${form.wert} €`,
+      `Wert: ${wert} €`,
+      `Anzahl: ${quantity}`,
       `Empfänger: ${form.empfaengerName}`,
       `Empfänger E-Mail: ${form.empfaengerEmail || "–"}`,
       `Lieferung: ${lieferungLabel}`,
       `Absender: ${form.absenderName}`,
       `Absender E-Mail: ${form.absenderEmail}`,
-      `Persönliche Nachricht: ${form.nachricht.trim() || "–"}`,
     ].join("\n")
 
     startTransition(async () => {
@@ -126,19 +128,59 @@ export function GutscheinAnfrageForm() {
 
       {/* Wert */}
       <div>
-        <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-1.5">
+        <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2">
           Wert in € <span className="text-wine-red">*</span>
         </label>
-        <input
-          type="number"
-          min={10}
-          step="1"
-          value={form.wert}
-          onChange={(e) => update("wert", e.target.value)}
-          placeholder="z.B. 109"
-          className={inputClass("wert")}
-        />
-        {errors.wert && <p className="text-red-500 text-xs mt-1">{errors.wert}</p>}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          {VOUCHER_VALUES.map((val) => {
+            const active = wert === val
+            return (
+              <button
+                key={val}
+                type="button"
+                onClick={() => setWert(val)}
+                className={cn(
+                  "rounded-lg px-4 py-3 text-base font-bold border-2 transition-all font-condensed",
+                  active
+                    ? "bg-wine-red text-white border-wine-red"
+                    : "bg-[#ECE9CF] text-dark border-transparent hover:border-wine-red/30"
+                )}
+              >
+                {val} €
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      {/* Anzahl */}
+      <div>
+        <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2">
+          Anzahl Gutscheine <span className="text-wine-red">*</span>
+        </label>
+        <div className="flex items-center gap-4">
+          <button
+            type="button"
+            onClick={() => setQuantity((q) => Math.max(MIN_QUANTITY, q - 1))}
+            disabled={quantity <= MIN_QUANTITY}
+            aria-label="Anzahl verringern"
+            className="w-11 h-11 rounded-lg bg-[#ECE9CF] text-wine-red font-bold text-xl hover:bg-wine-red hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#ECE9CF] disabled:hover:text-wine-red"
+          >
+            −
+          </button>
+          <span className="min-w-[3rem] text-center text-lg font-bold text-dark font-condensed">
+            {quantity}
+          </span>
+          <button
+            type="button"
+            onClick={() => setQuantity((q) => Math.min(MAX_QUANTITY, q + 1))}
+            disabled={quantity >= MAX_QUANTITY}
+            aria-label="Anzahl erhöhen"
+            className="w-11 h-11 rounded-lg bg-[#ECE9CF] text-wine-red font-bold text-xl hover:bg-wine-red hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-[#ECE9CF] disabled:hover:text-wine-red"
+          >
+            +
+          </button>
+        </div>
       </div>
 
       {/* Lieferung */}
@@ -229,20 +271,6 @@ export function GutscheinAnfrageForm() {
           />
           {errors.absenderEmail && <p className="text-red-500 text-xs mt-1">{errors.absenderEmail}</p>}
         </div>
-      </div>
-
-      {/* Persönliche Nachricht */}
-      <div>
-        <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-1.5">
-          Persönliche Nachricht <span className="text-dark/30 normal-case font-normal tracking-normal text-xs">(optional)</span>
-        </label>
-        <textarea
-          value={form.nachricht}
-          onChange={(e) => update("nachricht", e.target.value)}
-          placeholder="Eine persönliche Botschaft für den Gutschein…"
-          rows={3}
-          className={cn(inputClass("nachricht"), "resize-none")}
-        />
       </div>
 
       {serverError && (

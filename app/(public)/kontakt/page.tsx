@@ -24,8 +24,8 @@ export default async function KontaktPage({
       {/* Hero */}
       <section className="relative h-[640px] flex items-end overflow-hidden">
         <Image
-          src="/images/einfahrt-zur-kochschule.png"
-          alt="Einfahrt zur menufaktur Kochschule"
+          src="/images/kontakt-hero-new.png"
+          alt="menufaktur Kontakt"
           fill
           className="object-cover"
           priority
@@ -119,7 +119,7 @@ export default async function KontaktPage({
                 </div>
               </div>
 
-              <div className="mt-6 relative rounded-xl overflow-hidden aspect-video shadow-md">
+              <div className="mt-6 relative rounded-xl overflow-hidden aspect-[4/3] shadow-md">
                 <Image
                   src="/images/einfahrt-zur-kochschule.png"
                   alt="Einfahrt zur menufaktur Kochschule"

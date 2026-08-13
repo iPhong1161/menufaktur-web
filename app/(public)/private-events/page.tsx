@@ -41,7 +41,7 @@ export default function PrivateEventsPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
           <div className="lg:col-span-7 space-y-6">
             <h2 className="text-4xl md:text-5xl font-bold text-wine-red leading-[1.1]">
-              Sie sind auf der Suche nach einem besonderen Ort für Ihre Feier –
+              Sie sind auf der Suche nach einem besonderen Ort für Ihre Feier
             </h2>
             <div className="space-y-5 text-lg text-dark/60 font-condensed leading-relaxed">
               <p>
@@ -158,8 +158,8 @@ export default function PrivateEventsPage() {
             </div>
             <div className="relative md:w-1/2 aspect-video rounded-xl overflow-hidden shadow-xl">
               <Image
-                src="/images/private-events/catering-home.png"
-                alt="menufaktur Catering bei Ihnen zu Hause"
+                src="/images/private-events-zuhause.png"
+                alt="Die menufaktur besucht Sie zu Hause"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -171,8 +171,8 @@ export default function PrivateEventsPage() {
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <div className="relative md:w-2/3 aspect-video rounded-xl overflow-hidden shadow-xl">
               <Image
-                src="/images/private-events/private-cooking-class.png"
-                alt="Privater Kochkurs in der menufaktur"
+                src="/images/private-events-firmen.png"
+                alt="Gruppen- und Firmenevents in der menufaktur"
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 66vw"

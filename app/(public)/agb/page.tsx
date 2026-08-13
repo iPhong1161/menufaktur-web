@@ -11,7 +11,7 @@ import {
   BookOpen,
   FileText,
 } from "lucide-react"
-import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
+import Image from "next/image"
 
 export const metadata: Metadata = {
   title: "AGB — menufaktur",
@@ -124,10 +124,13 @@ export default function AgbPage() {
                 Teilnehmerzahl muss 7 Tage vor dem Event gemeldet werden.
               </p>
             </div>
-            <div className="w-full md:w-1/3 aspect-[4/3] rounded-xl overflow-hidden shrink-0">
-              <ImagePlaceholder
-                label="private-events/team-cooking.jpg"
-                className="w-full h-full"
+            <div className="relative w-full md:w-1/3 aspect-[4/3] rounded-xl overflow-hidden shrink-0">
+              <Image
+                src="/images/agb-firmen.png"
+                alt="menufaktur Kochkurs"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 33vw"
               />
             </div>
           </div>

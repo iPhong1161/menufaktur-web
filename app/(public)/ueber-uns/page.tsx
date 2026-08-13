@@ -14,8 +14,8 @@ export default function UeberUnsPage() {
       {/* Hero */}
       <section className="relative h-[720px] flex items-end overflow-hidden">
         <Image
-          src="/images/eingangsbereich.png"
-          alt="Eingangsbereich der menufaktur Kochschule"
+          src="/images/ueber-uns-team.png"
+          alt="Das menufaktur Team"
           fill
           className="object-cover"
           priority
