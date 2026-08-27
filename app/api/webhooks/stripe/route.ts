@@ -4,6 +4,7 @@ import { stripe } from "@/lib/stripe/client"
 import { createServiceClient } from "@/lib/supabase/server"
 import { resend } from "@/lib/resend/client"
 import { buildStripeConfirmationEmail, formatGermanDate } from "@/lib/email/templates"
+import { processVoucherCheckoutCompleted } from "@/app/api/webhooks/stripe/voucher/route"
 
 export async function POST(req: NextRequest) {
   const body = await req.text()
@@ -23,6 +24,13 @@ export async function POST(req: NextRequest) {
 
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session
+
+    // Dispatch by metadata.type — voucher purchases have their own handler
+    if (session.metadata?.type === "voucher") {
+      await processVoucherCheckoutCompleted(session)
+      return NextResponse.json({ received: true })
+    }
+
     const bookingNumber = session.metadata?.bookingNumber
 
     if (!bookingNumber) {

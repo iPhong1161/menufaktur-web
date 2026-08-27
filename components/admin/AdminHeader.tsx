@@ -2,9 +2,10 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Bell, CircleUser } from "lucide-react"
+import { CircleUser } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { AdminLogoutButton } from "./AdminLogoutButton"
+import { NotificationBell } from "./NotificationBell"
 
 type NavItem = { href: string; label: string; badge?: number }
 
@@ -75,9 +76,7 @@ export function AdminHeader({ role, unreadMessages = 0 }: { role: "admin" | "mod
 
         {/* Right side */}
         <div className="flex items-center gap-3">
-<button className="p-2 hover:bg-wine-red/5 rounded-lg text-dark/60 transition-colors">
-            <Bell className="w-5 h-5" />
-          </button>
+          <NotificationBell />
           <Link href="/admin/einstellungen" className="p-2 hover:bg-wine-red/5 rounded-lg text-dark/60 transition-colors">
             <CircleUser className="w-5 h-5" />
           </Link>
