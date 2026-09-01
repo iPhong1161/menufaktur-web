@@ -1,11 +1,41 @@
 "use client"
 
-import { useState, useMemo } from "react"
-import { Search, Download, Eye, Plus, Pencil, Check } from "lucide-react"
+import { useState, useMemo, useEffect } from "react"
+import { useSearchParams, useRouter } from "next/navigation"
+import { Search, Download, Eye, Plus, Pencil, Check, Truck } from "lucide-react"
 import { AdminBackButton } from "@/components/admin/AdminBackButton"
 import { CreateVoucherModal } from "@/components/admin/CreateVoucherModal"
-import { updateVoucherStatusAction } from "./actions"
+import { updateVoucherStatusAction, markVoucherDispatchedAction } from "./actions"
 import type { AdminVoucher } from "@/lib/supabase/queries/vouchers"
+
+type FilterKey = "alle" | "aktiv" | "eingeloest" | "zu-versenden" | "abgelaufen"
+
+const FILTER_TABS: { key: FilterKey; label: string }[] = [
+  { key: "alle", label: "Alle" },
+  { key: "aktiv", label: "Aktiv" },
+  { key: "eingeloest", label: "Eingelöst" },
+  { key: "zu-versenden", label: "Zu versenden" },
+  { key: "abgelaufen", label: "Abgelaufen" },
+]
+
+function isPostalPending(v: AdminVoucher): boolean {
+  return v.postal_address != null && v.dispatched_at == null && v.status === "active"
+}
+
+function matchesFilter(v: AdminVoucher, filter: FilterKey): boolean {
+  switch (filter) {
+    case "alle":
+      return true
+    case "aktiv":
+      return v.status === "active"
+    case "eingeloest":
+      return v.status === "redeemed"
+    case "abgelaufen":
+      return v.status === "expired" || v.status === "cancelled"
+    case "zu-versenden":
+      return isPostalPending(v)
+  }
+}
 
 const STATUS_LABEL: Record<AdminVoucher["status"], string> = {
   active: "Aktiv",
@@ -142,17 +172,67 @@ function VoucherStatusButton({ id, status }: { id: string; status: AdminVoucher[
   )
 }
 
+// ─── Als versendet markieren ──────────────────────────────────────────────────
+
+function MarkDispatchedButton({ id }: { id: string }) {
+  const [pending, setPending] = useState(false)
+  const [done, setDone] = useState(false)
+
+  async function handleClick() {
+    if (pending || done) return
+    setPending(true)
+    const result = await markVoucherDispatchedAction(id)
+    setPending(false)
+    if (!("error" in result)) setDone(true)
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      disabled={pending || done}
+      title="Als versendet markieren"
+      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-wine-red text-white text-[10px] font-bold uppercase tracking-widest rounded-lg hover:bg-garnet-red transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+    >
+      <Truck className="w-3 h-3" />
+      {done ? "Versendet" : pending ? "…" : "Als versendet"}
+    </button>
+  )
+}
+
 // ─── Main page client ─────────────────────────────────────────────────────────
 
 export function GutscheineClient({ vouchers, role }: { vouchers: AdminVoucher[]; role: "admin" | "moderator" }) {
+  const searchParams = useSearchParams()
+  const router = useRouter()
+  const initialFilter = (searchParams.get("filter") as FilterKey | null) ?? "alle"
+  const validFilter: FilterKey = FILTER_TABS.some((t) => t.key === initialFilter)
+    ? (initialFilter as FilterKey)
+    : "alle"
+
   const [search, setSearch] = useState("")
-  const [statusFilter, setStatusFilter] = useState<"" | AdminVoucher["status"]>("")
+  const [filter, setFilter] = useState<FilterKey>(validFilter)
   const [showModal, setShowModal] = useState(false)
+
+  // Keep local state in sync when the URL changes (e.g. via the notification bell)
+  useEffect(() => {
+    const fromUrl = (searchParams.get("filter") as FilterKey | null) ?? "alle"
+    const next: FilterKey = FILTER_TABS.some((t) => t.key === fromUrl) ? fromUrl : "alle"
+    setFilter(next)
+  }, [searchParams])
+
+  function selectFilter(next: FilterKey) {
+    setFilter(next)
+    const params = new URLSearchParams(searchParams.toString())
+    if (next === "alle") params.delete("filter")
+    else params.set("filter", next)
+    const qs = params.toString()
+    router.replace(qs ? `/admin/gutscheine?${qs}` : "/admin/gutscheine", { scroll: false })
+  }
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase().trim()
     return vouchers.filter((v) => {
-      if (statusFilter && v.status !== statusFilter) return false
+      if (!matchesFilter(v, filter)) return false
       if (q) {
         const match =
           v.code.toLowerCase().includes(q) ||
@@ -162,7 +242,24 @@ export function GutscheineClient({ vouchers, role }: { vouchers: AdminVoucher[];
       }
       return true
     })
-  }, [vouchers, search, statusFilter])
+  }, [vouchers, search, filter])
+
+  const tabCounts = useMemo(() => {
+    const counts: Record<FilterKey, number> = {
+      alle: vouchers.length,
+      aktiv: 0,
+      eingeloest: 0,
+      "zu-versenden": 0,
+      abgelaufen: 0,
+    }
+    for (const v of vouchers) {
+      if (v.status === "active") counts.aktiv++
+      if (v.status === "redeemed") counts.eingeloest++
+      if (v.status === "expired" || v.status === "cancelled") counts.abgelaufen++
+      if (isPostalPending(v)) counts["zu-versenden"]++
+    }
+    return counts
+  }, [vouchers])
 
   return (
     <>
@@ -193,39 +290,45 @@ export function GutscheineClient({ vouchers, role }: { vouchers: AdminVoucher[];
         </div>
       </header>
 
-      {/* Filter bar */}
-      <section className="mb-8 p-6 bg-[#F8F5DA] rounded-xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold uppercase tracking-widest text-dark/40 font-condensed ml-1">
-              Status
-            </label>
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value as "" | AdminVoucher["status"])}
-              className="bg-[#ECE9CF] border-none rounded-lg text-sm h-12 px-3 focus:outline-none focus:ring-2 focus:ring-wine-red/20 font-condensed text-dark"
-            >
-              <option value="">Alle Stati</option>
-              <option value="active">Aktiv</option>
-              <option value="redeemed">Eingelöst</option>
-              <option value="expired">Abgelaufen</option>
-            </select>
-          </div>
-          <div className="flex flex-col gap-1.5">
-            <label className="text-[10px] font-bold uppercase tracking-widest text-dark/40 font-condensed ml-1">
-              Suche
-            </label>
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark/30" />
-              <input
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Code, Käufer oder Empfänger"
-                className="w-full h-12 pl-10 pr-4 bg-[#ECE9CF] border-none rounded-lg text-sm text-dark placeholder:text-dark/30 focus:outline-none focus:ring-2 focus:ring-wine-red/20 font-condensed"
-              />
-            </div>
-          </div>
+      {/* Filter tabs + search */}
+      <section className="mb-8 space-y-4">
+        <div className="flex flex-wrap gap-2">
+          {FILTER_TABS.map((tab) => {
+            const active = filter === tab.key
+            const count = tabCounts[tab.key]
+            return (
+              <button
+                key={tab.key}
+                onClick={() => selectFilter(tab.key)}
+                className={
+                  active
+                    ? "inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest bg-wine-red text-white transition-colors"
+                    : "inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest bg-[#F8F5DA] text-dark/60 hover:bg-[#ECE9CF] transition-colors"
+                }
+              >
+                {tab.label}
+                <span
+                  className={
+                    active
+                      ? "text-[10px] bg-white/20 rounded-full px-1.5 py-0.5 tabular-nums"
+                      : "text-[10px] bg-dark/8 rounded-full px-1.5 py-0.5 tabular-nums"
+                  }
+                >
+                  {count}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark/30" />
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Code, Käufer oder Empfänger"
+            className="w-full h-12 pl-10 pr-4 bg-[#ECE9CF] border-none rounded-lg text-sm text-dark placeholder:text-dark/30 focus:outline-none focus:ring-2 focus:ring-wine-red/20 font-condensed"
+          />
         </div>
       </section>
 
@@ -253,7 +356,20 @@ export function GutscheineClient({ vouchers, role }: { vouchers: AdminVoucher[];
                 filtered.map((v) => (
                   <tr key={v.id} className="hover:bg-[#F8F5DA]/20 transition-colors group">
                     <td className="px-6 py-5 font-mono text-xs text-wine-red whitespace-nowrap">{v.code}</td>
-                    <td className="px-6 py-5 text-sm text-dark font-bold">{v.recipient_name}</td>
+                    <td className="px-6 py-5">
+                      <p className="text-sm text-dark font-bold">{v.recipient_name}</p>
+                      {v.postal_address && (
+                        <span
+                          className={
+                            v.dispatched_at
+                              ? "mt-1 inline-block px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-green-100 text-green-800"
+                              : "mt-1 inline-block px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-amber-100 text-amber-800"
+                          }
+                        >
+                          {v.dispatched_at ? "Versendet" : "Zu versenden"}
+                        </span>
+                      )}
+                    </td>
                     <td className="px-6 py-5">
                       <p className="font-bold text-sm text-dark">{v.purchaser_name}</p>
                       <p className="text-xs text-dark/40 font-condensed">{v.purchaser_email}</p>
@@ -282,13 +398,18 @@ export function GutscheineClient({ vouchers, role }: { vouchers: AdminVoucher[];
                       {formatDate(v.created_at)}
                     </td>
                     <td className="px-6 py-5">
-                      <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button className="p-2 text-dark/40 hover:text-wine-red rounded-lg transition-colors">
-                          <Eye className="w-4 h-4" />
-                        </button>
-                        <button className="p-2 text-dark/40 hover:text-wine-red rounded-lg transition-colors">
-                          <Download className="w-4 h-4" />
-                        </button>
+                      <div className="flex items-center gap-2">
+                        {role === "admin" && isPostalPending(v) && (
+                          <MarkDispatchedButton id={v.id} />
+                        )}
+                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                          <button className="p-2 text-dark/40 hover:text-wine-red rounded-lg transition-colors">
+                            <Eye className="w-4 h-4" />
+                          </button>
+                          <button className="p-2 text-dark/40 hover:text-wine-red rounded-lg transition-colors">
+                            <Download className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
                     </td>
                   </tr>

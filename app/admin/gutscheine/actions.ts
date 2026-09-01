@@ -81,3 +81,19 @@ export async function updateVoucherStatusAction(
   revalidatePath("/admin/gutscheine")
   return { success: true }
 }
+
+export async function markVoucherDispatchedAction(
+  id: string
+): Promise<{ success: true; dispatched_at: string } | { error: string }> {
+  const guard = await requireAdmin()
+  if (guard) return guard
+  const supabase = createServiceClient()
+  const dispatched_at = new Date().toISOString()
+  const { error } = await supabase
+    .from("vouchers")
+    .update({ dispatched_at })
+    .eq("id", id)
+  if (error) return { error: error.message }
+  revalidatePath("/admin/gutscheine")
+  return { success: true, dispatched_at }
+}

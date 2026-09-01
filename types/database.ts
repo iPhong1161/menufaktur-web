@@ -167,6 +167,7 @@ export type Database = {
           stripe_session_id: string | null
           payment_status: "unpaid" | "paid" | "refunded"
           postal_fee: number
+          dispatched_at: string | null
         }
         Insert: {
           id?: string
@@ -186,6 +187,7 @@ export type Database = {
           stripe_session_id?: string | null
           payment_status?: "unpaid" | "paid" | "refunded"
           postal_fee?: number
+          dispatched_at?: string | null
         }
         Update: Partial<Database["public"]["Tables"]["vouchers"]["Insert"]>
         Relationships: []

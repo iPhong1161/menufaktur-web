@@ -203,32 +203,49 @@ export function NotificationBell() {
               <Section
                 title="Gutscheine zu versenden"
                 icon={<Ticket className="w-3.5 h-3.5" aria-hidden="true" />}
-                allHref="/admin/gutscheine"
-                allLabel="Alle Gutscheine anzeigen"
+                allHref="/admin/gutscheine?filter=zu-versenden"
+                allLabel="Alle anzeigen"
                 onNavigate={() => setOpen(false)}
               >
-                {data.postalVouchers.items.map((v) => (
-                  <Link
-                    key={v.id}
-                    href="/admin/gutscheine"
-                    onClick={() => setOpen(false)}
-                    className="block px-5 py-3 hover:bg-wine-red/5 transition-colors"
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0">
-                        <p className="text-sm font-bold text-dark">
-                          {v.value.toLocaleString("de-DE", { minimumFractionDigits: 2 })} €
-                        </p>
-                        <p className="text-xs text-dark/50 font-condensed truncate">
-                          {v.recipient_name || v.code}
-                        </p>
+                {data.postalVouchers.items.map((v) => {
+                  const addr = v.postal_address ?? {}
+                  const street = addr.street ?? ""
+                  const postalCode = addr.postalCode ?? ""
+                  const city = addr.city ?? ""
+                  const addressLine = [street, [postalCode, city].filter(Boolean).join(" ")]
+                    .filter((s) => s.trim().length > 0)
+                    .join(", ")
+                  return (
+                    <Link
+                      key={v.id}
+                      href="/admin/gutscheine?filter=zu-versenden"
+                      onClick={() => setOpen(false)}
+                      className="block px-5 py-3 hover:bg-wine-red/5 transition-colors"
+                    >
+                      <div className="flex items-start justify-between gap-3">
+                        <div className="min-w-0 space-y-0.5">
+                          <p className="text-sm font-bold text-dark">
+                            <span className="font-mono tracking-wider">{v.code}</span>
+                            <span className="ml-2 text-wine-red">
+                              {v.value.toLocaleString("de-DE", { minimumFractionDigits: 2 })} €
+                            </span>
+                          </p>
+                          <p className="text-xs text-dark/70 font-condensed truncate">
+                            {v.recipient_name || "—"}
+                          </p>
+                          {addressLine && (
+                            <p className="text-[11px] text-dark/40 font-condensed truncate">
+                              {addressLine}
+                            </p>
+                          )}
+                        </div>
+                        <span className="text-[10px] text-dark/40 shrink-0 tabular-nums">
+                          {relativeTime(v.created_at)}
+                        </span>
                       </div>
-                      <span className="text-[10px] text-dark/40 shrink-0 tabular-nums">
-                        {relativeTime(v.created_at)}
-                      </span>
-                    </div>
-                  </Link>
-                ))}
+                    </Link>
+                  )
+                })}
               </Section>
             )}
           </div>

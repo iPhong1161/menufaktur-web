@@ -13,13 +13,15 @@ export type AdminVoucher = {
   purchaser_email: string
   recipient_name: string
   created_at: string
+  postal_address: Record<string, string> | null
+  dispatched_at: string | null
 }
 
 export async function getVouchersAdmin(): Promise<AdminVoucher[]> {
   const supabase = createServiceClient()
   const { data, error } = await supabase
     .from("vouchers")
-    .select("id, code, value, remaining_value, status, payment_status, expires_at, purchaser_name, purchaser_email, recipient_name, created_at")
+    .select("id, code, value, remaining_value, status, payment_status, expires_at, purchaser_name, purchaser_email, recipient_name, created_at, postal_address, dispatched_at")
     .order("created_at", { ascending: false })
   if (error) return []
   return (data ?? []) as AdminVoucher[]

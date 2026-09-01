@@ -22,6 +22,7 @@ export interface NotificationVoucher {
   value: number
   recipient_name: string
   created_at: string
+  postal_address: Record<string, string> | null
 }
 
 export interface NotificationsPayload {
@@ -33,7 +34,6 @@ export interface NotificationsPayload {
 
 const ITEMS_PER_CATEGORY = 3
 const BOOKING_STALE_DAYS = 3
-const VOUCHER_RECENT_DAYS = 14
 
 function daysAgoISO(days: number): string {
   const d = new Date()
@@ -48,7 +48,6 @@ export async function getNotifications(): Promise<NotificationsPayload | { error
   const supabase = createServiceClient()
 
   const staleBefore = daysAgoISO(BOOKING_STALE_DAYS)
-  const voucherSince = daysAgoISO(VOUCHER_RECENT_DAYS)
 
   const [messagesRes, bookingsRes, vouchersRes] = await Promise.all([
     supabase
@@ -67,10 +66,10 @@ export async function getNotifications(): Promise<NotificationsPayload | { error
       .limit(ITEMS_PER_CATEGORY),
     supabase
       .from("vouchers")
-      .select("id, code, value, recipient_name, created_at", { count: "exact" })
+      .select("id, code, value, recipient_name, created_at, postal_address", { count: "exact" })
       .not("postal_address", "is", null)
       .eq("status", "active")
-      .gte("created_at", voucherSince)
+      .is("dispatched_at", null)
       .order("created_at", { ascending: false })
       .limit(ITEMS_PER_CATEGORY),
   ])
@@ -93,12 +92,14 @@ export async function getNotifications(): Promise<NotificationsPayload | { error
     value: number | string
     recipient_name: string
     created_at: string
+    postal_address: Record<string, string> | null
   }>).map((v) => ({
     id: v.id,
     code: v.code,
     value: Number(v.value),
     recipient_name: v.recipient_name,
     created_at: v.created_at,
+    postal_address: v.postal_address,
   }))
 
   const messagesCount = messagesRes.count ?? messageItems.length
