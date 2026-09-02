@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
       const course = booking.courses as unknown as { title: string; date: string }
       try {
         await resend.emails.send({
-          from: "onboarding@resend.dev",
+          from: "noreply@menufaktur.de",
           to: participant.email,
           subject: `Buchungsbestätigung — ${course.title}`,
           html: buildStripeConfirmationEmail({

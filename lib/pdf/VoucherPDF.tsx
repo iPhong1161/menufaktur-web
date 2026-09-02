@@ -1,7 +1,7 @@
 import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer"
 
 // Note: @react-pdf/renderer's <Image> primitive does NOT support remote SVG.
-// The brand logo at https://menufaktur-web.vercel.app/brand/menufaktur-icon-cream.svg
+// The brand logo at https://menufaktur.de/brand/menufaktur-icon-cream.svg
 // is served as SVG, so we use a text wordmark in the header instead. Swap to
 // <Image src="..." /> once a PNG variant of the logo is available.
 

@@ -11,7 +11,7 @@ import type { Database } from "@/types/database"
 
 type VoucherInsert = Database["public"]["Tables"]["vouchers"]["Insert"]
 
-const FROM_ADDRESS = "onboarding@resend.dev"
+const FROM_ADDRESS = "noreply@menufaktur.de"
 const ADMIN_ADDRESS = "noreply@menufaktur.de"
 
 function esc(str: string | null | undefined): string {

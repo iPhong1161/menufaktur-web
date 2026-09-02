@@ -64,7 +64,7 @@ export function emailLayout(body: string): string {
         <tr>
           <td style="background:#722F37;padding:36px 40px;text-align:center;">
             <img
-              src="https://menufaktur-web.vercel.app/brand/menufaktur-icon-cream.svg"
+              src="https://menufaktur.de/brand/menufaktur-icon-cream.svg"
               alt="menufaktur Kochschule"
               width="180"
               style="display:block;margin:0 auto 8px;"

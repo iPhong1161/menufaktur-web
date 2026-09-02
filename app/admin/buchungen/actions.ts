@@ -39,7 +39,7 @@ export async function markBookingPaidAction(
     ])
     if (!course || !participant?.email) return
     await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: "noreply@menufaktur.de",
       to: participant.email,
       subject: "Buchung bestätigt — wir freuen uns auf Sie!",
       html: buildBookingConfirmedEmail({

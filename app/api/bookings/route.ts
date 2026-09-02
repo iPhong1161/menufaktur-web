@@ -157,7 +157,7 @@ export async function POST(req: NextRequest) {
     const primaryEmail = body.participants[0]?.email
     if (primaryEmail && course.title && course.date) {
       resend.emails.send({
-        from: "onboarding@resend.dev",
+        from: "noreply@menufaktur.de",
         to: primaryEmail,
         subject: "Buchungsanfrage eingegangen — menufaktur Kochschule",
         html: buildBankTransferEmail({
