@@ -51,11 +51,16 @@ export function CatalogCourseCard({
   photo_url,
 }: CatalogCourse) {
   const soldOut = remainingCapacity === 0
+  const detailHref = `/kurse/${slug}`
 
   return (
     <article className={`group flex flex-col${soldOut ? " opacity-70" : ""}`}>
-      {/* Image */}
-      <div className="relative overflow-hidden rounded-lg aspect-[4/3] mb-5">
+      {/* Image — clickable */}
+      <Link
+        href={detailHref}
+        aria-label={`Details zu ${title} ansehen`}
+        className="relative overflow-hidden rounded-lg aspect-[4/3] mb-5 block transition-shadow duration-300 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wine-red/50"
+      >
         <Image
           src={courseImageSrc(slug, photo_url)}
           alt={title}
@@ -66,18 +71,19 @@ export function CatalogCourseCard({
         <div className="absolute top-4 left-4">
           <CapacityBadge remaining={remainingCapacity} />
         </div>
-      </div>
+      </Link>
 
-      {/* Content */}
-      <h3
-        className={`text-lg font-bold mb-3 leading-snug transition-colors duration-200 ${
+      {/* Title — clickable */}
+      <Link
+        href={detailHref}
+        className={`text-lg font-bold mb-3 leading-snug transition-colors duration-200 rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wine-red/50 ${
           soldOut
-            ? "text-dark/60"
-            : "text-dark group-hover:text-wine-red"
+            ? "text-dark/60 hover:text-wine-red"
+            : "text-dark group-hover:text-wine-red hover:text-wine-red"
         }`}
       >
-        {title}
-      </h3>
+        <h3>{title}</h3>
+      </Link>
 
       <div className="flex items-center gap-4 text-sm text-dark/50 mb-2">
         <span className="flex items-center gap-1.5">
