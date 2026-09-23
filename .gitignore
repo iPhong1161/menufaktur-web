@@ -43,3 +43,8 @@ next-env.d.ts
 
 # client content files (ODT documents, not part of the codebase)
 /content
+
+# vendored agent skills — local tooling, not part of the app
+/.agents/
+/.claude/skills/
+/skills-lock.json
