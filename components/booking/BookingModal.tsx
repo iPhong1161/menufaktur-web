@@ -473,7 +473,7 @@ function Step2({
                         onChange={(e) => onUpdateParticipant(i, "email", e.target.value)}
                       />
                     </FormField>
-                    <FormField label="Telefon">
+                    <FormField label="Telefon" error={errors[`${i}_phone`]}>
                       <input
                         type="tel"
                         className={inputClass}
@@ -1214,6 +1214,7 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
     if (!participants[0].email.trim()) errors["0_email"] = "Pflichtfeld"
     else if (!/\S+@\S+\.\S+/.test(participants[0].email))
       errors["0_email"] = "Ungültige E-Mail-Adresse"
+    if (!participants[0].phone.trim()) errors["0_phone"] = "Pflichtfeld"
     for (let i = 1; i < participants.length; i++) {
       if (!participants[i].firstName.trim()) errors[`${i}_firstName`] = "Pflichtfeld"
       if (!participants[i].lastName.trim()) errors[`${i}_lastName`] = "Pflichtfeld"

@@ -176,6 +176,9 @@ export default async function AdminBuchungDetailPage({
                           )}
                         </p>
                         <p className="text-xs text-dark/40 font-condensed">{p.email}</p>
+                        {p.phone && (
+                          <p className="text-xs text-dark/40 font-condensed">{p.phone}</p>
+                        )}
                         <div className="flex gap-2 mt-1 flex-wrap">
                           {foods.map((f) => (
                             <span key={f} className="text-xs px-2 py-0.5 rounded bg-dark/8 text-dark/50 font-bold">{f}</span>
