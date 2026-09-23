@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 import Link from "next/link"
-import { ArrowLeft, CalendarDays, Clock, MapPin, CreditCard, Users, Ban } from "lucide-react"
+import { ArrowLeft, CalendarDays, Clock, MapPin, CreditCard, Users, Ban, Download } from "lucide-react"
 import { getUserBookingDetail } from "@/lib/supabase/queries/bookings"
 import { createClient } from "@/lib/supabase/server"
 import { CancelBookingButton } from "@/components/booking/CancelBookingButton"
@@ -133,9 +133,30 @@ export default async function BookingDetailPage({
             {booking.course?.title ?? "Kursdetails"}
           </h1>
         </div>
-        <span className={`px-3 py-1.5 text-[10px] font-bold rounded-full uppercase tracking-wider ${STATUS_STYLES[booking.status] ?? "bg-dark/8 text-dark/40"}`}>
-          {STATUS_LABELS[booking.status] ?? booking.status}
-        </span>
+        <div className="flex flex-col items-end gap-3">
+          <span className={`px-3 py-1.5 text-[10px] font-bold rounded-full uppercase tracking-wider ${STATUS_STYLES[booking.status] ?? "bg-dark/8 text-dark/40"}`}>
+            {STATUS_LABELS[booking.status] ?? booking.status}
+          </span>
+          {booking.payment_status === "paid" ? (
+            <a
+              href={`/api/bookings/${booking.booking_number}/invoice`}
+              download
+              className="px-5 py-2.5 bg-[#ECE9CF] text-wine-red font-bold rounded-xl hover:bg-[#E6E4C9] transition-colors flex items-center gap-2 text-sm"
+            >
+              <Download className="w-4 h-4" />
+              Rechnung herunterladen
+            </a>
+          ) : (
+            <button
+              disabled
+              title="Verfügbar nach Zahlungseingang"
+              className="px-5 py-2.5 bg-[#ECE9CF] text-wine-red font-bold rounded-xl flex items-center gap-2 text-sm opacity-40 cursor-not-allowed"
+            >
+              <Download className="w-4 h-4" />
+              Rechnung herunterladen
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

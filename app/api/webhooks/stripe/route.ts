@@ -59,7 +59,11 @@ export async function POST(req: NextRequest) {
     // Mark booking as paid
     const { error: updateError } = await supabase
       .from("bookings")
-      .update({ payment_status: "paid", stripe_session_id: session.id })
+      .update({
+        payment_status: "paid",
+        stripe_session_id: session.id,
+        paid_at: new Date().toISOString(),
+      })
       .eq("booking_number", bookingNumber)
 
     if (updateError) {

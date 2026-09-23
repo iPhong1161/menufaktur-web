@@ -90,10 +90,25 @@ export default async function AdminBuchungDetailPage({
           </div>
         </div>
         <div className="flex flex-wrap gap-3 items-center">
-          <button className="px-6 py-3 bg-[#ECE9CF] text-wine-red font-bold rounded-xl hover:bg-[#E6E4C9] transition-colors flex items-center gap-2 text-sm">
-            <Download className="w-4 h-4" />
-            Rechnung herunterladen
-          </button>
+          {isPaid ? (
+            <a
+              href={`/api/bookings/${booking.booking_number}/invoice`}
+              download
+              className="px-6 py-3 bg-[#ECE9CF] text-wine-red font-bold rounded-xl hover:bg-[#E6E4C9] transition-colors flex items-center gap-2 text-sm"
+            >
+              <Download className="w-4 h-4" />
+              Rechnung herunterladen
+            </a>
+          ) : (
+            <button
+              disabled
+              title="Verfügbar nach Zahlungseingang"
+              className="px-6 py-3 bg-[#ECE9CF] text-wine-red font-bold rounded-xl flex items-center gap-2 text-sm opacity-40 cursor-not-allowed"
+            >
+              <Download className="w-4 h-4" />
+              Rechnung herunterladen
+            </button>
+          )}
           {role === "admin" && !isPaid && !isCancelled && <MarkPaidButton bookingId={booking.id} />}
         </div>
       </div>

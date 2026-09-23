@@ -58,6 +58,7 @@ export type Database = {
           status: "pending" | "confirmed" | "cancelled" | "refunded"
           payment_method: "card" | "sepa" | "bank_transfer"
           payment_status: "unpaid" | "paid" | "refunded"
+          paid_at: string | null
           stripe_session_id: string | null
           stripe_payment_intent: string | null
           total_amount: number
@@ -75,6 +76,7 @@ export type Database = {
           status?: "pending" | "confirmed" | "cancelled" | "refunded"
           payment_method: "card" | "sepa" | "bank_transfer"
           payment_status?: "unpaid" | "paid" | "refunded"
+          paid_at?: string | null
           stripe_session_id?: string | null
           stripe_payment_intent?: string | null
           total_amount: number
