@@ -48,3 +48,6 @@ next-env.d.ts
 /.agents/
 /.claude/skills/
 /skills-lock.json
+
+# Supabase CLI scratch state (link/auth temp files, not project content)
+/supabase/.temp/
