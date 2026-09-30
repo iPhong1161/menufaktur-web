@@ -418,14 +418,16 @@ export function GutscheinAnfrageForm() {
         <p className="text-red-600 text-sm font-condensed">{serverError}</p>
       )}
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="inline-flex items-center gap-3 bg-wine-red hover:bg-garnet-red text-white font-bold uppercase tracking-tight text-sm px-12 py-5 rounded-xl transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
-      >
-        {isSubmitting ? "Weiterleitung…" : "Zur Zahlung"}
-        {!isSubmitting && <Send className="w-4 h-4" aria-hidden="true" />}
-      </button>
+      <div className="flex justify-end">
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          className="inline-flex items-center gap-3 bg-wine-red hover:bg-garnet-red text-white font-bold uppercase tracking-tight text-sm px-12 py-5 rounded-xl transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {isSubmitting ? "Weiterleitung…" : "Zur Zahlung"}
+          {!isSubmitting && <Send className="w-4 h-4" aria-hidden="true" />}
+        </button>
+      </div>
     </form>
   )
 }

@@ -87,10 +87,13 @@ export default function PrivateEventsPage() {
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-wine-red p-8 hidden lg:block rounded-xl shadow-xl">
-                <p className="text-white font-bold text-2xl leading-tight">Bis zu 60 Gäste</p>
-                <p className="text-white/70 text-sm mt-1">Raum für Ihre Feier</p>
+                {/* Anchored to the image box itself, not the grid column — the
+                    column stretches to the text's height, which drifted the badge
+                    away from the image's bottom edge. */}
+                <div className="absolute bottom-4 right-4 bg-wine-red p-5 lg:p-8 rounded-xl shadow-xl">
+                  <p className="text-white font-bold text-xl lg:text-2xl leading-tight">Bis zu 60 Gäste</p>
+                  <p className="text-white/70 text-sm mt-1">Raum für Ihre Feier</p>
+                </div>
               </div>
             </div>
 
