@@ -1,7 +1,8 @@
 "use client"
 
 import { useState, useTransition } from "react"
-import { ChevronDown, ChevronUp, Check } from "lucide-react"
+import Link from "next/link"
+import { ChevronDown, ChevronUp, Check, Ticket, GraduationCap, Building2 } from "lucide-react"
 import { AdminBackButton } from "@/components/admin/AdminBackButton"
 import { updateMessageReadAction } from "./actions"
 
@@ -13,6 +14,12 @@ export type ContactMessage = {
   subject: string
   message: string
   read: boolean
+  // Structured fields — null on messages sent before the contact form rebuild,
+  // and on the voucher webhook's postal-order notifications.
+  category: string | null
+  booking_number: string | null
+  course_title: string | null
+  company: string | null
 }
 
 function formatDate(iso: string) {
@@ -25,7 +32,16 @@ function formatDate(iso: string) {
   })
 }
 
-function MessageRow({ msg }: { msg: ContactMessage; role: "admin" | "moderator" }) {
+const TAG_CLASS =
+  "inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-dark/8 text-dark/50"
+
+function MessageRow({
+  msg,
+  bookingId,
+}: {
+  msg: ContactMessage
+  bookingId?: string
+}) {
   const [expanded, setExpanded] = useState(false)
   const [read, setRead] = useState(msg.read)
   const [isPending, startTransition] = useTransition()
@@ -58,6 +74,48 @@ function MessageRow({ msg }: { msg: ContactMessage; role: "admin" | "moderator" 
         <td className="px-4 py-4">
           <p className={`text-sm ${!read ? "font-bold text-dark" : "font-medium text-dark/70"}`}>{msg.name}</p>
           <p className="text-xs text-dark/40 font-condensed">{msg.email}</p>
+          {msg.company && (
+            <p className="text-xs text-dark/40 font-condensed flex items-center gap-1 mt-0.5">
+              <Building2 className="w-3 h-3" aria-hidden="true" />
+              {msg.company}
+            </p>
+          )}
+          {(msg.booking_number || msg.course_title) && (
+            <div className="flex gap-1.5 mt-1.5 flex-wrap">
+              {msg.booking_number && (
+                bookingId ? (
+                  <Link
+                    href={`/admin/buchungen/${bookingId}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className={`${TAG_CLASS} bg-wine-red/10 text-wine-red hover:bg-wine-red/20 transition-colors`}
+                  >
+                    <Ticket className="w-3 h-3" aria-hidden="true" />
+                    {msg.booking_number}
+                  </Link>
+                ) : (
+                  <span className={TAG_CLASS} title="Keine passende Buchung gefunden">
+                    <Ticket className="w-3 h-3" aria-hidden="true" />
+                    {msg.booking_number}
+                  </span>
+                )
+              )}
+              {msg.course_title && (
+                <span className={TAG_CLASS}>
+                  <GraduationCap className="w-3 h-3" aria-hidden="true" />
+                  {msg.course_title}
+                </span>
+              )}
+            </div>
+          )}
+        </td>
+        <td className="px-4 py-4">
+          {msg.category ? (
+            <span className="px-2.5 py-1 rounded-full text-[10px] font-bold bg-garnet-red/10 text-garnet-red whitespace-nowrap">
+              {msg.category}
+            </span>
+          ) : (
+            <span className="text-xs text-dark/25 font-condensed">—</span>
+          )}
         </td>
         <td className="px-4 py-4 text-sm text-dark/70 font-condensed max-w-xs truncate">{msg.subject}</td>
         <td className="px-4 py-4 text-xs text-dark/40 font-condensed whitespace-nowrap">{formatDate(msg.created_at)}</td>
@@ -77,7 +135,7 @@ function MessageRow({ msg }: { msg: ContactMessage; role: "admin" | "moderator" 
       {expanded && (
         <tr className="border-b border-dark/5 bg-[#F8F5DA]">
           <td />
-          <td colSpan={5} className="px-4 pb-6 pt-3">
+          <td colSpan={6} className="px-4 pb-6 pt-3">
             <p className="text-sm text-dark/70 font-condensed leading-relaxed whitespace-pre-wrap">{msg.message}</p>
           </td>
         </tr>
@@ -89,9 +147,11 @@ function MessageRow({ msg }: { msg: ContactMessage; role: "admin" | "moderator" 
 export function NachrichtenClient({
   messages,
   role,
+  bookingIdByNumber = {},
 }: {
   messages: ContactMessage[]
   role: "admin" | "moderator"
+  bookingIdByNumber?: Record<string, string>
 }) {
   const unread = messages.filter((m) => !m.read).length
 
@@ -125,6 +185,7 @@ export function NachrichtenClient({
                 <th className="px-6 py-4 w-8" />
                 <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-dark/40">Status</th>
                 <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-dark/40">Absender</th>
+                <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-dark/40">Anliegen</th>
                 <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-dark/40">Betreff</th>
                 <th className="px-4 py-4 text-[10px] font-bold uppercase tracking-widest text-dark/40">Datum</th>
                 <th className="px-4 py-4" />
@@ -132,7 +193,11 @@ export function NachrichtenClient({
             </thead>
             <tbody>
               {messages.map((msg) => (
-                <MessageRow key={msg.id} msg={msg} role={role} />
+                <MessageRow
+                  key={msg.id}
+                  msg={msg}
+                  bookingId={msg.booking_number ? bookingIdByNumber[msg.booking_number] : undefined}
+                />
               ))}
             </tbody>
           </table>

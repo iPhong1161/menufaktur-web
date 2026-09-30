@@ -3,6 +3,7 @@ import Image from "next/image"
 import { MapPin, Phone, Mail, Train, ParkingSquare } from "lucide-react"
 import { ContactForm } from "@/components/contact/ContactForm"
 import { MapEmbed } from "@/components/ui/MapEmbed"
+import { getUpcomingCourseTitles } from "@/lib/supabase/queries/courses"
 
 export const metadata: Metadata = {
   title: "Kontakt — menufaktur",
@@ -13,11 +14,19 @@ export const metadata: Metadata = {
 export default async function KontaktPage({
   searchParams,
 }: {
-  searchParams: Promise<{ betreff?: string; nachricht?: string }>
+  searchParams: Promise<{
+    anliegen?: string
+    kurs?: string
+    buchungsnummer?: string
+    nachricht?: string
+  }>
 }) {
   const params = await searchParams
-  const initialSubject = params.betreff ?? ""
+  const initialCategory = params.anliegen ?? ""
+  const initialCourseTitle = params.kurs ?? ""
+  const initialBookingNumber = params.buchungsnummer ?? ""
   const initialMessage = params.nachricht ?? ""
+  const courseTitles = await getUpcomingCourseTitles()
 
   return (
     <div className="bg-light-beige min-h-screen">
@@ -50,7 +59,13 @@ export default async function KontaktPage({
             <h2 className="text-4xl md:text-5xl font-bold text-wine-red leading-tight mb-8">
               Schreiben Sie uns
             </h2>
-            <ContactForm initialSubject={initialSubject} initialMessage={initialMessage} />
+            <ContactForm
+              courseTitles={courseTitles}
+              initialCategory={initialCategory}
+              initialCourseTitle={initialCourseTitle}
+              initialBookingNumber={initialBookingNumber}
+              initialMessage={initialMessage}
+            />
           </div>
 
           {/* Right: info */}

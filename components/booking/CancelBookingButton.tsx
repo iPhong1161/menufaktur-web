@@ -15,12 +15,18 @@ export function CancelBookingButton({ bookingNumber, courseTitle, voucherNote }:
   const router = useRouter()
 
   function handleConfirm() {
-    const betreff = `Stornierung Buchung ${bookingNumber}`
     const nachricht =
       `Guten Tag,\n\nich möchte meine Buchung ${bookingNumber} für den Kurs „${courseTitle}" stornieren.\n\nBitte bestätigen Sie die Stornierung.\n\nMit freundlichen Grüßen`
-    router.push(
-      `/kontakt?betreff=${encodeURIComponent(betreff)}&nachricht=${encodeURIComponent(nachricht)}`
-    )
+    // Prefills the contact form's structured fields, so a cancellation request
+    // arrives in the admin inbox already tagged with category, course and
+    // booking number instead of only as free text in the message body.
+    const query = new URLSearchParams({
+      anliegen: "Stornierung",
+      kurs: courseTitle,
+      buchungsnummer: bookingNumber,
+      nachricht,
+    })
+    router.push(`/kontakt?${query.toString()}`)
   }
 
   if (confirming) {

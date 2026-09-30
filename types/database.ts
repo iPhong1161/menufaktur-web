@@ -251,6 +251,10 @@ export type Database = {
           subject: string
           message: string
           read: boolean
+          category: string | null
+          booking_number: string | null
+          course_title: string | null
+          company: string | null
         }
         Insert: {
           id?: string
@@ -260,6 +264,10 @@ export type Database = {
           subject: string
           message: string
           read?: boolean
+          category?: string | null
+          booking_number?: string | null
+          course_title?: string | null
+          company?: string | null
         }
         Update: Partial<Database["public"]["Tables"]["contact_messages"]["Insert"]>
         Relationships: []

@@ -4,22 +4,44 @@ import { useState, useTransition } from "react"
 import { Send, CheckCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { submitContactFormAction } from "@/app/actions/contact"
+import { CONTACT_CATEGORIES, NO_COURSE_OPTION } from "@/lib/contact-categories"
 
 interface FormData {
   name: string
   company: string
   email: string
-  subject: string
+  category: string
+  courseTitle: string
+  bookingNumber: string
   message: string
 }
 
 interface ContactFormProps {
-  initialSubject?: string
+  /** Titles of upcoming published courses, for the Kurs select. */
+  courseTitles?: string[]
+  initialCategory?: string
+  initialCourseTitle?: string
+  initialBookingNumber?: string
   initialMessage?: string
 }
 
-export function ContactForm({ initialSubject = "", initialMessage = "" }: ContactFormProps) {
-  const [form, setForm] = useState<FormData>({ name: "", company: "", email: "", subject: initialSubject, message: initialMessage })
+export function ContactForm({
+  courseTitles = [],
+  initialCategory = "",
+  initialCourseTitle = "",
+  initialBookingNumber = "",
+  initialMessage = "",
+}: ContactFormProps) {
+  const [form, setForm] = useState<FormData>({
+    name: "",
+    company: "",
+    email: "",
+    category: initialCategory,
+    // Only preselect a course we actually offer, otherwise fall back to the default.
+    courseTitle: courseTitles.includes(initialCourseTitle) ? initialCourseTitle : NO_COURSE_OPTION,
+    bookingNumber: initialBookingNumber,
+    message: initialMessage,
+  })
   const [errors, setErrors] = useState<Partial<FormData>>({})
   const [submitted, setSubmitted] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -34,6 +56,7 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       e.email = "Ungültige E-Mail-Adresse"
     }
+    if (!form.category.trim()) e.category = "Pflichtfeld"
     if (!form.message.trim()) e.message = "Pflichtfeld"
     return e
   }
@@ -67,6 +90,9 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
       errors[field] ? "border-red-500" : "border-transparent focus:border-wine-red"
     )
 
+  const labelClass = "block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2"
+  const optionalHint = <span className="font-normal normal-case tracking-normal text-dark/40">(optional)</span>
+
   if (success) {
     return (
       <div className="bg-white p-10 md:p-14 rounded-xl shadow-sm flex flex-col items-center text-center gap-5 py-24">
@@ -85,10 +111,9 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
     <div className="bg-white p-10 md:p-14 rounded-xl shadow-sm">
       <form onSubmit={handleSubmit} className="space-y-7" noValidate>
         <div>
-          <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2">
-            Ihr Name
-          </label>
+          <label htmlFor="contact-name" className={labelClass}>Ihr Name</label>
           <input
+            id="contact-name"
             type="text"
             value={form.name}
             onChange={(e) => update("name", e.target.value)}
@@ -99,10 +124,9 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
         </div>
 
         <div>
-          <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2">
-            Firma <span className="font-normal normal-case tracking-normal text-dark/40">(optional)</span>
-          </label>
+          <label htmlFor="contact-company" className={labelClass}>Firma {optionalHint}</label>
           <input
+            id="contact-company"
             type="text"
             value={form.company}
             onChange={(e) => update("company", e.target.value)}
@@ -112,10 +136,9 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
         </div>
 
         <div>
-          <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2">
-            E-Mail-Adresse
-          </label>
+          <label htmlFor="contact-email" className={labelClass}>E-Mail-Adresse</label>
           <input
+            id="contact-email"
             type="email"
             value={form.email}
             onChange={(e) => update("email", e.target.value)}
@@ -126,23 +149,54 @@ export function ContactForm({ initialSubject = "", initialMessage = "" }: Contac
         </div>
 
         <div>
-          <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2">
-            Betreff
-          </label>
+          <label htmlFor="contact-category" className={labelClass}>Anliegen</label>
+          <select
+            id="contact-category"
+            value={form.category}
+            onChange={(e) => update("category", e.target.value)}
+            className={cn(inputClass("category"), "cursor-pointer")}
+          >
+            <option value="">Bitte wählen…</option>
+            {CONTACT_CATEGORIES.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
+          {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category}</p>}
+        </div>
+
+        {courseTitles.length > 0 && (
+          <div>
+            <label htmlFor="contact-course" className={labelClass}>Kurs {optionalHint}</label>
+            <select
+              id="contact-course"
+              value={form.courseTitle}
+              onChange={(e) => update("courseTitle", e.target.value)}
+              className={cn(inputClass("courseTitle"), "cursor-pointer")}
+            >
+              <option value={NO_COURSE_OPTION}>{NO_COURSE_OPTION}</option>
+              {courseTitles.map((t) => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        <div>
+          <label htmlFor="contact-booking" className={labelClass}>Buchungsnummer {optionalHint}</label>
           <input
+            id="contact-booking"
             type="text"
-            value={form.subject}
-            onChange={(e) => update("subject", e.target.value)}
-            placeholder="Wie können wir Ihnen helfen?"
-            className={inputClass("subject")}
+            value={form.bookingNumber}
+            onChange={(e) => update("bookingNumber", e.target.value)}
+            placeholder="z. B. MF-2026-00123"
+            className={inputClass("bookingNumber")}
           />
         </div>
 
         <div>
-          <label className="block text-[10px] font-bold uppercase tracking-widest text-dark/40 mb-2">
-            Ihre Nachricht
-          </label>
+          <label htmlFor="contact-message" className={labelClass}>Ihre Nachricht</label>
           <textarea
+            id="contact-message"
             value={form.message}
             onChange={(e) => update("message", e.target.value)}
             placeholder="Ihre Nachricht an uns…"
