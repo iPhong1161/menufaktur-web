@@ -143,16 +143,58 @@ export async function getCourseByIdAdmin(id: string): Promise<CourseRow | null> 
   return data
 }
 
+/** Postgres unique_violation. */
+const UNIQUE_VIOLATION = "23505"
+
+const SLUG_TAKEN_MESSAGE =
+  "Ein Kurs mit diesem Namen existiert bereits. Bitte ändern Sie den Titel oder die URL."
+
+export const COURSE_ARCHIVED_MESSAGE =
+  "Dieser Kurs hat Buchungen und kann nicht gelöscht werden. Er wurde stattdessen archiviert und ist auf der Website nicht mehr sichtbar."
+
+/**
+ * First free slug at or after `baseSlug`, probing `-2`, `-3`, … on collision.
+ * courses.slug is unique, and the same course title legitimately recurs on
+ * different dates, so a collision is routine rather than exceptional.
+ */
+async function findFreeSlug(
+  supabase: ReturnType<typeof createServiceClient>,
+  baseSlug: string
+): Promise<string> {
+  let slug = baseSlug
+  let attempt = 2
+  for (;;) {
+    const { count } = await supabase
+      .from("courses")
+      .select("id", { count: "exact", head: true })
+      .eq("slug", slug)
+    if (!count) return slug
+    slug = `${baseSlug}-${attempt++}`
+  }
+}
+
 export async function createCourse(
   data: Omit<CourseInsert, "id">
 ): Promise<{ id: string } | { error: string }> {
   const supabase = createServiceClient()
+
+  // Resolve the slug before inserting so a duplicate title just works instead
+  // of bouncing a raw constraint error back at the admin.
+  const slug = await findFreeSlug(supabase, data.slug)
+
   const { data: row, error } = await supabase
     .from("courses")
-    .insert(data)
+    .insert({ ...data, slug })
     .select("id")
     .single()
-  if (error || !row) return { error: error?.message ?? "Fehler beim Erstellen des Kurses." }
+
+  if (error) {
+    // The probe above is not atomic — a concurrent insert can still take the
+    // slug between the check and the write.
+    if (error.code === UNIQUE_VIOLATION) return { error: SLUG_TAKEN_MESSAGE }
+    return { error: error.message }
+  }
+  if (!row) return { error: "Fehler beim Erstellen des Kurses." }
   return { id: row.id }
 }
 
@@ -166,26 +208,38 @@ export async function updateCourse(
   return { success: true }
 }
 
-export async function deleteCourse(
-  id: string
-): Promise<{ success: true } | { error: string }> {
+export type DeleteCourseResult =
+  | { success: true; outcome: "deleted" }
+  | { success: true; outcome: "archived"; message: string }
+  | { error: string }
+
+export async function deleteCourse(id: string): Promise<DeleteCourseResult> {
   const supabase = createServiceClient()
 
-  const { count } = await supabase
+  // Count bookings of EVERY status: bookings.course_id carries no ON DELETE
+  // clause, so Postgres defaults to NO ACTION and any surviving row — pending
+  // and cancelled included — blocks the delete.
+  const { count, error: countError } = await supabase
     .from("bookings")
     .select("*", { count: "exact", head: true })
     .eq("course_id", id)
-    .eq("status", "confirmed")
+
+  // Without this guard a failed count leaves `count` null and falls straight
+  // through to a delete that the FK would reject.
+  if (countError) return { error: countError.message }
 
   if (count && count > 0) {
-    return {
-      error: `Dieser Kurs hat ${count} bestätigte Buchung${count > 1 ? "en" : ""} und kann nicht gelöscht werden.`,
-    }
+    const { error: archiveError } = await supabase
+      .from("courses")
+      .update({ status: "archived" })
+      .eq("id", id)
+    if (archiveError) return { error: archiveError.message }
+    return { success: true, outcome: "archived", message: COURSE_ARCHIVED_MESSAGE }
   }
 
   const { error } = await supabase.from("courses").delete().eq("id", id)
   if (error) return { error: error.message }
-  return { success: true }
+  return { success: true, outcome: "deleted" }
 }
 
 export async function getUpcomingCoursesAdmin(): Promise<AdminCourse[]> {
@@ -243,18 +297,7 @@ export async function duplicateCourse(
 
   if (fetchError || !original) return { error: "Kurs nicht gefunden." }
 
-  // Find unique slug
-  const baseSlug = `${original.slug}-kopie`
-  let slug = baseSlug
-  let attempt = 2
-  for (;;) {
-    const { count } = await supabase
-      .from("courses")
-      .select("id", { count: "exact", head: true })
-      .eq("slug", slug)
-    if (!count) break
-    slug = `${baseSlug}-${attempt++}`
-  }
+  const slug = await findFreeSlug(supabase, `${original.slug}-kopie`)
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { id: _id, created_at: _ca, ...rest } = original
