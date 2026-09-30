@@ -20,14 +20,9 @@ export const metadata: Metadata = {
   title: "menufaktur — Kochschule Frankfurt-Bornheim",
   description:
     "Seit 2007 begeistert menufaktur in Frankfurt-Bornheim Menschen fürs gemeinsame Kochen. Kurse buchen und Gutscheine kaufen.",
-  icons: [
-    {
-      rel: "icon",
-      url: "/brand/menufaktur-icon-cream-on-burgundy.svg",
-      type: "image/svg+xml",
-    },
-    { rel: "icon", url: "/favicon.ico", sizes: "32x32" },
-  ],
+  // Icons come from the file-based convention: app/favicon.ico, app/icon.png
+  // and app/apple-icon.png. Do not add an `icons` array here — declaring both
+  // makes Next emit conflicting <link> tags.
 }
 
 export default function RootLayout({
