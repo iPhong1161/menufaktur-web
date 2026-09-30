@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import { Ticket } from "lucide-react"
 import { GutscheinAnfrageForm } from "@/components/voucher/GutscheinAnfrageForm"
 
 export const metadata: Metadata = {
@@ -77,9 +76,6 @@ export default function GutscheinPage() {
 
             {/* Buy section */}
             <div className="bg-white p-10 md:p-14 rounded-xl shadow-sm border border-dark/5 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-8 opacity-[0.04] pointer-events-none">
-                <Ticket className="w-32 h-32 text-wine-red" />
-              </div>
               <div className="relative z-10 space-y-8">
                 <h2 className="text-wine-red font-bold text-3xl md:text-4xl tracking-tight">
                   Gutschein bestellen
