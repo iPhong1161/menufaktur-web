@@ -13,7 +13,6 @@ type Result = { email: string; password: string }
 const PAYMENT_OPTIONS = [
   { value: "", label: "Keine Angabe" },
   { value: "card", label: "Kreditkarte" },
-  { value: "sepa", label: "SEPA-Lastschrift" },
   { value: "bank_transfer", label: "Banküberweisung" },
 ]
 

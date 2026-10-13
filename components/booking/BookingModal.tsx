@@ -18,7 +18,6 @@ import {
   Check,
   CreditCard,
   Building2,
-  Landmark,
 } from "lucide-react"
 import { ImagePlaceholder } from "@/components/ui/ImagePlaceholder"
 import { validateVoucherAction } from "@/app/actions/voucher"
@@ -64,7 +63,7 @@ interface InvoiceData {
   vatId: string
 }
 
-export type PaymentMethod = "bank_transfer" | "card" | "sepa"
+export type PaymentMethod = "bank_transfer" | "card"
 
 export interface BookingModalProps {
   course: CourseData
@@ -1034,12 +1033,11 @@ function Step4({
                 Zahlungsart
               </h3>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {(
                 [
                   { value: "bank_transfer", label: "Überweisung", Icon: Building2, sub: "Rechnung per E-Mail" },
                   { value: "card", label: "Kreditkarte", Icon: CreditCard, sub: "Visa, Mastercard" },
-                  { value: "sepa", label: "SEPA-Lastschrift", Icon: Landmark, sub: "EU Bankeinzug" },
                 ] as const
               ).map(({ value, label, Icon, sub }) => (
                 <button
@@ -1297,15 +1295,12 @@ export function BookingModal({ course, onClose }: BookingModalProps) {
         router.push(`/buchung/bestaetigung/${data.booking_number}?count=${count}`)
         onClose()
       } else {
-        // Card / SEPA: create Stripe Checkout Session and redirect
-        const stripePaymentMethod = paymentMethod === "card" ? "card" : "sepa_debit"
+        // Card: create Stripe Checkout Session and redirect. The route decides
+        // which payment methods the session offers.
         const stripeRes = await fetch("/api/stripe/checkout", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            bookingNumber: data.booking_number,
-            paymentMethod: stripePaymentMethod,
-          }),
+          body: JSON.stringify({ bookingNumber: data.booking_number }),
         })
         const stripeData = await stripeRes.json()
         if (!stripeRes.ok || !stripeData.url) {

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { stripe } from "@/lib/stripe/client"
+import { enabledPaymentMethodTypes } from "@/lib/payments"
 import { createServiceClient } from "@/lib/supabase/server"
 
 const GERMAN_MONTHS = [
@@ -8,9 +9,11 @@ const GERMAN_MONTHS = [
 ]
 
 export async function POST(req: NextRequest) {
-  const { bookingNumber, paymentMethod } = await req.json()
+  // paymentMethod from the request body is ignored — the server decides which
+  // methods are offered.
+  const { bookingNumber } = await req.json()
 
-  if (!bookingNumber || !["card", "sepa_debit"].includes(paymentMethod)) {
+  if (!bookingNumber) {
     return NextResponse.json({ error: "Ungültige Anfrage." }, { status: 400 })
   }
 
@@ -37,7 +40,7 @@ export async function POST(req: NextRequest) {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: [paymentMethod],
+      payment_method_types: enabledPaymentMethodTypes(),
       line_items: [
         {
           price_data: {

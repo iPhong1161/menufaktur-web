@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { stripe } from "@/lib/stripe/client"
+import { enabledPaymentMethodTypes } from "@/lib/payments"
 
 interface Address {
   firstName: string
@@ -133,7 +134,7 @@ export async function POST(req: NextRequest) {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: ["card", "sepa_debit"],
+      payment_method_types: enabledPaymentMethodTypes(),
       customer_email: body.billingAddress.email!.trim(),
       line_items: lineItems,
       metadata: {

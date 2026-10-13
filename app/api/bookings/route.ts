@@ -103,7 +103,9 @@ export async function POST(req: NextRequest) {
   const vatAmount = Math.round((finalTotal - finalTotal / 1.19) * 100) / 100
   const inv: InvoiceBody = body.invoiceRecipient
 
-  const paymentMethod = ["card", "sepa", "bank_transfer"].includes(body.paymentMethod)
+  // "sepa" is no longer offered, so it is no longer accepted here either — a
+  // body claiming it falls back to bank_transfer. Historical rows keep theirs.
+  const paymentMethod = ["card", "bank_transfer"].includes(body.paymentMethod)
     ? body.paymentMethod
     : "bank_transfer"
 
