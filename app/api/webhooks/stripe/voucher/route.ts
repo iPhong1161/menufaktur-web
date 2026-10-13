@@ -189,6 +189,21 @@ function buyerConfirmationHtml(params: {
 export async function processVoucherCheckoutCompleted(
   session: Stripe.Checkout.Session,
 ): Promise<void> {
+  // Guarded here as well as at the dispatching route, because this function is
+  // also reachable through the standalone POST below. Vouchers are spendable
+  // the moment they exist, so none may be issued for an unsettled session.
+  if (
+    session.payment_status !== "paid" &&
+    session.payment_status !== "no_payment_required"
+  ) {
+    console.warn(
+      "[webhook/stripe/voucher] session not settled — no vouchers issued",
+      session.id,
+      session.payment_status
+    )
+    return
+  }
+
   const meta = parseMetadata(session)
   if (!meta) {
     console.error("[webhook/stripe/voucher] invalid metadata", session.id)

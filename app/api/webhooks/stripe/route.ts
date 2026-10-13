@@ -25,6 +25,22 @@ export async function POST(req: NextRequest) {
   if (event.type === "checkout.session.completed") {
     const session = event.data.object as Stripe.Checkout.Session
 
+    // completed does not mean funded. Delayed-notification methods deliver this
+    // event with payment_status "unpaid" and settle later via
+    // async_payment_succeeded / async_payment_failed, which are not handled.
+    // Until they are, only a settled session may mark anything paid.
+    if (
+      session.payment_status !== "paid" &&
+      session.payment_status !== "no_payment_required"
+    ) {
+      console.warn(
+        "[webhook/stripe] session not settled — ignoring",
+        session.id,
+        session.payment_status
+      )
+      return NextResponse.json({ received: true })
+    }
+
     // Dispatch by metadata.type — voucher purchases have their own handler
     if (session.metadata?.type === "voucher") {
       await processVoucherCheckoutCompleted(session)
