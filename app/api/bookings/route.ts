@@ -107,7 +107,10 @@ export async function POST(req: NextRequest) {
     ? body.paymentMethod
     : "bank_transfer"
 
-  const { data, error } = await supabase.rpc("create_booking_atomic", {
+  // Service client: the permissive "Anyone can create bookings" policy is being
+  // dropped. p_user_id is passed explicitly from the verified session above, so
+  // ownership never depends on the caller's own database role.
+  const { data, error } = await serviceSupabase.rpc("create_booking_atomic", {
     p_course_id:         body.course.id,
     p_user_id:           user?.id ?? null,
     p_payment_method:    paymentMethod,

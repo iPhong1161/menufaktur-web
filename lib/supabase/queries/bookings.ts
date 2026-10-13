@@ -1,5 +1,10 @@
-import { createClient } from "@/lib/supabase/server"
-import type { Database } from "@/types/database"
+import { createClient, createServiceClient } from "@/lib/supabase/server"
+
+// Every read here goes through the service client, server-side only. The
+// permissive "Booking number lookup" policy is being dropped, so the anon and
+// cookie-based clients can no longer see bookings they do not own. Ownership is
+// enforced in code instead: each function establishes the caller's identity via
+// the cookie client's auth.getUser() and then filters by user_id explicitly.
 
 export interface UserBooking {
   id: string
@@ -19,72 +24,38 @@ export interface UserBooking {
   } | null
 }
 
-type BookingInsert = Database["public"]["Tables"]["bookings"]["Insert"]
-type ParticipantInsert = Database["public"]["Tables"]["participants"]["Insert"]
-type InvoiceRecipientInsert = Database["public"]["Tables"]["invoice_recipients"]["Insert"]
-
-export interface CreateBookingPayload {
-  booking: Omit<BookingInsert, "booking_number">
-  participants: Omit<ParticipantInsert, "booking_id">[]
-  invoiceRecipient: Omit<InvoiceRecipientInsert, "booking_id">
+/** Shape returned to the booking confirmation page. */
+export interface BookingConfirmation {
+  booking_number: string
+  total_amount: number
+  course: {
+    title: string
+    date: string
+    start_time: string
+    end_time: string | null
+    photo_url: string | null
+  } | null
 }
 
-export async function createBooking(
-  payload: CreateBookingPayload
-): Promise<{ booking_number: string; id: string } | { error: string }> {
-  const supabase = await createClient()
-
-  // Generate booking number server-side
-  const { data: numberData, error: numberError } = await supabase
-    .rpc("next_booking_number")
-
-  if (numberError || !numberData) {
-    return { error: "Buchungsnummer konnte nicht generiert werden." }
-  }
-
-  const booking_number = numberData as string
-
-  const { data: booking, error: bookingError } = await supabase
-    .from("bookings")
-    .insert({ ...payload.booking, booking_number })
-    .select("id, booking_number")
-    .single()
-
-  if (bookingError || !booking) {
-    return { error: bookingError?.message ?? "Buchung fehlgeschlagen." }
-  }
-
-  // Insert participants
-  const { error: participantsError } = await supabase
-    .from("participants")
-    .insert(payload.participants.map((p) => ({ ...p, booking_id: booking.id })))
-
-  if (participantsError) {
-    return { error: "Teilnehmerdaten konnten nicht gespeichert werden." }
-  }
-
-  // Insert invoice recipient
-  const { error: recipientError } = await supabase
-    .from("invoice_recipients")
-    .insert({ ...payload.invoiceRecipient, booking_id: booking.id })
-
-  if (recipientError) {
-    return { error: "Rechnungsempfänger konnte nicht gespeichert werden." }
-  }
-
-  return { booking_number: booking.booking_number, id: booking.id }
-}
-
-export async function getBookingByNumber(booking_number: string, userId: string | null = null) {
-  const supabase = await createClient()
+/**
+ * Lookup for the post-checkout confirmation page, which a guest reaches via
+ * Stripe's success_url without logging in.
+ *
+ * Deliberately narrow: no participant, invoice-recipient, payment or Stripe
+ * fields are selected, because anyone holding the booking number can call this.
+ * Pass userId to additionally require ownership.
+ */
+export async function getBookingByNumber(
+  booking_number: string,
+  userId: string | null = null
+): Promise<BookingConfirmation | null> {
+  const supabase = createServiceClient()
 
   let query = supabase
     .from("bookings")
     .select(
-      `*,
-       course:courses(*),
-       participants(*),
-       invoice_recipient:invoice_recipients(*)`
+      `booking_number, total_amount,
+       course:courses(title, date, start_time, end_time, photo_url)`
     )
     .eq("booking_number", booking_number)
 
@@ -94,8 +65,8 @@ export async function getBookingByNumber(booking_number: string, userId: string 
 
   const { data, error } = await query.single()
 
-  if (error) return null
-  return data
+  if (error || !data) return null
+  return data as unknown as BookingConfirmation
 }
 
 export interface BookingDetail {
@@ -125,10 +96,11 @@ export interface BookingDetail {
 export async function getUserBookingDetail(
   booking_number: string
 ): Promise<BookingDetail | null> {
-  const supabase = await createClient()
-
-  const { data: { user } } = await supabase.auth.getUser()
+  const authClient = await createClient()
+  const { data: { user } } = await authClient.auth.getUser()
   if (!user) return null
+
+  const supabase = createServiceClient()
 
   const { data, error } = await supabase
     .from("bookings")
@@ -147,14 +119,18 @@ export async function getUserBookingDetail(
 }
 
 export async function getUserBookings(): Promise<UserBooking[]> {
-  const supabase = await createClient()
-
-  const { data: { user } } = await supabase.auth.getUser()
+  const authClient = await createClient()
+  const { data: { user } } = await authClient.auth.getUser()
   if (!user) return []
+
+  const supabase = createServiceClient()
 
   const { data, error } = await supabase
     .from("bookings")
-    .select(`*, course:courses(id, title, date, start_time, end_time, photo_url)`)
+    .select(
+      `id, booking_number, status, total_amount, created_at, user_id, course_id,
+       course:courses(id, title, date, start_time, end_time, photo_url)`
+    )
     .eq("user_id", user.id)
     .order("created_at", { ascending: false })
 

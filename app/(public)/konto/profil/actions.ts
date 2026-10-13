@@ -9,10 +9,11 @@ export async function deleteAccountAction(): Promise<{ error: string } | { succe
   if (!user) redirect("/login")
 
   const userId = user.id
+  const service = createServiceClient()
 
   // Block deletion if the user has active upcoming bookings
   const today = new Date().toISOString().split("T")[0]
-  const { data: upcomingBookings } = await supabase
+  const { data: upcomingBookings } = await service
     .from("bookings")
     .select("id, courses!inner(date)")
     .eq("user_id", userId)
@@ -22,8 +23,6 @@ export async function deleteAccountAction(): Promise<{ error: string } | { succe
   if (upcomingBookings && upcomingBookings.length > 0) {
     return { error: "Sie haben noch aktive Buchungen. Bitte stornieren Sie diese zuerst oder kontaktieren Sie uns." }
   }
-
-  const service = createServiceClient()
 
   // Step 1 — Anonymise profile row
   const { error: profileError } = await service
