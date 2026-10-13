@@ -58,6 +58,7 @@ export type Database = {
           status: "pending" | "confirmed" | "cancelled" | "refunded"
           payment_method: "card" | "sepa" | "bank_transfer"
           payment_status: "unpaid" | "paid" | "refunded"
+          paid_at: string | null
           stripe_session_id: string | null
           stripe_payment_intent: string | null
           total_amount: number
@@ -75,6 +76,7 @@ export type Database = {
           status?: "pending" | "confirmed" | "cancelled" | "refunded"
           payment_method: "card" | "sepa" | "bank_transfer"
           payment_status?: "unpaid" | "paid" | "refunded"
+          paid_at?: string | null
           stripe_session_id?: string | null
           stripe_payment_intent?: string | null
           total_amount: number
@@ -228,14 +230,14 @@ export type Database = {
           user_id: string
           created_at: string
           role: string | null
-          email: string
+          email: string | null
         }
         Insert: {
           id?: string
           user_id: string
           created_at?: string
           role?: string | null
-          email: string
+          email?: string | null
         }
         Update: Partial<Omit<Database["public"]["Tables"]["admin_users"]["Insert"], "id">>
         Relationships: []
@@ -249,6 +251,10 @@ export type Database = {
           subject: string
           message: string
           read: boolean
+          category: string | null
+          booking_number: string | null
+          course_title: string | null
+          company: string | null
         }
         Insert: {
           id?: string
@@ -258,6 +264,10 @@ export type Database = {
           subject: string
           message: string
           read?: boolean
+          category?: string | null
+          booking_number?: string | null
+          course_title?: string | null
+          company?: string | null
         }
         Update: Partial<Database["public"]["Tables"]["contact_messages"]["Insert"]>
         Relationships: []

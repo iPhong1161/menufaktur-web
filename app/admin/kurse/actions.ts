@@ -7,6 +7,7 @@ import {
   updateCourse,
   deleteCourse,
   duplicateCourse,
+  type DeleteCourseResult,
 } from "@/lib/supabase/queries/admin-courses"
 import { createServiceClient, getAdminUser } from "@/lib/supabase/server"
 import type { Database } from "@/types/database"
@@ -44,15 +45,15 @@ export async function updateCourseAction(
   return { success: true }
 }
 
-export async function deleteCourseAction(
-  id: string
-): Promise<{ error: string } | { success: true }> {
+export async function deleteCourseAction(id: string): Promise<DeleteCourseResult> {
   const guard = await requireAdmin()
   if (guard) return guard
   const result = await deleteCourse(id)
   if ("error" in result) return { error: result.error }
   revalidatePath("/admin/kurse")
-  return { success: true }
+  // Archiving hides the course from the public catalogue, so that cache too.
+  revalidatePath("/kurse")
+  return result
 }
 
 export async function duplicateCourseAction(

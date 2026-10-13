@@ -136,3 +136,21 @@ export async function getCourseById(
     remaining_capacity: course.capacity - (count ?? 0),
   }
 }
+
+/**
+ * Distinct titles of upcoming published courses, for the Kurs select on the
+ * contact form. The same course title can recur on several dates, so titles are
+ * deduped and returned in date order (soonest first).
+ */
+export async function getUpcomingCourseTitles(): Promise<string[]> {
+  const supabase = await createClient()
+
+  const { data } = await supabase
+    .from("courses")
+    .select("title, date")
+    .eq("status", "published")
+    .gte("date", new Date().toISOString().split("T")[0])
+    .order("date", { ascending: true })
+
+  return Array.from(new Set((data ?? []).map((c) => c.title)))
+}

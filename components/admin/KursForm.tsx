@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { Eye, ImagePlus, Save, Trash2 } from "lucide-react"
+import { Archive, Eye, ImagePlus, Save, Trash2 } from "lucide-react"
 import { createClient } from "@/lib/supabase/client"
 import {
   createCourseAction,
@@ -52,6 +52,7 @@ export function KursForm({ course }: Props) {
   const [isDeleting, startDeleteTransition] = useTransition()
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
+  const [info, setInfo] = useState<string | null>(null)
 
   const [photoFile, setPhotoFile] = useState<File | null>(null)
   const [photoPreview, setPhotoPreview] = useState<string | null>(course?.photo_url ?? null)
@@ -169,11 +170,23 @@ export function KursForm({ course }: Props) {
 
   function handleDelete() {
     if (!course) return
-    if (!confirm("Kurs wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.")) return
+    if (
+      !confirm(
+        "Kurs wirklich löschen? Kurse mit Buchungen werden stattdessen archiviert."
+      )
+    )
+      return
+    setError(null)
+    setInfo(null)
     startDeleteTransition(async () => {
       const result = await deleteCourseAction(course.id)
       if ("error" in result) {
         setError(result.error)
+      } else if (result.outcome === "archived") {
+        // Stay on the page so the admin sees why, and refresh so the status
+        // field reflects "Archiviert".
+        setInfo(result.message)
+        router.refresh()
       } else {
         router.push("/admin/kurse")
       }
@@ -462,6 +475,12 @@ export function KursForm({ course }: Props) {
           {success && (
             <div className="p-4 bg-green-50 border border-green-200 rounded-xl text-green-800 text-sm font-condensed">
               Änderungen erfolgreich gespeichert.
+            </div>
+          )}
+          {info && (
+            <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-800 text-sm font-condensed flex items-start gap-2.5">
+              <Archive className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />
+              <span>{info}</span>
             </div>
           )}
           {error && (

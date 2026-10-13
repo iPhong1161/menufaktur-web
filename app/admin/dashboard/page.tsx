@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { CalendarDays, UserPlus, UtensilsCrossed, AlertCircle, Pencil, Ticket, Users, Settings, BookOpen } from "lucide-react"
+import { CalendarDays, UserPlus, UtensilsCrossed, AlertCircle, Pencil, Ticket, Users, Lock, BookOpen } from "lucide-react"
 import { getAdminDashboardStats } from "@/lib/supabase/queries/admin-stats"
 import { getUpcomingCoursesAdmin } from "@/lib/supabase/queries/admin-courses"
 import { getRecentBookingsAdmin } from "@/lib/supabase/queries/admin-bookings"
@@ -142,9 +142,9 @@ export default async function AdminDashboardPage() {
             },
             {
               href: "/admin/einstellungen",
-              icon: Settings,
-              title: "Einstellungen",
-              description: "Systemkonfiguration",
+              icon: Lock,
+              title: "Passwort ändern",
+              description: "Kontopasswort aktualisieren",
             },
           ].map(({ href, icon: Icon, title, description }) => (
             <Link

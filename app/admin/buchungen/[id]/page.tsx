@@ -90,10 +90,25 @@ export default async function AdminBuchungDetailPage({
           </div>
         </div>
         <div className="flex flex-wrap gap-3 items-center">
-          <button className="px-6 py-3 bg-[#ECE9CF] text-wine-red font-bold rounded-xl hover:bg-[#E6E4C9] transition-colors flex items-center gap-2 text-sm">
-            <Download className="w-4 h-4" />
-            Rechnung herunterladen
-          </button>
+          {isPaid ? (
+            <a
+              href={`/api/bookings/${booking.booking_number}/invoice`}
+              download
+              className="px-6 py-3 bg-[#ECE9CF] text-wine-red font-bold rounded-xl hover:bg-[#E6E4C9] transition-colors flex items-center gap-2 text-sm"
+            >
+              <Download className="w-4 h-4" />
+              Rechnung herunterladen
+            </a>
+          ) : (
+            <button
+              disabled
+              title="Verfügbar nach Zahlungseingang"
+              className="px-6 py-3 bg-[#ECE9CF] text-wine-red font-bold rounded-xl flex items-center gap-2 text-sm opacity-40 cursor-not-allowed"
+            >
+              <Download className="w-4 h-4" />
+              Rechnung herunterladen
+            </button>
+          )}
           {role === "admin" && !isPaid && !isCancelled && <MarkPaidButton bookingId={booking.id} />}
         </div>
       </div>
@@ -176,6 +191,9 @@ export default async function AdminBuchungDetailPage({
                           )}
                         </p>
                         <p className="text-xs text-dark/40 font-condensed">{p.email}</p>
+                        {p.phone && (
+                          <p className="text-xs text-dark/40 font-condensed">{p.phone}</p>
+                        )}
                         <div className="flex gap-2 mt-1 flex-wrap">
                           {foods.map((f) => (
                             <span key={f} className="text-xs px-2 py-0.5 rounded bg-dark/8 text-dark/50 font-bold">{f}</span>

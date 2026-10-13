@@ -2,7 +2,8 @@
 
 import { useState, useTransition } from "react"
 import Link from "next/link"
-import { Search, Eye, Pencil, LayoutList, Trash2 } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { Archive, Search, Eye, Pencil, LayoutList, Trash2 } from "lucide-react"
 import { deleteCourseAction } from "@/app/admin/kurse/actions"
 import type { AdminCourse } from "@/lib/supabase/queries/admin-courses"
 
@@ -43,9 +44,11 @@ function fmtTime(t: string) {
 }
 
 export function KurseClient({ courses, role }: { courses: AdminCourse[]; role: "admin" | "moderator" }) {
+  const router = useRouter()
   const [search, setSearch] = useState("")
   const [statusFilter, setStatusFilter] = useState("")
   const [, startTransition] = useTransition()
+  const [notice, setNotice] = useState<{ kind: "info" | "error"; text: string } | null>(null)
 
   const filtered = courses.filter((c) => {
     const matchesSearch =
@@ -57,19 +60,38 @@ export function KurseClient({ courses, role }: { courses: AdminCourse[]; role: "
   })
 
   function handleDelete(id: string) {
-    if (!confirm("Kurs wirklich löschen?")) return
+    if (!confirm("Kurs wirklich löschen? Kurse mit Buchungen werden stattdessen archiviert.")) return
+    setNotice(null)
     startTransition(async () => {
       const result = await deleteCourseAction(id)
       if ("error" in result) {
-        alert(result.error)
+        setNotice({ kind: "error", text: result.error })
+      } else if (result.outcome === "archived") {
+        setNotice({ kind: "info", text: result.message })
+        // router.refresh() rather than a full reload, so the notice survives
+        // while the row's status badge updates to "Archiviert".
+        router.refresh()
       } else {
-        window.location.reload()
+        router.refresh()
       }
     })
   }
 
   return (
     <>
+      {notice && (
+        <div
+          className={`mb-6 p-4 rounded-xl text-sm font-condensed flex items-start gap-2.5 ${
+            notice.kind === "info"
+              ? "bg-amber-50 border border-amber-200 text-amber-800"
+              : "bg-red-50 border border-red-200 text-red-700"
+          }`}
+        >
+          {notice.kind === "info" && <Archive className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />}
+          <span>{notice.text}</span>
+        </div>
+      )}
+
       <section className="bg-[#F8F5DA] rounded-xl p-6 mb-8 flex flex-wrap items-center gap-4">
         <div className="flex-1 min-w-[280px] relative">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-dark/30" />

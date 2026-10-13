@@ -185,7 +185,11 @@ export async function updateBookingPaymentStatus(
   const supabase = createServiceClient()
   const { error } = await supabase
     .from("bookings")
-    .update({ payment_status: "paid", status: "confirmed" })
+    .update({
+      payment_status: "paid",
+      status: "confirmed",
+      paid_at: new Date().toISOString(),
+    })
     .eq("id", id)
   if (error) return { error: error.message }
   return { success: true }

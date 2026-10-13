@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { CircleUser } from "lucide-react"
+import { Lock } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { AdminLogoutButton } from "./AdminLogoutButton"
 import { NotificationBell } from "./NotificationBell"
@@ -77,8 +77,13 @@ export function AdminHeader({ role, unreadMessages = 0 }: { role: "admin" | "mod
         {/* Right side */}
         <div className="flex items-center gap-3">
           <NotificationBell />
-          <Link href="/admin/einstellungen" className="p-2 hover:bg-wine-red/5 rounded-lg text-dark/60 transition-colors">
-            <CircleUser className="w-5 h-5" />
+          <Link
+            href="/admin/einstellungen"
+            aria-label="Passwort ändern"
+            title="Passwort ändern"
+            className="p-2 hover:bg-wine-red/5 rounded-lg text-dark/60 transition-colors"
+          >
+            <Lock className="w-5 h-5" />
           </Link>
           <div className="w-px h-5 bg-dark/10 mx-1" />
           <AdminLogoutButton />

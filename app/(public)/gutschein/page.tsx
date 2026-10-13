@@ -1,6 +1,5 @@
 import type { Metadata } from "next"
 import Image from "next/image"
-import { Ticket, ShoppingBasket } from "lucide-react"
 import { GutscheinAnfrageForm } from "@/components/voucher/GutscheinAnfrageForm"
 
 export const metadata: Metadata = {
@@ -65,15 +64,9 @@ export default function GutscheinPage() {
           <div className="lg:col-span-8 space-y-16">
             {/* Redeem section */}
             <div className="space-y-5">
-              <div className="flex items-center gap-4">
-                <Ticket
-                  className="w-8 h-8 text-wine-red shrink-0"
-                  aria-hidden="true"
-                />
-                <h2 className="text-wine-red font-bold text-3xl md:text-4xl tracking-tight">
-                  Sie möchten einen Gutschein einlösen
-                </h2>
-              </div>
+              <h2 className="text-wine-red font-bold text-3xl md:text-4xl tracking-tight">
+                Sie möchten einen Gutschein einlösen
+              </h2>
               <p className="text-dark/60 text-lg leading-relaxed font-condensed max-w-2xl">
                 Um einen Gutschein einzulösen, melden Sie sich einfach zum
                 gewünschten Kurs an und geben im Laufe der Kursanmeldung
@@ -83,19 +76,10 @@ export default function GutscheinPage() {
 
             {/* Buy section */}
             <div className="bg-white p-10 md:p-14 rounded-xl shadow-sm border border-dark/5 relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-8 opacity-[0.04] pointer-events-none">
-                <Ticket className="w-32 h-32 text-wine-red" />
-              </div>
               <div className="relative z-10 space-y-8">
-                <div className="flex items-center gap-4">
-                  <ShoppingBasket
-                    className="w-8 h-8 text-wine-red shrink-0"
-                    aria-hidden="true"
-                  />
-                  <h2 className="text-wine-red font-bold text-3xl md:text-4xl tracking-tight">
-                    Gutschein bestellen
-                  </h2>
-                </div>
+                <h2 className="text-wine-red font-bold text-3xl md:text-4xl tracking-tight">
+                  Gutschein bestellen
+                </h2>
                 <GutscheinAnfrageForm />
               </div>
             </div>
